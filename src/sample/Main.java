@@ -1,9 +1,9 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -176,10 +176,10 @@ public class Main extends Application {
 
         //Style ComboBox's
 
-        //Populate topBar
+        //Populate and style topBar
         topBar.getChildren().addAll(optionsBtn, helpBtn);
 
-        //Populate bottomBar
+        //Populate and style bottomBar
         bottomBar.getChildren().addAll(
                 spaceCannonOffenseBtn,
                 spaceCombatBtn,
@@ -188,16 +188,86 @@ public class Main extends Application {
                 invasionCombatBtn
         );
 
-        //Populate gridPane
-        
+        //Populate and style gridPane
+        gridPane.setPadding(new Insets(10, 10, 10, 10));
+        gridPane.setVgap(4);
+        gridPane.setHgap(20);
 
-        //Populate Borderpane
+        GridPane.setConstraints(attackerLabel, 0, 0);
+        GridPane.setConstraints(unitsLabel, 1, 0);
+        GridPane.setConstraints(defenderLabel, 2, 0);
+        GridPane.setConstraints(attackerFactionCB, 0, 1);
+        GridPane.setConstraints(defenderFactionCB, 2, 1);
+        GridPane.setConstraints(attackerFlagshipCB, 0, 2);
+        GridPane.setConstraints(flagshipLabel, 1, 2);
+        GridPane.setConstraints(defenderFlagshipCB, 2, 2);
+        GridPane.setConstraints(attackerWarSunCB, 0, 3);
+        GridPane.setConstraints(warSunLabel, 1, 3);
+        GridPane.setConstraints(defenderWarSunCB, 2, 3);
+        GridPane.setConstraints(attackerDreadnoughtCB, 0, 4);
+        GridPane.setConstraints(dreadnoughtLabel, 1, 4);
+        GridPane.setConstraints(defenderDreadnoughtCB, 2, 4);
+        GridPane.setConstraints(attackerCarrierCB, 0, 5);
+        GridPane.setConstraints(carrierLabel, 1, 5);
+        GridPane.setConstraints(defenderCarrierCB, 2, 5);
+        GridPane.setConstraints(attackerCruiserCB, 0, 6);
+        GridPane.setConstraints(cruiserLabel, 1, 6);
+        GridPane.setConstraints(defenderCruiserCB, 2, 6);
+        GridPane.setConstraints(attackerDestroyerCB, 0, 7);
+        GridPane.setConstraints(destroyerLabel, 1, 7);
+        GridPane.setConstraints(defenderDestroyerCB, 2, 7);
+        GridPane.setConstraints(attackerFighterCB, 0, 8);
+        GridPane.setConstraints(fighterLabel, 1, 8);
+        GridPane.setConstraints(defenderFighterCB, 2, 8);
+        GridPane.setConstraints(attackerMechCB, 0, 9);
+        GridPane.setConstraints(mechLabel, 1, 9);
+        GridPane.setConstraints(defenderMechCB, 2, 9);
+        GridPane.setConstraints(attackerInfantryCB, 0, 10);
+        GridPane.setConstraints(infantryLabel, 1, 10);
+        GridPane.setConstraints(defenderInfantryCB, 2, 10);
+
+        gridPane.getChildren().addAll(
+                attackerLabel,
+                unitsLabel,
+                defenderLabel,
+                attackerFactionCB,
+                defenderFactionCB,
+                attackerFlagshipCB,
+                flagshipLabel,
+                defenderFlagshipCB,
+                attackerWarSunCB,
+                warSunLabel,
+                defenderWarSunCB,
+                attackerDreadnoughtCB,
+                dreadnoughtLabel,
+                defenderDreadnoughtCB,
+                attackerCarrierCB,
+                carrierLabel,
+                defenderCarrierCB,
+                attackerCruiserCB,
+                cruiserLabel,
+                defenderCruiserCB,
+                attackerDestroyerCB,
+                destroyerLabel,
+                defenderDestroyerCB,
+                attackerFighterCB,
+                fighterLabel,
+                defenderFighterCB,
+                attackerMechCB,
+                mechLabel,
+                defenderMechCB,
+                attackerInfantryCB,
+                infantryLabel,
+                defenderInfantryCB
+        );
+
+        //Populate and style Borderpane
         borderPane.setTop(topBar);
         borderPane.setCenter(gridPane);
         borderPane.setBottom(bottomBar);
 
         //Add the borderPane to a scene and show it
-        Scene mainScene = new Scene(borderPane, 1920, 1080);
+        Scene mainScene = new Scene(borderPane, 1280, 720);
         window.setScene(mainScene);
         window.show();
     }
