@@ -297,6 +297,17 @@ public class Main extends Application {
                 clearDefenderBtn
         );
 
+        GridPane.setHalignment(unitsLabel, HPos.CENTER);
+        GridPane.setHalignment(flagshipLabel, HPos.CENTER);
+        GridPane.setHalignment(warSunLabel, HPos.CENTER);
+        GridPane.setHalignment(dreadnoughtLabel, HPos.CENTER);
+        GridPane.setHalignment(carrierLabel, HPos.CENTER);
+        GridPane.setHalignment(cruiserLabel, HPos.CENTER);
+        GridPane.setHalignment(destroyerLabel, HPos.CENTER);
+        GridPane.setHalignment(fighterLabel, HPos.CENTER);
+        GridPane.setHalignment(mechLabel, HPos.CENTER);
+        GridPane.setHalignment(infantryLabel, HPos.CENTER);
+
         //Populate and style Borderpane
         borderPane.setTop(topBar);
         borderPane.setCenter(gridPane);
