@@ -137,12 +137,15 @@ public class Main extends Application {
         defenderCruiserCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8);
         attackerDestroyerCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8);
         defenderDestroyerCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8);
-        attackerFighterCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-        defenderFighterCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
         attackerMechCB.getItems().addAll(0, 1, 2, 3, 4);
         defenderMechCB.getItems().addAll(0, 1, 2, 3, 4);
-        attackerInfantryCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-        defenderInfantryCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+        for(int i = 0; i < 100; i++) {
+            attackerFighterCB.getItems().add(i);
+            defenderFighterCB.getItems().add(i);
+            attackerInfantryCB.getItems().add(i);
+            defenderInfantryCB.getItems().add(i);
+        }
+
 
         //Set ComboBox Prompts/Defaults
         attackerFactionCB.setPromptText("Select Faction");
@@ -166,12 +169,6 @@ public class Main extends Application {
         defenderMechCB.getSelectionModel().selectFirst();
         attackerInfantryCB.getSelectionModel().selectFirst();
         defenderInfantryCB.getSelectionModel().selectFirst();
-
-        //Set Infantry and fighter box's to be editable
-        attackerFighterCB.setEditable(true);
-        defenderFighterCB.setEditable(true);
-        attackerInfantryCB.setEditable(true);
-        defenderInfantryCB.setEditable(true);
 
         //Style ComboBox's
         attackerFactionCB.setPrefWidth(125);
