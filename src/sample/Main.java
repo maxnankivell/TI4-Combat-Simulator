@@ -2,6 +2,7 @@ package sample;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -30,8 +31,8 @@ public class Main extends Application {
         //Initialise layout elements
         BorderPane borderPane = new BorderPane();
         GridPane gridPane = new GridPane();
-        HBox topBar = new HBox(10);
-        VBox bottomBar = new VBox(10);
+        HBox topBar = new HBox();
+        VBox bottomBar = new VBox();
 
         //Initialise other elements
         Button optionsBtn = new Button("Options");
@@ -170,14 +171,41 @@ public class Main extends Application {
         attackerInfantryCB.setEditable(true);
         defenderInfantryCB.setEditable(true);
 
+        //Style ComboBox's
+        attackerFlagshipCB.setPrefWidth(60);
+        defenderFlagshipCB.setPrefWidth(60);
+        attackerWarSunCB.setPrefWidth(60);
+        defenderWarSunCB.setPrefWidth(60);
+        attackerDreadnoughtCB.setPrefWidth(60);
+        defenderDreadnoughtCB.setPrefWidth(60);
+        attackerCarrierCB.setPrefWidth(60);
+        defenderCarrierCB.setPrefWidth(60);
+        attackerCruiserCB.setPrefWidth(60);
+        defenderCruiserCB.setPrefWidth(60);
+        attackerDestroyerCB.setPrefWidth(60);
+        defenderDestroyerCB.setPrefWidth(60);
+        attackerFighterCB.setPrefWidth(60);
+        defenderFighterCB.setPrefWidth(60);
+        attackerMechCB.setPrefWidth(60);
+        defenderMechCB.setPrefWidth(60);
+        attackerInfantryCB.setPrefWidth(60);
+        defenderInfantryCB.setPrefWidth(60);
+
         //Style Button's
+        spaceCannonOffenseBtn.setPrefWidth(150);
+        spaceCombatBtn.setPrefWidth(150);
+        bombardmentBtn.setPrefWidth(150);
+        spaceCannonDefenseBtn.setPrefWidth(150);
+        invasionCombatBtn.setPrefWidth(150);
+
+        clearAttackerBtn.setPrefWidth(60);
+        clearDefenderBtn.setPrefWidth(60);
 
         //Style Label's
 
-        //Style ComboBox's
-
         //Populate and style topBar
         topBar.getChildren().addAll(optionsBtn, helpBtn);
+        topBar.setSpacing(2);
 
         //Populate and style bottomBar
         bottomBar.getChildren().addAll(
@@ -187,11 +215,14 @@ public class Main extends Application {
                 spaceCannonDefenseBtn,
                 invasionCombatBtn
         );
+        bottomBar.setAlignment(Pos.CENTER);
+        bottomBar.setSpacing(12);
+        bottomBar.setPadding(new Insets(12, 0, 12, 0));
 
         //Populate and style gridPane
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
         gridPane.setVgap(4);
         gridPane.setHgap(20);
+        gridPane.setAlignment(Pos.CENTER);
 
         GridPane.setConstraints(attackerLabel, 0, 0);
         GridPane.setConstraints(unitsLabel, 1, 0);
@@ -225,6 +256,8 @@ public class Main extends Application {
         GridPane.setConstraints(attackerInfantryCB, 0, 10);
         GridPane.setConstraints(infantryLabel, 1, 10);
         GridPane.setConstraints(defenderInfantryCB, 2, 10);
+        GridPane.setConstraints(clearAttackerBtn, 0, 11);
+        GridPane.setConstraints(clearDefenderBtn, 2, 11);
 
         gridPane.getChildren().addAll(
                 attackerLabel,
@@ -258,7 +291,9 @@ public class Main extends Application {
                 defenderMechCB,
                 attackerInfantryCB,
                 infantryLabel,
-                defenderInfantryCB
+                defenderInfantryCB,
+                clearAttackerBtn,
+                clearDefenderBtn
         );
 
         //Populate and style Borderpane
@@ -267,8 +302,9 @@ public class Main extends Application {
         borderPane.setBottom(bottomBar);
 
         //Add the borderPane to a scene and show it
-        Scene mainScene = new Scene(borderPane, 1280, 720);
+        Scene mainScene = new Scene(borderPane, 1024, 576);
         window.setScene(mainScene);
+        window.setMaximized(true);
         window.show();
     }
 
