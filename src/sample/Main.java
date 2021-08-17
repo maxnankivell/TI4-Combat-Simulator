@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -124,46 +125,47 @@ public class Main extends Application {
                 "Titan of Ul",
                 "Vuil'Raith"
         );
-        attackerFlagshipCB.getItems().add(1);
-        defenderFlagshipCB.getItems().add(1);
-        attackerWarSunCB.getItems().addAll(1, 2);
-        defenderWarSunCB.getItems().addAll(1, 2);
-        attackerDreadnoughtCB.getItems().addAll(1, 2, 3, 4, 5);
-        defenderDreadnoughtCB.getItems().addAll(1, 2, 3, 4, 5);
-        attackerCarrierCB.getItems().addAll(1, 2, 3, 4);
-        defenderCarrierCB.getItems().addAll(1, 2, 3, 4);
-        attackerCruiserCB.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
-        defenderCruiserCB.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
-        attackerDestroyerCB.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
-        defenderDestroyerCB.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
-        attackerFighterCB.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-        defenderFighterCB.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-        attackerMechCB.getItems().addAll(1, 2, 3, 4);
-        defenderMechCB.getItems().addAll(1, 2, 3, 4);
-        attackerInfantryCB.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-        defenderInfantryCB.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+        attackerFlagshipCB.getItems().addAll(0, 1);
+        defenderFlagshipCB.getItems().addAll(0, 1);
+        attackerWarSunCB.getItems().addAll(0, 1, 2);
+        defenderWarSunCB.getItems().addAll(0, 1, 2);
+        attackerDreadnoughtCB.getItems().addAll(0, 1, 2, 3, 4, 5);
+        defenderDreadnoughtCB.getItems().addAll(0, 1, 2, 3, 4, 5);
+        attackerCarrierCB.getItems().addAll(0, 1, 2, 3, 4);
+        defenderCarrierCB.getItems().addAll(0, 1, 2, 3, 4);
+        attackerCruiserCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8);
+        defenderCruiserCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8);
+        attackerDestroyerCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8);
+        defenderDestroyerCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8);
+        attackerFighterCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+        defenderFighterCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+        attackerMechCB.getItems().addAll(0, 1, 2, 3, 4);
+        defenderMechCB.getItems().addAll(0, 1, 2, 3, 4);
+        attackerInfantryCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+        defenderInfantryCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
-        //Set ComboBox Prompts
+        //Set ComboBox Prompts/Defaults
         attackerFactionCB.setPromptText("Select Faction");
         defenderFactionCB.setPromptText("Select Faction");
-        attackerFlagshipCB.setPromptText("0");
-        defenderFlagshipCB.setPromptText("0");
-        attackerWarSunCB.setPromptText("0");
-        defenderWarSunCB.setPromptText("0");
-        attackerDreadnoughtCB.setPromptText("0");
-        defenderDreadnoughtCB.setPromptText("0");
-        attackerCarrierCB.setPromptText("0");
-        defenderCarrierCB.setPromptText("0");
-        attackerCruiserCB.setPromptText("0");
-        defenderCruiserCB.setPromptText("0");
-        attackerDestroyerCB.setPromptText("0");
-        defenderDestroyerCB.setPromptText("0");
-        attackerFighterCB.setPromptText("0");
-        defenderFighterCB.setPromptText("0");
-        attackerMechCB.setPromptText("0");
-        defenderMechCB.setPromptText("0");
-        attackerInfantryCB.setPromptText("0");
-        defenderInfantryCB.setPromptText("0");
+
+        attackerFlagshipCB.getSelectionModel().selectFirst();
+        defenderFlagshipCB.getSelectionModel().selectFirst();
+        attackerWarSunCB.getSelectionModel().selectFirst();
+        defenderWarSunCB.getSelectionModel().selectFirst();
+        attackerDreadnoughtCB.getSelectionModel().selectFirst();
+        defenderDreadnoughtCB.getSelectionModel().selectFirst();
+        attackerCarrierCB.getSelectionModel().selectFirst();
+        defenderCarrierCB.getSelectionModel().selectFirst();
+        attackerCruiserCB.getSelectionModel().selectFirst();
+        defenderCruiserCB.getSelectionModel().selectFirst();
+        attackerDestroyerCB.getSelectionModel().selectFirst();
+        defenderDestroyerCB.getSelectionModel().selectFirst();
+        attackerFighterCB.getSelectionModel().selectFirst();
+        defenderFighterCB.getSelectionModel().selectFirst();
+        attackerMechCB.getSelectionModel().selectFirst();
+        defenderMechCB.getSelectionModel().selectFirst();
+        attackerInfantryCB.getSelectionModel().selectFirst();
+        defenderInfantryCB.getSelectionModel().selectFirst();
 
         //Set Infantry and fighter box's to be editable
         attackerFighterCB.setEditable(true);
@@ -172,24 +174,26 @@ public class Main extends Application {
         defenderInfantryCB.setEditable(true);
 
         //Style ComboBox's
-        attackerFlagshipCB.setPrefWidth(60);
-        defenderFlagshipCB.setPrefWidth(60);
-        attackerWarSunCB.setPrefWidth(60);
-        defenderWarSunCB.setPrefWidth(60);
-        attackerDreadnoughtCB.setPrefWidth(60);
-        defenderDreadnoughtCB.setPrefWidth(60);
-        attackerCarrierCB.setPrefWidth(60);
-        defenderCarrierCB.setPrefWidth(60);
-        attackerCruiserCB.setPrefWidth(60);
-        defenderCruiserCB.setPrefWidth(60);
-        attackerDestroyerCB.setPrefWidth(60);
-        defenderDestroyerCB.setPrefWidth(60);
-        attackerFighterCB.setPrefWidth(60);
-        defenderFighterCB.setPrefWidth(60);
-        attackerMechCB.setPrefWidth(60);
-        defenderMechCB.setPrefWidth(60);
-        attackerInfantryCB.setPrefWidth(60);
-        defenderInfantryCB.setPrefWidth(60);
+        attackerFactionCB.setPrefWidth(125);
+        defenderFactionCB.setPrefWidth(125);
+        attackerFlagshipCB.setPrefWidth(125);
+        defenderFlagshipCB.setPrefWidth(125);
+        attackerWarSunCB.setPrefWidth(125);
+        defenderWarSunCB.setPrefWidth(125);
+        attackerDreadnoughtCB.setPrefWidth(125);
+        defenderDreadnoughtCB.setPrefWidth(125);
+        attackerCarrierCB.setPrefWidth(125);
+        defenderCarrierCB.setPrefWidth(125);
+        attackerCruiserCB.setPrefWidth(125);
+        defenderCruiserCB.setPrefWidth(125);
+        attackerDestroyerCB.setPrefWidth(125);
+        defenderDestroyerCB.setPrefWidth(125);
+        attackerFighterCB.setPrefWidth(125);
+        defenderFighterCB.setPrefWidth(125);
+        attackerMechCB.setPrefWidth(125);
+        defenderMechCB.setPrefWidth(125);
+        attackerInfantryCB.setPrefWidth(125);
+        defenderInfantryCB.setPrefWidth(125);
 
         //Style Button's
         spaceCannonOffenseBtn.setPrefWidth(150);
@@ -198,8 +202,8 @@ public class Main extends Application {
         spaceCannonDefenseBtn.setPrefWidth(150);
         invasionCombatBtn.setPrefWidth(150);
 
-        clearAttackerBtn.setPrefWidth(60);
-        clearDefenderBtn.setPrefWidth(60);
+        clearAttackerBtn.setPrefWidth(125);
+        clearDefenderBtn.setPrefWidth(125);
 
         //Style Label's
 
