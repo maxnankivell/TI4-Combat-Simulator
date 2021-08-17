@@ -1,5 +1,3 @@
-package sample;
-
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -313,11 +311,14 @@ public class Main extends Application {
         borderPane.setCenter(gridPane);
         borderPane.setBottom(bottomBar);
 
+        //Button Actions
+        helpBtn.setOnAction(e -> new HelpScreenGUI());
+        optionsBtn.setOnAction(e -> new OptionsScreenGUI());
+
         //Add the borderPane to a scene and show it
         Scene mainScene = new Scene(borderPane, 1024, 576);
         window.setScene(mainScene);
         window.setMaximized(true);
         window.show();
     }
-
 }
