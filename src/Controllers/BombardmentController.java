@@ -1,34 +1,36 @@
 package Controllers;
 
-import Utility.Player;
+public class BombardmentController extends Controller{
 
-public class SpaceCannonOffenseController extends Controller{
-
-    public SpaceCannonOffenseController(){
+    public BombardmentController(){
         super();
     }
 
     @Override
     public void startProcess() {
-
         //Plasma scoring
 
-        //Antimass deflector
+        //X-89 Bacterial Weapon
 
-        //Strike wing ambuscade
+        //Strike wing ambush
 
-        //Experimental battlestation
+        //Bunker
 
-        //Solar flare
+        //Disable
+
+        //Blitz
 
         //Argent flight commander
 
         //Jol-Nar commander
 
-        //Titans Hero
+        //L1Z1X commander
+
+        //Convention of war
 
         numHitsAttacker = hitCalculator(true);
         numHitsDefender = hitCalculator(false);
+
     }
 
 
