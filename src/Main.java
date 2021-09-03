@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -56,6 +57,25 @@ public class Main extends Application {
         Label fighterLabel = new Label("Fighter");
         Label mechLabel = new Label("Mech");
         Label infantryLabel = new Label("Infantry");
+
+        CheckBox attackerFlagshipCheckBox = new CheckBox();
+        CheckBox defenderFlagshipCheckBox = new CheckBox();
+        CheckBox attackerWarSunCheckBox = new CheckBox();
+        CheckBox defenderWarSunCheckBox = new CheckBox();
+        CheckBox attackerDreadnoughtCheckBox = new CheckBox();
+        CheckBox defenderDreadnoughtCheckBox = new CheckBox();
+        CheckBox attackerCarrierCheckBox = new CheckBox();
+        CheckBox defenderCarrierCheckBox = new CheckBox();
+        CheckBox attackerCruiserCheckBox = new CheckBox();
+        CheckBox defenderCruiserCheckBox = new CheckBox();
+        CheckBox attackerDestroyerCheckBox = new CheckBox();
+        CheckBox defenderDestroyerCheckBox = new CheckBox();
+        CheckBox attackerFighterCheckBox = new CheckBox();
+        CheckBox defenderFighterCheckBox = new CheckBox();
+        CheckBox attackerMechCheckBox = new CheckBox();
+        CheckBox defenderMechCheckBox = new CheckBox();
+        CheckBox attackerInfantryCheckBox = new CheckBox();
+        CheckBox defenderInfantryCheckBox = new CheckBox();
 
         ComboBox<Object> attackerFactionCB = new ComboBox<>();
         ComboBox<Object> defenderFactionCB = new ComboBox<>();
@@ -223,40 +243,61 @@ public class Main extends Application {
         gridPane.setHgap(20);
         gridPane.setAlignment(Pos.CENTER);
 
-        GridPane.setConstraints(attackerLabel, 0, 0);
-        GridPane.setConstraints(unitsLabel, 1, 0);
-        GridPane.setConstraints(defenderLabel, 2, 0);
-        GridPane.setConstraints(attackerFactionCB, 0, 1);
-        GridPane.setConstraints(defenderFactionCB, 2, 1);
-        GridPane.setConstraints(attackerFlagshipCB, 0, 2);
-        GridPane.setConstraints(flagshipLabel, 1, 2);
-        GridPane.setConstraints(defenderFlagshipCB, 2, 2);
-        GridPane.setConstraints(attackerWarSunCB, 0, 3);
-        GridPane.setConstraints(warSunLabel, 1, 3);
-        GridPane.setConstraints(defenderWarSunCB, 2, 3);
-        GridPane.setConstraints(attackerDreadnoughtCB, 0, 4);
-        GridPane.setConstraints(dreadnoughtLabel, 1, 4);
-        GridPane.setConstraints(defenderDreadnoughtCB, 2, 4);
-        GridPane.setConstraints(attackerCarrierCB, 0, 5);
-        GridPane.setConstraints(carrierLabel, 1, 5);
-        GridPane.setConstraints(defenderCarrierCB, 2, 5);
-        GridPane.setConstraints(attackerCruiserCB, 0, 6);
-        GridPane.setConstraints(cruiserLabel, 1, 6);
-        GridPane.setConstraints(defenderCruiserCB, 2, 6);
-        GridPane.setConstraints(attackerDestroyerCB, 0, 7);
-        GridPane.setConstraints(destroyerLabel, 1, 7);
-        GridPane.setConstraints(defenderDestroyerCB, 2, 7);
-        GridPane.setConstraints(attackerFighterCB, 0, 8);
-        GridPane.setConstraints(fighterLabel, 1, 8);
-        GridPane.setConstraints(defenderFighterCB, 2, 8);
-        GridPane.setConstraints(attackerMechCB, 0, 9);
-        GridPane.setConstraints(mechLabel, 1, 9);
-        GridPane.setConstraints(defenderMechCB, 2, 9);
-        GridPane.setConstraints(attackerInfantryCB, 0, 10);
-        GridPane.setConstraints(infantryLabel, 1, 10);
-        GridPane.setConstraints(defenderInfantryCB, 2, 10);
-        GridPane.setConstraints(clearAttackerBtn, 0, 11);
-        GridPane.setConstraints(clearDefenderBtn, 2, 11);
+        GridPane.setConstraints(attackerLabel, 1, 0);
+        GridPane.setConstraints(unitsLabel, 2, 0);
+        GridPane.setConstraints(defenderLabel, 3, 0);
+        GridPane.setConstraints(attackerFactionCB, 1, 1);
+        GridPane.setConstraints(defenderFactionCB, 3, 1);
+        GridPane.setConstraints(attackerFlagshipCB, 1, 2);
+        GridPane.setConstraints(flagshipLabel, 2, 2);
+        GridPane.setConstraints(defenderFlagshipCB, 3, 2);
+        GridPane.setConstraints(attackerWarSunCB, 1, 3);
+        GridPane.setConstraints(warSunLabel, 2, 3);
+        GridPane.setConstraints(defenderWarSunCB, 3, 3);
+        GridPane.setConstraints(attackerDreadnoughtCB, 1, 4);
+        GridPane.setConstraints(dreadnoughtLabel, 2, 4);
+        GridPane.setConstraints(defenderDreadnoughtCB, 3, 4);
+        GridPane.setConstraints(attackerCarrierCB, 1, 5);
+        GridPane.setConstraints(carrierLabel, 2, 5);
+        GridPane.setConstraints(defenderCarrierCB, 3, 5);
+        GridPane.setConstraints(attackerCruiserCB, 1, 6);
+        GridPane.setConstraints(cruiserLabel, 2, 6);
+        GridPane.setConstraints(defenderCruiserCB, 3, 6);
+        GridPane.setConstraints(attackerDestroyerCB, 1, 7);
+        GridPane.setConstraints(destroyerLabel, 2, 7);
+        GridPane.setConstraints(defenderDestroyerCB, 3, 7);
+        GridPane.setConstraints(attackerFighterCB, 1, 8);
+        GridPane.setConstraints(fighterLabel, 2, 8);
+        GridPane.setConstraints(defenderFighterCB, 3, 8);
+        GridPane.setConstraints(attackerMechCB, 1, 9);
+        GridPane.setConstraints(mechLabel, 2, 9);
+        GridPane.setConstraints(defenderMechCB, 3, 9);
+        GridPane.setConstraints(attackerInfantryCB, 1, 10);
+        GridPane.setConstraints(infantryLabel, 2, 10);
+        GridPane.setConstraints(defenderInfantryCB, 3, 10);
+        GridPane.setConstraints(clearAttackerBtn, 1, 11);
+        GridPane.setConstraints(clearDefenderBtn, 3, 11);
+
+        //adding checkboxs
+        GridPane.setConstraints(attackerFlagshipCheckBox, 0, 2);
+        GridPane.setConstraints(attackerWarSunCheckBox, 0, 3);
+        GridPane.setConstraints(attackerDreadnoughtCheckBox, 0, 4);
+        GridPane.setConstraints(attackerCarrierCheckBox, 0, 5);
+        GridPane.setConstraints(attackerCruiserCheckBox, 0, 6);
+        GridPane.setConstraints(attackerDestroyerCheckBox, 0, 7);
+        GridPane.setConstraints(attackerFighterCheckBox, 0, 8);
+        GridPane.setConstraints(attackerMechCheckBox, 0, 9);
+        GridPane.setConstraints(attackerInfantryCheckBox, 0, 10);
+        GridPane.setConstraints(defenderFlagshipCheckBox, 4, 2);
+        GridPane.setConstraints(defenderWarSunCheckBox, 4, 3);
+        GridPane.setConstraints(defenderDreadnoughtCheckBox, 4, 4);
+        GridPane.setConstraints(defenderCarrierCheckBox, 4, 5);
+        GridPane.setConstraints(defenderCruiserCheckBox, 4, 6);
+        GridPane.setConstraints(defenderDestroyerCheckBox, 4, 7);
+        GridPane.setConstraints(defenderFighterCheckBox, 4, 8);
+        GridPane.setConstraints(defenderMechCheckBox, 4, 9);
+        GridPane.setConstraints(defenderInfantryCheckBox, 4, 10);
+
 
         gridPane.getChildren().addAll(
                 attackerLabel,
@@ -292,7 +333,25 @@ public class Main extends Application {
                 infantryLabel,
                 defenderInfantryCB,
                 clearAttackerBtn,
-                clearDefenderBtn
+                clearDefenderBtn,
+                attackerFlagshipCheckBox,
+                attackerWarSunCheckBox,
+                attackerDreadnoughtCheckBox,
+                attackerCarrierCheckBox,
+                attackerCruiserCheckBox,
+                attackerDestroyerCheckBox,
+                attackerFighterCheckBox,
+                attackerMechCheckBox,
+                attackerInfantryCheckBox,
+                defenderFlagshipCheckBox,
+                defenderWarSunCheckBox,
+                defenderDreadnoughtCheckBox,
+                defenderCarrierCheckBox,
+                defenderCruiserCheckBox,
+                defenderDestroyerCheckBox,
+                defenderFighterCheckBox,
+                defenderMechCheckBox,
+                defenderInfantryCheckBox
         );
 
         GridPane.setHalignment(unitsLabel, HPos.CENTER);
