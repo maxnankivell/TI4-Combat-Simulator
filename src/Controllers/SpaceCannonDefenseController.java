@@ -1,35 +1,28 @@
 package Controllers;
 
-import Utility.Player;
+public class SpaceCannonDefenseController extends Controller{
 
-public class SpaceCannonOffenseController extends Controller{
-
-    public SpaceCannonOffenseController(){
+    public SpaceCannonDefenseController(){
         super();
     }
 
     @Override
     public void startProcess() {
-
         //Plasma scoring
 
         //Antimass deflector
 
-        //Strike wing ambuscade
+        //Disable
 
         //Experimental battlestation
-
-        //Solar flare
 
         //Argent flight commander
 
         //Jol-Nar commander
 
-        //Titans Hero
+        //Titans hero
 
         numHitsAttacker = hitCalculator(true);
         numHitsDefender = hitCalculator(false);
     }
-
-
 }
