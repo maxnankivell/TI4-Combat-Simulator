@@ -1,10 +1,12 @@
 package Controllers;
 
-import Utility.Player;
+import Utility.Unit;
+
+import java.util.ArrayList;
 
 public abstract class Controller {
-    protected Player defender;
-    protected Player attacker;
+    protected ArrayList<Unit> defender;
+    protected ArrayList<Unit> attacker;
     protected int numHitsAttacker;
     protected int numHitsDefender;
 
@@ -15,7 +17,7 @@ public abstract class Controller {
         startProcess();
     }
 
-    public Player populatePlayer(boolean isAttacker){ return null;}
+    public ArrayList<Unit> populatePlayer(boolean isAttacker){ return null;}
 
     public abstract void startProcess();
 
