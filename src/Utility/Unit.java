@@ -28,6 +28,19 @@ public class Unit {
         this.numDiceRollsBombardment = builder.numDiceRollsBombardment;
     }
 
+    public Unit(Unit master){
+        this.hitValueSpaceCombat = master.hitValueSpaceCombat;
+        this.numDiceRollsSpaceCombat = master.numDiceRollsSpaceCombat;
+        this.hitValueSpaceCannon = master.hitValueSpaceCannon;
+        this.numDiceRollsSpaceCannon = master.numDiceRollsSpaceCannon;
+        this.hitValueAFB = master.hitValueAFB;
+        this.numDiceRollsAFB = master.numDiceRollsAFB;
+        this.hitValueInvasion = master.hitValueInvasion;
+        this.numDiceRollsInvasion = master.numDiceRollsInvasion;
+        this.hitValueBombardment = master.hitValueBombardment;
+        this.numDiceRollsBombardment = master.numDiceRollsBombardment;
+    }
+
     public static class Builder{
         private UnitNames name;
 
