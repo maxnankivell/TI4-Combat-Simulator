@@ -42,6 +42,7 @@ public class Main extends Application {
         Button clearAttackerBtn = new Button("Clear");
         Button clearDefenderBtn = new Button("Clear");
         Button spaceCannonOffenseBtn = new Button("Space Cannon Offense");
+        Button antiFighterBarrageBtn = new Button("Anti Fighter Barrage");
         Button spaceCombatBtn = new Button("Space Combat");
         Button bombardmentBtn = new Button("Bombardment");
         Button spaceCannonDefenseBtn = new Button("Space Cannon Defense");
@@ -59,6 +60,7 @@ public class Main extends Application {
         Label fighterLabel = new Label("Fighter");
         Label mechLabel = new Label("Mech");
         Label infantryLabel = new Label("Infantry");
+        Label pdsLabel = new Label("PDS");
 
         CheckBox attackerFlagshipCheckBox = new CheckBox();
         CheckBox defenderFlagshipCheckBox = new CheckBox();
@@ -78,6 +80,8 @@ public class Main extends Application {
         CheckBox defenderMechCheckBox = new CheckBox();
         CheckBox attackerInfantryCheckBox = new CheckBox();
         CheckBox defenderInfantryCheckBox = new CheckBox();
+        CheckBox attackerPdsCheckBox = new CheckBox();
+        CheckBox defenderPdsCheckBox = new CheckBox();
 
         ComboBox<Object> attackerFactionCB = new ComboBox<>();
         ComboBox<Object> defenderFactionCB = new ComboBox<>();
@@ -99,6 +103,8 @@ public class Main extends Application {
         ComboBox<Object> defenderMechCB = new ComboBox<>();
         ComboBox<Object> attackerInfantryCB = new ComboBox<>();
         ComboBox<Object> defenderInfantryCB = new ComboBox<>();
+        ComboBox<Object> attackerPdsCB = new ComboBox<>();
+        ComboBox<Object> defenderPdsCB = new ComboBox<>();
 
         //Populate Combo Box's
         attackerFactionCB.getItems().addAll(
@@ -159,6 +165,8 @@ public class Main extends Application {
         defenderDestroyerCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6, 7, 8);
         attackerMechCB.getItems().addAll(0, 1, 2, 3, 4);
         defenderMechCB.getItems().addAll(0, 1, 2, 3, 4);
+        attackerPdsCB.getItems().addAll(0, 1, 2, 3, 4, 5 ,6);
+        defenderPdsCB.getItems().addAll(0, 1, 2, 3, 4, 5, 6);
         for(int i = 0; i < 100; i++) {
             attackerFighterCB.getItems().add(i);
             defenderFighterCB.getItems().add(i);
@@ -189,6 +197,8 @@ public class Main extends Application {
         defenderMechCB.getSelectionModel().selectFirst();
         attackerInfantryCB.getSelectionModel().selectFirst();
         defenderInfantryCB.getSelectionModel().selectFirst();
+        attackerPdsCB.getSelectionModel().selectFirst();
+        defenderPdsCB.getSelectionModel().selectFirst();
 
         //Style ComboBox's
         attackerFactionCB.setPrefWidth(125);
@@ -211,9 +221,12 @@ public class Main extends Application {
         defenderMechCB.setPrefWidth(125);
         attackerInfantryCB.setPrefWidth(125);
         defenderInfantryCB.setPrefWidth(125);
+        attackerPdsCB.setPrefWidth(125);
+        defenderPdsCB.setPrefWidth(125);
 
         //Style Button's
         spaceCannonOffenseBtn.setPrefWidth(150);
+        antiFighterBarrageBtn.setPrefWidth(150);
         spaceCombatBtn.setPrefWidth(150);
         bombardmentBtn.setPrefWidth(150);
         spaceCannonDefenseBtn.setPrefWidth(150);
@@ -231,6 +244,7 @@ public class Main extends Application {
         //Populate and style bottomBar
         bottomBar.getChildren().addAll(
                 spaceCannonOffenseBtn,
+                antiFighterBarrageBtn,
                 spaceCombatBtn,
                 bombardmentBtn,
                 spaceCannonDefenseBtn,
@@ -277,8 +291,11 @@ public class Main extends Application {
         GridPane.setConstraints(attackerInfantryCB, 1, 10);
         GridPane.setConstraints(infantryLabel, 2, 10);
         GridPane.setConstraints(defenderInfantryCB, 3, 10);
-        GridPane.setConstraints(clearAttackerBtn, 1, 11);
-        GridPane.setConstraints(clearDefenderBtn, 3, 11);
+        GridPane.setConstraints(attackerPdsCB, 1, 11);
+        GridPane.setConstraints(pdsLabel, 2, 11);
+        GridPane.setConstraints(defenderPdsCB, 3, 11);
+        GridPane.setConstraints(clearAttackerBtn, 1, 12);
+        GridPane.setConstraints(clearDefenderBtn, 3, 12);
 
         //adding checkboxs
         GridPane.setConstraints(attackerFlagshipCheckBox, 0, 2);
@@ -290,6 +307,7 @@ public class Main extends Application {
         GridPane.setConstraints(attackerFighterCheckBox, 0, 8);
         GridPane.setConstraints(attackerMechCheckBox, 0, 9);
         GridPane.setConstraints(attackerInfantryCheckBox, 0, 10);
+        GridPane.setConstraints(attackerPdsCheckBox, 0, 11);
         GridPane.setConstraints(defenderFlagshipCheckBox, 4, 2);
         GridPane.setConstraints(defenderWarSunCheckBox, 4, 3);
         GridPane.setConstraints(defenderDreadnoughtCheckBox, 4, 4);
@@ -299,6 +317,7 @@ public class Main extends Application {
         GridPane.setConstraints(defenderFighterCheckBox, 4, 8);
         GridPane.setConstraints(defenderMechCheckBox, 4, 9);
         GridPane.setConstraints(defenderInfantryCheckBox, 4, 10);
+        GridPane.setConstraints(defenderPdsCheckBox, 4, 11);
 
 
         gridPane.getChildren().addAll(
@@ -334,6 +353,9 @@ public class Main extends Application {
                 attackerInfantryCB,
                 infantryLabel,
                 defenderInfantryCB,
+                attackerPdsCB,
+                pdsLabel,
+                defenderPdsCB,
                 clearAttackerBtn,
                 clearDefenderBtn,
                 attackerFlagshipCheckBox,
@@ -345,6 +367,7 @@ public class Main extends Application {
                 attackerFighterCheckBox,
                 attackerMechCheckBox,
                 attackerInfantryCheckBox,
+                attackerPdsCheckBox,
                 defenderFlagshipCheckBox,
                 defenderWarSunCheckBox,
                 defenderDreadnoughtCheckBox,
@@ -353,7 +376,8 @@ public class Main extends Application {
                 defenderDestroyerCheckBox,
                 defenderFighterCheckBox,
                 defenderMechCheckBox,
-                defenderInfantryCheckBox
+                defenderInfantryCheckBox,
+                defenderPdsCheckBox
         );
 
         GridPane.setHalignment(unitsLabel, HPos.CENTER);
@@ -366,6 +390,7 @@ public class Main extends Application {
         GridPane.setHalignment(fighterLabel, HPos.CENTER);
         GridPane.setHalignment(mechLabel, HPos.CENTER);
         GridPane.setHalignment(infantryLabel, HPos.CENTER);
+        GridPane.setHalignment(pdsLabel, HPos.CENTER);
 
         //Populate and style Borderpane
         borderPane.setTop(topBar);
