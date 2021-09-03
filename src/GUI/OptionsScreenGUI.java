@@ -1,3 +1,5 @@
+package GUI;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
