@@ -1,5 +1,7 @@
 package GUI;
 
+import Utility.AttackerOptions;
+import Utility.DefenderOptions;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -15,6 +17,59 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class OptionsScreenGUI {
+
+    CheckBox plasmaScoringAttackerCheckbox;
+    CheckBox plasmaScoringDefenderCheckbox;
+    CheckBox magenDefenseGridDefenderCheckbox;
+    CheckBox x89BacterialWeaponAttackerCheckbox;
+    CheckBox antimassDeflectorAttackerCheckbox;
+    CheckBox antimassDeflectorDefenderCheckbox;
+
+    CheckBox strikeWingAmbushAttackerCheckbox;
+    CheckBox strikeWingAmbushDefenderCheckbox;
+    CheckBox warFundingAttackerCheckbox;
+    CheckBox warFundingDefenderCheckbox;
+    CheckBox memoriaOneAttackerCheckbox;
+    CheckBox memoriaOneDefenderCheckbox;
+    CheckBox memoriaTwoAttackerCheckbox;
+    CheckBox memoriaTwoDefenderCheckbox;
+    CheckBox tekklarLegionAttackerCheckbox;
+    CheckBox tekklarLegionDefenderCheckbox;
+
+    CheckBox baronyAgentAttackerCheckbox;
+    CheckBox baronyAgentDefenderCheckbox;
+    CheckBox solAgentAttackerCheckbox;
+    CheckBox solAgentDefenderCheckbox;
+
+    CheckBox bunkerLabelDefenderCheckbox;
+    CheckBox disableLabelAttackerCheckbox;
+    CheckBox experimentalBattlestationAttackerCheckbox;
+    CheckBox experimentalBattlestationDefenderCheckbox;
+    CheckBox fighterPrototypeAttackerCheckbox;
+    CheckBox fighterPrototypeDefenderCheckbox;
+    CheckBox fireTeamAttackerCheckbox;
+    CheckBox fireTeamDefenderCheckbox;
+    CheckBox moraleBoostAttackerCheckbox;
+    CheckBox moraleBoostDefenderCheckbox;
+    CheckBox blitzAttackerCheckbox;
+    CheckBox solarFlairAttackerCheckbox;
+    CheckBox solarFlairDefenderCheckbox;
+    CheckBox argentFlightCommanderAttackerCheckbox;
+    CheckBox argentFlightCommanderDefenderCheckbox;
+    CheckBox jolNarCommanderAttackerCheckbox ;
+    CheckBox jolNarCommanderDefenderCheckbox;
+    CheckBox l1Z1XCommanderAttackerCheckbox;
+    CheckBox l1Z1XCommanderDefenderCheckbox;
+    CheckBox winnuCommanderAttackerCheckbox;
+    CheckBox winnuCommanderDefenderCheckbox;
+
+    CheckBox conventionsOfWarDefenderCheckbox;
+    CheckBox prophecyOfIxthAttackerCheckbox;
+    CheckBox prophecyOfIxthDefenderCheckbox;
+
+    CheckBox defendingInNebulaDefenderCheckbox;
+    CheckBox titansHeroAttackerCheckbox;
+    CheckBox titansHeroDefenderCheckbox;
 
     public OptionsScreenGUI(){
 
@@ -77,58 +132,63 @@ public class OptionsScreenGUI {
 //        May add later
 //        Label factionSpecificLabel = new Label("Faction Specific");
 
-        CheckBox plasmaScoringAttackerCheckbox = new CheckBox();
-        CheckBox plasmaScoringDefenderCheckbox = new CheckBox();
-        CheckBox magenDefenseGridDefenderCheckbox = new CheckBox();
-        CheckBox x89BacterialWeaponAttackerCheckbox = new CheckBox();
-        CheckBox antimassDeflectorAttackerCheckbox = new CheckBox();
-        CheckBox antimassDeflectorDefenderCheckbox = new CheckBox();
+        plasmaScoringAttackerCheckbox = new CheckBox();
+        plasmaScoringDefenderCheckbox = new CheckBox();
+        magenDefenseGridDefenderCheckbox = new CheckBox();
+        x89BacterialWeaponAttackerCheckbox = new CheckBox();
+        antimassDeflectorAttackerCheckbox = new CheckBox();
+        antimassDeflectorDefenderCheckbox = new CheckBox();
 
-        CheckBox strikeWingAmbushAttackerCheckbox = new CheckBox();
-        CheckBox strikeWingAmbushDefenderCheckbox = new CheckBox();
-        CheckBox warFundingAttackerCheckbox = new CheckBox();
-        CheckBox warFundingDefenderCheckbox = new CheckBox();
-        CheckBox memoriaOneAttackerCheckbox = new CheckBox();
-        CheckBox memoriaOneDefenderCheckbox = new CheckBox();
-        CheckBox memoriaTwoAttackerCheckbox = new CheckBox();
-        CheckBox memoriaTwoDefenderCheckbox = new CheckBox();
-        CheckBox tekklarLegionAttackerCheckbox = new CheckBox();
-        CheckBox tekklarLegionDefenderCheckbox = new CheckBox();
+        strikeWingAmbushAttackerCheckbox = new CheckBox();
+        strikeWingAmbushDefenderCheckbox = new CheckBox();
+        warFundingAttackerCheckbox = new CheckBox();
+        warFundingDefenderCheckbox = new CheckBox();
+        memoriaOneAttackerCheckbox = new CheckBox();
+        memoriaOneDefenderCheckbox = new CheckBox();
+        memoriaTwoAttackerCheckbox = new CheckBox();
+        memoriaTwoDefenderCheckbox = new CheckBox();
+        tekklarLegionAttackerCheckbox = new CheckBox();
+        tekklarLegionDefenderCheckbox = new CheckBox();
 
-        CheckBox baronyAgentAttackerCheckbox = new CheckBox();
-        CheckBox baronyAgentDefenderCheckbox = new CheckBox();
-        CheckBox solAgentAttackerCheckbox = new CheckBox();
-        CheckBox solAgentDefenderCheckbox = new CheckBox();
+        baronyAgentAttackerCheckbox = new CheckBox();
+        baronyAgentDefenderCheckbox = new CheckBox();
+        solAgentAttackerCheckbox = new CheckBox();
+        solAgentDefenderCheckbox = new CheckBox();
 
-        CheckBox bunkerLabelDefenderCheckbox = new CheckBox();
-        CheckBox disableLabelAttackerCheckbox = new CheckBox();
-        CheckBox experimentalBattlestationAttackerCheckbox = new CheckBox();
-        CheckBox experimentalBattlestationDefenderCheckbox = new CheckBox();
-        CheckBox fighterPrototypeAttackerCheckbox = new CheckBox();
-        CheckBox fighterPrototypeDefenderCheckbox = new CheckBox();
-        CheckBox fireTeamAttackerCheckbox = new CheckBox();
-        CheckBox fireTeamDefenderCheckbox = new CheckBox();
-        CheckBox moraleBoostAttackerCheckbox = new CheckBox();
-        CheckBox moraleBoostDefenderCheckbox = new CheckBox();
-        CheckBox blitzAttackerCheckbox = new CheckBox();
-        CheckBox solarFlairAttackerCheckbox = new CheckBox();
-        CheckBox solarFlairDefenderCheckbox = new CheckBox();
-        CheckBox argentFlightCommanderAttackerCheckbox = new CheckBox();
-        CheckBox argentFlightCommanderDefenderCheckbox = new CheckBox();
-        CheckBox jolNarCommanderAttackerCheckbox = new CheckBox();
-        CheckBox jolNarCommanderDefenderCheckbox = new CheckBox();
-        CheckBox l1Z1XCommanderAttackerCheckbox = new CheckBox();
-        CheckBox l1Z1XCommanderDefenderCheckbox = new CheckBox();
-        CheckBox winnuCommanderAttackerCheckbox = new CheckBox();
-        CheckBox winnuCommanderDefenderCheckbox = new CheckBox();
+        bunkerLabelDefenderCheckbox = new CheckBox();
+        disableLabelAttackerCheckbox = new CheckBox();
+        experimentalBattlestationAttackerCheckbox = new CheckBox();
+        experimentalBattlestationDefenderCheckbox = new CheckBox();
+        fighterPrototypeAttackerCheckbox = new CheckBox();
+        fighterPrototypeDefenderCheckbox = new CheckBox();
+        fireTeamAttackerCheckbox = new CheckBox();
+        fireTeamDefenderCheckbox = new CheckBox();
+        moraleBoostAttackerCheckbox = new CheckBox();
+        moraleBoostDefenderCheckbox = new CheckBox();
+        blitzAttackerCheckbox = new CheckBox();
+        solarFlairAttackerCheckbox = new CheckBox();
+        solarFlairDefenderCheckbox = new CheckBox();
 
-        CheckBox conventionsOfWarDefenderCheckbox = new CheckBox();
-        CheckBox prophecyOfIxthAttackerCheckbox = new CheckBox();
-        CheckBox prophecyOfIxthDefenderCheckbox = new CheckBox();
+        argentFlightCommanderAttackerCheckbox = new CheckBox();
+        argentFlightCommanderDefenderCheckbox = new CheckBox();
+        jolNarCommanderAttackerCheckbox = new CheckBox();
+        jolNarCommanderDefenderCheckbox = new CheckBox();
+        l1Z1XCommanderAttackerCheckbox = new CheckBox();
+        l1Z1XCommanderDefenderCheckbox = new CheckBox();
+        winnuCommanderAttackerCheckbox = new CheckBox();
+        winnuCommanderDefenderCheckbox = new CheckBox();
 
-        CheckBox defendingInNebulaDefenderCheckbox = new CheckBox();
-        CheckBox titansHeroAttackerCheckbox = new CheckBox();
-        CheckBox titansHeroDefenderCheckbox = new CheckBox();
+        conventionsOfWarDefenderCheckbox = new CheckBox();
+        prophecyOfIxthAttackerCheckbox = new CheckBox();
+        prophecyOfIxthDefenderCheckbox = new CheckBox();
+
+        defendingInNebulaDefenderCheckbox = new CheckBox();
+        titansHeroAttackerCheckbox = new CheckBox();
+        titansHeroDefenderCheckbox = new CheckBox();
+
+        //populate checkboxs
+        initialiseAttackerCheckBoxs();
+        initialiseDefenderCheckBoxs();
 
         Button closeButton = new Button("Close");
 
@@ -325,10 +385,149 @@ public class OptionsScreenGUI {
 
 
         //Button actions
-        closeButton.setOnAction(e -> window.close());
+        closeButton.setOnAction(e -> {
+            saveCheckBoxs();
+            window.close();
+        });
 
         Scene scene = new Scene(borderPane, 600, 600);
         window.setScene(scene);
         window.showAndWait();
+    }
+
+    private void saveCheckBoxs() {
+
+        //Attacker checkboxs
+        AttackerOptions.setPlasmaScoringAttackerCheckbox(plasmaScoringAttackerCheckbox.isSelected());
+        AttackerOptions.setX89BacterialWeaponAttackerCheckbox(x89BacterialWeaponAttackerCheckbox.isSelected());
+        AttackerOptions.setAntimassDeflectorAttackerCheckbox(antimassDeflectorAttackerCheckbox.isSelected());
+
+        AttackerOptions.setStrikeWingAmbushAttackerCheckbox(strikeWingAmbushAttackerCheckbox.isSelected());
+        AttackerOptions.setWarFundingAttackerCheckbox(warFundingAttackerCheckbox.isSelected());
+        AttackerOptions.setMemoriaOneAttackerCheckbox(memoriaOneAttackerCheckbox.isSelected());
+        AttackerOptions.setMemoriaTwoAttackerCheckbox(memoriaTwoAttackerCheckbox.isSelected());
+        AttackerOptions.setTekklarLegionAttackerCheckbox(tekklarLegionAttackerCheckbox.isSelected());
+
+        AttackerOptions.setBaronyAgentAttackerCheckbox(baronyAgentAttackerCheckbox.isSelected());
+        AttackerOptions.setSolAgentAttackerCheckbox(solAgentAttackerCheckbox.isSelected());
+
+        AttackerOptions.setDisableLabelAttackerCheckbox(disableLabelAttackerCheckbox.isSelected());
+        AttackerOptions.setExperimentalBattlestationAttackerCheckbox(experimentalBattlestationAttackerCheckbox.isSelected());
+        AttackerOptions.setFighterPrototypeAttackerCheckbox(fighterPrototypeAttackerCheckbox.isSelected());
+        AttackerOptions.setFireTeamAttackerCheckbox(fireTeamAttackerCheckbox.isSelected());
+        AttackerOptions.setMoraleBoostAttackerCheckbox(moraleBoostAttackerCheckbox.isSelected());
+        AttackerOptions.setBlitzAttackerCheckbox(blitzAttackerCheckbox.isSelected());
+        AttackerOptions.setSolarFlairAttackerCheckbox(solarFlairAttackerCheckbox.isSelected());
+
+        AttackerOptions.setArgentFlightCommanderAttackerCheckbox(argentFlightCommanderAttackerCheckbox.isSelected());
+        AttackerOptions.setJolNarCommanderAttackerCheckbox(jolNarCommanderAttackerCheckbox.isSelected());
+        AttackerOptions.setL1Z1XCommanderAttackerCheckbox(l1Z1XCommanderAttackerCheckbox.isSelected());
+        AttackerOptions.setWinnuCommanderAttackerCheckbox(winnuCommanderAttackerCheckbox.isSelected());
+
+        AttackerOptions.setProphecyOfIxthAttackerCheckbox(prophecyOfIxthAttackerCheckbox.isSelected());
+
+        AttackerOptions.setTitansHeroAttackerCheckbox(titansHeroAttackerCheckbox.isSelected());
+
+        //Defender checkboxs
+        DefenderOptions.setPlasmaScoringDefenderCheckbox(plasmaScoringDefenderCheckbox.isSelected());
+        DefenderOptions.setMagenDefenseGridDefenderCheckbox(magenDefenseGridDefenderCheckbox.isSelected());
+        DefenderOptions.setAntimassDeflectorDefenderCheckbox(antimassDeflectorDefenderCheckbox.isSelected());
+
+        DefenderOptions.setStrikeWingAmbushDefenderCheckbox(strikeWingAmbushDefenderCheckbox.isSelected());
+        DefenderOptions.setWarFundingDefenderCheckbox(warFundingDefenderCheckbox.isSelected());
+        DefenderOptions.setMemoriaOneDefenderCheckbox(memoriaOneDefenderCheckbox.isSelected());
+        DefenderOptions.setMemoriaTwoDefenderCheckbox(memoriaTwoDefenderCheckbox.isSelected());
+        DefenderOptions.setTekklarLegionDefenderCheckbox(tekklarLegionDefenderCheckbox.isSelected());
+
+        DefenderOptions.setBaronyAgentDefenderCheckbox(baronyAgentDefenderCheckbox.isSelected());
+        DefenderOptions.setSolAgentDefenderCheckbox(solAgentDefenderCheckbox.isSelected());
+
+        DefenderOptions.setBunkerLabelDefenderCheckbox(bunkerLabelDefenderCheckbox.isSelected());
+        DefenderOptions.setExperimentalBattlestationDefenderCheckbox(experimentalBattlestationDefenderCheckbox.isSelected());
+        DefenderOptions.setFighterPrototypeDefenderCheckbox(fighterPrototypeDefenderCheckbox.isSelected());
+        DefenderOptions.setFireTeamDefenderCheckbox(fireTeamDefenderCheckbox.isSelected());
+        DefenderOptions.setMoraleBoostDefenderCheckbox(moraleBoostDefenderCheckbox.isSelected());
+        DefenderOptions.setSolarFlairDefenderCheckbox(solarFlairDefenderCheckbox.isSelected());
+
+        DefenderOptions.setArgentFlightCommanderDefenderCheckbox(argentFlightCommanderDefenderCheckbox.isSelected());
+        DefenderOptions.setJolNarCommanderDefenderCheckbox(jolNarCommanderDefenderCheckbox.isSelected());
+        DefenderOptions.setL1Z1XCommanderDefenderCheckbox(l1Z1XCommanderDefenderCheckbox.isSelected());
+        DefenderOptions.setWinnuCommanderDefenderCheckbox(winnuCommanderDefenderCheckbox.isSelected());
+
+        DefenderOptions.setConventionsOfWarDefenderCheckbox(conventionsOfWarDefenderCheckbox.isSelected());
+        DefenderOptions.setProphecyOfIxthDefenderCheckbox(prophecyOfIxthDefenderCheckbox.isSelected());
+
+        DefenderOptions.setDefendingInNebulaDefenderCheckbox(defendingInNebulaDefenderCheckbox.isSelected());
+        DefenderOptions.setTitansHeroDefenderCheckbox(titansHeroDefenderCheckbox.isSelected());
+
+    }
+
+    private void initialiseAttackerCheckBoxs(){
+
+        plasmaScoringAttackerCheckbox.setSelected(AttackerOptions.isPlasmaScoringAttackerCheckbox());
+        x89BacterialWeaponAttackerCheckbox.setSelected(AttackerOptions.isX89BacterialWeaponAttackerCheckbox());
+        antimassDeflectorAttackerCheckbox.setSelected(AttackerOptions.isAntimassDeflectorAttackerCheckbox());
+
+        strikeWingAmbushAttackerCheckbox.setSelected(AttackerOptions.isStrikeWingAmbushAttackerCheckbox());
+        warFundingAttackerCheckbox.setSelected(AttackerOptions.isWarFundingAttackerCheckbox());
+        memoriaOneAttackerCheckbox.setSelected(AttackerOptions.isMemoriaOneAttackerCheckbox());
+        memoriaTwoAttackerCheckbox.setSelected(AttackerOptions.isMemoriaTwoAttackerCheckbox());
+        tekklarLegionAttackerCheckbox.setSelected(AttackerOptions.isTekklarLegionAttackerCheckbox());
+
+        baronyAgentAttackerCheckbox.setSelected(AttackerOptions.isBaronyAgentAttackerCheckbox());
+        solAgentAttackerCheckbox.setSelected(AttackerOptions.isSolAgentAttackerCheckbox());
+
+        disableLabelAttackerCheckbox.setSelected(AttackerOptions.isDisableLabelAttackerCheckbox());
+        experimentalBattlestationAttackerCheckbox.setSelected(AttackerOptions.isExperimentalBattlestationAttackerCheckbox());
+        fighterPrototypeAttackerCheckbox.setSelected(AttackerOptions.isFighterPrototypeAttackerCheckbox());
+        fireTeamAttackerCheckbox.setSelected(AttackerOptions.isFireTeamAttackerCheckbox());
+        moraleBoostAttackerCheckbox.setSelected(AttackerOptions.isMoraleBoostAttackerCheckbox());
+        blitzAttackerCheckbox.setSelected(AttackerOptions.isBlitzAttackerCheckbox());
+        solarFlairAttackerCheckbox.setSelected(AttackerOptions.isSolarFlairAttackerCheckbox());
+
+        argentFlightCommanderAttackerCheckbox.setSelected(AttackerOptions.isArgentFlightCommanderAttackerCheckbox());
+        jolNarCommanderAttackerCheckbox.setSelected(AttackerOptions.isJolNarCommanderAttackerCheckbox());
+        l1Z1XCommanderAttackerCheckbox.setSelected(AttackerOptions.isL1Z1XCommanderAttackerCheckbox());
+        winnuCommanderAttackerCheckbox.setSelected(AttackerOptions.isWinnuCommanderAttackerCheckbox());
+
+        prophecyOfIxthAttackerCheckbox.setSelected(AttackerOptions.isProphecyOfIxthAttackerCheckbox());
+
+        titansHeroAttackerCheckbox.setSelected(AttackerOptions.isTitansHeroAttackerCheckbox());
+
+    }
+
+    private void initialiseDefenderCheckBoxs(){
+
+        plasmaScoringDefenderCheckbox.setSelected(DefenderOptions.isPlasmaScoringDefenderCheckbox());
+        magenDefenseGridDefenderCheckbox.setSelected(DefenderOptions.isMagenDefenseGridDefenderCheckbox());
+        antimassDeflectorDefenderCheckbox.setSelected(DefenderOptions.isAntimassDeflectorDefenderCheckbox());
+
+        strikeWingAmbushDefenderCheckbox.setSelected(DefenderOptions.isStrikeWingAmbushDefenderCheckbox());
+        warFundingDefenderCheckbox.setSelected(DefenderOptions.isWarFundingDefenderCheckbox());
+        memoriaOneDefenderCheckbox.setSelected(DefenderOptions.isMemoriaOneDefenderCheckbox());
+        memoriaTwoDefenderCheckbox.setSelected(DefenderOptions.isMemoriaTwoDefenderCheckbox());
+        tekklarLegionDefenderCheckbox.setSelected(DefenderOptions.isTekklarLegionDefenderCheckbox());
+
+        baronyAgentDefenderCheckbox.setSelected(DefenderOptions.isBaronyAgentDefenderCheckbox());
+        solAgentDefenderCheckbox.setSelected(DefenderOptions.isSolAgentDefenderCheckbox());
+
+        bunkerLabelDefenderCheckbox.setSelected(DefenderOptions.isBunkerLabelDefenderCheckbox());
+        experimentalBattlestationDefenderCheckbox.setSelected(DefenderOptions.isExperimentalBattlestationDefenderCheckbox());
+        fighterPrototypeDefenderCheckbox.setSelected(DefenderOptions.isFighterPrototypeDefenderCheckbox());
+        fireTeamDefenderCheckbox.setSelected(DefenderOptions.isFireTeamDefenderCheckbox());
+        moraleBoostDefenderCheckbox.setSelected(DefenderOptions.isMoraleBoostDefenderCheckbox());
+        solarFlairDefenderCheckbox.setSelected(DefenderOptions.isSolarFlairDefenderCheckbox());
+
+        argentFlightCommanderDefenderCheckbox.setSelected(DefenderOptions.isArgentFlightCommanderDefenderCheckbox());
+        jolNarCommanderDefenderCheckbox.setSelected(DefenderOptions.isJolNarCommanderDefenderCheckbox());
+        l1Z1XCommanderDefenderCheckbox.setSelected(DefenderOptions.isL1Z1XCommanderDefenderCheckbox());
+        winnuCommanderDefenderCheckbox.setSelected(DefenderOptions.isWinnuCommanderDefenderCheckbox());
+
+        conventionsOfWarDefenderCheckbox.setSelected(DefenderOptions.isConventionsOfWarDefenderCheckbox());
+        prophecyOfIxthDefenderCheckbox.setSelected(DefenderOptions.isProphecyOfIxthDefenderCheckbox());
+
+        defendingInNebulaDefenderCheckbox.setSelected(DefenderOptions.isDefendingInNebulaDefenderCheckbox());
+        titansHeroDefenderCheckbox.setSelected(DefenderOptions.isTitansHeroDefenderCheckbox());
+
     }
 }
