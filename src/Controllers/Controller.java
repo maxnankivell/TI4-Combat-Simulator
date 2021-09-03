@@ -25,15 +25,20 @@ public abstract class Controller {
 
         //for each ship type
         //for each ship player has of that ship
-        diceValue = rollDice();
-        //if (Player.doesItHit(shipType, diceValue)) {
-        numHits++;
-        //}
-
+//        diceValue = rollDice();
+//        if(isAttacker) {
+//            if (attacker.doesItHit(shipType, diceValue)) {
+//                numHits++;
+//            }
+//        } else {
+//            if (attacker.doesItHit(shipType, diceValue)) {
+//                numHits++;
+//            }
+//        }
         return numHits;
     }
 
-    public int rollDice(){return -1;};
+    public int rollDice(){return -1;}
 
     public int getNumHitsAttacker() {
         return numHitsAttacker;
