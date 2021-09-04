@@ -201,4 +201,31 @@ public class Unit {
     public void setPlanetaryDefense(boolean planetaryDefense) {
         this.planetaryDefense = planetaryDefense;
     }
+
+    public void setBombardmentValue(int hitValueBombardment, int numDiceRollsBombardment) {
+        this.hitValueBombardment = hitValueBombardment;
+        this.numDiceRollsBombardment = numDiceRollsBombardment;
+    }
+
+
+    public void setGroundCombatValue(int hitValueGroundCombat, int numDiceRollsGroundComba) {
+        this.hitValueGroundCombat = hitValueGroundCombat;
+        this.numDiceRollsGroundCombat = numDiceRollsGroundCombat;
+    }
+
+    public void setAFBValue(int hitValueAFB, int numDiceRollsAFB) {
+        this.hitValueAFB = hitValueAFB;
+        this.numDiceRollsAFB = numDiceRollsAFB;
+    }
+
+    public void setSpaceCannonValue(int hitValueSpaceCannon, int numDiceRollsSpaceCannon) {
+        this.hitValueSpaceCannon = hitValueSpaceCannon;
+        this.numDiceRollsSpaceCannon = numDiceRollsSpaceCannon;
+    }
+
+    public void setSpaceCombatValue(int hitValueSpaceCombat, int numDiceRollsSpaceCombat) {
+        this.hitValueSpaceCombat = hitValueSpaceCombat;
+        this.numDiceRollsSpaceCombat = numDiceRollsSpaceCombat;
+    }
+
 }

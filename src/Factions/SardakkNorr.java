@@ -1,28 +1,41 @@
 package Factions;
 
+import Units.Unit;
+import Units.UnitNames;
+
 public class SardakkNorr extends Faction{
+    private Unit flagship;
 
     public SardakkNorr() {
+        super();
         //Flagship
-        setFlagShipCombatValue(new int[][]{{2, 6},{2, 6}});
+        //Apply +1 to the result of each of your other ship's combat rolls in this system.
+        flagship = new Unit.Builder(UnitNames.FLAGSHIP)
+                .addSpaceCannonValue(6,2)
+                .build();
         //Special units
-        setDreadnoughtBombardmentValue(new int[][]{{2, 4},{2, 4}});
+        dreadnought.setBombardmentValue(4,2);
+        dreadnoughtUpgrade.setBombardmentValue(4,2);
         //Special abilities
         unrelenting();
     }
 
     private void unrelenting() {
-        int[][] flag = getFlagShipCombatValue();
-        setFlagShipCombatValue(new int[][]{{flag[0][0], flag[0][1]-1},{flag[1][0], flag[1][1]-1}});
-
-        setWarSunCombatValue(new int[][]{{2, 6},{2, 6}});
-        setDreadnoughtCombatValue(new int[][]{{2, 6},{2, 6}});
-        setCarrierCombatValue(new int[][]{{2, 6},{2, 6}});
-        setCruiserCombatValue(new int[][]{{2, 6},{2, 6}});
-        setDestroyerCombatValue(new int[][]{{2, 6},{2, 6}});
-        setFighterCombatValue(new int[][]{{2, 6},{2, 6}});
-        setInfantryCombatValue(new int[][]{{2, 6},{2, 6}});
-        setMechCombatValue(new int[][]{{2, 6},{2, 6}});
+        flagship.setHitValueSpaceCombat(flagship.getHitValueSpaceCombat()+1);
+        warsun.setHitValueSpaceCombat(warsun.getHitValueSpaceCombat()+1);
+        dreadnought.setHitValueSpaceCombat(dreadnought.getHitValueSpaceCombat()+1);
+        dreadnoughtUpgrade.setHitValueSpaceCombat(dreadnoughtUpgrade.getHitValueSpaceCombat()+1);
+        carrier.setHitValueSpaceCombat(carrier.getHitValueSpaceCombat()+1);
+        carrierUpgrade.setHitValueSpaceCombat(carrierUpgrade.getHitValueSpaceCombat()+1);
+        cruiser.setHitValueSpaceCombat(cruiser.getHitValueSpaceCombat()+1);
+        cruiserUpgrade.setHitValueSpaceCombat(cruiserUpgrade.getHitValueSpaceCombat()+1);
+        destroyer.setHitValueSpaceCombat(destroyer.getHitValueSpaceCombat()+1);
+        destroyerUpgrade.setHitValueSpaceCombat(destroyerUpgrade.getHitValueSpaceCombat()+1);
+        fighter.setHitValueSpaceCombat(fighter.getHitValueSpaceCombat()+1);
+        fighterUpgrade.setHitValueSpaceCombat(fighterUpgrade.getHitValueSpaceCombat()+1);
+        infantry.setHitValueGroundCombat(infantry.getHitValueGroundCombat()+1);
+        infantryUpgrade.setHitValueGroundCombat(infantryUpgrade.getHitValueGroundCombat()+1);
+        mech.setHitValueGroundCombat(mech.getHitValueGroundCombat()+1);
 
     }
 
