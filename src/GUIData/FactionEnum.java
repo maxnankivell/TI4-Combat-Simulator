@@ -20,5 +20,7 @@ public enum FactionEnum {
     SARDAKKNORR,
     SOL,
     TITANSOFUL,
-    VUILRAITH
+    VUILRAITH,
+
+    WINNU
 }
