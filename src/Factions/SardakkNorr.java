@@ -36,7 +36,6 @@ public class SardakkNorr extends Faction{
         infantry.setHitValueGroundCombat(infantry.getHitValueGroundCombat()-1);
         infantryUpgrade.setHitValueGroundCombat(infantryUpgrade.getHitValueGroundCombat()-1);
         mech.setHitValueGroundCombat(mech.getHitValueGroundCombat()-1);
-
     }
 
 }
