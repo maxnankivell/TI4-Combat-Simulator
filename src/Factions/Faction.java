@@ -1,197 +1,220 @@
 package Factions;
 
+import Units.Unit;
+import Units.UnitNames;
+
 public abstract class Faction {
+    protected Unit warsun;
+    protected Unit dreadnought;
+    protected Unit dreadnoughtUpgrade;
+    protected Unit carrier;
+    protected Unit carrierUpgrade;
+    protected Unit cruiser;
+    protected Unit cruiserUpgrade;
+    protected Unit destroyer;
+    protected Unit destroyerUpgrade;
+    protected Unit fighter;
+    protected Unit fighterUpgrade;
+    protected Unit mech;
+    protected Unit mechUpgrade;
+    protected Unit infantry;
+    protected Unit infantryUpgrade;
+    protected Unit pds;
+    protected Unit pdsUpgrade;
 
-    //1st row un-upgraded, 2nd row upgraded
-    //1st column num dice, 2nd column combat value
-    protected int[][] flagShipCombatValue = {   {2, 7},
-                                                {2, 7}};
-    protected int[][] flagShipAFBValue = {  {0, 0},
-                                            {0, 0}};
-    protected int[][] flagShipSpaceCannonValue = {  {0, 0},
-                                                    {0, 0}};
-    protected int[][] flagShipBombardmentValue = {  {0, 0},
-                                                    {0, 0}};
-    protected int[][] warSunCombatValue = { {0, 0},
-                                            {3, 3}};
-    protected int[][] warSunBombardmentValue = {{0, 0},
-                                                {3, 3}};
-    protected int[][] dreadnoughtCombatValue = {{1, 5},
-                                                {1, 5}};
-    protected int[][] dreadnoughtBombardmentValue = {   {1, 5},
-                                                        {1, 5}};
-    protected int[][] carrierCombatValue = {{1, 9},
-                                            {1, 9}};
-    protected int[][] cruiserCombatValue = {{1, 7},
-                                            {1, 6}};
-    protected int[][] destroyerCombatValue = {  {1, 9},
-                                                {1, 8}};
-    protected int[][] destroyerAFBValue = { {2, 9},
-                                            {3, 6}};
-    protected int[][] fighterCombatValue = {{1, 9},
-                                            {1, 8}};
-    protected int[][] pdsCombatValue = {{0, 0},
-                                        {0, 0}};
-    protected int[][] pdsSpaceCannonValue = {   {1, 6},
-                                                {1, 5}};
-    protected int[][] infantryCombatValue = {   {1, 8},
-                                                {1, 7}};
-    protected int[][] mechCombatValue = {   {1, 6},
-                                            {1, 6}};
-    protected int[][] mechBombardmentValue = {  {0, 0},
-                                                {0, 0}};
-    protected int[][] mechSpaceCannonValue = {  {0, 0},
-                                                {0, 0}};
-
-    public int[][] getFlagShipCombatValue() {
-        return flagShipCombatValue;
+    public Faction(){
+        warsun = new Unit.Builder(UnitNames.WARSUN)
+                .addSpaceCombatValue(3,3)
+                .addBombardmentValue(3,3)
+                .build();
+        dreadnought = new Unit.Builder(UnitNames.DREADNOUGHT)
+                .addSpaceCombatValue(5,1)
+                .addBombardmentValue(5,1)
+                .build();
+        dreadnoughtUpgrade = new Unit.Builder(UnitNames.DREADNOUGHTUPGRADE)
+                .addSpaceCombatValue(5,1)
+                .addBombardmentValue(5,1)
+                .build();
+        carrier = new Unit.Builder(UnitNames.CARRIER)
+                .addSpaceCombatValue(9,1)
+                .build();
+        carrierUpgrade = new Unit.Builder(UnitNames.CARRIERUPGRADE)
+                .addSpaceCombatValue(9,1)
+                .build();
+        cruiser = new Unit.Builder(UnitNames.CRUISER)
+                .addSpaceCombatValue(7,1)
+                .build();
+        cruiserUpgrade = new Unit.Builder(UnitNames.CRUISERUPGRADE)
+                .addSpaceCombatValue(6,1)
+                .build();
+        destroyer = new Unit.Builder(UnitNames.DESTROYER)
+                .addSpaceCombatValue(9,1)
+                .addAFBValue(9,2)
+                .build();
+        destroyerUpgrade = new Unit.Builder(UnitNames.DESTROYERUPGRADE)
+                .addSpaceCombatValue(8,1)
+                .addAFBValue(6,3)
+                .build();
+        fighter = new Unit.Builder(UnitNames.FIGHTER)
+                .addSpaceCombatValue(9,1)
+                .build();
+        fighterUpgrade = new Unit.Builder(UnitNames.FIGHTERUPGRADE)
+                .addSpaceCombatValue(8,1)
+                .build();
+        pds = new Unit.Builder(UnitNames.PDS)
+                .addSpaceCombatValue(6,1)
+                .build();
+        pdsUpgrade = new Unit.Builder(UnitNames.PDSUPGRADE)
+                .addSpaceCombatValue(5,1)
+                .addPlanetaryDefense()
+                .build();
+        infantry = new Unit.Builder(UnitNames.INFANTRY)
+                .addGroundCombatValue(8,1)
+                .build();
+        infantryUpgrade = new Unit.Builder(UnitNames.INFANTRYUPGRADE)
+                .addGroundCombatValue(7,1)
+                .build();
+        mech = new Unit.Builder(UnitNames.MECH)
+                .addGroundCombatValue(6,1)
+                .build();
+        mechUpgrade = new Unit.Builder(UnitNames.MECHUPGRADE)
+                .addGroundCombatValue(6,1)
+                .build();
     }
 
-    public int[][] getFlagShipAFBValue() {
-        return flagShipAFBValue;
+    public Unit getWarsun() {
+        return warsun;
     }
 
-    public int[][] getFlagShipSpaceCannonValue() {
-        return flagShipSpaceCannonValue;
+    public void setWarsun(Unit warsun) {
+        this.warsun = warsun;
     }
 
-    public int[][] getFlagShipBombardmentValue() {
-        return flagShipBombardmentValue;
+    public Unit getDreadnought() {
+        return dreadnought;
     }
 
-    public int[][] getWarSunCombatValue() {
-        return warSunCombatValue;
+    public void setDreadnought(Unit dreadnought) {
+        this.dreadnought = dreadnought;
     }
 
-    public int[][] getWarSunBombardmentValue() {
-        return warSunBombardmentValue;
+    public Unit getDreadnoughtUpgrade() {
+        return dreadnoughtUpgrade;
     }
 
-    public int[][] getDreadnoughtCombatValue() {
-        return dreadnoughtCombatValue;
+    public void setDreadnoughtUpgrade(Unit dreadnoughtUpgrade) {
+        this.dreadnoughtUpgrade = dreadnoughtUpgrade;
     }
 
-    public int[][] getDreadnoughtBombardmentValue() {
-        return dreadnoughtBombardmentValue;
+    public Unit getCarrier() {
+        return carrier;
     }
 
-    public int[][] getCarrierCombatValue() {
-        return carrierCombatValue;
+    public void setCarrier(Unit carrier) {
+        this.carrier = carrier;
     }
 
-    public int[][] getCruiserCombatValue() {
-        return cruiserCombatValue;
+    public Unit getCarrierUpgrade() {
+        return carrierUpgrade;
     }
 
-    public int[][] getDestroyerCombatValue() {
-        return destroyerCombatValue;
+    public void setCarrierUpgrade(Unit carrierUpgrade) {
+        this.carrierUpgrade = carrierUpgrade;
     }
 
-    public int[][] getDestroyerAFBValue() {
-        return destroyerAFBValue;
+    public Unit getCruiser() {
+        return cruiser;
     }
 
-    public int[][] getFighterCombatValue() {
-        return fighterCombatValue;
+    public void setCruiser(Unit cruiser) {
+        this.cruiser = cruiser;
     }
 
-    public int[][] getPdsCombatValue() {
-        return pdsCombatValue;
+    public Unit getCruiserUpgrade() {
+        return cruiserUpgrade;
     }
 
-    public int[][] getPdsSpaceCannonValue() {
-        return pdsSpaceCannonValue;
+    public void setCruiserUpgrade(Unit cruiserUpgrade) {
+        this.cruiserUpgrade = cruiserUpgrade;
     }
 
-    public int[][] getInfantryCombatValue() {
-        return infantryCombatValue;
+    public Unit getDestroyer() {
+        return destroyer;
     }
 
-    public int[][] getMechCombatValue() {
-        return mechCombatValue;
+    public void setDestroyer(Unit destroyer) {
+        this.destroyer = destroyer;
     }
 
-    public int[][] getMechBombardmentValue() {
-        return mechBombardmentValue;
+    public Unit getDestroyerUpgrade() {
+        return destroyerUpgrade;
     }
 
-    public int[][] getMechSpaceCannonValue() {
-        return mechSpaceCannonValue;
+    public void setDestroyerUpgrade(Unit destroyerUpgrade) {
+        this.destroyerUpgrade = destroyerUpgrade;
     }
 
-    public void setFlagShipCombatValue(int[][] flagShipCombatValue) {
-        this.flagShipCombatValue = flagShipCombatValue;
+    public Unit getFighter() {
+        return fighter;
     }
 
-    public void setFlagShipAFBValue(int[][] flagShipAFBValue) {
-        this.flagShipAFBValue = flagShipAFBValue;
+    public void setFighter(Unit fighter) {
+        this.fighter = fighter;
     }
 
-    public void setFlagShipSpaceCannonValue(int[][] flagShipSpaceCannonValue) {
-        this.flagShipSpaceCannonValue = flagShipSpaceCannonValue;
+    public Unit getFighterUpgrade() {
+        return fighterUpgrade;
     }
 
-    public void setFlagShipBombardmentValue(int[][] flagShipBombardmentValue) {
-        this.flagShipBombardmentValue = flagShipBombardmentValue;
+    public void setFighterUpgrade(Unit fighterUpgrade) {
+        this.fighterUpgrade = fighterUpgrade;
     }
 
-    public void setWarSunCombatValue(int[][] warSunCombatValue) {
-        this.warSunCombatValue = warSunCombatValue;
+    public Unit getMech() {
+        return mech;
     }
 
-    public void setWarSunBombardmentValue(int[][] warSunBombardmentValue) {
-        this.warSunBombardmentValue = warSunBombardmentValue;
+    public void setMech(Unit mech) {
+        this.mech = mech;
     }
 
-    public void setDreadnoughtCombatValue(int[][] dreadnoughtCombatValue) {
-        this.dreadnoughtCombatValue = dreadnoughtCombatValue;
+    public Unit getMechUpgrade() {
+        return mechUpgrade;
     }
 
-    public void setDreadnoughtBombardmentValue(int[][] dreadnoughtBombardmentValue) {
-        this.dreadnoughtBombardmentValue = dreadnoughtBombardmentValue;
+    public void setMechUpgrade(Unit mechUpgrade) {
+        this.mechUpgrade = mechUpgrade;
     }
 
-    public void setCarrierCombatValue(int[][] carrierCombatValue) {
-        this.carrierCombatValue = carrierCombatValue;
+    public Unit getInfantry() {
+        return infantry;
     }
 
-    public void setCruiserCombatValue(int[][] cruiserCombatValue) {
-        this.cruiserCombatValue = cruiserCombatValue;
+    public void setInfantry(Unit infantry) {
+        this.infantry = infantry;
     }
 
-    public void setDestroyerCombatValue(int[][] destroyerCombatValue) {
-        this.destroyerCombatValue = destroyerCombatValue;
+    public Unit getInfantryUpgrade() {
+        return infantryUpgrade;
     }
 
-    public void setDestroyerAFBValue(int[][] destroyerAFBValue) {
-        this.destroyerAFBValue = destroyerAFBValue;
+    public void setInfantryUpgrade(Unit infantryUpgrade) {
+        this.infantryUpgrade = infantryUpgrade;
     }
 
-    public void setFighterCombatValue(int[][] fighterCombatValue) {
-        this.fighterCombatValue = fighterCombatValue;
+    public Unit getPds() {
+        return pds;
     }
 
-    public void setPdsCombatValue(int[][] pdsCombatValue) {
-        this.pdsCombatValue = pdsCombatValue;
+    public void setPds(Unit pds) {
+        this.pds = pds;
     }
 
-    public void setPdsSpaceCannonValue(int[][] pdsSpaceCannonValue) {
-        this.pdsSpaceCannonValue = pdsSpaceCannonValue;
+    public Unit getPdsUpgrade() {
+        return pdsUpgrade;
     }
 
-    public void setInfantryCombatValue(int[][] infantryCombatValue) {
-        this.infantryCombatValue = infantryCombatValue;
-    }
-
-    public void setMechCombatValue(int[][] mechCombatValue) {
-        this.mechCombatValue = mechCombatValue;
-    }
-
-    public void setMechBombardmentValue(int[][] mechBombardmentValue) {
-        this.mechBombardmentValue = mechBombardmentValue;
-    }
-
-    public void setMechSpaceCannonValue(int[][] mechSpaceCannonValue) {
-        this.mechSpaceCannonValue = mechSpaceCannonValue;
+    public void setPdsUpgrade(Unit pdsUpgrade) {
+        this.pdsUpgrade = pdsUpgrade;
     }
 }

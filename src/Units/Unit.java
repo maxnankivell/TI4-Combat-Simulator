@@ -1,4 +1,4 @@
-package Utility;
+package Units;
 
 public class Unit {
 
@@ -10,10 +10,12 @@ public class Unit {
     private int numDiceRollsSpaceCannon;
     private int hitValueAFB;
     private int numDiceRollsAFB;
-    private int hitValueInvasion;
-    private int numDiceRollsInvasion;
+    private int hitValueGroundCombat;
+    private int numDiceRollsGroundCombat;
     private int hitValueBombardment;
     private int numDiceRollsBombardment;
+
+    private boolean hasPlanetaryDefense;
 
     public Unit(Builder builder){
         this.hitValueSpaceCombat = builder.hitValueSpaceCombat;
@@ -22,10 +24,11 @@ public class Unit {
         this.numDiceRollsSpaceCannon = builder.numDiceRollsSpaceCannon;
         this.hitValueAFB = builder.hitValueAFB;
         this.numDiceRollsAFB = builder.numDiceRollsAFB;
-        this.hitValueInvasion = builder.hitValueInvasion;
-        this.numDiceRollsInvasion = builder.numDiceRollsInvasion;
+        this.hitValueGroundCombat = builder.hitValueGroundCombat;
+        this.numDiceRollsGroundCombat = builder.numDiceRollsGroundCombat;
         this.hitValueBombardment = builder.hitValueBombardment;
         this.numDiceRollsBombardment = builder.numDiceRollsBombardment;
+        this.hasPlanetaryDefense = builder.hasPlanetaryDefense;
     }
 
     public Unit(Unit master){
@@ -35,10 +38,11 @@ public class Unit {
         this.numDiceRollsSpaceCannon = master.numDiceRollsSpaceCannon;
         this.hitValueAFB = master.hitValueAFB;
         this.numDiceRollsAFB = master.numDiceRollsAFB;
-        this.hitValueInvasion = master.hitValueInvasion;
-        this.numDiceRollsInvasion = master.numDiceRollsInvasion;
+        this.hitValueGroundCombat = master.hitValueGroundCombat;
+        this.numDiceRollsGroundCombat = master.numDiceRollsGroundCombat;
         this.hitValueBombardment = master.hitValueBombardment;
         this.numDiceRollsBombardment = master.numDiceRollsBombardment;
+        this.hasPlanetaryDefense = master.hasPlanetaryDefense;
     }
 
     public static class Builder{
@@ -50,10 +54,12 @@ public class Unit {
         private int numDiceRollsSpaceCannon = 0;
         private int hitValueAFB = 0;
         private int numDiceRollsAFB = 0;
-        private int hitValueInvasion = 0;
-        private int numDiceRollsInvasion = 0;
+        private int hitValueGroundCombat = 0;
+        private int numDiceRollsGroundCombat = 0;
         private int hitValueBombardment = 0;
         private int numDiceRollsBombardment = 0;
+
+        private boolean hasPlanetaryDefense = false;
 
         public Builder(UnitNames name){
             this.name=name;
@@ -77,15 +83,20 @@ public class Unit {
             return this;
         }
 
-        public Builder addInvasionValue(int hitValue, int numDiceRoll){
-            this.hitValueInvasion = hitValue;
-            this.numDiceRollsInvasion = numDiceRoll;
+        public Builder addGroundCombatValue(int hitValue, int numDiceRoll){
+            this.hitValueGroundCombat = hitValue;
+            this.numDiceRollsGroundCombat = numDiceRoll;
             return this;
         }
 
         public Builder addBombardmentValue(int hitValue, int numDiceRoll){
             this.hitValueBombardment = hitValue;
             this.numDiceRollsBombardment = numDiceRoll;
+            return this;
+        }
+
+        public Builder addPlanetaryDefense(){
+            this.hasPlanetaryDefense = true;
             return this;
         }
 
@@ -151,20 +162,20 @@ public class Unit {
         this.numDiceRollsAFB = numDiceRollsAFB;
     }
 
-    public int getHitValueInvasion() {
-        return hitValueInvasion;
+    public int getHitValueGroundCombat() {
+        return hitValueGroundCombat;
     }
 
-    public void setHitValueInvasion(int hitValueInvasion) {
-        this.hitValueInvasion = hitValueInvasion;
+    public void setHitValueGroundCombat(int hitValueGroundCombat) {
+        this.hitValueGroundCombat = hitValueGroundCombat;
     }
 
-    public int getNumDiceRollsInvasion() {
-        return numDiceRollsInvasion;
+    public int getNumDiceRollsGroundCombat() {
+        return numDiceRollsGroundCombat;
     }
 
-    public void setNumDiceRollsInvasion(int numDiceRollsInvasion) {
-        this.numDiceRollsInvasion = numDiceRollsInvasion;
+    public void setNumDiceRollsGroundCombat(int numDiceRollsGroundCombat) {
+        this.numDiceRollsGroundCombat = numDiceRollsGroundCombat;
     }
 
     public int getHitValueBombardment() {
