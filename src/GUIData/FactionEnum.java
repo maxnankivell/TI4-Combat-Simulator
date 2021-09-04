@@ -22,5 +22,6 @@ public enum FactionEnum {
     TITANSOFUL,
     VUILRAITH,
 
-    WINNU
+    WINNU,
+    XXCHA
 }
