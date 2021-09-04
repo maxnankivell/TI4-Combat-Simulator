@@ -24,5 +24,6 @@ public enum FactionEnum {
 
     WINNU,
     XXCHA,
-    YIN
+    YIN,
+    YSSARIL
 }
