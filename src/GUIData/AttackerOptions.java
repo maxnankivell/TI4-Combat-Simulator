@@ -1,7 +1,4 @@
-package Utility;
-
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
+package GUIData;
 
 public class AttackerOptions {
 
@@ -29,7 +26,7 @@ public class AttackerOptions {
     private static boolean tekklarLegionAttackerCheckbox = false;
 
     private static boolean baronyAgentAttackerCheckbox = false;
-    private static  boolean solAgentAttackerCheckbox = false;
+    private static boolean solAgentAttackerCheckbox = false;
 
     private static boolean disableLabelAttackerCheckbox = false;
     private static boolean experimentalBattlestationAttackerCheckbox = false;
@@ -48,7 +45,7 @@ public class AttackerOptions {
     private static boolean titansHeroAttackerCheckbox = false;
 
     //unit numbers
-    private static String attackerFactionCB = "";
+    private static FactionEnum attackerFactionCB;
     private static int attackerFlagshipCB = 0;
     private static int attackerWarSunCB = 0;
     private static int attackerDreadnoughtCB = 0;
@@ -327,11 +324,11 @@ public class AttackerOptions {
         AttackerOptions.titansHeroAttackerCheckbox = titansHeroAttackerCheckbox;
     }
 
-    public static String getAttackerFactionCB() {
+    public static FactionEnum getAttackerFactionCB() {
         return attackerFactionCB;
     }
 
-    public static void setAttackerFactionCB(String attackerFactionCB) {
+    public static void setAttackerFactionCB(FactionEnum attackerFactionCB) {
         AttackerOptions.attackerFactionCB = attackerFactionCB;
     }
 

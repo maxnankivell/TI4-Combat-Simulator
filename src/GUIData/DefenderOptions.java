@@ -1,7 +1,4 @@
-package Utility;
-
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
+package GUIData;
 
 public class DefenderOptions {
 
@@ -50,7 +47,7 @@ public class DefenderOptions {
     private static boolean titansHeroDefenderCheckbox = false;
 
     //unit numbers
-    private static String defenderFactionCB = "";
+    private static FactionEnum defenderFactionCB;
     private static int defenderFlagshipCB = 0;
     private static int defenderWarSunCB = 0;
     private static int defenderDreadnoughtCB = 0;
@@ -337,11 +334,11 @@ public class DefenderOptions {
         DefenderOptions.titansHeroDefenderCheckbox = titansHeroDefenderCheckbox;
     }
 
-    public static String getDefenderFactionCB() {
+    public static FactionEnum getDefenderFactionCB() {
         return defenderFactionCB;
     }
 
-    public static void setDefenderFactionCB(String defenderFactionCB) {
+    public static void setDefenderFactionCB(FactionEnum defenderFactionCB) {
         DefenderOptions.defenderFactionCB = defenderFactionCB;
     }
 

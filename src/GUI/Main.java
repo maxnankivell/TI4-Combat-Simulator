@@ -1,7 +1,8 @@
 package GUI;
 
-import Utility.AttackerOptions;
-import Utility.DefenderOptions;
+import GUIData.AttackerOptions;
+import GUIData.DefenderOptions;
+import GUIData.FactionEnum;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -365,7 +366,6 @@ public class Main extends Application {
         GridPane.setConstraints(defenderInfantryCheckBox, 4, 10);
         GridPane.setConstraints(defenderPdsCheckBox, 4, 11);
 
-
         gridPane.getChildren().addAll(
                 attackerLabel,
                 unitsLabel,
@@ -481,7 +481,11 @@ public class Main extends Application {
 
     private void checkComboBox(){
 
-        AttackerOptions.setAttackerFactionCB((String) attackerFactionCB.getValue());
+        String attackerFactionName = (String) attackerFactionCB.getValue();
+        attackerFactionName = attackerFactionName.replaceAll("[^a-zA-Z0-9]", "");
+        attackerFactionName = attackerFactionName.toUpperCase();
+
+        AttackerOptions.setAttackerFactionCB(FactionEnum.valueOf(attackerFactionName));
         AttackerOptions.setAttackerFlagshipCB((Integer) attackerFlagshipCB.getValue());
         AttackerOptions.setAttackerWarSunCB((Integer) attackerWarSunCB.getValue());
         AttackerOptions.setAttackerDreadnoughtCB((Integer) attackerDreadnoughtCB.getValue());
@@ -493,7 +497,11 @@ public class Main extends Application {
         AttackerOptions.setAttackerInfantryCB((Integer) attackerInfantryCB.getValue());
         AttackerOptions.setAttackerPdsCB((Integer) attackerPdsCB.getValue());
 
-        DefenderOptions.setDefenderFactionCB((String) defenderFactionCB.getValue());
+        String defenderFactionName = (String) defenderFactionCB.getValue();
+        defenderFactionName = defenderFactionName.replaceAll("[^a-zA-Z0-9]", "");
+        defenderFactionName = defenderFactionName.toUpperCase();
+
+        DefenderOptions.setDefenderFactionCB(FactionEnum.valueOf(defenderFactionName));
         DefenderOptions.setDefenderFlagshipCB((Integer) defenderFlagshipCB.getValue());
         DefenderOptions.setDefenderWarSunCB((Integer) defenderWarSunCB.getValue());
         DefenderOptions.setDefenderDreadnoughtCB((Integer) defenderDreadnoughtCB.getValue());

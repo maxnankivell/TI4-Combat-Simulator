@@ -1,7 +1,7 @@
 package GUI;
 
-import Utility.AttackerOptions;
-import Utility.DefenderOptions;
+import GUIData.AttackerOptions;
+import GUIData.DefenderOptions;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -187,10 +187,9 @@ public class OptionsScreenGUI {
         titansHeroDefenderCheckbox = new CheckBox();
 
         //populate checkboxs
-        initialiseAttackerCheckBoxs();
-        initialiseDefenderCheckBoxs();
+        initialiseCheckBoxs();
 
-        Button closeButton = new Button("Close");
+        Button saveButton = new Button("Save");
 
         //Populate and style gridPane
         gridPane.setVgap(4);
@@ -378,14 +377,14 @@ public class OptionsScreenGUI {
 
         //Populate and style Borderpane
         stackPaneTop.getChildren().add(optionsLabel);
-        stackPaneBottom.getChildren().add(closeButton);
+        stackPaneBottom.getChildren().add(saveButton);
         borderPane.setTop(stackPaneTop);
         borderPane.setCenter(scrollPane);
         borderPane.setBottom(stackPaneBottom);
 
 
         //Button actions
-        closeButton.setOnAction(e -> {
+        saveButton.setOnAction(e -> {
             saveCheckBoxs();
             window.close();
         });
@@ -462,7 +461,7 @@ public class OptionsScreenGUI {
 
     }
 
-    private void initialiseAttackerCheckBoxs(){
+    private void initialiseCheckBoxs(){
 
         plasmaScoringAttackerCheckbox.setSelected(AttackerOptions.isPlasmaScoringAttackerCheckbox());
         x89BacterialWeaponAttackerCheckbox.setSelected(AttackerOptions.isX89BacterialWeaponAttackerCheckbox());
@@ -494,10 +493,7 @@ public class OptionsScreenGUI {
 
         titansHeroAttackerCheckbox.setSelected(AttackerOptions.isTitansHeroAttackerCheckbox());
 
-    }
-
-    private void initialiseDefenderCheckBoxs(){
-
+        //defender
         plasmaScoringDefenderCheckbox.setSelected(DefenderOptions.isPlasmaScoringDefenderCheckbox());
         magenDefenseGridDefenderCheckbox.setSelected(DefenderOptions.isMagenDefenseGridDefenderCheckbox());
         antimassDeflectorDefenderCheckbox.setSelected(DefenderOptions.isAntimassDeflectorDefenderCheckbox());
