@@ -16,7 +16,6 @@ public abstract class Faction {
     protected Unit fighter;
     protected Unit fighterUpgrade;
     protected Unit mech;
-    protected Unit mechUpgrade;
     protected Unit infantry;
     protected Unit infantryUpgrade;
     protected Unit pds;
@@ -75,9 +74,6 @@ public abstract class Faction {
                 .addGroundCombatValue(7,1)
                 .build();
         mech = new Unit.Builder(UnitNames.MECH)
-                .addGroundCombatValue(6,1)
-                .build();
-        mechUpgrade = new Unit.Builder(UnitNames.MECHUPGRADE)
                 .addGroundCombatValue(6,1)
                 .build();
     }
@@ -176,14 +172,6 @@ public abstract class Faction {
 
     public void setMech(Unit mech) {
         this.mech = mech;
-    }
-
-    public Unit getMechUpgrade() {
-        return mechUpgrade;
-    }
-
-    public void setMechUpgrade(Unit mechUpgrade) {
-        this.mechUpgrade = mechUpgrade;
     }
 
     public Unit getInfantry() {

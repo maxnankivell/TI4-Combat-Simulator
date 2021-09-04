@@ -9,6 +9,7 @@ public class Arborec extends Faction{
     public Arborec(){
         super();
         flagship = new Unit.Builder(UnitNames.FLAGSHIP).addSpaceCombatValue(7,2).build();
+        mech.setPlanetaryDefense(true);
     }
 
 }

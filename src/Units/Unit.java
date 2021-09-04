@@ -15,7 +15,7 @@ public class Unit {
     private int hitValueBombardment;
     private int numDiceRollsBombardment;
 
-    private boolean hasPlanetaryDefense;
+    private boolean planetaryDefense;
 
     public Unit(Builder builder){
         this.hitValueSpaceCombat = builder.hitValueSpaceCombat;
@@ -28,7 +28,7 @@ public class Unit {
         this.numDiceRollsGroundCombat = builder.numDiceRollsGroundCombat;
         this.hitValueBombardment = builder.hitValueBombardment;
         this.numDiceRollsBombardment = builder.numDiceRollsBombardment;
-        this.hasPlanetaryDefense = builder.hasPlanetaryDefense;
+        this.planetaryDefense = builder.planetaryDefense;
     }
 
     public Unit(Unit master){
@@ -42,7 +42,7 @@ public class Unit {
         this.numDiceRollsGroundCombat = master.numDiceRollsGroundCombat;
         this.hitValueBombardment = master.hitValueBombardment;
         this.numDiceRollsBombardment = master.numDiceRollsBombardment;
-        this.hasPlanetaryDefense = master.hasPlanetaryDefense;
+        this.planetaryDefense = master.planetaryDefense;
     }
 
     public static class Builder{
@@ -59,7 +59,7 @@ public class Unit {
         private int hitValueBombardment = 0;
         private int numDiceRollsBombardment = 0;
 
-        private boolean hasPlanetaryDefense = false;
+        private boolean planetaryDefense = false;
 
         public Builder(UnitNames name){
             this.name=name;
@@ -96,7 +96,7 @@ public class Unit {
         }
 
         public Builder addPlanetaryDefense(){
-            this.hasPlanetaryDefense = true;
+            this.planetaryDefense = true;
             return this;
         }
 
@@ -192,5 +192,13 @@ public class Unit {
 
     public void setNumDiceRollsBombardment(int numDiceRollsBombardment) {
         this.numDiceRollsBombardment = numDiceRollsBombardment;
+    }
+
+    public boolean hasPlanetaryDefense() {
+        return planetaryDefense;
+    }
+
+    public void setPlanetaryDefense(boolean planetaryDefense) {
+        this.planetaryDefense = planetaryDefense;
     }
 }
