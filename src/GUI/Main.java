@@ -1,5 +1,8 @@
 package GUI;
 
+import GUIData.AttackerOptions;
+import GUIData.DefenderOptions;
+import GUIData.FactionEnum;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -18,6 +21,50 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     Stage window;
+
+    CheckBox attackerFlagshipCheckBox;
+    CheckBox defenderFlagshipCheckBox;
+    CheckBox attackerWarSunCheckBox;
+    CheckBox defenderWarSunCheckBox;
+    CheckBox attackerDreadnoughtCheckBox;
+    CheckBox defenderDreadnoughtCheckBox;
+    CheckBox attackerCarrierCheckBox;
+    CheckBox defenderCarrierCheckBox;
+    CheckBox attackerCruiserCheckBox;
+    CheckBox defenderCruiserCheckBox;
+    CheckBox attackerDestroyerCheckBox;
+    CheckBox defenderDestroyerCheckBox;
+    CheckBox attackerFighterCheckBox;
+    CheckBox defenderFighterCheckBox;
+    CheckBox attackerMechCheckBox;
+    CheckBox defenderMechCheckBox;
+    CheckBox attackerInfantryCheckBox;
+    CheckBox defenderInfantryCheckBox;
+    CheckBox attackerPdsCheckBox;
+    CheckBox defenderPdsCheckBox;
+
+    ComboBox<Object> attackerFactionCB;
+    ComboBox<Object> defenderFactionCB;
+    ComboBox<Object> attackerFlagshipCB;
+    ComboBox<Object> defenderFlagshipCB;
+    ComboBox<Object> attackerWarSunCB;
+    ComboBox<Object> defenderWarSunCB;
+    ComboBox<Object> attackerDreadnoughtCB;
+    ComboBox<Object> defenderDreadnoughtCB;
+    ComboBox<Object> attackerCarrierCB;
+    ComboBox<Object> defenderCarrierCB;
+    ComboBox<Object> attackerCruiserCB;
+    ComboBox<Object> defenderCruiserCB;
+    ComboBox<Object> attackerDestroyerCB;
+    ComboBox<Object> defenderDestroyerCB;
+    ComboBox<Object> attackerFighterCB;
+    ComboBox<Object> defenderFighterCB;
+    ComboBox<Object> attackerMechCB;
+    ComboBox<Object> defenderMechCB;
+    ComboBox<Object> attackerInfantryCB;
+    ComboBox<Object> defenderInfantryCB;
+    ComboBox<Object> attackerPdsCB;
+    ComboBox<Object> defenderPdsCB;
 
     public static void main(String[] args) {
         launch(args);
@@ -62,49 +109,49 @@ public class Main extends Application {
         Label infantryLabel = new Label("Infantry");
         Label pdsLabel = new Label("PDS");
 
-        CheckBox attackerFlagshipCheckBox = new CheckBox();
-        CheckBox defenderFlagshipCheckBox = new CheckBox();
-        CheckBox attackerWarSunCheckBox = new CheckBox();
-        CheckBox defenderWarSunCheckBox = new CheckBox();
-        CheckBox attackerDreadnoughtCheckBox = new CheckBox();
-        CheckBox defenderDreadnoughtCheckBox = new CheckBox();
-        CheckBox attackerCarrierCheckBox = new CheckBox();
-        CheckBox defenderCarrierCheckBox = new CheckBox();
-        CheckBox attackerCruiserCheckBox = new CheckBox();
-        CheckBox defenderCruiserCheckBox = new CheckBox();
-        CheckBox attackerDestroyerCheckBox = new CheckBox();
-        CheckBox defenderDestroyerCheckBox = new CheckBox();
-        CheckBox attackerFighterCheckBox = new CheckBox();
-        CheckBox defenderFighterCheckBox = new CheckBox();
-        CheckBox attackerMechCheckBox = new CheckBox();
-        CheckBox defenderMechCheckBox = new CheckBox();
-        CheckBox attackerInfantryCheckBox = new CheckBox();
-        CheckBox defenderInfantryCheckBox = new CheckBox();
-        CheckBox attackerPdsCheckBox = new CheckBox();
-        CheckBox defenderPdsCheckBox = new CheckBox();
+        attackerFlagshipCheckBox = new CheckBox();
+        defenderFlagshipCheckBox = new CheckBox();
+        attackerWarSunCheckBox = new CheckBox();
+        defenderWarSunCheckBox = new CheckBox();
+        attackerDreadnoughtCheckBox = new CheckBox();
+        defenderDreadnoughtCheckBox = new CheckBox();
+        attackerCarrierCheckBox = new CheckBox();
+        defenderCarrierCheckBox = new CheckBox();
+        attackerCruiserCheckBox = new CheckBox();
+        defenderCruiserCheckBox = new CheckBox();
+        attackerDestroyerCheckBox = new CheckBox();
+        defenderDestroyerCheckBox = new CheckBox();
+        attackerFighterCheckBox = new CheckBox();
+        defenderFighterCheckBox = new CheckBox();
+        attackerMechCheckBox = new CheckBox();
+        defenderMechCheckBox = new CheckBox();
+        attackerInfantryCheckBox = new CheckBox();
+        defenderInfantryCheckBox = new CheckBox();
+        attackerPdsCheckBox = new CheckBox();
+        defenderPdsCheckBox = new CheckBox();
 
-        ComboBox<Object> attackerFactionCB = new ComboBox<>();
-        ComboBox<Object> defenderFactionCB = new ComboBox<>();
-        ComboBox<Object> attackerFlagshipCB = new ComboBox<>();
-        ComboBox<Object> defenderFlagshipCB = new ComboBox<>();
-        ComboBox<Object> attackerWarSunCB = new ComboBox<>();
-        ComboBox<Object> defenderWarSunCB = new ComboBox<>();
-        ComboBox<Object> attackerDreadnoughtCB = new ComboBox<>();
-        ComboBox<Object> defenderDreadnoughtCB = new ComboBox<>();
-        ComboBox<Object> attackerCarrierCB = new ComboBox<>();
-        ComboBox<Object> defenderCarrierCB = new ComboBox<>();
-        ComboBox<Object> attackerCruiserCB = new ComboBox<>();
-        ComboBox<Object> defenderCruiserCB = new ComboBox<>();
-        ComboBox<Object> attackerDestroyerCB = new ComboBox<>();
-        ComboBox<Object> defenderDestroyerCB = new ComboBox<>();
-        ComboBox<Object> attackerFighterCB = new ComboBox<>();
-        ComboBox<Object> defenderFighterCB = new ComboBox<>();
-        ComboBox<Object> attackerMechCB = new ComboBox<>();
-        ComboBox<Object> defenderMechCB = new ComboBox<>();
-        ComboBox<Object> attackerInfantryCB = new ComboBox<>();
-        ComboBox<Object> defenderInfantryCB = new ComboBox<>();
-        ComboBox<Object> attackerPdsCB = new ComboBox<>();
-        ComboBox<Object> defenderPdsCB = new ComboBox<>();
+        attackerFactionCB = new ComboBox<>();
+        defenderFactionCB = new ComboBox<>();
+        attackerFlagshipCB = new ComboBox<>();
+        defenderFlagshipCB = new ComboBox<>();
+        attackerWarSunCB = new ComboBox<>();
+        defenderWarSunCB = new ComboBox<>();
+        attackerDreadnoughtCB = new ComboBox<>();
+        defenderDreadnoughtCB = new ComboBox<>();
+        attackerCarrierCB = new ComboBox<>();
+        defenderCarrierCB = new ComboBox<>();
+        attackerCruiserCB = new ComboBox<>();
+        defenderCruiserCB = new ComboBox<>();
+        attackerDestroyerCB = new ComboBox<>();
+        defenderDestroyerCB = new ComboBox<>();
+        attackerFighterCB = new ComboBox<>();
+        defenderFighterCB = new ComboBox<>();
+        attackerMechCB = new ComboBox<>();
+        defenderMechCB = new ComboBox<>();
+        attackerInfantryCB = new ComboBox<>();
+        defenderInfantryCB = new ComboBox<>();
+        attackerPdsCB = new ComboBox<>();
+        defenderPdsCB = new ComboBox<>();
 
         //Populate Combo Box's
         attackerFactionCB.getItems().addAll(
@@ -319,7 +366,6 @@ public class Main extends Application {
         GridPane.setConstraints(defenderInfantryCheckBox, 4, 10);
         GridPane.setConstraints(defenderPdsCheckBox, 4, 11);
 
-
         gridPane.getChildren().addAll(
                 attackerLabel,
                 unitsLabel,
@@ -406,5 +452,66 @@ public class Main extends Application {
         window.setScene(mainScene);
         window.setMaximized(true);
         window.show();
+    }
+
+    private void checkCheckBox(){
+
+        AttackerOptions.setAttackerFlagshipCheckBox(attackerFlagshipCheckBox.isSelected());
+        AttackerOptions.setAttackerWarSunCheckBox(attackerWarSunCheckBox.isSelected());
+        AttackerOptions.setAttackerDreadnoughtCheckBox(attackerDreadnoughtCheckBox.isSelected());
+        AttackerOptions.setAttackerCarrierCheckBox(attackerCarrierCheckBox.isSelected());
+        AttackerOptions.setAttackerCruiserCheckBox(attackerCruiserCheckBox.isSelected());
+        AttackerOptions.setAttackerDestroyerCheckBox(attackerDestroyerCheckBox.isSelected());
+        AttackerOptions.setAttackerFighterCheckBox(attackerFighterCheckBox.isSelected());
+        AttackerOptions.setAttackerMechCheckBox(attackerMechCheckBox.isSelected());
+        AttackerOptions.setAttackerInfantryCheckBox(attackerInfantryCheckBox.isSelected());
+        AttackerOptions.setAttackerPdsCheckBox(attackerPdsCheckBox.isSelected());
+
+        DefenderOptions.setDefenderFlagshipCheckBox(defenderFlagshipCheckBox.isSelected());
+        DefenderOptions.setDefenderWarSunCheckBox(defenderWarSunCheckBox.isSelected());
+        DefenderOptions.setDefenderDreadnoughtCheckBox(defenderDreadnoughtCheckBox.isSelected());
+        DefenderOptions.setDefenderCarrierCheckBox(defenderCarrierCheckBox.isSelected());
+        DefenderOptions.setDefenderCruiserCheckBox(defenderCruiserCheckBox.isSelected());
+        DefenderOptions.setDefenderDestroyerCheckBox(defenderDestroyerCheckBox.isSelected());
+        DefenderOptions.setDefenderFighterCheckBox(defenderFighterCheckBox.isSelected());
+        DefenderOptions.setDefenderMechCheckBox(defenderMechCheckBox.isSelected());
+        DefenderOptions.setDefenderInfantryCheckBox(defenderInfantryCheckBox.isSelected());
+        DefenderOptions.setDefenderPdsCheckBox(defenderPdsCheckBox.isSelected());
+    }
+
+    private void checkComboBox(){
+
+        String attackerFactionName = (String) attackerFactionCB.getValue();
+        attackerFactionName = attackerFactionName.replaceAll("[^a-zA-Z0-9]", "");
+        attackerFactionName = attackerFactionName.toUpperCase();
+
+        AttackerOptions.setAttackerFactionCB(FactionEnum.valueOf(attackerFactionName));
+        AttackerOptions.setAttackerFlagshipCB((Integer) attackerFlagshipCB.getValue());
+        AttackerOptions.setAttackerWarSunCB((Integer) attackerWarSunCB.getValue());
+        AttackerOptions.setAttackerDreadnoughtCB((Integer) attackerDreadnoughtCB.getValue());
+        AttackerOptions.setAttackerCarrierCB((Integer) attackerCarrierCB.getValue());
+        AttackerOptions.setAttackerCruiserCB((Integer) attackerCruiserCB.getValue());
+        AttackerOptions.setAttackerDestroyerCB((Integer) attackerDestroyerCB.getValue());
+        AttackerOptions.setAttackerFighterCB((Integer) attackerFighterCB.getValue());
+        AttackerOptions.setAttackerMechCB((Integer) attackerMechCB.getValue());
+        AttackerOptions.setAttackerInfantryCB((Integer) attackerInfantryCB.getValue());
+        AttackerOptions.setAttackerPdsCB((Integer) attackerPdsCB.getValue());
+
+        String defenderFactionName = (String) defenderFactionCB.getValue();
+        defenderFactionName = defenderFactionName.replaceAll("[^a-zA-Z0-9]", "");
+        defenderFactionName = defenderFactionName.toUpperCase();
+
+        DefenderOptions.setDefenderFactionCB(FactionEnum.valueOf(defenderFactionName));
+        DefenderOptions.setDefenderFlagshipCB((Integer) defenderFlagshipCB.getValue());
+        DefenderOptions.setDefenderWarSunCB((Integer) defenderWarSunCB.getValue());
+        DefenderOptions.setDefenderDreadnoughtCB((Integer) defenderDreadnoughtCB.getValue());
+        DefenderOptions.setDefenderCarrierCB((Integer) defenderCarrierCB.getValue());
+        DefenderOptions.setDefenderCruiserCB((Integer) defenderCruiserCB.getValue());
+        DefenderOptions.setDefenderDestroyerCB((Integer) defenderDestroyerCB.getValue());
+        DefenderOptions.setDefenderFighterCB((Integer) defenderFighterCB.getValue());
+        DefenderOptions.setDefenderMechCB((Integer) defenderMechCB.getValue());
+        DefenderOptions.setDefenderInfantryCB((Integer) defenderInfantryCB.getValue());
+        DefenderOptions.setDefenderPdsCB((Integer) defenderPdsCB.getValue());
+
     }
 }
