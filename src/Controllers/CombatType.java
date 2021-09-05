@@ -1,6 +1,6 @@
 package Controllers;
 
-public enum CombatStage {
+public enum CombatType {
     AFB,
     BOMBARDMENT,
     GROUNDCOMBAT,

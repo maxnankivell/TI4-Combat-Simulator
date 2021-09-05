@@ -15,12 +15,12 @@ public class SpaceCannonDefenseController extends Controller{
     public void startProcess() {
         //Plasma scoring
         if (DefenderOptions.isPlasmaScoringDefenderCheckbox()){
-            addDiceToOneUnit(CombatStage.SPACECANNON, defender);
+            addOneDiceToUnit(CombatType.SPACECANNON, defender);
         }
 
         //Antimass deflector
         if (AttackerOptions.isAntimassDeflectorAttackerCheckbox()){
-            changeHitValueOfAllUnits(CombatStage.SPACECANNON, defender, 1);
+            changeHitValueOfAllUnits(CombatType.SPACECANNON, defender, 1);
         }
 
         //Disable
@@ -35,7 +35,7 @@ public class SpaceCannonDefenseController extends Controller{
 
         //Argent flight commander
         if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()){
-            addDiceToOneUnit(CombatStage.SPACECANNON, defender);
+            addOneDiceToUnit(CombatType.SPACECANNON, defender);
         }
 
         //Titans hero
