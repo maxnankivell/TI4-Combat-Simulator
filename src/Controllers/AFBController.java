@@ -33,7 +33,6 @@ public class AFBController extends Controller{
      * Method to run through all pre-combat modifiers for the attacker
      */
     public void attackerPreProcess(){
-        //Check for pre-combat modifiers
         //Argent Flight Promissory note
         if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()) {
             addOneDiceToUnit(CombatType.AFB, attacker);
@@ -70,7 +69,7 @@ public class AFBController extends Controller{
                 }
                 //Argent Flight special destroyers
                 if(AttackerOptions.getAttackerFactionCB() == FactionEnum.ARGENTFLIGHT) {
-                    strikeWingAlpha(roll, unit);
+                    numInfantryHitsAttacker =+ strikeWingAlpha(roll, unit);
                 }
             }
         }
@@ -80,10 +79,9 @@ public class AFBController extends Controller{
      * Method to run through all post-combat modifiers for the attacker
      */
     public void attackerPostProcess(){
-        //Check for post-combat modifiers
         //Argent Flight faction ability
         if(AttackerOptions.getAttackerFactionCB() == FactionEnum.ARGENTFLIGHT) {
-            raidFormation();
+            raidFormationAttacker();
         }
     }
 
@@ -127,7 +125,7 @@ public class AFBController extends Controller{
                 }
                 //Argent Flight special destroyers
                 if(DefenderOptions.getDefenderFactionCB() == FactionEnum.ARGENTFLIGHT) {
-                    strikeWingAlpha(roll, unit);
+                    numInfantryHitsDefender += strikeWingAlpha(roll, unit);
                 }
             }
         }
@@ -139,7 +137,7 @@ public class AFBController extends Controller{
     private void defenderPostProcess() {
         //Argent Flight faction ability
         if(DefenderOptions.getDefenderFactionCB() == FactionEnum.ARGENTFLIGHT) {
-            raidFormation();
+            raidFormationDefender();
         }
     }
 
@@ -147,19 +145,31 @@ public class AFBController extends Controller{
      * Method for the Argent Flight unique destroyers
      * @param roll the number that was rolled by the destroyer being passed in
      * @param unit the destroyer being passed in
+     * @return if the roll was a critical or not
      */
-    private void strikeWingAlpha(int roll, Unit unit){
+    private int strikeWingAlpha(int roll, Unit unit){
         if(unit.getName() == UnitNames.DESTROYERUPGRADE && roll >= 9){
             numInfantryHitsAttacker++;
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * Method for the Argent Flight unique ability
+     */
+    private void raidFormationAttacker(){
+        if(numHitsAttacker > DefenderOptions.getDefenderFighterCB()){
+            numSustainDamageHitsAttacker = numHitsAttacker - DefenderOptions.getDefenderFighterCB();
         }
     }
 
     /**
      * Method for the Argent Flight unique ability
      */
-    private void raidFormation(){
-        if(numHitsAttacker > DefenderOptions.getDefenderFighterCB()){
-            numSustainDamageHitsAttacker = numHitsAttacker - DefenderOptions.getDefenderFighterCB();
+    private void raidFormationDefender(){
+        if(numHitsDefender > AttackerOptions.getAttackerFighterCB()){
+            numSustainDamageHitsDefender = numHitsDefender - AttackerOptions.getAttackerFighterCB();
         }
     }
 
