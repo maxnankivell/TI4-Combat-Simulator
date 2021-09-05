@@ -126,18 +126,23 @@ public class SpaceCombatController extends Controller{
     private void defenderPostProcess() {
     }
 
+    /**
+     * Method to set the number of dice the winnu flagship will roll
+     * @param myUnits Arraylist of the current players units
+     * @param opponentUnits Arraylist of the opponent players units
+     */
     private void winnuFlagship(ArrayList<Unit> myUnits, ArrayList<Unit> opponentUnits) {
-        int numOpponentUnits = 0;
+        int numOpponentCapitalShips = 0;
 
         for (Unit unit : opponentUnits) {
-            if(unit.getName() == UnitNames.FLAGSHIP || unit.getName() == UnitNames.FLAGSHIPUPGRADE){
-
+            if(unit.isNonFighterShip()){
+                numOpponentCapitalShips++;
             }
         }
 
         for (Unit unit : myUnits) {
-            if(unit.getName() == UnitNames.FLAGSHIP || unit.getName() == UnitNames.FLAGSHIPUPGRADE){
-
+            if(unit.getName() == UnitNames.FLAGSHIP){
+                unit.setNumDiceRollsSpaceCombat(numOpponentCapitalShips);
             }
         }
     }
