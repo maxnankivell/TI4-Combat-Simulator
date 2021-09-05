@@ -16,6 +16,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * When this class is created it will make a popup GUI with all possible combat abilities
+ */
 public class OptionsScreenGUI {
 
     CheckBox plasmaScoringAttackerCheckbox;
@@ -71,6 +74,9 @@ public class OptionsScreenGUI {
     CheckBox titansHeroAttackerCheckbox;
     CheckBox titansHeroDefenderCheckbox;
 
+    /**
+     * Constructor to build the GUI
+     */
     public OptionsScreenGUI(){
 
         //Initialise window
@@ -389,11 +395,15 @@ public class OptionsScreenGUI {
             window.close();
         });
 
+        //Set the scene and show the window
         Scene scene = new Scene(borderPane, 600, 600);
         window.setScene(scene);
         window.showAndWait();
     }
 
+    /**
+     * Method to save the values of all checkboxs in the static options classes
+     */
     private void saveCheckBoxs() {
 
         //Attacker checkboxs
@@ -461,6 +471,9 @@ public class OptionsScreenGUI {
 
     }
 
+    /**
+     * Method to initialise the values of all checkboxs from the information stored in the static options classes
+     */
     private void initialiseCheckBoxs(){
 
         plasmaScoringAttackerCheckbox.setSelected(AttackerOptions.isPlasmaScoringAttackerCheckbox());

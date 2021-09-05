@@ -19,6 +19,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Main class will be in charge of the GUI for the main window
+ */
 public class Main extends Application {
 
     Stage window;
@@ -337,7 +340,6 @@ public class Main extends Application {
         GridPane.setConstraints(clearAttackerBtn, 1, 12);
         GridPane.setConstraints(clearDefenderBtn, 3, 12);
 
-        //adding checkboxs
         GridPane.setConstraints(attackerFlagshipCheckBox, 0, 2);
         GridPane.setConstraints(attackerDreadnoughtCheckBox, 0, 4);
         GridPane.setConstraints(attackerCarrierCheckBox, 0, 5);
@@ -438,7 +440,6 @@ public class Main extends Application {
         spaceCannonDefenseBtn.setOnAction(e -> handleSpaceCannonDefense());
         invasionCombatBtn.setOnAction(e -> handleInvasionCombat());
 
-
         //Add the borderPane to a scene and show it
         Scene mainScene = new Scene(borderPane, 1024, 576);
         window.setScene(mainScene);
@@ -446,6 +447,10 @@ public class Main extends Application {
         window.show();
     }
 
+    /**
+     * Method to handle Space Cannon Offense after the button is pressed
+     * It will first check to make sure both factions are selected and all GUI values are saved
+     */
     private void handleSpaceCannonOffense() {
         if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
             return;
@@ -457,6 +462,10 @@ public class Main extends Application {
 //        SpaceCannonOffenseController();
     }
 
+    /**
+     * Method to handle Anti Fighter Barrage after the button is pressed
+     * It will first check to make sure both factions are selected and all GUI values are saved
+     */
     private void handleAntiFighterBarrage() {
         if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
             return;
@@ -468,6 +477,10 @@ public class Main extends Application {
 //        AFBController();
     }
 
+    /**
+     * Method to handle Space Combat after the button is pressed
+     * It will first check to make sure both factions are selected and all GUI values are saved
+     */
     private void handleSpaceCombat() {
         if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
             return;
@@ -479,6 +492,10 @@ public class Main extends Application {
 //        SpaceCombatController();
     }
 
+    /**
+     * Method to handle Bombardment after the button is pressed
+     * It will first check to make sure both factions are selected and all GUI values are saved
+     */
     private void handleBombardment() {
         if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
             return;
@@ -490,6 +507,10 @@ public class Main extends Application {
 //        BombardmentController();
     }
 
+    /**
+     * Method to handle Space Cannon Defense after the button is pressed
+     * It will first check to make sure both factions are selected and all GUI values are saved
+     */
     private void handleSpaceCannonDefense() {
         if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
             return;
@@ -501,6 +522,10 @@ public class Main extends Application {
 //        SpaceCannonDefenseController();
     }
 
+    /**
+     * Method to handle Invasion Combat after the button is pressed
+     * It will first check to make sure both factions are selected and all GUI values are saved
+     */
     private void handleInvasionCombat() {
         if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
             return;
@@ -511,7 +536,10 @@ public class Main extends Application {
 
 //        InvasionController();
     }
-    
+
+    /**
+     * Method to save the values of all checkboxs in the static options classes
+     */
     private void checkCheckBox(){
 
         AttackerOptions.setAttackerFlagshipCheckBox(attackerFlagshipCheckBox.isSelected());
@@ -533,6 +561,9 @@ public class Main extends Application {
         DefenderOptions.setDefenderPdsCheckBox(defenderPdsCheckBox.isSelected());
     }
 
+    /**
+     * Method to save the values of all comboboxs in the static options classes
+     */
     private void checkComboBox(){
 
         String attackerFactionName = (String) attackerFactionCB.getValue();

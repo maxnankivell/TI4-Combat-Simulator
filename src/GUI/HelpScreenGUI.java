@@ -9,6 +9,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * When this class is created it will make a popup GUI representing a help screen
+ */
 public class HelpScreenGUI {
 
     public HelpScreenGUI(){
