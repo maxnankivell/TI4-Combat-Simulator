@@ -1,7 +1,7 @@
 package Factions;
 
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 public abstract class Faction {
     protected Unit flagship;
@@ -27,58 +27,58 @@ public abstract class Faction {
      * creates each unit with the default unit values
      */
     public Faction(){
-        warsun = new Unit.Builder(UnitNames.WARSUN)
+        warsun = new Unit.Builder(UnitName.WARSUN)
                 .addSpaceCombatValue(3,3)
                 .addBombardmentValue(3,3)
                 .build();
-        dreadnought = new Unit.Builder(UnitNames.DREADNOUGHT)
+        dreadnought = new Unit.Builder(UnitName.DREADNOUGHT)
                 .addSpaceCombatValue(5,1)
                 .addBombardmentValue(5,1)
                 .build();
-        dreadnoughtUpgrade = new Unit.Builder(UnitNames.DREADNOUGHTUPGRADE)
+        dreadnoughtUpgrade = new Unit.Builder(UnitName.DREADNOUGHTUPGRADE)
                 .addSpaceCombatValue(5,1)
                 .addBombardmentValue(5,1)
                 .build();
-        carrier = new Unit.Builder(UnitNames.CARRIER)
+        carrier = new Unit.Builder(UnitName.CARRIER)
                 .addSpaceCombatValue(9,1)
                 .build();
-        carrierUpgrade = new Unit.Builder(UnitNames.CARRIERUPGRADE)
+        carrierUpgrade = new Unit.Builder(UnitName.CARRIERUPGRADE)
                 .addSpaceCombatValue(9,1)
                 .build();
-        cruiser = new Unit.Builder(UnitNames.CRUISER)
+        cruiser = new Unit.Builder(UnitName.CRUISER)
                 .addSpaceCombatValue(7,1)
                 .build();
-        cruiserUpgrade = new Unit.Builder(UnitNames.CRUISERUPGRADE)
+        cruiserUpgrade = new Unit.Builder(UnitName.CRUISERUPGRADE)
                 .addSpaceCombatValue(6,1)
                 .build();
-        destroyer = new Unit.Builder(UnitNames.DESTROYER)
+        destroyer = new Unit.Builder(UnitName.DESTROYER)
                 .addSpaceCombatValue(9,1)
                 .addAFBValue(9,2)
                 .build();
-        destroyerUpgrade = new Unit.Builder(UnitNames.DESTROYERUPGRADE)
+        destroyerUpgrade = new Unit.Builder(UnitName.DESTROYERUPGRADE)
                 .addSpaceCombatValue(8,1)
                 .addAFBValue(6,3)
                 .build();
-        fighter = new Unit.Builder(UnitNames.FIGHTER)
+        fighter = new Unit.Builder(UnitName.FIGHTER)
                 .addSpaceCombatValue(9,1)
                 .build();
-        fighterUpgrade = new Unit.Builder(UnitNames.FIGHTERUPGRADE)
+        fighterUpgrade = new Unit.Builder(UnitName.FIGHTERUPGRADE)
                 .addSpaceCombatValue(8,1)
                 .build();
-        pds = new Unit.Builder(UnitNames.PDS)
+        pds = new Unit.Builder(UnitName.PDS)
                 .addSpaceCombatValue(6,1)
                 .build();
-        pdsUpgrade = new Unit.Builder(UnitNames.PDSUPGRADE)
+        pdsUpgrade = new Unit.Builder(UnitName.PDSUPGRADE)
                 .addSpaceCombatValue(5,1)
                 .addPlanetaryDefense()
                 .build();
-        infantry = new Unit.Builder(UnitNames.INFANTRY)
+        infantry = new Unit.Builder(UnitName.INFANTRY)
                 .addGroundCombatValue(8,1)
                 .build();
-        infantryUpgrade = new Unit.Builder(UnitNames.INFANTRYUPGRADE)
+        infantryUpgrade = new Unit.Builder(UnitName.INFANTRYUPGRADE)
                 .addGroundCombatValue(7,1)
                 .build();
-        mech = new Unit.Builder(UnitNames.MECH)
+        mech = new Unit.Builder(UnitName.MECH)
                 .addGroundCombatValue(6,1)
                 .build();
     }

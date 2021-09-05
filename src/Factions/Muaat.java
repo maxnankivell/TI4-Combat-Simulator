@@ -1,14 +1,14 @@
 package Factions;
 
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 public class Muaat extends Faction{
 
     public Muaat(){
         super();
         //flagship
-        flagship = new Unit.Builder(UnitNames.FLAGSHIP)
+        flagship = new Unit.Builder(UnitName.FLAGSHIP)
                 .addSpaceCombatValue(5,2)
                 .build();
         //special units

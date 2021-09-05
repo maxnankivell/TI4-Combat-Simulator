@@ -4,7 +4,7 @@ import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import GUIData.FactionEnum;
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 import java.util.ArrayList;
 
@@ -148,7 +148,7 @@ public class AFBController extends Controller{
      * @return if the roll was a critical or not
      */
     private int strikeWingAlpha(int roll, Unit unit){
-        if(unit.getName() == UnitNames.DESTROYERUPGRADE && roll >= 9){
+        if(unit.getName() == UnitName.DESTROYERUPGRADE && roll >= 9){
             numInfantryHitsAttacker++;
             return 1;
         }

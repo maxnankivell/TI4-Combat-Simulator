@@ -2,7 +2,7 @@ package Units;
 
 public class Unit {
 
-    private UnitNames name;
+    private UnitName name;
 
     //hit values for each stage of combat
     private int hitValueSpaceCombat;
@@ -55,7 +55,7 @@ public class Unit {
     }
 
     public static class Builder{
-        private UnitNames name;
+        private UnitName name;
 
         private int hitValueSpaceCombat = 0;
         private int numDiceRollsSpaceCombat = 0;
@@ -74,7 +74,7 @@ public class Unit {
          * fills mandatory fields
          * @param name the unit name
          */
-        public Builder(UnitNames name){
+        public Builder(UnitName name){
             this.name=name;
         }
 
@@ -159,11 +159,11 @@ public class Unit {
 
 
     //getters and setters for fields
-    public UnitNames getName() {
+    public UnitName getName() {
         return name;
     }
 
-    public void setName(UnitNames name) {
+    public void setName(UnitName name) {
         this.name = name;
     }
 
@@ -283,17 +283,17 @@ public class Unit {
     }
 
     public boolean isNonFighterShip(){
-        return name == UnitNames.CARRIER ||
-                name == UnitNames.CARRIERUPGRADE ||
-                name == UnitNames.CRUISER ||
-                name == UnitNames.CRUISERUPGRADE ||
-                name == UnitNames.FLAGSHIP ||
-                name == UnitNames.FLAGSHIPUPGRADE ||
-                name == UnitNames.DESTROYER ||
-                name == UnitNames.DESTROYERUPGRADE ||
-                name == UnitNames.DREADNOUGHT ||
-                name == UnitNames.DREADNOUGHTUPGRADE ||
-                name == UnitNames.WARSUN;
+        return name == UnitName.CARRIER ||
+                name == UnitName.CARRIERUPGRADE ||
+                name == UnitName.CRUISER ||
+                name == UnitName.CRUISERUPGRADE ||
+                name == UnitName.FLAGSHIP ||
+                name == UnitName.FLAGSHIPUPGRADE ||
+                name == UnitName.DESTROYER ||
+                name == UnitName.DESTROYERUPGRADE ||
+                name == UnitName.DREADNOUGHT ||
+                name == UnitName.DREADNOUGHTUPGRADE ||
+                name == UnitName.WARSUN;
     }
 
 }

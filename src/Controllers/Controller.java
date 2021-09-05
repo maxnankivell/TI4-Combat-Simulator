@@ -4,7 +4,7 @@ import Factions.*;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 import java.util.ArrayList;
 
@@ -337,6 +337,54 @@ public abstract class Controller {
     }
 
     /**
+     * Method to check if an arraylist of units contains a unit with a specific name
+     * @param name Unit name to search for
+     * @param units arraylist of units to search through
+     * @return true if unit is found
+     */
+    public static boolean containsName(UnitName name, ArrayList<Unit> units){
+        for (Unit unit : units) {
+            if(unit.getName() == name){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Method to find the number of units with a given name in an arraylist
+     * @param name Unit name to search for
+     * @param units arraylist of units to search through
+     * @return Number of units found
+     */
+    public static int numberOfType(UnitName name, ArrayList<Unit> units){
+        int number = 0;
+
+        for (Unit unit : units) {
+            if(unit.getName() == name){
+                number++;
+            }
+        }
+        return number;
+    }
+
+    /**
+     * Method to find the number of non fighter ships in an arraylist
+     * @param units arraylist of units to search through
+     * @return Number of units found
+     */
+    public static int numOfNonFighterShips(ArrayList<Unit> units){
+        int number = 0;
+
+        for (Unit unit : units) {
+            if(unit.isNonFighterShip()){
+                number++;
+            }
+        }
+        return number;
+    }
+
+    /**
      * adds a dice to the best possible unit given this stage of combat
      * @param combatType the current stage of combat
      * @param player the list of the players units
@@ -394,7 +442,7 @@ public abstract class Controller {
      * @param unitName name of unit
      * @param unitNameUpgraded name of upgraded unit
      */
-    public void addDiceToSpecificUnitType(CombatType combatType, ArrayList<Unit> player, UnitNames unitName, UnitNames unitNameUpgraded){
+    public void addDiceToSpecificUnitType(CombatType combatType, ArrayList<Unit> player, UnitName unitName, UnitName unitNameUpgraded){
         switch (combatType){
             case AFB:
                 for (Unit unit: player){
@@ -478,7 +526,7 @@ public abstract class Controller {
      * @param unitName name of unit
      * @param unitNameUpgraded name of upgraded unit
      */
-    public void changeHitValueOfAllUnitsOfSpecificType(CombatType combatType, ArrayList<Unit> player, int addAmount, UnitNames unitName, UnitNames unitNameUpgraded){
+    public void changeHitValueOfAllUnitsOfSpecificType(CombatType combatType, ArrayList<Unit> player, int addAmount, UnitName unitName, UnitName unitNameUpgraded){
         switch (combatType){
             case AFB:
                 for (Unit unit: player){

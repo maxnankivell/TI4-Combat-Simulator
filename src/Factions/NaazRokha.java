@@ -1,7 +1,7 @@
 package Factions;
 
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 public class NaazRokha extends Faction {
 
@@ -9,7 +9,7 @@ public class NaazRokha extends Faction {
         super();
         //flagship
         //Your mechs in this system roll 1 additional die during combat.
-        flagship = new Unit.Builder(UnitNames.FLAGSHIP)
+        flagship = new Unit.Builder(UnitName.FLAGSHIP)
                 .addSpaceCombatValue(9,2)
                 .build();
         //special units

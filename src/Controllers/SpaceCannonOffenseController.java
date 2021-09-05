@@ -3,7 +3,7 @@ package Controllers;
 import Factions.ArgentFlight;
 import GUIData.AttackerOptions;
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 import java.util.ArrayList;
 
@@ -136,7 +136,7 @@ public class SpaceCannonOffenseController extends Controller{
      */
     public boolean checkForFlagship(ArrayList<Unit> player){
         for (Unit unit: player){
-            if (unit.getName()== UnitNames.FLAGSHIP){
+            if (unit.getName()== UnitName.FLAGSHIP){
                 return true;
             }
         }

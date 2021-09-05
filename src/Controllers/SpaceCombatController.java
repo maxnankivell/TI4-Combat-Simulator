@@ -1,10 +1,9 @@
 package Controllers;
 
 import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
 import GUIData.FactionEnum;
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 import java.util.ArrayList;
 
@@ -141,7 +140,7 @@ public class SpaceCombatController extends Controller{
         }
 
         for (Unit unit : myUnits) {
-            if(unit.getName() == UnitNames.FLAGSHIP){
+            if(unit.getName() == UnitName.FLAGSHIP){
                 unit.setNumDiceRollsSpaceCombat(numOpponentCapitalShips);
             }
         }
