@@ -12,6 +12,8 @@ public abstract class Controller {
     protected ArrayList<Unit> attacker;
     protected Faction attackersFaction;
     protected Faction defendersFation;
+    protected int numHitsAttacker;
+    protected int numHitsDefender;
 
     public Controller(){
         try {
