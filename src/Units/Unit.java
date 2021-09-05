@@ -282,8 +282,18 @@ public class Unit {
         this.numDiceRollsSpaceCombat = numDiceRollsSpaceCombat;
     }
 
-    public void CalculateHits() {
-
+    public boolean isNonFighterShip(){
+        return name == UnitNames.CARRIER ||
+                name == UnitNames.CARRIERUPGRADE ||
+                name == UnitNames.CRUISER ||
+                name == UnitNames.CRUISERUPGRADE ||
+                name == UnitNames.FLAGSHIP ||
+                name == UnitNames.FLAGSHIPUPGRADE ||
+                name == UnitNames.DESTROYER ||
+                name == UnitNames.DESTROYERUPGRADE ||
+                name == UnitNames.DREADNOUGHT ||
+                name == UnitNames.DREADNOUGHTUPGRADE ||
+                name == UnitNames.WARSUN;
     }
 
 }

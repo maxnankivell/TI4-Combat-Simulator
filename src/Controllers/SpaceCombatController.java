@@ -4,6 +4,7 @@ import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import GUIData.FactionEnum;
 import Units.Unit;
+import Units.UnitNames;
 
 import java.util.ArrayList;
 
@@ -53,6 +54,10 @@ public class SpaceCombatController extends Controller{
      * Method to run through all pre-combat modifiers for the attacker
      */
     public void attackerPreProcess(){
+        //Populate the number of dice for the winnu flagship
+        if(AttackerOptions.getAttackerFactionCB() == FactionEnum.WINNU){
+            winnuFlagship(attacker, defender);
+        }
     }
 
     /**
@@ -121,4 +126,19 @@ public class SpaceCombatController extends Controller{
     private void defenderPostProcess() {
     }
 
+    private void winnuFlagship(ArrayList<Unit> myUnits, ArrayList<Unit> opponentUnits) {
+        int numOpponentUnits = 0;
+
+        for (Unit unit : opponentUnits) {
+            if(unit.getName() == UnitNames.FLAGSHIP || unit.getName() == UnitNames.FLAGSHIPUPGRADE){
+
+            }
+        }
+
+        for (Unit unit : myUnits) {
+            if(unit.getName() == UnitNames.FLAGSHIP || unit.getName() == UnitNames.FLAGSHIPUPGRADE){
+
+            }
+        }
+    }
 }
