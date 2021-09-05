@@ -19,8 +19,8 @@ public class SpaceCannonDefenseController extends Controller{
      */
     @Override
     public void startProcess() {
-        attackerPreProcess();
         defenderPreProcess();
+        attackerPreProcess();
         defenderMainProcess();
     }
 
@@ -36,12 +36,7 @@ public class SpaceCannonDefenseController extends Controller{
 
         //Disable
         if (AttackerOptions.isDisableLabelAttackerCheckbox()){
-            for (Unit unit: defender){
-                if (unit.getName()== UnitNames.PDS){
-                    unit.setNumDiceRollsSpaceCannon(0);
-                    unit.setPlanetaryDefense(false);
-                }
-            }
+           disablePDS(defender);
         }
     }
 
@@ -62,9 +57,7 @@ public class SpaceCannonDefenseController extends Controller{
 
         //Titans hero
         if (DefenderOptions.isTitansHeroDefenderCheckbox()){
-            defender.add(new Unit.Builder(UnitNames.OTHER)
-                    .addSpaceCannonValue(5,3)
-                    .build());
+            addUnitTitansHero(defender);
         }
     }
 
@@ -94,6 +87,24 @@ public class SpaceCannonDefenseController extends Controller{
                 }
             }
         }
+    }
+
+    /**
+     * stops all pds from firing and turns off planetary shield
+     */
+    public void disablePDS(ArrayList<Unit> player){
+        for (Unit unit: player){
+            if (unit.getName()== UnitNames.PDS){
+                unit.setNumDiceRollsSpaceCannon(0);
+                unit.setPlanetaryDefense(false);
+            }
+        }
+    }
+
+    public void addUnitTitansHero(ArrayList<Unit> player){
+        player.add(new Unit.Builder(UnitNames.OTHER)
+                .addSpaceCannonValue(5,3)
+                .build());
     }
 
 }

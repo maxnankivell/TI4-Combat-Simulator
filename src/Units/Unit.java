@@ -282,8 +282,8 @@ public class Unit {
         this.numDiceRollsSpaceCombat = numDiceRollsSpaceCombat;
     }
 
-    public void CalculateHits() {
 
-    }
+
+    
 
 }
