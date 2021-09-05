@@ -5,8 +5,6 @@ import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import Units.Unit;
 
-import java.io.IOError;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class Controller {
@@ -41,82 +39,32 @@ public abstract class Controller {
         int numInfantry = AttackerOptions.getAttackerInfantryCB();
         int numPDSs = AttackerOptions.getAttackerPdsCB();
 
-        switch (AttackerOptions.getAttackerFactionCB()){
-            case ARBOREC:
-                faction = new Arborec();
-                break;
-            case ARGENTFLIGHT:
-                faction = new ArgentFlight();
-                break;
-            case BARONYOFLETNEV:
-                faction = new BaronyOfLetnev();
-                break;
-            case CLANOFSAAR:
-                faction = new ClanOfSaar();
-                break;
-            case CREUSS:
-                faction = new Creuss();
-                break;
-            case EMPYREAN:
-                faction = new Empyrean();
-                break;
-            case HACAN:
-                faction = new Hacan();
-                break;
-            case JOLNAR:
-                faction = new JolNar();
-                break;
-            case L1Z1X:
-                faction = new L1Z1X();
-                break;
-            case MAHACT:
-                faction = new Mahact();
-                break;
-            case MUAAT:
-                faction = new Muaat();
-                break;
-            case MENTAK:
-                faction = new Mentak();
-                break;
-            case NAALU:
-                faction = new Naalu();
-                break;
-            case NAAZROKHA:
-                faction = new NaazRokha();
-                break;
-            case NEKRO:
-                faction = new Nekro();
-                break;
-            case NOMAD:
-                faction = new Nomad();
-                break;
-            case SARDAKKNORR:
-                faction = new SardakkNorr();
-                break;
-            case SOL:
-                faction = new Sol();
-                break;
-            case TITANSOFUL:
-                faction = new TitansOfUl();
-                break;
-            case VUILRAITH:
-                faction = new VuilRaith();
-                break;
-            case WINNU:
-                faction = new Winnu();
-                break;
-            case XXCHA:
-                faction = new Xxcha();
-                break;
-            case YIN:
-                faction = new Yin();
-                break;
-            case YSSARIL:
-                faction = new Yssaril();
-                break;
-            default:
-                throw (Throwable) IOException;
-        }
+        faction = switch (AttackerOptions.getAttackerFactionCB()) {
+            case ARBOREC -> new Arborec();
+            case ARGENTFLIGHT -> new ArgentFlight();
+            case BARONYOFLETNEV -> new BaronyOfLetnev();
+            case CLANOFSAAR -> new ClanOfSaar();
+            case CREUSS -> new Creuss();
+            case EMPYREAN -> new Empyrean();
+            case HACAN -> new Hacan();
+            case JOLNAR -> new JolNar();
+            case L1Z1X -> new L1Z1X();
+            case MAHACT -> new Mahact();
+            case MUAAT -> new Muaat();
+            case MENTAK -> new Mentak();
+            case NAALU -> new Naalu();
+            case NAAZROKHA -> new NaazRokha();
+            case NEKRO -> new Nekro();
+            case NOMAD -> new Nomad();
+            case SARDAKKNORR -> new SardakkNorr();
+            case SOL -> new Sol();
+            case TITANSOFUL -> new TitansOfUl();
+            case VUILRAITH -> new VuilRaith();
+            case WINNU -> new Winnu();
+            case XXCHA -> new Xxcha();
+            case YIN -> new Yin();
+            case YSSARIL -> new Yssaril();
+        };
 
         //flagship
         if (AttackerOptions.isAttackerFlagshipCheckBox() && faction instanceof Nomad){
@@ -233,82 +181,32 @@ public abstract class Controller {
         int numInfantry = DefenderOptions.getDefenderInfantryCB();
         int numPDSs = DefenderOptions.getDefenderPdsCB();
 
-        switch (DefenderOptions.getDefenderFactionCB()) {
-            case ARBOREC:
-                faction = new Arborec();
-                break;
-            case ARGENTFLIGHT:
-                faction = new ArgentFlight();
-                break;
-            case BARONYOFLETNEV:
-                faction = new BaronyOfLetnev();
-                break;
-            case CLANOFSAAR:
-                faction = new ClanOfSaar();
-                break;
-            case CREUSS:
-                faction = new Creuss();
-                break;
-            case EMPYREAN:
-                faction = new Empyrean();
-                break;
-            case HACAN:
-                faction = new Hacan();
-                break;
-            case JOLNAR:
-                faction = new JolNar();
-                break;
-            case L1Z1X:
-                faction = new L1Z1X();
-                break;
-            case MAHACT:
-                faction = new Mahact();
-                break;
-            case MUAAT:
-                faction = new Muaat();
-                break;
-            case MENTAK:
-                faction = new Mentak();
-                break;
-            case NAALU:
-                faction = new Naalu();
-                break;
-            case NAAZROKHA:
-                faction = new NaazRokha();
-                break;
-            case NEKRO:
-                faction = new Nekro();
-                break;
-            case NOMAD:
-                faction = new Nomad();
-                break;
-            case SARDAKKNORR:
-                faction = new SardakkNorr();
-                break;
-            case SOL:
-                faction = new Sol();
-                break;
-            case TITANSOFUL:
-                faction = new TitansOfUl();
-                break;
-            case VUILRAITH:
-                faction = new VuilRaith();
-                break;
-            case WINNU:
-                faction = new Winnu();
-                break;
-            case XXCHA:
-                faction = new Xxcha();
-                break;
-            case YIN:
-                faction = new Yin();
-                break;
-            case YSSARIL:
-                faction = new Yssaril();
-                break;
-            default:
-                throw (Throwable) IOException;
-        }
+        faction = switch (DefenderOptions.getDefenderFactionCB()) {
+            case ARBOREC -> new Arborec();
+            case ARGENTFLIGHT -> new ArgentFlight();
+            case BARONYOFLETNEV -> new BaronyOfLetnev();
+            case CLANOFSAAR -> new ClanOfSaar();
+            case CREUSS -> new Creuss();
+            case EMPYREAN -> new Empyrean();
+            case HACAN -> new Hacan();
+            case JOLNAR -> new JolNar();
+            case L1Z1X -> new L1Z1X();
+            case MAHACT -> new Mahact();
+            case MUAAT -> new Muaat();
+            case MENTAK -> new Mentak();
+            case NAALU -> new Naalu();
+            case NAAZROKHA -> new NaazRokha();
+            case NEKRO -> new Nekro();
+            case NOMAD -> new Nomad();
+            case SARDAKKNORR -> new SardakkNorr();
+            case SOL -> new Sol();
+            case TITANSOFUL -> new TitansOfUl();
+            case VUILRAITH -> new VuilRaith();
+            case WINNU -> new Winnu();
+            case XXCHA -> new Xxcha();
+            case YIN -> new Yin();
+            case YSSARIL -> new Yssaril();
+        };
 
         //flagship
         if (DefenderOptions.isDefenderFlagshipCheckBox() && faction instanceof Nomad) {
