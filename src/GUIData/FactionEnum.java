@@ -21,7 +21,6 @@ public enum FactionEnum {
     SOL,
     TITANSOFUL,
     VUILRAITH,
-
     WINNU,
     XXCHA,
     YIN,

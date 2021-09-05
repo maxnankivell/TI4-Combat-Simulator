@@ -1,5 +1,6 @@
 package GUI;
 
+import Controllers.*;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import GUIData.FactionEnum;
@@ -24,8 +25,6 @@ public class Main extends Application {
 
     CheckBox attackerFlagshipCheckBox;
     CheckBox defenderFlagshipCheckBox;
-    CheckBox attackerWarSunCheckBox;
-    CheckBox defenderWarSunCheckBox;
     CheckBox attackerDreadnoughtCheckBox;
     CheckBox defenderDreadnoughtCheckBox;
     CheckBox attackerCarrierCheckBox;
@@ -36,8 +35,6 @@ public class Main extends Application {
     CheckBox defenderDestroyerCheckBox;
     CheckBox attackerFighterCheckBox;
     CheckBox defenderFighterCheckBox;
-    CheckBox attackerMechCheckBox;
-    CheckBox defenderMechCheckBox;
     CheckBox attackerInfantryCheckBox;
     CheckBox defenderInfantryCheckBox;
     CheckBox attackerPdsCheckBox;
@@ -111,8 +108,6 @@ public class Main extends Application {
 
         attackerFlagshipCheckBox = new CheckBox();
         defenderFlagshipCheckBox = new CheckBox();
-        attackerWarSunCheckBox = new CheckBox();
-        defenderWarSunCheckBox = new CheckBox();
         attackerDreadnoughtCheckBox = new CheckBox();
         defenderDreadnoughtCheckBox = new CheckBox();
         attackerCarrierCheckBox = new CheckBox();
@@ -123,8 +118,6 @@ public class Main extends Application {
         defenderDestroyerCheckBox = new CheckBox();
         attackerFighterCheckBox = new CheckBox();
         defenderFighterCheckBox = new CheckBox();
-        attackerMechCheckBox = new CheckBox();
-        defenderMechCheckBox = new CheckBox();
         attackerInfantryCheckBox = new CheckBox();
         defenderInfantryCheckBox = new CheckBox();
         attackerPdsCheckBox = new CheckBox();
@@ -346,23 +339,19 @@ public class Main extends Application {
 
         //adding checkboxs
         GridPane.setConstraints(attackerFlagshipCheckBox, 0, 2);
-        GridPane.setConstraints(attackerWarSunCheckBox, 0, 3);
         GridPane.setConstraints(attackerDreadnoughtCheckBox, 0, 4);
         GridPane.setConstraints(attackerCarrierCheckBox, 0, 5);
         GridPane.setConstraints(attackerCruiserCheckBox, 0, 6);
         GridPane.setConstraints(attackerDestroyerCheckBox, 0, 7);
         GridPane.setConstraints(attackerFighterCheckBox, 0, 8);
-        GridPane.setConstraints(attackerMechCheckBox, 0, 9);
         GridPane.setConstraints(attackerInfantryCheckBox, 0, 10);
         GridPane.setConstraints(attackerPdsCheckBox, 0, 11);
         GridPane.setConstraints(defenderFlagshipCheckBox, 4, 2);
-        GridPane.setConstraints(defenderWarSunCheckBox, 4, 3);
         GridPane.setConstraints(defenderDreadnoughtCheckBox, 4, 4);
         GridPane.setConstraints(defenderCarrierCheckBox, 4, 5);
         GridPane.setConstraints(defenderCruiserCheckBox, 4, 6);
         GridPane.setConstraints(defenderDestroyerCheckBox, 4, 7);
         GridPane.setConstraints(defenderFighterCheckBox, 4, 8);
-        GridPane.setConstraints(defenderMechCheckBox, 4, 9);
         GridPane.setConstraints(defenderInfantryCheckBox, 4, 10);
         GridPane.setConstraints(defenderPdsCheckBox, 4, 11);
 
@@ -405,23 +394,19 @@ public class Main extends Application {
                 clearAttackerBtn,
                 clearDefenderBtn,
                 attackerFlagshipCheckBox,
-                attackerWarSunCheckBox,
                 attackerDreadnoughtCheckBox,
                 attackerCarrierCheckBox,
                 attackerCruiserCheckBox,
                 attackerDestroyerCheckBox,
                 attackerFighterCheckBox,
-                attackerMechCheckBox,
                 attackerInfantryCheckBox,
                 attackerPdsCheckBox,
                 defenderFlagshipCheckBox,
-                defenderWarSunCheckBox,
                 defenderDreadnoughtCheckBox,
                 defenderCarrierCheckBox,
                 defenderCruiserCheckBox,
                 defenderDestroyerCheckBox,
                 defenderFighterCheckBox,
-                defenderMechCheckBox,
                 defenderInfantryCheckBox,
                 defenderPdsCheckBox
         );
@@ -446,6 +431,13 @@ public class Main extends Application {
         //Button Actions
         helpBtn.setOnAction(e -> new HelpScreenGUI());
         optionsBtn.setOnAction(e -> new OptionsScreenGUI());
+        spaceCannonOffenseBtn.setOnAction(e -> handleSpaceCannonOffense());
+        antiFighterBarrageBtn.setOnAction(e -> handleAntiFighterBarrage());
+        spaceCombatBtn.setOnAction(e -> handleSpaceCombat());
+        bombardmentBtn.setOnAction(e -> handleBombardment());
+        spaceCannonDefenseBtn.setOnAction(e -> handleSpaceCannonDefense());
+        invasionCombatBtn.setOnAction(e -> handleInvasionCombat());
+
 
         //Add the borderPane to a scene and show it
         Scene mainScene = new Scene(borderPane, 1024, 576);
@@ -454,27 +446,89 @@ public class Main extends Application {
         window.show();
     }
 
+    private void handleSpaceCannonOffense() {
+        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
+            return;
+        }
+
+        checkCheckBox();
+        checkComboBox();
+
+//        SpaceCannonOffenseController();
+    }
+
+    private void handleAntiFighterBarrage() {
+        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
+            return;
+        }
+
+        checkCheckBox();
+        checkComboBox();
+
+//        AFBController();
+    }
+
+    private void handleSpaceCombat() {
+        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
+            return;
+        }
+
+        checkCheckBox();
+        checkComboBox();
+
+//        SpaceCombatController();
+    }
+
+    private void handleBombardment() {
+        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
+            return;
+        }
+
+        checkCheckBox();
+        checkComboBox();
+
+//        BombardmentController();
+    }
+
+    private void handleSpaceCannonDefense() {
+        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
+            return;
+        }
+
+        checkCheckBox();
+        checkComboBox();
+
+//        SpaceCannonDefenseController();
+    }
+
+    private void handleInvasionCombat() {
+        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
+            return;
+        }
+
+        checkCheckBox();
+        checkComboBox();
+
+//        InvasionController();
+    }
+    
     private void checkCheckBox(){
 
         AttackerOptions.setAttackerFlagshipCheckBox(attackerFlagshipCheckBox.isSelected());
-        AttackerOptions.setAttackerWarSunCheckBox(attackerWarSunCheckBox.isSelected());
         AttackerOptions.setAttackerDreadnoughtCheckBox(attackerDreadnoughtCheckBox.isSelected());
         AttackerOptions.setAttackerCarrierCheckBox(attackerCarrierCheckBox.isSelected());
         AttackerOptions.setAttackerCruiserCheckBox(attackerCruiserCheckBox.isSelected());
         AttackerOptions.setAttackerDestroyerCheckBox(attackerDestroyerCheckBox.isSelected());
         AttackerOptions.setAttackerFighterCheckBox(attackerFighterCheckBox.isSelected());
-        AttackerOptions.setAttackerMechCheckBox(attackerMechCheckBox.isSelected());
         AttackerOptions.setAttackerInfantryCheckBox(attackerInfantryCheckBox.isSelected());
         AttackerOptions.setAttackerPdsCheckBox(attackerPdsCheckBox.isSelected());
 
         DefenderOptions.setDefenderFlagshipCheckBox(defenderFlagshipCheckBox.isSelected());
-        DefenderOptions.setDefenderWarSunCheckBox(defenderWarSunCheckBox.isSelected());
         DefenderOptions.setDefenderDreadnoughtCheckBox(defenderDreadnoughtCheckBox.isSelected());
         DefenderOptions.setDefenderCarrierCheckBox(defenderCarrierCheckBox.isSelected());
         DefenderOptions.setDefenderCruiserCheckBox(defenderCruiserCheckBox.isSelected());
         DefenderOptions.setDefenderDestroyerCheckBox(defenderDestroyerCheckBox.isSelected());
         DefenderOptions.setDefenderFighterCheckBox(defenderFighterCheckBox.isSelected());
-        DefenderOptions.setDefenderMechCheckBox(defenderMechCheckBox.isSelected());
         DefenderOptions.setDefenderInfantryCheckBox(defenderInfantryCheckBox.isSelected());
         DefenderOptions.setDefenderPdsCheckBox(defenderPdsCheckBox.isSelected());
     }
