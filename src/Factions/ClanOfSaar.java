@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class ClanOfSaar extends Faction{
-    private Unit flagship;
 
     public ClanOfSaar(){
         super();

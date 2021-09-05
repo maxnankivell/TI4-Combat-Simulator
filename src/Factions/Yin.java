@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class Yin extends Faction{
-    private Unit flagship;
 
     public Yin(){
         super();

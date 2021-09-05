@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class Arborec extends Faction{
-    private Unit flagship;
 
     public Arborec(){
         super();

@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class BaronyOfLetnev extends Faction{
-    private Unit flagship;
 
     public BaronyOfLetnev(){
         super();

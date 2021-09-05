@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class Naalu extends Faction{
-    private Unit flagship;
 
     public Naalu(){
         super();

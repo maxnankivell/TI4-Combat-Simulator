@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class Mahact extends Faction {
-    private Unit flagship;
 
     public Mahact(){
         super();

@@ -4,6 +4,8 @@ import Units.Unit;
 import Units.UnitNames;
 
 public abstract class Faction {
+    protected Unit flagship;
+    protected Unit flagshipUpgrade;
     protected Unit warsun;
     protected Unit dreadnought;
     protected Unit dreadnoughtUpgrade;
@@ -204,5 +206,21 @@ public abstract class Faction {
 
     public void setPdsUpgrade(Unit pdsUpgrade) {
         this.pdsUpgrade = pdsUpgrade;
+    }
+
+    public Unit getFlagship() {
+        return flagship;
+    }
+
+    public void setFlagship(Unit flagship) {
+        this.flagship = flagship;
+    }
+
+    public Unit getFlagshipUpgrade() {
+        return flagshipUpgrade;
+    }
+
+    public void setFlagshipUpgrade(Unit flagshipUpgrade) {
+        this.flagshipUpgrade = flagshipUpgrade;
     }
 }

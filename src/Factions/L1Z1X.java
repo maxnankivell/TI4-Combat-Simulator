@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class L1Z1X extends Faction{
-    private Unit flagship;
 
     public L1Z1X(){
         super();

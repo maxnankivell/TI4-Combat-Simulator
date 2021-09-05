@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class Muaat extends Faction{
-    private Unit flagship;
 
     public Muaat(){
         super();

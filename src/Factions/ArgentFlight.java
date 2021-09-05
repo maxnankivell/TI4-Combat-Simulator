@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class ArgentFlight extends Faction {
-    private Unit flagship;
 
     public ArgentFlight() {
         super();

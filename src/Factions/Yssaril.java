@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class Yssaril extends Faction {
-    private Unit flagship;
 
     public Yssaril(){
         super();

@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class JolNar extends Faction{
-    private Unit flagship;
 
     public JolNar() {
         super();

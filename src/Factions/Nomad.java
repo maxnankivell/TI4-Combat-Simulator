@@ -4,8 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class Nomad extends Faction {
-    private Unit flagship;
-    private Unit flagshipUpgrade;
 
     public Nomad(){
         super();

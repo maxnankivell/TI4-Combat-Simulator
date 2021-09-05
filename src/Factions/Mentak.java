@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class Mentak extends Faction{
-    private Unit flagship;
 
     public Mentak(){
         super();

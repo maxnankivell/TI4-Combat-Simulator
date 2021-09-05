@@ -4,7 +4,6 @@ import Units.Unit;
 import Units.UnitNames;
 
 public class Nekro extends Faction{
-    private Unit flagship;
 
     public Nekro(){
         super();
