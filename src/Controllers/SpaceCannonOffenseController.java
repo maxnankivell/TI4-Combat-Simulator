@@ -2,6 +2,7 @@ package Controllers;
 
 import Factions.ArgentFlight;
 import GUIData.AttackerOptions;
+import GUIData.DefenderOptions;
 import Units.Unit;
 import Units.UnitName;
 
@@ -17,56 +18,20 @@ public class SpaceCannonOffenseController extends Controller{
 
     @Override
     public void startProcess() {
+        attackerPreProcess();
+        defenderPreProcess();
 
-        //Plasma scoring
-
-        //Antimass deflector
-
-        //Strike wing ambuscade
-
-        //Experimental battlestation
-
-        //Solar flare
-
-        //Argent flight commander
-
-        //Jol-Nar commander
-
-        //Titans Hero
-
-        //Argent flight flagship
-
-        //Yin flagship
-
-        numHitsAttacker = hitCalculator(true);
-        numHitsDefender = hitCalculator(false);
-    }
-
-    public int hitCalculator(boolean isAttacker){
-        int numHits = 0;
-
-        if(isAttacker) {
-            for (Unit unit : attacker){
-                for (int i=0; i<unit.getNumDiceRollsSpaceCannon(); i++){
-                    if (diceRoll() >= unit.getHitValueSpaceCannon()){
-                        numHits++;
-                    }
-                }
-            }
-        } else {
-            for (Unit unit : defender){
-                for (int i=0; i<unit.getNumDiceRollsSpaceCannon(); i++){
-                    if (diceRoll() >= unit.getHitValueSpaceCannon()){
-                        numHits++;
-                    }
-                }
-            }
+        if (!attackerCancelled){
+            attackerMainProcess();
         }
-
-        return numHits;
+        if (!defenderCancelled){
+            defenderMainProcess();
+        }
     }
 
-
+    /**
+     * Method to run through all pre-combat modifiers for the attacker
+     */
     public void attackerPreProcess(){
         //Plasma scoring
         if (AttackerOptions.isPlasmaScoringAttackerCheckbox()){
@@ -99,32 +64,122 @@ public class SpaceCannonOffenseController extends Controller{
         }
     }
 
+    /**
+     * Method to run through all pre-combat modifiers for the defender
+     */
     public void defenderPreProcess(){
         //Plasma scoring
+        if (DefenderOptions.isPlasmaScoringDefenderCheckbox()){
+            addOneDiceToUnit(CombatType.SPACECANNON, defender);
+        }
 
         //Antimass deflector
+        if (DefenderOptions.isAntimassDeflectorDefenderCheckbox()){
+            changeHitValueOfAllUnits(CombatType.SPACECANNON, attacker, 1);
+        }
 
         //Strike wing ambuscade
+        if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()){
+            addOneDiceToUnit(CombatType.SPACECANNON, defender);
+        }
 
         //Experimental battlestation
+        if (DefenderOptions.isExperimentalBattlestationDefenderCheckbox()){
+            addUnitExperimentalBattlestation(defender);
+        }
 
         //Argent flight commander
-
-        //Jol-Nar commander
+        if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()){
+            addOneDiceToUnit(CombatType.SPACECANNON, defender);
+        }
 
         //Titans Hero
+        if (DefenderOptions.isTitansHeroDefenderCheckbox()){
+            addUnitTitansHero(defender);
+        }
 
         //Argent flight flagship
-
-        //Yin flagship
+        if (defendersFaction instanceof ArgentFlight && defender.contains(new Unit.Builder(UnitName.FLAGSHIP).build())){
+            attackerCancelled = true;
+        }
     }
 
+    /**
+     * Method to run through the main combat process for the attacker
+     */
     public void attackerMainProcess(){
-        //Jol-Nar commander
+        //start rolling
+        for (Unit unit : attacker) {
+            ArrayList<Integer> diceRolls = new ArrayList<>();
+
+            //roll amount of dice necessary for one unit
+            for (int i = 0; i < unit.getNumDiceRollsSpaceCannon(); i++) {
+                diceRolls.add(diceRoll());
+            }
+
+            //Check re-roll conditions
+            //Jol Nar commander
+            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+                diceRolls = reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
+            }
+
+            //Check number of hits from this unit
+            for (Integer roll : diceRolls) {
+                if (roll >= unit.getHitValueSpaceCannon()) {
+                    numHitsAttacker++;
+                }
+            }
+
+        }
     }
 
-    public void defenderMainProcess(){
+    /**
+     * Method to run through the main combat process for the defender
+     */
+    public void defenderMainProcess() {
+        //start rolling
+        for (Unit unit : defender) {
+            ArrayList<Integer> diceRolls = new ArrayList<>();
 
+            //roll amount of dice necessary for one unit
+            for (int i = 0; i < unit.getNumDiceRollsSpaceCannon(); i++) {
+                diceRolls.add(diceRoll());
+            }
+
+            //Check re-roll conditions
+            //Jol Nar commander
+            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+                diceRolls = reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
+            }
+
+            //Check number of hits from this unit
+            for (Integer roll : diceRolls) {
+                if (roll >= unit.getHitValueSpaceCannon()) {
+                    numHitsDefender++;
+                }
+            }
+
+        }
+    }
+
+    /**
+     * adds the experimental battlestation unit to the players list of units
+     * @param player list of units
+     */
+    public void addUnitExperimentalBattlestation(ArrayList<Unit> player){
+        player.add(new Unit.Builder(UnitName.OTHER)
+                .addSpaceCannonValue(5,3)
+                .build());
+    }
+
+    /**
+     * adds the titans hero unit to the players list of units
+     * @param player list of units
+     */
+    public void addUnitTitansHero(ArrayList<Unit> player){
+        player.add(new Unit.Builder(UnitName.OTHER)
+                .addSpaceCannonValue(5,3)
+                .build());
     }
     
     /**

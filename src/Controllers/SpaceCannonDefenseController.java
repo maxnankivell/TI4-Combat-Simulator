@@ -99,6 +99,7 @@ public class SpaceCannonDefenseController extends Controller{
         for (Unit unit: player){
             if (unit.getName()== UnitName.PDS){
                 unit.setNumDiceRollsSpaceCannon(0);
+                unit.setHitValueSpaceCannon(0);
                 unit.setPlanetaryDefense(false);
             }
         }
