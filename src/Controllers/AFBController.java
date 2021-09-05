@@ -16,6 +16,10 @@ public class AFBController extends Controller{
 
         //Jol-Nar commander
 
+        //Argent flight destroyer
+
+        //Argent flight units
+
         numHitsAttacker = hitCalculator(true);
         numHitsDefender = hitCalculator(false);
     }

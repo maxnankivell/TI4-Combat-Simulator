@@ -30,6 +30,8 @@ public class BombardmentController extends Controller{
 
         //Convention of war
 
+        //warsuns
+
         numHitsAttacker = hitCalculator(true);
         numHitsDefender = hitCalculator(false);
 

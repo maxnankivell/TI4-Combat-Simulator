@@ -27,6 +27,10 @@ public class SpaceCannonOffenseController extends Controller{
 
         //Titans Hero
 
+        //Argent flight flagship
+
+        //Yin flagship
+
         numHitsAttacker = hitCalculator(true);
         numHitsDefender = hitCalculator(false);
     }
