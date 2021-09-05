@@ -149,7 +149,6 @@ public class AFBController extends Controller{
      */
     private int strikeWingAlpha(int roll, Unit unit){
         if(unit.getName() == UnitName.DESTROYERUPGRADE && roll >= 9){
-            numInfantryHitsAttacker++;
             return 1;
         }
         return 0;
