@@ -224,7 +224,6 @@ public abstract class Controller {
             case XXCHA -> new Xxcha();
             case YIN -> new Yin();
             case YSSARIL -> new Yssaril();
-            default -> throw (Throwable) IOException;
         };
 
         //flagship
@@ -422,7 +421,7 @@ public abstract class Controller {
                 break;
         }
     }
-    
+
 
     public abstract void startProcess();
 
