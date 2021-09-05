@@ -181,5 +181,19 @@ public class SpaceCannonOffenseController extends Controller{
                 .addSpaceCannonValue(5,3)
                 .build());
     }
+    
+    /**
+     * checks to see if the player has a flagship
+     * @param player an array of the players ships
+     * @return
+     */
+    public boolean checkForFlagship(ArrayList<Unit> player){
+        for (Unit unit: player){
+            if (unit.getName()== UnitName.FLAGSHIP){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

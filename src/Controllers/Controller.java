@@ -337,6 +337,54 @@ public abstract class Controller {
     }
 
     /**
+     * Method to check if an arraylist of units contains a unit with a specific name
+     * @param name Unit name to search for
+     * @param units arraylist of units to search through
+     * @return true if unit is found
+     */
+    public static boolean containsName(UnitName name, ArrayList<Unit> units){
+        for (Unit unit : units) {
+            if(unit.getName() == name){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Method to find the number of units with a given name in an arraylist
+     * @param name Unit name to search for
+     * @param units arraylist of units to search through
+     * @return Number of units found
+     */
+    public static int numberOfType(UnitName name, ArrayList<Unit> units){
+        int number = 0;
+
+        for (Unit unit : units) {
+            if(unit.getName() == name){
+                number++;
+            }
+        }
+        return number;
+    }
+
+    /**
+     * Method to find the number of non fighter ships in an arraylist
+     * @param units arraylist of units to search through
+     * @return Number of units found
+     */
+    public static int numOfNonFighterShips(ArrayList<Unit> units){
+        int number = 0;
+
+        for (Unit unit : units) {
+            if(unit.isNonFighterShip()){
+                number++;
+            }
+        }
+        return number;
+    }
+
+    /**
      * adds a dice to the best possible unit given this stage of combat
      * @param combatType the current stage of combat
      * @param player the list of the players units
