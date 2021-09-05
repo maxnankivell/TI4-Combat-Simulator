@@ -207,8 +207,7 @@ public class Unit {
         this.numDiceRollsBombardment = numDiceRollsBombardment;
     }
 
-
-    public void setGroundCombatValue(int hitValueGroundCombat, int numDiceRollsGroundComba) {
+    public void setGroundCombatValue(int hitValueGroundCombat, int numDiceRollsGroundCombat) {
         this.hitValueGroundCombat = hitValueGroundCombat;
         this.numDiceRollsGroundCombat = numDiceRollsGroundCombat;
     }
@@ -226,6 +225,10 @@ public class Unit {
     public void setSpaceCombatValue(int hitValueSpaceCombat, int numDiceRollsSpaceCombat) {
         this.hitValueSpaceCombat = hitValueSpaceCombat;
         this.numDiceRollsSpaceCombat = numDiceRollsSpaceCombat;
+    }
+
+    public void CalculateHits() {
+
     }
 
 }

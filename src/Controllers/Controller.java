@@ -12,6 +12,12 @@ public abstract class Controller {
     protected ArrayList<Unit> attacker;
     protected int numHitsAttacker;
     protected int numHitsDefender;
+    protected int numInfantryHitsAttacker;
+    protected int numInfantryHitsDefender;
+    protected int numSustainDamageHitsAttacker;
+    protected int numSustainDamageHitsDefender;
+    protected int numNonFighterHitsAttacker;
+    protected int numNonFighterHitsDefender;
     private Object IOException;
 
     public Controller(){
@@ -206,6 +212,7 @@ public abstract class Controller {
             case XXCHA -> new Xxcha();
             case YIN -> new Yin();
             case YSSARIL -> new Yssaril();
+            default -> throw (Throwable) IOException;
         };
 
         //flagship
