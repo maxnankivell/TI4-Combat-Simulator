@@ -5,6 +5,7 @@ import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import GUIData.FactionEnum;
 import Units.Unit;
+import Units.UnitNames;
 
 import java.util.ArrayList;
 
@@ -388,6 +389,53 @@ public abstract class Controller {
     }
 
     /**
+     * adds a dice to all units of a specific type given this stage of combat
+     * @param combatType the current stage of combat
+     * @param player the list of the players units
+     * @param unitName name of unit
+     * @param unitNameUpgraded name of upgraded unit
+     */
+    public void addDiceToSpecificUnitType(CombatType combatType, ArrayList<Unit> player, UnitNames unitName, UnitNames unitNameUpgraded){
+        switch (combatType){
+            case AFB:
+                for (Unit unit: player){
+                    if(unit.getName() == unitName || unit.getName() == unitNameUpgraded){
+                        unit.setNumDiceRollsAFB(unit.getNumDiceRollsAFB()+1);
+                    }
+                }
+                break;
+            case BOMBARDMENT:
+                for (Unit unit: player){
+                    if(unit.getName() == unitName || unit.getName() == unitNameUpgraded){
+                        unit.setNumDiceRollsBombardment(unit.getNumDiceRollsBombardment()+1);
+                    }
+                }
+                break;
+            case SPACECANNON:
+                for (Unit unit: player){
+                    if(unit.getName() == unitName || unit.getName() == unitNameUpgraded){
+                        unit.setNumDiceRollsSpaceCannon(unit.getNumDiceRollsSpaceCannon()+1);
+                    }
+                }
+                break;
+            case SPACECOMBAT:
+                for (Unit unit: player){
+                    if(unit.getName() == unitName || unit.getName() == unitNameUpgraded){
+                        unit.setNumDiceRollsSpaceCombat(unit.getNumDiceRollsSpaceCombat()+1);
+                    }
+                }
+                break;
+            case GROUNDCOMBAT:
+                for (Unit unit: player){
+                    if(unit.getName() == unitName || unit.getName() == unitNameUpgraded){
+                        unit.setNumDiceRollsGroundCombat(unit.getNumDiceRollsGroundCombat()+1);
+                    }
+                }
+                break;
+        }
+    }
+
+    /**
      * adds to all units in this stage of combat
      * @param combatType the current stage of combat
      * @param player the list of the players units
@@ -418,6 +466,54 @@ public abstract class Controller {
             case GROUNDCOMBAT:
                 for (Unit unit: player){
                     unit.setHitValueGroundCombat(unit.getHitValueGroundCombat()+addAmount);
+                }
+                break;
+        }
+    }
+
+    /**
+     * Modifies hit value of all units of a specific type in this stage of combat
+     * @param combatType the current stage of combat
+     * @param player the list of the players units
+     * @param addAmount amount added to the units hit values
+     * @param unitName name of unit
+     * @param unitNameUpgraded name of upgraded unit
+     */
+    public void changeHitValueOfAllUnitsOfSpecificType(CombatType combatType, ArrayList<Unit> player, int addAmount, UnitNames unitName, UnitNames unitNameUpgraded){
+        switch (combatType){
+            case AFB:
+                for (Unit unit: player){
+                    if(unit.getName() == unitName || unit.getName() == unitNameUpgraded){
+                        unit.setHitValueAFB(unit.getHitValueAFB()+addAmount);
+                    }
+                }
+                break;
+            case BOMBARDMENT:
+                for (Unit unit: player){
+                    if(unit.getName() == unitName || unit.getName() == unitNameUpgraded){
+                        unit.setHitValueBombardment(unit.getHitValueBombardment()+addAmount);
+                    }
+                }
+                break;
+            case SPACECANNON:
+                for (Unit unit: player){
+                    if(unit.getName() == unitName || unit.getName() == unitNameUpgraded){
+                        unit.setHitValueSpaceCannon(unit.getHitValueSpaceCannon()+addAmount);
+                    }
+                }
+                break;
+            case SPACECOMBAT:
+                for (Unit unit: player){
+                    if(unit.getName() == unitName || unit.getName() == unitNameUpgraded){
+                        unit.setHitValueSpaceCombat(unit.getHitValueSpaceCombat()+addAmount);
+                    }
+                }
+                break;
+            case GROUNDCOMBAT:
+                for (Unit unit: player){
+                    if(unit.getName() == unitName || unit.getName() == unitNameUpgraded){
+                        unit.setHitValueGroundCombat(unit.getHitValueGroundCombat()+addAmount);
+                    }
                 }
                 break;
         }

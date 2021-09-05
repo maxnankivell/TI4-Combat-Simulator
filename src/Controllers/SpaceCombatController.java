@@ -12,8 +12,6 @@ public class SpaceCombatController extends Controller{
     public void startProcess() {
         //War funding
 
-        //Tekklar legion
-
         //Barony agent
 
         //Fighter prototype
@@ -25,6 +23,7 @@ public class SpaceCombatController extends Controller{
         //Prophecy of ixth
 
         //Defending in a nebula
+
 
         //Jol Nar flagship
 
