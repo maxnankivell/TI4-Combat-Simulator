@@ -2,29 +2,19 @@ package Controllers;
 
 import Units.Unit;
 
-public class SpaceCombatController extends Controller{
+public class AFBController extends Controller{
 
-    public SpaceCombatController(){
+    public AFBController(){
         super();
     }
 
     @Override
     public void startProcess() {
-        //War funding
+        //Strike wing ambush
 
-        //Tekklar legion
+        //Argent flight commander
 
-        //Barony agent
-
-        //Fighter prototype
-
-        //Morale boost
-
-        //Winnu commander
-
-        //Prophecy of ixth
-
-        //Defending in a nebula
+        //Jol-Nar commander
 
         numHitsAttacker = hitCalculator(true);
         numHitsDefender = hitCalculator(false);
@@ -35,16 +25,16 @@ public class SpaceCombatController extends Controller{
 
         if(isAttacker) {
             for (Unit unit : attacker){
-                for (int i=0; i<unit.getNumDiceRollsSpaceCombat(); i++){
-                    if (diceRoll() >= unit.getHitValueSpaceCombat()){
+                for (int i=0; i<unit.getNumDiceRollsAFB(); i++){
+                    if (diceRoll() >= unit.getHitValueAFB()){
                         numHits++;
                     }
                 }
             }
         } else {
             for (Unit unit : defender){
-                for (int i=0; i<unit.getNumDiceRollsSpaceCombat(); i++){
-                    if (diceRoll() >= unit.getHitValueSpaceCombat()){
+                for (int i=0; i<unit.getNumDiceRollsAFB(); i++){
+                    if (diceRoll() >= unit.getHitValueAFB()){
                         numHits++;
                     }
                 }

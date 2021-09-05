@@ -411,5 +411,9 @@ public abstract class Controller {
         return units;
     }
 
+    public int diceRoll(){
+        return (int) Math.floor(Math.random()*10)+1;
+    }
+
     public abstract void startProcess();
 }
