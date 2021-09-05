@@ -298,6 +298,12 @@ public class Unit {
                 name == UnitName.WARSUN;
     }
 
+    public boolean isShip(){
+        return isNonFighterShip() ||
+                name == UnitName.FIGHTER ||
+                name == UnitName.FIGHTERUPGRADE;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
