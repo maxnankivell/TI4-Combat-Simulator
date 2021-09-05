@@ -24,6 +24,10 @@ public class InvasionController extends Controller{
 
         //Defending in nebula
 
+        //Jol Nar mech
+
+        //Naaz Rokha flagship
+
         numHitsAttacker = hitCalculator(true);
         numHitsDefender = hitCalculator(false);
     }

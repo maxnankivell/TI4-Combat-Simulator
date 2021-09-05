@@ -26,6 +26,18 @@ public class SpaceCombatController extends Controller{
 
         //Defending in a nebula
 
+        //Jol Nar flagship
+
+        //Naaz Rokha flagship
+
+        //Sardakk Norr flagship
+
+        //Winnu flagship
+
+        //Yin flagship
+
+        //L1Z1X flagship
+
         numHitsAttacker = hitCalculator(true);
         numHitsDefender = hitCalculator(false);
     }

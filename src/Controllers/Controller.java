@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public abstract class Controller {
     protected ArrayList<Unit> defender;
     protected ArrayList<Unit> attacker;
+    protected Faction attackersFaction;
+    protected Faction defendersFation;
     protected int numHitsAttacker;
     protected int numHitsDefender;
     protected int numInfantryHitsAttacker;
@@ -31,9 +33,14 @@ public abstract class Controller {
         startProcess();
     }
 
-    public ArrayList<Unit> populateAttacker() throws Throwable {
+    /**
+     * populates attackers arraylist with units
+     * number of units got from attacker options
+     * units have factions specific values
+     * @return arraylist with attackers units
+     */
+    public ArrayList<Unit> populateAttacker() {
         ArrayList<Unit> units = new ArrayList<Unit>();
-        Faction faction;
         int numFlagships = AttackerOptions.getAttackerFlagshipCB();
         int numWarsuns = AttackerOptions.getAttackerWarSunCB();
         int numDreadnoughts = AttackerOptions.getAttackerDreadnoughtCB();
@@ -45,7 +52,7 @@ public abstract class Controller {
         int numInfantry = AttackerOptions.getAttackerInfantryCB();
         int numPDSs = AttackerOptions.getAttackerPdsCB();
 
-        faction = switch (AttackerOptions.getAttackerFactionCB()) {
+        attackersFaction = switch (AttackerOptions.getAttackerFactionCB()) {
             case ARBOREC -> new Arborec();
             case ARGENTFLIGHT -> new ArgentFlight();
             case BARONYOFLETNEV -> new BaronyOfLetnev();
@@ -73,109 +80,114 @@ public abstract class Controller {
         };
 
         //flagship
-        if (AttackerOptions.isAttackerFlagshipCheckBox() && faction instanceof Nomad){
+        if (AttackerOptions.isAttackerFlagshipCheckBox() && attackersFaction instanceof Nomad){
             for(int i=0; i<numFlagships; i++){
-                units.add(new Unit(faction.getFlagshipUpgrade()));
+                units.add(new Unit(attackersFaction.getFlagshipUpgrade()));
             }
         } else{
             for(int i=0; i<numFlagships; i++){
-                units.add(new Unit(faction.getFlagship()));
+                units.add(new Unit(attackersFaction.getFlagship()));
             }
         }
 
         //warsuns
         for(int i=0; i<numWarsuns; i++){
-            units.add(new Unit(faction.getWarsun()));
+            units.add(new Unit(attackersFaction.getWarsun()));
         }
 
         //dreadnought
         if (AttackerOptions.isAttackerDreadnoughtCheckBox()){
             for(int i=0; i<numDreadnoughts; i++){
-                units.add(new Unit(faction.getDreadnoughtUpgrade()));
+                units.add(new Unit(attackersFaction.getDreadnoughtUpgrade()));
             }
         } else{
             for(int i=0; i<numDreadnoughts; i++){
-                units.add(new Unit(faction.getDreadnought()));
+                units.add(new Unit(attackersFaction.getDreadnought()));
             }
         }
 
         //carrier
         if (AttackerOptions.isAttackerCarrierCheckBox()){
             for(int i=0; i<numCarriers; i++){
-                units.add(new Unit(faction.getCarrierUpgrade()));
+                units.add(new Unit(attackersFaction.getCarrierUpgrade()));
             }
         } else{
             for(int i=0; i<numCarriers; i++){
-                units.add(new Unit(faction.getCarrier()));
+                units.add(new Unit(attackersFaction.getCarrier()));
             }
         }
 
         //crusier
         if (AttackerOptions.isAttackerCruiserCheckBox()){
             for(int i=0; i<numCrusiers; i++){
-                units.add(new Unit(faction.getCruiserUpgrade()));
+                units.add(new Unit(attackersFaction.getCruiserUpgrade()));
             }
         } else{
             for(int i=0; i<numCrusiers; i++){
-                units.add(new Unit(faction.getCruiser()));
+                units.add(new Unit(attackersFaction.getCruiser()));
             }
         }
 
         //destroyer
         if (AttackerOptions.isAttackerDestroyerCheckBox()){
             for(int i=0; i<numDestroyers; i++){
-                units.add(new Unit(faction.getDestroyerUpgrade()));
+                units.add(new Unit(attackersFaction.getDestroyerUpgrade()));
             }
         } else{
             for(int i=0; i<numDestroyers; i++){
-                units.add(new Unit(faction.getDestroyer()));
+                units.add(new Unit(attackersFaction.getDestroyer()));
             }
         }
 
         //fighter
         if (AttackerOptions.isAttackerFighterCheckBox()){
             for(int i=0; i<numFighters; i++){
-                units.add(new Unit(faction.getFighterUpgrade()));
+                units.add(new Unit(attackersFaction.getFighterUpgrade()));
             }
         } else{
             for(int i=0; i<numFighters; i++){
-                units.add(new Unit(faction.getFighter()));
+                units.add(new Unit(attackersFaction.getFighter()));
             }
         }
 
         //mech
         for(int i=0; i<numMechs; i++){
-            units.add(new Unit(faction.getMech()));
+            units.add(new Unit(attackersFaction.getMech()));
         }
 
         //infantry
         if (AttackerOptions.isAttackerInfantryCheckBox()){
             for(int i=0; i<numInfantry; i++){
-                units.add(new Unit(faction.getInfantryUpgrade()));
+                units.add(new Unit(attackersFaction.getInfantryUpgrade()));
             }
         } else{
             for(int i=0; i<numInfantry; i++){
-                units.add(new Unit(faction.getInfantry()));
+                units.add(new Unit(attackersFaction.getInfantry()));
             }
         }
 
         //pds
         if (AttackerOptions.isAttackerPdsCheckBox()){
             for(int i=0; i<numPDSs; i++){
-                units.add(new Unit(faction.getPdsUpgrade()));
+                units.add(new Unit(attackersFaction.getPdsUpgrade()));
             }
         } else{
             for(int i=0; i<numPDSs; i++){
-                units.add(new Unit(faction.getPds()));
+                units.add(new Unit(attackersFaction.getPds()));
             }
         }
 
         return units;
     }
 
-    public ArrayList<Unit> populateDefender() throws Throwable {
+    /**
+     * populates defenders arraylist with units
+     * number of units got from defender options
+     * units have factions specific values
+     * @return arraylist with defenders units
+     */
+    public ArrayList<Unit> populateDefender() {
         ArrayList<Unit> units = new ArrayList<Unit>();
-        Faction faction;
         int numFlagships = DefenderOptions.getDefenderFlagshipCB();
         int numWarsuns = DefenderOptions.getDefenderWarSunCB();
         int numDreadnoughts = DefenderOptions.getDefenderDreadnoughtCB();
@@ -187,7 +199,7 @@ public abstract class Controller {
         int numInfantry = DefenderOptions.getDefenderInfantryCB();
         int numPDSs = DefenderOptions.getDefenderPdsCB();
 
-        faction = switch (DefenderOptions.getDefenderFactionCB()) {
+        defendersFation = switch (DefenderOptions.getDefenderFactionCB()) {
             case ARBOREC -> new Arborec();
             case ARGENTFLIGHT -> new ArgentFlight();
             case BARONYOFLETNEV -> new BaronyOfLetnev();
@@ -216,109 +228,202 @@ public abstract class Controller {
         };
 
         //flagship
-        if (DefenderOptions.isDefenderFlagshipCheckBox() && faction instanceof Nomad) {
+        if (DefenderOptions.isDefenderFlagshipCheckBox() && defendersFation instanceof Nomad) {
             for (int i = 0; i < numFlagships; i++) {
-                units.add(new Unit(faction.getFlagshipUpgrade()));
+                units.add(new Unit(defendersFation.getFlagshipUpgrade()));
             }
         } else {
             for (int i = 0; i < numFlagships; i++) {
-                units.add(new Unit(faction.getFlagship()));
+                units.add(new Unit(defendersFation.getFlagship()));
             }
         }
 
         //warsuns
         for (int i = 0; i < numWarsuns; i++) {
-            units.add(new Unit(faction.getWarsun()));
+            units.add(new Unit(defendersFation.getWarsun()));
         }
 
         //dreadnought
         if (DefenderOptions.isDefenderDreadnoughtCheckBox()) {
             for (int i = 0; i < numDreadnoughts; i++) {
-                units.add(new Unit(faction.getDreadnoughtUpgrade()));
+                units.add(new Unit(defendersFation.getDreadnoughtUpgrade()));
             }
         } else {
             for (int i = 0; i < numDreadnoughts; i++) {
-                units.add(new Unit(faction.getDreadnought()));
+                units.add(new Unit(defendersFation.getDreadnought()));
             }
         }
 
         //carrier
         if (DefenderOptions.isDefenderCarrierCheckBox()) {
             for (int i = 0; i < numCarriers; i++) {
-                units.add(new Unit(faction.getCarrierUpgrade()));
+                units.add(new Unit(defendersFation.getCarrierUpgrade()));
             }
         } else {
             for (int i = 0; i < numCarriers; i++) {
-                units.add(new Unit(faction.getCarrier()));
+                units.add(new Unit(defendersFation.getCarrier()));
             }
         }
 
         //crusier
         if (DefenderOptions.isDefenderCruiserCheckBox()) {
             for (int i = 0; i < numCrusiers; i++) {
-                units.add(new Unit(faction.getCruiserUpgrade()));
+                units.add(new Unit(defendersFation.getCruiserUpgrade()));
             }
         } else {
             for (int i = 0; i < numCrusiers; i++) {
-                units.add(new Unit(faction.getCruiser()));
+                units.add(new Unit(defendersFation.getCruiser()));
             }
         }
 
         //destroyer
         if (DefenderOptions.isDefenderDestroyerCheckBox()) {
             for (int i = 0; i < numDestroyers; i++) {
-                units.add(new Unit(faction.getDestroyerUpgrade()));
+                units.add(new Unit(defendersFation.getDestroyerUpgrade()));
             }
         } else {
             for (int i = 0; i < numDestroyers; i++) {
-                units.add(new Unit(faction.getDestroyer()));
+                units.add(new Unit(defendersFation.getDestroyer()));
             }
         }
 
         //fighter
         if (DefenderOptions.isDefenderFighterCheckBox()) {
             for (int i = 0; i < numFighters; i++) {
-                units.add(new Unit(faction.getFighterUpgrade()));
+                units.add(new Unit(defendersFation.getFighterUpgrade()));
             }
         } else {
             for (int i = 0; i < numFighters; i++) {
-                units.add(new Unit(faction.getFighter()));
+                units.add(new Unit(defendersFation.getFighter()));
             }
         }
 
         //mech
         for (int i = 0; i < numMechs; i++) {
-            units.add(new Unit(faction.getMech()));
+            units.add(new Unit(defendersFation.getMech()));
         }
 
         //infantry
         if (DefenderOptions.isDefenderInfantryCheckBox()) {
             for (int i = 0; i < numInfantry; i++) {
-                units.add(new Unit(faction.getInfantryUpgrade()));
+                units.add(new Unit(defendersFation.getInfantryUpgrade()));
             }
         } else {
             for (int i = 0; i < numInfantry; i++) {
-                units.add(new Unit(faction.getInfantry()));
+                units.add(new Unit(defendersFation.getInfantry()));
             }
         }
 
         //pds
         if (DefenderOptions.isDefenderPdsCheckBox()) {
             for (int i = 0; i < numPDSs; i++) {
-                units.add(new Unit(faction.getPdsUpgrade()));
+                units.add(new Unit(defendersFation.getPdsUpgrade()));
             }
         } else {
             for (int i = 0; i < numPDSs; i++) {
-                units.add(new Unit(faction.getPds()));
+                units.add(new Unit(defendersFation.getPds()));
             }
         }
 
         return units;
     }
 
+    /**
+     * gets random number from 1 to 10
+     * @return random number from 1 to 10
+     */
     public int diceRoll(){
         return (int) Math.floor(Math.random()*10)+1;
     }
 
+    /**
+     * adds a dice to the best possible unit given this stage of combat
+     * @param combatStage the current stage of combat
+     * @param player the list of the players units
+     */
+    public void addDiceToOneUnit(CombatStage combatStage, ArrayList<Unit> player){
+        Unit lowestHitValue = player.get(0);
+        switch (combatStage){
+            case AFB:
+                for (Unit unit: player){
+                    if (unit.getHitValueAFB()<lowestHitValue.getHitValueAFB()){
+                        lowestHitValue=unit;
+                    }
+                }
+                lowestHitValue.setNumDiceRollsAFB(lowestHitValue.getNumDiceRollsAFB()+1);
+                break;
+            case BOMBARDMENT:
+                for (Unit unit: player){
+                    if (unit.getHitValueBombardment()<lowestHitValue.getHitValueBombardment()){
+                        lowestHitValue=unit;
+                    }
+                }
+                lowestHitValue.setNumDiceRollsBombardment(lowestHitValue.getNumDiceRollsBombardment()+1);
+                break;
+            case SPACECANNON:
+                for (Unit unit: player){
+                    if (unit.getHitValueSpaceCannon()<lowestHitValue.getHitValueSpaceCannon()){
+                        lowestHitValue=unit;
+                    }
+                }
+                    lowestHitValue.setNumDiceRollsSpaceCannon(lowestHitValue.getNumDiceRollsSpaceCannon()+1);
+                break;
+            case SPACECOMBAT:
+                for (Unit unit: player){
+                    if (unit.getHitValueSpaceCombat()<lowestHitValue.getHitValueSpaceCombat()){
+                        lowestHitValue=unit;
+                    }
+                }
+                lowestHitValue.setNumDiceRollsSpaceCombat(lowestHitValue.getNumDiceRollsSpaceCombat()+1);
+                break;
+            case GROUNDCOMBAT:
+                for (Unit unit: player){
+                    if (unit.getHitValueGroundCombat()<lowestHitValue.getHitValueGroundCombat()){
+                        lowestHitValue=unit;
+                    }
+                }
+                lowestHitValue.setNumDiceRollsGroundCombat(lowestHitValue.getNumDiceRollsGroundCombat()+1);
+                break;
+        }
+    }
+
+    /**
+     * adds to all units in this stage of combat
+     * @param combatStage the current stage of combat
+     * @param player the list of the players units
+     * @param addAmount amount added to the units hit values
+     */
+    public void changeHitValueOfAllUnits(CombatStage combatStage, ArrayList<Unit> player, int addAmount){
+        switch (combatStage){
+            case AFB:
+                for (Unit unit: player){
+                    unit.setHitValueAFB(unit.getHitValueAFB()+addAmount);
+                }
+                break;
+            case BOMBARDMENT:
+                for (Unit unit: player){
+                    unit.setHitValueBombardment(unit.getHitValueBombardment()+addAmount);
+                }
+                break;
+            case SPACECANNON:
+                for (Unit unit: player){
+                    unit.setHitValueSpaceCannon(unit.getHitValueSpaceCannon()+addAmount);
+                }
+                break;
+            case SPACECOMBAT:
+                for (Unit unit: player){
+                    unit.setHitValueSpaceCombat(unit.getHitValueSpaceCombat()+addAmount);
+                }
+                break;
+            case GROUNDCOMBAT:
+                for (Unit unit: player){
+                    unit.setHitValueGroundCombat(unit.getHitValueGroundCombat()+addAmount);
+                }
+                break;
+        }
+    }
+    
+
     public abstract void startProcess();
+
 }

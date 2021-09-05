@@ -4,6 +4,7 @@ public class Unit {
 
     private UnitNames name;
 
+    //hit values for each stage of combat
     private int hitValueSpaceCombat;
     private int numDiceRollsSpaceCombat;
     private int hitValueSpaceCannon;
@@ -17,6 +18,10 @@ public class Unit {
 
     private boolean planetaryDefense;
 
+    /**
+     * gets values for fields from Builder object
+     * @param builder a Builder class
+     */
     public Unit(Builder builder){
         this.hitValueSpaceCombat = builder.hitValueSpaceCombat;
         this.numDiceRollsSpaceCombat = builder.numDiceRollsSpaceCombat;
@@ -31,6 +36,10 @@ public class Unit {
         this.planetaryDefense = builder.planetaryDefense;
     }
 
+    /**
+     * copies a existing unit
+     * @param master a existing unit
+     */
     public Unit(Unit master){
         this.hitValueSpaceCombat = master.hitValueSpaceCombat;
         this.numDiceRollsSpaceCombat = master.numDiceRollsSpaceCombat;
@@ -61,51 +70,95 @@ public class Unit {
 
         private boolean planetaryDefense = false;
 
+        /**
+         * fills mandatory fields
+         * @param name the unit name
+         */
         public Builder(UnitNames name){
             this.name=name;
         }
 
+        /**
+         * adds space combat ability to unit
+         * @param hitValue what the unit hits on
+         * @param numDiceRoll how many dice the unit rolls
+         * @return the builder
+         */
         public Builder addSpaceCombatValue(int hitValue, int numDiceRoll){
             this.hitValueSpaceCombat = hitValue;
             this.numDiceRollsSpaceCombat = numDiceRoll;
             return this;
         }
 
+        /**
+         * adds space cannon ability to unit
+         * @param hitValue what the unit hits on
+         * @param numDiceRoll how many dice the unit rolls
+         * @return the builder
+         */
         public Builder addSpaceCannonValue(int hitValue, int numDiceRoll){
             this.hitValueSpaceCannon = hitValue;
             this.numDiceRollsSpaceCannon = numDiceRoll;
             return this;
         }
 
+        /**
+         * adds AFB ability to unit
+         * @param hitValue what the unit hits on
+         * @param numDiceRoll how many dice the unit rolls
+         * @return the builder
+         */
         public Builder addAFBValue(int hitValue, int numDiceRoll){
             this.hitValueAFB = hitValue;
             this.numDiceRollsAFB = numDiceRoll;
             return this;
         }
 
+        /**
+         * adds ground combat ability to unit
+         * @param hitValue what the unit hits on
+         * @param numDiceRoll how many dice the unit rolls
+         * @return the builder
+         */
         public Builder addGroundCombatValue(int hitValue, int numDiceRoll){
             this.hitValueGroundCombat = hitValue;
             this.numDiceRollsGroundCombat = numDiceRoll;
             return this;
         }
 
+        /**
+         * adds bombardment ability to unit
+         * @param hitValue what the unit hits on
+         * @param numDiceRoll how many dice the unit rolls
+         * @return the builder
+         */
         public Builder addBombardmentValue(int hitValue, int numDiceRoll){
             this.hitValueBombardment = hitValue;
             this.numDiceRollsBombardment = numDiceRoll;
             return this;
         }
 
+        /**
+         * adds planetary defense to a unit
+         * @return the builder
+         */
         public Builder addPlanetaryDefense(){
             this.planetaryDefense = true;
             return this;
         }
 
+        /**
+         * builds the unit
+         * @return the unit
+         */
         public Unit build(){
             return new Unit(this);
         }
 
     }
 
+
+    //getters and setters for fields
     public UnitNames getName() {
         return name;
     }
@@ -201,6 +254,8 @@ public class Unit {
     public void setPlanetaryDefense(boolean planetaryDefense) {
         this.planetaryDefense = planetaryDefense;
     }
+
+    //adds or changes units abilities
 
     public void setBombardmentValue(int hitValueBombardment, int numDiceRollsBombardment) {
         this.hitValueBombardment = hitValueBombardment;

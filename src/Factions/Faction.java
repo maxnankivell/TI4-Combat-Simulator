@@ -23,6 +23,9 @@ public abstract class Faction {
     protected Unit pds;
     protected Unit pdsUpgrade;
 
+    /**
+     * creates each unit with the default unit values
+     */
     public Faction(){
         warsun = new Unit.Builder(UnitNames.WARSUN)
                 .addSpaceCombatValue(3,3)
@@ -79,6 +82,8 @@ public abstract class Faction {
                 .addGroundCombatValue(6,1)
                 .build();
     }
+
+    //getters and setters for each unit
 
     public Unit getWarsun() {
         return warsun;

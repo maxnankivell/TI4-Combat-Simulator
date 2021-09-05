@@ -19,5 +19,7 @@ public class ArgentFlight extends Faction {
         //When this unit uses AFB, each result of 9 or 10 also destroys 1 of your opponent's infantry
         //in the space area of the active system
         destroyerUpgrade.setAFBValue(6,3);
+        //When 1 or more of your units uses ANTI-FIGHTER BARRAGE, for each hit produced in excess of your
+        //opponent's Fighters, choose 1 of your opponent's ships that has SUSTAIN DAMAGE to become damaged.
     }
 }

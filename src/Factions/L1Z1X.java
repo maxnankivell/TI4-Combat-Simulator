@@ -8,6 +8,8 @@ public class L1Z1X extends Faction{
     public L1Z1X(){
         super();
         //flagship
+        //During a space combat, hits produced by this ship and by your dreadnoughts in this system must be assigned to
+        // non-fighter ships if able.
         flagship = new Unit.Builder(UnitNames.FLAGSHIP)
                 .addSpaceCombatValue(5,2)
                 .build();
