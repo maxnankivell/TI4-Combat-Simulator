@@ -33,7 +33,6 @@ public class AFBController extends Controller{
      * Method to run through all pre-combat modifiers for the attacker
      */
     public void attackerPreProcess(){
-        //Check for pre-combat modifiers
         //Argent Flight Promissory note
         if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()) {
             addOneDiceToUnit(CombatType.AFB, attacker);
@@ -80,7 +79,6 @@ public class AFBController extends Controller{
      * Method to run through all post-combat modifiers for the attacker
      */
     public void attackerPostProcess(){
-        //Check for post-combat modifiers
         //Argent Flight faction ability
         if(AttackerOptions.getAttackerFactionCB() == FactionEnum.ARGENTFLIGHT) {
             raidFormation();
