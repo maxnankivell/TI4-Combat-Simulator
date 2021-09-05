@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public abstract class Controller {
     protected ArrayList<Unit> defender;
     protected ArrayList<Unit> attacker;
-    protected int numHitsAttacker;
-    protected int numHitsDefender;
+    protected Faction attackersFaction;
+    protected Faction defendersFation;
     private Object IOException;
 
     public Controller(){
