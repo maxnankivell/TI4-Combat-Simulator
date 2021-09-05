@@ -14,6 +14,9 @@ public class AFBController extends Controller{
         super();
     }
 
+    /**
+     * method to run through the AFB process
+     */
     @Override
     public void startProcess() {
         attackerPreProcess();
@@ -26,6 +29,9 @@ public class AFBController extends Controller{
         defenderPostProcess();
     }
 
+    /**
+     * Method to run through all pre-combat modifiers for the attacker
+     */
     public void attackerPreProcess(){
         //Check for pre-combat modifiers
         //Argent Flight Promissory note
@@ -38,6 +44,9 @@ public class AFBController extends Controller{
         }
     }
 
+    /**
+     * Method to run through the main combat process for the attacker
+     */
     public void attackerMainProcess(){
         //Start the rolling for each unit
         for (Unit unit : attacker) {
@@ -67,6 +76,9 @@ public class AFBController extends Controller{
         }
     }
 
+    /**
+     * Method to run through all post-combat modifiers for the attacker
+     */
     public void attackerPostProcess(){
         //Check for post-combat modifiers
         //Argent Flight faction ability
@@ -75,8 +87,10 @@ public class AFBController extends Controller{
         }
     }
 
+    /**
+     * Method to run through all pre-combat modifiers for the defender
+     */
     private void defenderPreProcess() {
-        //Check for pre-combat modifiers
         //Argent Flight Promissory note
         if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()) {
             addOneDiceToUnit(CombatType.AFB, defender);
@@ -87,6 +101,9 @@ public class AFBController extends Controller{
         }
     }
 
+    /**
+     * Method to run through the main combat process for the defender
+     */
     private void defenderMainProcess() {
         //Start the rolling for each unit
         for (Unit unit : attacker) {
@@ -116,20 +133,30 @@ public class AFBController extends Controller{
         }
     }
 
+    /**
+     * Method to run through all post-combat modifiers for the defender
+     */
     private void defenderPostProcess() {
-        //Check for post-combat modifiers
         //Argent Flight faction ability
         if(DefenderOptions.getDefenderFactionCB() == FactionEnum.ARGENTFLIGHT) {
             raidFormation();
         }
     }
-    
+
+    /**
+     * Method for the Argent Flight unique destroyers
+     * @param roll the number that was rolled by the destroyer being passed in
+     * @param unit the destroyer being passed in
+     */
     private void strikeWingAlpha(int roll, Unit unit){
         if(unit.getName() == UnitNames.DESTROYERUPGRADE && roll >= 9){
             numInfantryHitsAttacker++;
         }
     }
 
+    /**
+     * Method for the Argent Flight unique ability
+     */
     private void raidFormation(){
         if(numHitsAttacker > DefenderOptions.getDefenderFighterCB()){
             numSustainDamageHitsAttacker = numHitsAttacker - DefenderOptions.getDefenderFighterCB();
