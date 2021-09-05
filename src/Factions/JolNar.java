@@ -1,7 +1,7 @@
 package Factions;
 
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 public class JolNar extends Faction{
 
@@ -10,7 +10,7 @@ public class JolNar extends Faction{
         //Flagship
         //When making a combat roll for this ship, each result of 9 or 10, before applying modifiers,
         // produces 2 additional hits.
-        flagship = new Unit.Builder(UnitNames.FLAGSHIP)
+        flagship = new Unit.Builder(UnitName.FLAGSHIP)
                 .addSpaceCannonValue(6,2)
                 .build();
         //Special units

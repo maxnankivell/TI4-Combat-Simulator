@@ -1,7 +1,7 @@
 package Factions;
 
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 public class TitansOfUl extends Faction {
     private Unit flagship;
@@ -9,7 +9,7 @@ public class TitansOfUl extends Faction {
     public TitansOfUl(){
         super();
         //flagship
-        flagship = new Unit.Builder(UnitNames.FLAGSHIP)
+        flagship = new Unit.Builder(UnitName.FLAGSHIP)
                 .addSpaceCombatValue(7,2)
                 .build();
         //special units

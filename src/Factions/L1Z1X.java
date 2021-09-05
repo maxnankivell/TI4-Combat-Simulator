@@ -1,7 +1,7 @@
 package Factions;
 
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 public class L1Z1X extends Faction{
 
@@ -10,7 +10,7 @@ public class L1Z1X extends Faction{
         //flagship
         //During a space combat, hits produced by this ship and by your dreadnoughts in this system must be assigned to
         // non-fighter ships if able.
-        flagship = new Unit.Builder(UnitNames.FLAGSHIP)
+        flagship = new Unit.Builder(UnitName.FLAGSHIP)
                 .addSpaceCombatValue(5,2)
                 .build();
         //special units

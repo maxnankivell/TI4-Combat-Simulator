@@ -1,7 +1,7 @@
 package Factions;
 
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 public class ArgentFlight extends Faction {
 
@@ -9,7 +9,7 @@ public class ArgentFlight extends Faction {
         super();
         //Flagship
         //Other players cannot use space cannon against your ships in this system
-        flagship = new Unit.Builder(UnitNames.FLAGSHIP)
+        flagship = new Unit.Builder(UnitName.FLAGSHIP)
                 .addSpaceCannonValue(7,2)
                 .build();
         //Special units

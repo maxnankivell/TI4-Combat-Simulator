@@ -1,10 +1,9 @@
 package Controllers;
 
 import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
 import GUIData.FactionEnum;
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 import java.util.ArrayList;
 
@@ -130,13 +129,13 @@ public class SpaceCombatController extends Controller{
         int numOpponentUnits = 0;
 
         for (Unit unit : opponentUnits) {
-            if(unit.getName() == UnitNames.FLAGSHIP || unit.getName() == UnitNames.FLAGSHIPUPGRADE){
+            if(unit.getName() == UnitName.FLAGSHIP || unit.getName() == UnitName.FLAGSHIPUPGRADE){
 
             }
         }
 
         for (Unit unit : myUnits) {
-            if(unit.getName() == UnitNames.FLAGSHIP || unit.getName() == UnitNames.FLAGSHIPUPGRADE){
+            if(unit.getName() == UnitName.FLAGSHIP || unit.getName() == UnitName.FLAGSHIPUPGRADE){
 
             }
         }

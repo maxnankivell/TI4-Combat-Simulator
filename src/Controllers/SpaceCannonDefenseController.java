@@ -2,9 +2,8 @@ package Controllers;
 
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
-import GUIData.FactionEnum;
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 import java.util.ArrayList;
 
@@ -94,7 +93,7 @@ public class SpaceCannonDefenseController extends Controller{
      */
     public void disablePDS(ArrayList<Unit> player){
         for (Unit unit: player){
-            if (unit.getName()== UnitNames.PDS){
+            if (unit.getName()== UnitName.PDS){
                 unit.setNumDiceRollsSpaceCannon(0);
                 unit.setPlanetaryDefense(false);
             }
@@ -102,7 +101,7 @@ public class SpaceCannonDefenseController extends Controller{
     }
 
     public void addUnitTitansHero(ArrayList<Unit> player){
-        player.add(new Unit.Builder(UnitNames.OTHER)
+        player.add(new Unit.Builder(UnitName.OTHER)
                 .addSpaceCannonValue(5,3)
                 .build());
     }

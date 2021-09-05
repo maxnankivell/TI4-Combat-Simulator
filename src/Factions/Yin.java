@@ -1,7 +1,7 @@
 package Factions;
 
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 public class Yin extends Faction{
 
@@ -9,7 +9,7 @@ public class Yin extends Faction{
         super();
         //flagship
         //When this ship is destroyed, destroy all ships in this system.
-        flagship = new Unit.Builder(UnitNames.FLAGSHIP)
+        flagship = new Unit.Builder(UnitName.FLAGSHIP)
                 .addSpaceCombatValue(9,2)
                 .build();
     }

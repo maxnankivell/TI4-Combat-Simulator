@@ -1,6 +1,6 @@
 package Units;
 
-public enum UnitNames {
+public enum UnitName {
     FLAGSHIP,
     WARSUN,
     DREADNOUGHT,

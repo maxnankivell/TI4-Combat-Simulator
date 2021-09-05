@@ -3,9 +3,7 @@ package Controllers;
 import Factions.ArgentFlight;
 import GUIData.AttackerOptions;
 import Units.Unit;
-import Units.UnitNames;
-
-import java.util.ArrayList;
+import Units.UnitName;
 
 public class SpaceCannonOffenseController extends Controller{
     private boolean attackerCancelled = false;
@@ -94,11 +92,9 @@ public class SpaceCannonOffenseController extends Controller{
         }
 
         //Argent flight flagship
-        if (attackersFaction instanceof ArgentFlight){
-            checkFlagship();
+        if (attackersFaction instanceof ArgentFlight && attacker.contains(new Unit.Builder(UnitName.FLAGSHIP).build())){
+            defenderCancelled = true;
         }
-
-        //Yin flagship
     }
 
     public void defenderPreProcess(){
@@ -127,20 +123,6 @@ public class SpaceCannonOffenseController extends Controller{
 
     public void defenderMainProcess(){
 
-    }
-
-    /**
-     * checks to see if the player has a flagship
-     * @param player an array of the players ships
-     * @return
-     */
-    public boolean checkForFlagship(ArrayList<Unit> player){
-        for (Unit unit: player){
-            if (unit.getName()== UnitNames.FLAGSHIP){
-                return true;
-            }
-        }
-        return false;
     }
 
 }

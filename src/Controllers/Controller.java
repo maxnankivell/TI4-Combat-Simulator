@@ -4,7 +4,7 @@ import Factions.*;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import Units.Unit;
-import Units.UnitNames;
+import Units.UnitName;
 
 import java.util.ArrayList;
 
@@ -394,7 +394,7 @@ public abstract class Controller {
      * @param unitName name of unit
      * @param unitNameUpgraded name of upgraded unit
      */
-    public void addDiceToSpecificUnitType(CombatType combatType, ArrayList<Unit> player, UnitNames unitName, UnitNames unitNameUpgraded){
+    public void addDiceToSpecificUnitType(CombatType combatType, ArrayList<Unit> player, UnitName unitName, UnitName unitNameUpgraded){
         switch (combatType){
             case AFB:
                 for (Unit unit: player){
@@ -478,7 +478,7 @@ public abstract class Controller {
      * @param unitName name of unit
      * @param unitNameUpgraded name of upgraded unit
      */
-    public void changeHitValueOfAllUnitsOfSpecificType(CombatType combatType, ArrayList<Unit> player, int addAmount, UnitNames unitName, UnitNames unitNameUpgraded){
+    public void changeHitValueOfAllUnitsOfSpecificType(CombatType combatType, ArrayList<Unit> player, int addAmount, UnitName unitName, UnitName unitNameUpgraded){
         switch (combatType){
             case AFB:
                 for (Unit unit: player){
