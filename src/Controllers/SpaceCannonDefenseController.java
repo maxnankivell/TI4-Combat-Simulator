@@ -28,6 +28,7 @@ public class SpaceCannonDefenseController extends Controller{
             for (Unit unit: defender){
                 if (unit.getName()== UnitNames.PDS){
                     unit.setNumDiceRollsSpaceCannon(0);
+                    unit.setPlanetaryDefense(false);
                 }
             }
         }
@@ -53,6 +54,7 @@ public class SpaceCannonDefenseController extends Controller{
                 if (diceRoll() >= unit.getHitValueSpaceCannon()) {
                     numHitsDefender++;
                 } else {
+
                     //Jol-Nar commander
                     if (DefenderOptions.isJolNarCommanderDefenderCheckbox()) {
                         if (diceRoll() >= unit.getHitValueSpaceCannon()) {
