@@ -33,8 +33,6 @@ public class SpaceCombatController extends Controller{
 
         //Winnu flagship
 
-        //Yin flagship
-
         //L1Z1X flagship
 
         numHitsAttacker = hitCalculator(true);
