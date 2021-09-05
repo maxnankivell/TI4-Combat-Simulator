@@ -16,12 +16,17 @@ public class AFBController extends Controller{
 
     @Override
     public void startProcess() {
-        attackerProcess();
-        defenderProcess();
+        attackerPreProcess();
+        defenderPreProcess();
+
+        attackerMainProcess();
+        defenderMainProcess();
+
+        attackerPostProcess();
+        defenderPostProcess();
     }
 
-    public void attackerProcess(){
-
+    public void attackerPreProcess(){
         //Check for pre-combat modifiers
         //Argent Flight Promissory note
         if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()) {
@@ -31,7 +36,9 @@ public class AFBController extends Controller{
         if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()) {
             addOneDiceToUnit(CombatType.AFB, attacker);
         }
+    }
 
+    public void attackerMainProcess(){
         //Start the rolling for each unit
         for (Unit unit : attacker) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
@@ -44,7 +51,7 @@ public class AFBController extends Controller{
             //Check re-roll conditions
             //Jol Nar commander
             if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
-                reRollMissedDice(diceRolls, unit);
+                diceRolls = reRollMissedDice(CombatType.AFB, diceRolls, unit);
             }
 
             //Check number of hits from this unit
@@ -58,7 +65,9 @@ public class AFBController extends Controller{
                 }
             }
         }
+    }
 
+    public void attackerPostProcess(){
         //Check for post-combat modifiers
         //Argent Flight faction ability
         if(AttackerOptions.getAttackerFactionCB() == FactionEnum.ARGENTFLIGHT) {
@@ -66,8 +75,7 @@ public class AFBController extends Controller{
         }
     }
 
-    private void defenderProcess() {
-
+    private void defenderPreProcess() {
         //Check for pre-combat modifiers
         //Argent Flight Promissory note
         if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()) {
@@ -77,7 +85,9 @@ public class AFBController extends Controller{
         if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()) {
             addOneDiceToUnit(CombatType.AFB, defender);
         }
+    }
 
+    private void defenderMainProcess() {
         //Start the rolling for each unit
         for (Unit unit : attacker) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
@@ -90,7 +100,7 @@ public class AFBController extends Controller{
             //Check re-roll conditions
             //Jol Nar commander
             if (DefenderOptions.isJolNarCommanderDefenderCheckbox()) {
-                reRollMissedDice(diceRolls, unit);
+                diceRolls = reRollMissedDice(CombatType.AFB, diceRolls, unit);
             }
 
             //Check number of hits from this unit
@@ -104,17 +114,16 @@ public class AFBController extends Controller{
                 }
             }
         }
+    }
 
+    private void defenderPostProcess() {
         //Check for post-combat modifiers
         //Argent Flight faction ability
         if(DefenderOptions.getDefenderFactionCB() == FactionEnum.ARGENTFLIGHT) {
             raidFormation();
         }
     }
-
-    private void reRollMissedDice(ArrayList<Integer> diceRolls, Unit unit) {
-    }
-
+    
     private void strikeWingAlpha(int roll, Unit unit){
         if(unit.getName() == UnitNames.DESTROYERUPGRADE && roll >= 9){
             numInfantryHitsAttacker++;
