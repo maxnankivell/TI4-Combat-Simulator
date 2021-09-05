@@ -328,5 +328,97 @@ public abstract class Controller {
         return (int) Math.floor(Math.random()*10)+1;
     }
 
+    /**
+     * adds a dice to the best possible unit given this stage of combat
+     * @param combatStage the current stage of combat
+     * @param player the list of the players units
+     */
+    public void addDiceToOneUnit(CombatStage combatStage, ArrayList<Unit> player){
+        Unit lowestHitValue = player.get(0);
+        switch (combatStage){
+            case AFB:
+                for (Unit unit: player){
+                    if (unit.getHitValueAFB()<lowestHitValue.getHitValueAFB()){
+                        lowestHitValue=unit;
+                    }
+                }
+                lowestHitValue.setNumDiceRollsAFB(lowestHitValue.getNumDiceRollsAFB()+1);
+                break;
+            case BOMBARDMENT:
+                for (Unit unit: player){
+                    if (unit.getHitValueBombardment()<lowestHitValue.getHitValueBombardment()){
+                        lowestHitValue=unit;
+                    }
+                }
+                lowestHitValue.setNumDiceRollsBombardment(lowestHitValue.getNumDiceRollsBombardment()+1);
+                break;
+            case SPACECANNON:
+                for (Unit unit: player){
+                    if (unit.getHitValueSpaceCannon()<lowestHitValue.getHitValueSpaceCannon()){
+                        lowestHitValue=unit;
+                    }
+                }
+                    lowestHitValue.setNumDiceRollsSpaceCannon(lowestHitValue.getNumDiceRollsSpaceCannon()+1);
+                break;
+            case SPACECOMBAT:
+                for (Unit unit: player){
+                    if (unit.getHitValueSpaceCombat()<lowestHitValue.getHitValueSpaceCombat()){
+                        lowestHitValue=unit;
+                    }
+                }
+                lowestHitValue.setNumDiceRollsSpaceCombat(lowestHitValue.getNumDiceRollsSpaceCombat()+1);
+                break;
+            case GROUNDCOMBAT:
+                for (Unit unit: player){
+                    if (unit.getHitValueGroundCombat()<lowestHitValue.getHitValueGroundCombat()){
+                        lowestHitValue=unit;
+                    }
+                }
+                lowestHitValue.setNumDiceRollsGroundCombat(lowestHitValue.getNumDiceRollsGroundCombat()+1);
+                break;
+        }
+    }
+
+    /**
+     * adds to all units in this stage of combat
+     * @param combatStage the current stage of combat
+     * @param player the list of the players units
+     * @param addAmount amount added to the units hit values
+     */
+    public void changeHitValueOfAllUnits(CombatStage combatStage, ArrayList<Unit> player, int addAmount){
+        switch (combatStage){
+            case AFB:
+                for (Unit unit: player){
+                    unit.setHitValueAFB(unit.getHitValueAFB()+addAmount);
+                }
+                break;
+            case BOMBARDMENT:
+                for (Unit unit: player){
+                    unit.setHitValueBombardment(unit.getHitValueBombardment()+addAmount);
+                }
+                break;
+            case SPACECANNON:
+                for (Unit unit: player){
+                    unit.setHitValueSpaceCannon(unit.getHitValueSpaceCannon()+addAmount);
+                }
+                break;
+            case SPACECOMBAT:
+                for (Unit unit: player){
+                    unit.setHitValueSpaceCombat(unit.getHitValueSpaceCombat()+addAmount);
+                }
+                break;
+            case GROUNDCOMBAT:
+                for (Unit unit: player){
+                    unit.setHitValueGroundCombat(unit.getHitValueGroundCombat()+addAmount);
+                }
+                break;
+        }
+    }
+
+
+
+
+
     public abstract void startProcess();
+
 }
