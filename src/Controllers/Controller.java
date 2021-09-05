@@ -337,12 +337,12 @@ public abstract class Controller {
 
     /**
      * adds a dice to the best possible unit given this stage of combat
-     * @param combatStage the current stage of combat
+     * @param combatType the current stage of combat
      * @param player the list of the players units
      */
-    public void addDiceToOneUnit(CombatStage combatStage, ArrayList<Unit> player){
+    public void addOneDiceToUnit(CombatType combatType, ArrayList<Unit> player){
         Unit lowestHitValue = player.get(0);
-        switch (combatStage){
+        switch (combatType){
             case AFB:
                 for (Unit unit: player){
                     if (unit.getHitValueAFB()<lowestHitValue.getHitValueAFB()){
@@ -388,12 +388,12 @@ public abstract class Controller {
 
     /**
      * adds to all units in this stage of combat
-     * @param combatStage the current stage of combat
+     * @param combatType the current stage of combat
      * @param player the list of the players units
      * @param addAmount amount added to the units hit values
      */
-    public void changeHitValueOfAllUnits(CombatStage combatStage, ArrayList<Unit> player, int addAmount){
-        switch (combatStage){
+    public void changeHitValueOfAllUnits(CombatType combatType, ArrayList<Unit> player, int addAmount){
+        switch (combatType){
             case AFB:
                 for (Unit unit: player){
                     unit.setHitValueAFB(unit.getHitValueAFB()+addAmount);
@@ -421,7 +421,6 @@ public abstract class Controller {
                 break;
         }
     }
-
 
     public abstract void startProcess();
 

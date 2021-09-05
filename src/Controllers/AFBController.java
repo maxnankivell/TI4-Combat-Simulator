@@ -16,26 +16,20 @@ public class AFBController extends Controller{
 
     @Override
     public void startProcess() {
-        //Strike wing ambush
-
-        //Argent flight commander
-
-        //Jol-Nar commander
-
-        attackerHitCalculator();
-        numHitsDefender = defenderHitCalculator();
+        attackerProcess();
+        defenderProcess();
     }
 
-    public void attackerHitCalculator(){
+    public void attackerProcess(){
 
         //Check for pre-combat modifiers
         //Argent Flight Promissory note
         if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()) {
-            addOneDice();
+            addOneDiceToUnit(CombatType.AFB, attacker);
         }
         //Argent Flight commander
         if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()) {
-            addOneDice();
+            addOneDiceToUnit(CombatType.AFB, attacker);
         }
 
         //Start the rolling for each unit
@@ -59,45 +53,76 @@ public class AFBController extends Controller{
                     numHitsAttacker++;
                 }
                 //Argent Flight special destroyers
-                strikeWingAlpha(roll, unit);
+                if(AttackerOptions.getAttackerFactionCB() == FactionEnum.ARGENTFLIGHT) {
+                    strikeWingAlpha(roll, unit);
+                }
             }
         }
 
         //Check for post-combat modifiers
         //Argent Flight faction ability
-        raidFormation();
+        if(AttackerOptions.getAttackerFactionCB() == FactionEnum.ARGENTFLIGHT) {
+            raidFormation();
+        }
     }
 
-    private int defenderHitCalculator() {
-        int numHits = 0;
+    private void defenderProcess() {
 
-        for (Unit unit : defender){
+        //Check for pre-combat modifiers
+        //Argent Flight Promissory note
+        if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()) {
+            addOneDiceToUnit(CombatType.AFB, defender);
+        }
+        //Argent Flight commander
+        if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()) {
+            addOneDiceToUnit(CombatType.AFB, defender);
+        }
+
+        //Start the rolling for each unit
+        for (Unit unit : attacker) {
+            ArrayList<Integer> diceRolls = new ArrayList<>();
+
+            //roll amount of dice necessary for one unit
             for (int i=0; i<unit.getNumDiceRollsAFB(); i++){
-                if (diceRoll() >= unit.getHitValueAFB()){
-                    numHits++;
+                diceRolls.add(diceRoll());
+            }
+
+            //Check re-roll conditions
+            //Jol Nar commander
+            if (DefenderOptions.isJolNarCommanderDefenderCheckbox()) {
+                reRollMissedDice(diceRolls, unit);
+            }
+
+            //Check number of hits from this unit
+            for (Integer roll : diceRolls) {
+                if(roll >= unit.getHitValueAFB()){
+                    numHitsAttacker++;
+                }
+                //Argent Flight special destroyers
+                if(DefenderOptions.getDefenderFactionCB() == FactionEnum.ARGENTFLIGHT) {
+                    strikeWingAlpha(roll, unit);
                 }
             }
         }
 
-        return numHits;
-    }
-
-    private void addOneDice() {
+        //Check for post-combat modifiers
+        //Argent Flight faction ability
+        if(DefenderOptions.getDefenderFactionCB() == FactionEnum.ARGENTFLIGHT) {
+            raidFormation();
+        }
     }
 
     private void reRollMissedDice(ArrayList<Integer> diceRolls, Unit unit) {
     }
 
     private void strikeWingAlpha(int roll, Unit unit){
-        if(AttackerOptions.getAttackerFactionCB() == FactionEnum.ARGENTFLIGHT && unit.getName() == UnitNames.DESTROYERUPGRADE){
-            if(roll >= 9){
-                numInfantryHitsAttacker++;
-            }
+        if(unit.getName() == UnitNames.DESTROYERUPGRADE && roll >= 9){
+            numInfantryHitsAttacker++;
         }
     }
 
     private void raidFormation(){
-        if(AttackerOptions.getAttackerFactionCB() == FactionEnum.ARGENTFLIGHT && numHitsAttacker > DefenderOptions.getDefenderFighterCB()){
+        if(numHitsAttacker > DefenderOptions.getDefenderFighterCB()){
             numSustainDamageHitsAttacker = numHitsAttacker - DefenderOptions.getDefenderFighterCB();
         }
     }
