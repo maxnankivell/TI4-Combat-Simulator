@@ -1,5 +1,10 @@
 package GUIData;
 
+/**
+ * Class to store the state of all interactive GUI elements for the defender
+ * So that they can be used by other classes in the program
+ * The class is all static fields with getter and setter methods
+ */
 public class DefenderOptions {
 
     //unit upgrades

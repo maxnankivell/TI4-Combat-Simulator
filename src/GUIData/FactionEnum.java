@@ -1,5 +1,8 @@
 package GUIData;
 
+/**
+ * Enum for every faction in the game
+ */
 public enum FactionEnum {
     ARBOREC,
     ARGENTFLIGHT,

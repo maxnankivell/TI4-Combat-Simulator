@@ -1,5 +1,10 @@
 package GUIData;
 
+/**
+ * Class to store the state of all interactive GUI elements for the attacker
+ * So that they can be used by other classes in the program
+ * The class is all static fields with getter and setter methods
+ */
 public class AttackerOptions {
 
     //upgrades
