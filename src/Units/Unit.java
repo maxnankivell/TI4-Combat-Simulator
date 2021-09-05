@@ -1,5 +1,7 @@
 package Units;
 
+import java.util.Objects;
+
 public class Unit {
 
     private UnitName name;
@@ -296,4 +298,22 @@ public class Unit {
                 name == UnitName.WARSUN;
     }
 
+    public boolean isShip(){
+        return isNonFighterShip() ||
+                name == UnitName.FIGHTER ||
+                name == UnitName.FIGHTERUPGRADE;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Unit unit = (Unit) o;
+        return name == unit.name;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }

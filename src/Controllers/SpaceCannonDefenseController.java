@@ -68,22 +68,26 @@ public class SpaceCannonDefenseController extends Controller{
         for (Unit unit: defender){
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
-            //roll amount of dice necessary for one unit
-            for (int i=0; i<unit.getNumDiceRollsSpaceCannon(); i++){
-                diceRolls.add(diceRoll());
-            }
+            if (!unit.isShip()) {
 
-            //Check re-roll conditions
-            //Jol Nar commander
-            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
-                diceRolls = reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
-            }
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if(roll >= unit.getHitValueSpaceCannon()){
-                    numHitsDefender++;
+                //roll amount of dice necessary for one unit
+                for (int i = 0; i < unit.getNumDiceRollsSpaceCannon(); i++) {
+                    diceRolls.add(diceRoll());
                 }
+
+                //Check re-roll conditions
+                //Jol Nar commander
+                if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+                    diceRolls = reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
+                }
+
+                //Check number of hits from this unit
+                for (Integer roll : diceRolls) {
+                    if (roll >= unit.getHitValueSpaceCannon()) {
+                        numHitsDefender++;
+                    }
+                }
+
             }
         }
     }
@@ -100,6 +104,10 @@ public class SpaceCannonDefenseController extends Controller{
         }
     }
 
+    /**
+     * adds the titans hero unit to the players list of units
+     * @param player list of units
+     */
     public void addUnitTitansHero(ArrayList<Unit> player){
         player.add(new Unit.Builder(UnitName.OTHER)
                 .addSpaceCannonValue(5,3)

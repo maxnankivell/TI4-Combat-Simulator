@@ -134,7 +134,7 @@ public class SpaceCombatController extends Controller{
         int numOpponentCapitalShips = 0;
 
         for (Unit unit : opponentUnits) {
-            if(unit.isNonFighterShip()){
+            if (unit.isNonFighterShip()) {
                 numOpponentCapitalShips++;
             }
         }
