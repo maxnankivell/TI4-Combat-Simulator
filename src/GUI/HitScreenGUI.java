@@ -1,17 +1,20 @@
 package GUI;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * When this class is created it will make a popup GUI representing a help screen
+ * When this class is created it will make a popup GUI showing the amount of hits produced by a combat
  */
 public class HitScreenGUI {
 
@@ -83,8 +86,8 @@ public class HitScreenGUI {
         numNonFighterHitsDefenderLabel.setWrapText(true);
 
         //Style buttons
-        closeButton.setPrefWidth(100);
-        closeButton.setPrefHeight(40);
+        closeButton.setPrefWidth(80);
+        closeButton.setPrefHeight(20);
 
         //Populate left vbox
         VBox vBoxLeft = new VBox(10);
@@ -110,11 +113,13 @@ public class HitScreenGUI {
         hBox.setAlignment(Pos.CENTER);
 
         //Setup main layout
-        VBox mainLayout = new VBox(10);
-        mainLayout.setMinWidth(640);
-        mainLayout.setMinHeight(480);
-        mainLayout.getChildren().addAll(hBox, closeButton);
-        mainLayout.setAlignment(Pos.CENTER);
+        BorderPane mainLayout = new BorderPane();
+        mainLayout.setMinWidth(720);
+        mainLayout.setMinHeight(240);
+        mainLayout.setPadding(new Insets(20, 20, 20, 20));
+        StackPane buttonPane = new StackPane(closeButton);
+        mainLayout.setCenter(hBox);
+        mainLayout.setBottom(buttonPane);
 
         //Button actions
         closeButton.setOnAction(e -> window.close());
