@@ -18,52 +18,16 @@ public class InvasionController extends Controller{
 
     @Override
     public void startProcess() {
-        //Magen defense grid
+        attackPreProcess();
+        defenderPreProcess();
 
-        //Tekklar legion
-
-        //Sol agent
-
-        //Fire team
-
-        //Morale boost
-
-        //Winnu commander
-
-        //Defending in nebula
-
-        //Jol Nar mech
-
-        //Naaz Rokha flagship
-
-        numHitsAttacker = hitCalculator(true);
-        numHitsDefender = hitCalculator(false);
+        attackerMainProcess();
+        defenderMainProcess();
     }
 
-    public int hitCalculator(boolean isAttacker){
-        int numHits = 0;
-
-        if(isAttacker) {
-            for (Unit unit : attacker){
-                for (int i=0; i<unit.getNumDiceRollsGroundCombat(); i++){
-                    if (diceRoll() >= unit.getHitValueGroundCombat()){
-                        numHits++;
-                    }
-                }
-            }
-        } else {
-            for (Unit unit : defender){
-                for (int i=0; i<unit.getNumDiceRollsGroundCombat(); i++){
-                    if (diceRoll() >= unit.getHitValueGroundCombat()){
-                        numHits++;
-                    }
-                }
-            }
-        }
-
-        return numHits;
-    }
-
+    /**
+     * Method to run through all pre-combat modifiers for the attacker
+     */
     public void attackPreProcess(){
         //Tekklar legion
         if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()){
@@ -96,6 +60,9 @@ public class InvasionController extends Controller{
         }
     }
 
+    /**
+     * Method to run through all pre-combat modifiers for the defender
+     */
     public void defenderPreProcess(){
         //Magen defense grid
         if (DefenderOptions.isMagenDefenseGridDefenderCheckbox()){
@@ -138,12 +105,62 @@ public class InvasionController extends Controller{
         }
     }
 
+    /**
+     * Method to run through the main combat process for the attacker
+     */
     public void attackerMainProcess(){
-        //Fire team
+        //start rolling
+        for (Unit unit : attacker) {
+            ArrayList<Integer> diceRolls = new ArrayList<>();
+
+            //roll amount of dice necessary for one unit
+            for (int i = 0; i < unit.getNumDiceRollsGroundCombat(); i++) {
+                diceRolls.add(diceRoll());
+            }
+
+            //Check re-roll conditions
+            //Fire team
+            if (AttackerOptions.isFireTeamAttackerCheckbox()) {
+                diceRolls = reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
+            }
+
+            //Check number of hits from this unit
+            for (Integer roll : diceRolls) {
+                if (roll >= unit.getHitValueGroundCombat()) {
+                    numHitsAttacker++;
+                }
+            }
+
+        }
     }
 
+    /**
+     * Method to run through the main combat process for the defender
+     */
     public void defenderMainProcess(){
-        //Fire team
+        //start rolling
+        for (Unit unit : defender) {
+            ArrayList<Integer> diceRolls = new ArrayList<>();
+
+            //roll amount of dice necessary for one unit
+            for (int i = 0; i < unit.getNumDiceRollsGroundCombat(); i++) {
+                diceRolls.add(diceRoll());
+            }
+
+            //Check re-roll conditions
+            //Fire team
+            if (DefenderOptions.isFireTeamDefenderCheckbox()) {
+                diceRolls = reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
+            }
+
+            //Check number of hits from this unit
+            for (Integer roll : diceRolls) {
+                if (roll >= unit.getHitValueGroundCombat()) {
+                    numHitsDefender++;
+                }
+            }
+
+        }
     }
 
     /**
