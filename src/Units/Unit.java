@@ -18,7 +18,7 @@ public class Unit {
     private int hitValueBombardment;
     private int numDiceRollsBombardment;
 
-    private boolean planetaryDefense;
+    private boolean planetaryShield;
 
     /**
      * gets values for fields from Builder object
@@ -36,7 +36,7 @@ public class Unit {
         this.numDiceRollsGroundCombat = builder.numDiceRollsGroundCombat;
         this.hitValueBombardment = builder.hitValueBombardment;
         this.numDiceRollsBombardment = builder.numDiceRollsBombardment;
-        this.planetaryDefense = builder.planetaryDefense;
+        this.planetaryShield = builder.planetaryShield;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Unit {
         this.numDiceRollsGroundCombat = master.numDiceRollsGroundCombat;
         this.hitValueBombardment = master.hitValueBombardment;
         this.numDiceRollsBombardment = master.numDiceRollsBombardment;
-        this.planetaryDefense = master.planetaryDefense;
+        this.planetaryShield = master.planetaryShield;
     }
 
     public static class Builder{
@@ -72,7 +72,7 @@ public class Unit {
         private int hitValueBombardment = 0;
         private int numDiceRollsBombardment = 0;
 
-        private boolean planetaryDefense = false;
+        private boolean planetaryShield = false;
 
         /**
          * fills mandatory fields
@@ -147,7 +147,7 @@ public class Unit {
          * @return the builder
          */
         public Builder addPlanetaryDefense(){
-            this.planetaryDefense = true;
+            this.planetaryShield = true;
             return this;
         }
 
@@ -251,12 +251,12 @@ public class Unit {
         this.numDiceRollsBombardment = numDiceRollsBombardment;
     }
 
-    public boolean hasPlanetaryDefense() {
-        return planetaryDefense;
+    public boolean hasPlanetaryShield() {
+        return planetaryShield;
     }
 
-    public void setPlanetaryDefense(boolean planetaryDefense) {
-        this.planetaryDefense = planetaryDefense;
+    public void setPlanetaryShield(boolean planetaryShield) {
+        this.planetaryShield = planetaryShield;
     }
 
     //adds or changes units abilities

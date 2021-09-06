@@ -10,9 +10,9 @@ import Units.UnitName;
 
 import java.util.ArrayList;
 
-public class InvasionController extends Controller{
+public class GroundCombatController extends Controller{
 
-    public InvasionController(){
+    public GroundCombatController(){
         super();
     }
 
