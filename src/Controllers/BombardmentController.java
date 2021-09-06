@@ -26,6 +26,11 @@ public class BombardmentController extends Controller{
     }
 
     public void attackerPreProcess(){
+        //Blitz
+        if (AttackerOptions.isBlitzAttackerCheckbox()){
+            blitz();
+        }
+
         //Plasma scoring
         if (AttackerOptions.isPlasmaScoringAttackerCheckbox()){
             attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
@@ -39,11 +44,6 @@ public class BombardmentController extends Controller{
         //Disable
         if (AttackerOptions.isDisableLabelAttackerCheckbox()){
             defender.disablePDS();
-        }
-
-        //Blitz
-        if (AttackerOptions.isBlitzAttackerCheckbox()){
-            blitz();
         }
 
         //Argent flight commander
@@ -76,14 +76,29 @@ public class BombardmentController extends Controller{
     }
 
     public void attackerMainProcess(){
+        /**
+         * test
+         */
+        System.out.println("Attacker");
         //start rolling
         for (Unit unit : attacker.getUnitArrayList()) {
+            /**
+             * test
+             */
+            System.out.println(unit.getName());
+            System.out.println(unit.getHitValueBombardment() + " - " + unit.getNumDiceRollsBombardment());
+
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
             for (int i = 0; i < unit.getNumDiceRollsBombardment(); i++) {
                 diceRolls.add(diceRoll());
             }
+
+            /**
+             * test
+             */
+            System.out.println(diceRolls);
 
             //Check re-roll conditions
             //Jol Nar commander

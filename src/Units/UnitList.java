@@ -49,7 +49,7 @@ public class UnitList {
      */
     public void disablePDS(){
         for (Unit unit: unitArrayList){
-            if (unit.getName()== UnitName.PDS){
+            if (unit.getName()==UnitName.PDS || unit.getName()==UnitName.PDSUPGRADE){
                 unit.setNumDiceRollsSpaceCannon(0);
                 unit.setHitValueSpaceCannon(0);
                 unit.setPlanetaryShield(false);

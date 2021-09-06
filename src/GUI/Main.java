@@ -93,7 +93,7 @@ public class Main extends Application {
         Button spaceCombatBtn = new Button("Space Combat");
         Button bombardmentBtn = new Button("Bombardment");
         Button spaceCannonDefenseBtn = new Button("Space Cannon Defense");
-        Button invasionCombatBtn = new Button("Invasion Combat");
+        Button GroundCombatBtn = new Button("Ground Combat");
 
         Label attackerLabel = new Label("Attacker");
         Label defenderLabel = new Label("Defender");
@@ -281,7 +281,7 @@ public class Main extends Application {
         spaceCombatBtn.setPrefWidth(150);
         bombardmentBtn.setPrefWidth(150);
         spaceCannonDefenseBtn.setPrefWidth(150);
-        invasionCombatBtn.setPrefWidth(150);
+        GroundCombatBtn.setPrefWidth(150);
 
         clearAttackerBtn.setPrefWidth(125);
         clearDefenderBtn.setPrefWidth(125);
@@ -299,7 +299,7 @@ public class Main extends Application {
                 spaceCombatBtn,
                 bombardmentBtn,
                 spaceCannonDefenseBtn,
-                invasionCombatBtn
+                GroundCombatBtn
         );
         bottomBar.setAlignment(Pos.CENTER);
         bottomBar.setSpacing(12);
@@ -446,7 +446,7 @@ public class Main extends Application {
         spaceCombatBtn.setOnAction(e -> handleSpaceCombat());
         bombardmentBtn.setOnAction(e -> handleBombardment());
         spaceCannonDefenseBtn.setOnAction(e -> handleSpaceCannonDefense());
-        invasionCombatBtn.setOnAction(e -> handleInvasionCombat());
+        GroundCombatBtn.setOnAction(e -> handleGroundCombat());
         clearAttackerBtn.setOnAction(e -> handleClearAttacker());
         clearDefenderBtn.setOnAction(e -> handleClearDefender());
 
@@ -554,10 +554,10 @@ public class Main extends Application {
     }
 
     /**
-     * Method to handle Invasion Combat after the button is pressed
+     * Method to handle Ground Combat after the button is pressed
      * It will first check to make sure both factions are selected and all GUI values are saved
      */
-    private void handleInvasionCombat() {
+    private void handleGroundCombat() {
         if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
             return;
         }
