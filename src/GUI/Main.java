@@ -439,6 +439,8 @@ public class Main extends Application {
         bombardmentBtn.setOnAction(e -> handleBombardment());
         spaceCannonDefenseBtn.setOnAction(e -> handleSpaceCannonDefense());
         invasionCombatBtn.setOnAction(e -> handleInvasionCombat());
+        clearAttackerBtn.setOnAction(e -> handleClearAttacker());
+        clearDefenderBtn.setOnAction(e -> handleClearDefender());
 
         //Add the borderPane to a scene and show it
         Scene mainScene = new Scene(borderPane, 1024, 576);
@@ -560,6 +562,40 @@ public class Main extends Application {
                 controller.getNumInfantryHitsAttacker(),controller.getNumInfantryHitsDefender(),
                 controller.getNumSustainDamageHitsAttacker(),controller.getNumSustainDamageHitsDefender(),
                 controller.getNumNonFighterHitsAttacker(),controller.getNumNonFighterHitsDefender());
+    }
+
+    /**
+     * Method to clear all unit amounts selected by the attacker after the button is pressed
+     */
+    private void handleClearAttacker() {
+
+        attackerFlagshipCB.setValue(0);
+        attackerWarSunCB.setValue(0);
+        attackerDreadnoughtCB.setValue(0);
+        attackerCarrierCB.setValue(0);
+        attackerCruiserCB.setValue(0);
+        attackerDestroyerCB.setValue(0);
+        attackerFighterCB.setValue(0);
+        attackerMechCB.setValue(0);
+        attackerInfantryCB.setValue(0);
+        attackerPdsCB.setValue(0);
+    }
+
+    /**
+     * Method to clear all unit amounts selected by the defender after the button is pressed
+     */
+    private void handleClearDefender() {
+
+        defenderFlagshipCB.setValue(0);
+        defenderWarSunCB.setValue(0);
+        defenderDreadnoughtCB.setValue(0);
+        defenderCarrierCB.setValue(0);
+        defenderCruiserCB.setValue(0);
+        defenderDestroyerCB.setValue(0);
+        defenderFighterCB.setValue(0);
+        defenderMechCB.setValue(0);
+        defenderInfantryCB.setValue(0);
+        defenderPdsCB.setValue(0);
     }
 
     /**
