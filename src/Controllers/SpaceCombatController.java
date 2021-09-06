@@ -83,9 +83,6 @@ public class SpaceCombatController extends Controller{
         }
     }
 
-    private void sardakkFlagship(ArrayList<Unit> Units) {
-    }
-
     /**
      * Method to run through the main combat process for the attacker
      */
