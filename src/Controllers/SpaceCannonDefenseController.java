@@ -36,7 +36,7 @@ public class SpaceCannonDefenseController extends Controller{
 
         //Disable
         if (AttackerOptions.isDisableLabelAttackerCheckbox()){
-           disablePDS(defender);
+           defender.disablePDS();
         }
     }
 
@@ -93,17 +93,5 @@ public class SpaceCannonDefenseController extends Controller{
         }
     }
 
-    /**
-     * stops all pds from firing and turns off planetary shield
-     */
-    public void disablePDS(UnitList player){
-        for (Unit unit: player.getUnitArrayList()){
-            if (unit.getName()== UnitName.PDS){
-                unit.setNumDiceRollsSpaceCannon(0);
-                unit.setHitValueSpaceCannon(0);
-                unit.setPlanetaryDefense(false);
-            }
-        }
-    }
 
 }

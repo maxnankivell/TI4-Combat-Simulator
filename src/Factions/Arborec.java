@@ -12,7 +12,7 @@ public class Arborec extends Faction{
                 .addSpaceCombatValue(7,2)
                 .build();
         //special units
-        mech.setPlanetaryDefense(true);
+        mech.setPlanetaryShield(true);
     }
 
 }

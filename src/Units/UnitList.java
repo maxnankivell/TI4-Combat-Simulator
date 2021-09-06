@@ -32,6 +32,32 @@ public class UnitList {
     }
 
     /**
+     * checks if any unit has a planetary shield
+     * @return if any unit has a planetary shield
+     */
+    public boolean containsPlanetryShield(){
+        for (Unit unit : unitArrayList) {
+            if(unit.hasPlanetaryShield()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * stops all pds from firing and turns off planetary shield
+     */
+    public void disablePDS(){
+        for (Unit unit: unitArrayList){
+            if (unit.getName()== UnitName.PDS){
+                unit.setNumDiceRollsSpaceCannon(0);
+                unit.setHitValueSpaceCannon(0);
+                unit.setPlanetaryShield(false);
+            }
+        }
+    }
+
+    /**
      * Method to check if an arraylist of units contains a unit with a specific name
      * @param name Unit name to search for
      * @return true if unit is found
