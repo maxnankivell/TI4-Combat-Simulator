@@ -83,8 +83,8 @@ public class HitScreenGUI {
         numNonFighterHitsDefenderLabel.setWrapText(true);
 
         //Style buttons
-        closeButton.setPrefWidth(100);
-        closeButton.setPrefHeight(40);
+        closeButton.setPrefWidth(80);
+        closeButton.setPrefHeight(20);
 
         //Populate left vbox
         VBox vBoxLeft = new VBox(10);
@@ -110,9 +110,9 @@ public class HitScreenGUI {
         hBox.setAlignment(Pos.CENTER);
 
         //Setup main layout
-        VBox mainLayout = new VBox(10);
-        mainLayout.setMinWidth(640);
-        mainLayout.setMinHeight(480);
+        VBox mainLayout = new VBox(20);
+        mainLayout.setMinWidth(720);
+        mainLayout.setMinHeight(240);
         mainLayout.getChildren().addAll(hBox, closeButton);
         mainLayout.setAlignment(Pos.CENTER);
 
