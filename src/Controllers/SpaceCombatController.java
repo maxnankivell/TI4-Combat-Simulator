@@ -49,7 +49,7 @@ public class SpaceCombatController extends Controller{
             attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
         }
         if(AttackerOptions.getAttackerFactionCB() == FactionEnum.SARDAKKNORR && attacker.containsName(UnitName.FLAGSHIP)){
-            attacker.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
+            sardakNorrFlagship(attacker);
         }
 
         if(AttackerOptions.getAttackerFactionCB() == FactionEnum.NAAZROKHA && attacker.containsName(UnitName.FLAGSHIP)){
@@ -64,6 +64,7 @@ public class SpaceCombatController extends Controller{
      * Method to run through the main combat process for the attacker
      */
     public void attackerMainProcess(){
+
         //Start the rolling for each unit
         for (Unit unit : attacker.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
@@ -121,7 +122,7 @@ public class SpaceCombatController extends Controller{
             defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT, -1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
         }
         if(DefenderOptions.getDefenderFactionCB() == FactionEnum.SARDAKKNORR && defender.containsName(UnitName.FLAGSHIP)){
-            defender.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
+            sardakNorrFlagship(defender);
         }
 
         if(DefenderOptions.getDefenderFactionCB() == FactionEnum.NAAZROKHA && defender.containsName(UnitName.FLAGSHIP)){
@@ -136,6 +137,7 @@ public class SpaceCombatController extends Controller{
      * Method to run through the main combat process for the defender
      */
     private void defenderMainProcess() {
+
         //Start the rolling for each unit
         for (Unit unit : defender.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
@@ -169,6 +171,15 @@ public class SpaceCombatController extends Controller{
      * Method to run through all post-combat modifiers for the defender
      */
     private void defenderPostProcess() {
+    }
+
+    private void sardakNorrFlagship(UnitList myUnits){
+        myUnits.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
+        for (Unit unit : myUnits.getUnitArrayList()) {
+            if(unit.getName() == UnitName.FLAGSHIP){
+                unit.setHitValueSpaceCombat(unit.getHitValueSpaceCombat()+1);
+            }
+        }
     }
 
     /**
