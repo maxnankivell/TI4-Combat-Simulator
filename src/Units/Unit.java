@@ -25,6 +25,7 @@ public class Unit {
      * @param builder a Builder class
      */
     public Unit(Builder builder){
+        this.name = builder.name;
         this.hitValueSpaceCombat = builder.hitValueSpaceCombat;
         this.numDiceRollsSpaceCombat = builder.numDiceRollsSpaceCombat;
         this.hitValueSpaceCannon = builder.hitValueSpaceCannon;
@@ -43,6 +44,7 @@ public class Unit {
      * @param master a existing unit
      */
     public Unit(Unit master){
+        this.name = master.name;
         this.hitValueSpaceCombat = master.hitValueSpaceCombat;
         this.numDiceRollsSpaceCombat = master.numDiceRollsSpaceCombat;
         this.hitValueSpaceCannon = master.hitValueSpaceCannon;
@@ -57,7 +59,7 @@ public class Unit {
     }
 
     public static class Builder{
-        private UnitName name;
+        private final UnitName name;
 
         private int hitValueSpaceCombat = 0;
         private int numDiceRollsSpaceCombat = 0;

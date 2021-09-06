@@ -36,27 +36,27 @@ public class InvasionController extends Controller{
 
         //Sol agent
         if (AttackerOptions.isSolAgentAttackerCheckbox()){
-            addOneDiceToUnit(CombatType.GROUNDCOMBAT, attacker);
+            attacker.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
         }
 
         //Morale boost
         if (AttackerOptions.isMoraleBoostAttackerCheckbox()){
-            changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, attacker, -1);
+            attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         }
 
         //Winnu commander
         if (AttackerOptions.isWinnuCommanderAttackerCheckbox()){
-            changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, attacker, -2);
+            attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
         }
 
         //Jol Nar mech
-        if (attackersFaction instanceof JolNar && containsName(UnitName.MECH, attacker)){
-            changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, attacker, -1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
+        if (attackersFaction instanceof JolNar && attacker.containsName(UnitName.MECH)){
+            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, -1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
         }
 
         //Naaz Rokha flagship
-        if (attackersFaction instanceof NaazRokha && containsName(UnitName.FLAGSHIP, attacker)){
-            addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, attacker, UnitName.MECH, UnitName.MECH);
+        if (attackersFaction instanceof NaazRokha && attacker.containsName(UnitName.FLAGSHIP)){
+            attacker.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH, UnitName.MECH);
         }
     }
 
@@ -76,32 +76,32 @@ public class InvasionController extends Controller{
 
         //Sol agent
         if (DefenderOptions.isSolAgentDefenderCheckbox()){
-            addOneDiceToUnit(CombatType.GROUNDCOMBAT, defender);
+            defender.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
         }
 
         //Morale boost
         if (DefenderOptions.isMoraleBoostDefenderCheckbox()){
-            changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, defender, -1);
+            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         }
 
         //Winnu commander
         if (DefenderOptions.isWinnuCommanderDefenderCheckbox()){
-            changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, defender, -2);
+            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
         }
 
         //Defending in nebula
         if (DefenderOptions.isDefendingInNebulaDefenderCheckbox()){
-            changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, defender, -1);
+            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         }
 
         //Jol Nar mech
-        if (defendersFaction instanceof JolNar && containsName(UnitName.MECH, defender)){
-            changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, defender, -1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
+        if (defendersFaction instanceof JolNar && defender.containsName(UnitName.MECH)){
+            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT,-1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
         }
 
         //Naaz Rokha flagship
-        if (defendersFaction instanceof NaazRokha && containsName(UnitName.FLAGSHIP, defender)){
-            addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, defender, UnitName.MECH, UnitName.MECH);
+        if (defendersFaction instanceof NaazRokha && defender.containsName(UnitName.FLAGSHIP)){
+            defender.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH, UnitName.MECH);
         }
     }
 
@@ -110,7 +110,7 @@ public class InvasionController extends Controller{
      */
     public void attackerMainProcess(){
         //start rolling
-        for (Unit unit : attacker) {
+        for (Unit unit : attacker.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -139,7 +139,7 @@ public class InvasionController extends Controller{
      */
     public void defenderMainProcess(){
         //start rolling
-        for (Unit unit : defender) {
+        for (Unit unit : defender.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -169,9 +169,9 @@ public class InvasionController extends Controller{
      * all defender ground units hit values
      */
     public void tekklarLegionAttacker(){
-        changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, attacker, -1);
+        attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         if (defendersFaction instanceof SardakkNorr){
-            changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, defender, 1);
+            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
         }
     }
 
@@ -181,9 +181,9 @@ public class InvasionController extends Controller{
      * all attacker ground units hit values
      */
     public void tekklarLegionDefender(){
-        changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, defender, -1);
+        defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         if (attackersFaction instanceof SardakkNorr){
-            changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, attacker, 1);
+            attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
         }
     }
 

@@ -3,6 +3,7 @@ package Controllers;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import Units.Unit;
+import Units.UnitList;
 import Units.UnitName;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class SpaceCannonDefenseController extends Controller{
         //Check for pre-combat modifiers
         //Antimass deflector
         if (AttackerOptions.isAntimassDeflectorAttackerCheckbox()){
-            changeHitValueOfAllUnits(CombatType.SPACECANNON, defender, 1);
+            defender.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
         }
 
         //Disable
@@ -46,12 +47,12 @@ public class SpaceCannonDefenseController extends Controller{
         //Check for pre-combat modifiers
         //Plasma scoring
         if (DefenderOptions.isPlasmaScoringDefenderCheckbox()){
-            addOneDiceToUnit(CombatType.SPACECANNON, defender);
+            defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Argent flight commander
         if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()){
-            addOneDiceToUnit(CombatType.SPACECANNON, defender);
+            defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Titans hero
@@ -65,7 +66,7 @@ public class SpaceCannonDefenseController extends Controller{
      */
     public void defenderMainProcess(){
         //start rolling
-        for (Unit unit: defender){
+        for (Unit unit: defender.getUnitArrayList()){
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             if (!unit.isShip()) {
@@ -95,24 +96,14 @@ public class SpaceCannonDefenseController extends Controller{
     /**
      * stops all pds from firing and turns off planetary shield
      */
-    public void disablePDS(ArrayList<Unit> player){
-        for (Unit unit: player){
+    public void disablePDS(UnitList player){
+        for (Unit unit: player.getUnitArrayList()){
             if (unit.getName()== UnitName.PDS){
                 unit.setNumDiceRollsSpaceCannon(0);
                 unit.setHitValueSpaceCannon(0);
                 unit.setPlanetaryDefense(false);
             }
         }
-    }
-
-    /**
-     * adds the titans hero unit to the players list of units
-     * @param player list of units
-     */
-    public void addUnitTitansHero(ArrayList<Unit> player){
-        player.add(new Unit.Builder(UnitName.OTHER)
-                .addSpaceCannonValue(5,3)
-                .build());
     }
 
 }

@@ -4,6 +4,7 @@ import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import GUIData.FactionEnum;
 import Units.Unit;
+import Units.UnitList;
 import Units.UnitName;
 
 import java.util.ArrayList;
@@ -35,11 +36,11 @@ public class AFBController extends Controller{
     public void attackerPreProcess(){
         //Argent Flight Promissory note
         if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()) {
-            addOneDiceToUnit(CombatType.AFB, attacker);
+            attacker.addOneDiceToBestUnit(CombatType.AFB);
         }
         //Argent Flight commander
         if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()) {
-            addOneDiceToUnit(CombatType.AFB, attacker);
+            attacker.addOneDiceToBestUnit(CombatType.AFB);
         }
     }
 
@@ -48,7 +49,7 @@ public class AFBController extends Controller{
      */
     public void attackerMainProcess(){
         //Start the rolling for each unit
-        for (Unit unit : attacker) {
+        for (Unit unit : attacker.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -91,11 +92,11 @@ public class AFBController extends Controller{
     private void defenderPreProcess() {
         //Argent Flight Promissory note
         if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()) {
-            addOneDiceToUnit(CombatType.AFB, defender);
+            defender.addOneDiceToBestUnit(CombatType.AFB);
         }
         //Argent Flight commander
         if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()) {
-            addOneDiceToUnit(CombatType.AFB, defender);
+            defender.addOneDiceToBestUnit(CombatType.AFB);
         }
     }
 
@@ -104,7 +105,7 @@ public class AFBController extends Controller{
      */
     private void defenderMainProcess() {
         //Start the rolling for each unit
-        for (Unit unit : attacker) {
+        for (Unit unit : defender.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -121,7 +122,7 @@ public class AFBController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if(roll >= unit.getHitValueAFB()){
-                    numHitsAttacker++;
+                    numHitsDefender++;
                 }
                 //Argent Flight special destroyers
                 if(DefenderOptions.getDefenderFactionCB() == FactionEnum.ARGENTFLIGHT) {

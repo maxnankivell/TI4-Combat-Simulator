@@ -32,33 +32,7 @@ public class BombardmentController extends Controller{
 
         //warsuns
 
-        numHitsAttacker = hitCalculator(true);
-        numHitsDefender = hitCalculator(false);
 
-    }
-
-    public int hitCalculator(boolean isAttacker){
-        int numHits = 0;
-
-        if(isAttacker) {
-            for (Unit unit : attacker){
-                for (int i=0; i<unit.getNumDiceRollsBombardment(); i++){
-                    if (diceRoll() >= unit.getHitValueBombardment()){
-                        numHits++;
-                    }
-                }
-            }
-        } else {
-            for (Unit unit : defender){
-                for (int i=0; i<unit.getNumDiceRollsBombardment(); i++){
-                    if (diceRoll() >= unit.getHitValueBombardment()){
-                        numHits++;
-                    }
-                }
-            }
-        }
-
-        return numHits;
     }
 
 
