@@ -32,7 +32,6 @@ public class AttackerOptions {
     private static boolean solAgentAttackerCheckbox = false;
 
     private static boolean disableLabelAttackerCheckbox = false;
-    private static boolean experimentalBattlestationAttackerCheckbox = false;
     private static boolean fighterPrototypeAttackerCheckbox = false;
     private static boolean fireTeamAttackerCheckbox = false;
     private static boolean moraleBoostAttackerCheckbox = false;
@@ -213,14 +212,6 @@ public class AttackerOptions {
 
     public static void setDisableLabelAttackerCheckbox(boolean disableLabelAttackerCheckbox) {
         AttackerOptions.disableLabelAttackerCheckbox = disableLabelAttackerCheckbox;
-    }
-
-    public static boolean isExperimentalBattlestationAttackerCheckbox() {
-        return experimentalBattlestationAttackerCheckbox;
-    }
-
-    public static void setExperimentalBattlestationAttackerCheckbox(boolean experimentalBattlestationAttackerCheckbox) {
-        AttackerOptions.experimentalBattlestationAttackerCheckbox = experimentalBattlestationAttackerCheckbox;
     }
 
     public static boolean isFighterPrototypeAttackerCheckbox() {

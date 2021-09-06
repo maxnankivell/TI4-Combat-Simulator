@@ -46,7 +46,6 @@ public class OptionsScreenGUI {
 
     CheckBox bunkerLabelDefenderCheckbox;
     CheckBox disableLabelAttackerCheckbox;
-    CheckBox experimentalBattlestationAttackerCheckbox;
     CheckBox experimentalBattlestationDefenderCheckbox;
     CheckBox fighterPrototypeAttackerCheckbox;
     CheckBox fighterPrototypeDefenderCheckbox;
@@ -57,6 +56,7 @@ public class OptionsScreenGUI {
     CheckBox blitzAttackerCheckbox;
     CheckBox solarFlairAttackerCheckbox;
     CheckBox solarFlairDefenderCheckbox;
+
     CheckBox argentFlightCommanderAttackerCheckbox;
     CheckBox argentFlightCommanderDefenderCheckbox;
     CheckBox jolNarCommanderAttackerCheckbox ;
@@ -163,7 +163,6 @@ public class OptionsScreenGUI {
 
         bunkerLabelDefenderCheckbox = new CheckBox();
         disableLabelAttackerCheckbox = new CheckBox();
-        experimentalBattlestationAttackerCheckbox = new CheckBox();
         experimentalBattlestationDefenderCheckbox = new CheckBox();
         fighterPrototypeAttackerCheckbox = new CheckBox();
         fighterPrototypeDefenderCheckbox = new CheckBox();
@@ -244,7 +243,6 @@ public class OptionsScreenGUI {
         GridPane.setConstraints(bunkerLabelDefenderCheckbox, 2, 15);
         GridPane.setConstraints(disableLabelAttackerCheckbox, 0, 16);
         GridPane.setConstraints(disableLabel, 1, 16);
-        GridPane.setConstraints(experimentalBattlestationAttackerCheckbox, 0, 17);
         GridPane.setConstraints(experimentalBattlestationLabel, 1, 17);
         GridPane.setConstraints(experimentalBattlestationDefenderCheckbox, 2, 17);
         GridPane.setConstraints(fighterPrototypeAttackerCheckbox, 0, 18);
@@ -330,7 +328,6 @@ public class OptionsScreenGUI {
                 bunkerLabelDefenderCheckbox,
                 disableLabelAttackerCheckbox,
                 disableLabel,
-                experimentalBattlestationAttackerCheckbox,
                 experimentalBattlestationLabel,
                 experimentalBattlestationDefenderCheckbox,
                 fighterPrototypeAttackerCheckbox,
@@ -421,7 +418,6 @@ public class OptionsScreenGUI {
         AttackerOptions.setSolAgentAttackerCheckbox(solAgentAttackerCheckbox.isSelected());
 
         AttackerOptions.setDisableLabelAttackerCheckbox(disableLabelAttackerCheckbox.isSelected());
-        AttackerOptions.setExperimentalBattlestationAttackerCheckbox(experimentalBattlestationAttackerCheckbox.isSelected());
         AttackerOptions.setFighterPrototypeAttackerCheckbox(fighterPrototypeAttackerCheckbox.isSelected());
         AttackerOptions.setFireTeamAttackerCheckbox(fireTeamAttackerCheckbox.isSelected());
         AttackerOptions.setMoraleBoostAttackerCheckbox(moraleBoostAttackerCheckbox.isSelected());
@@ -490,7 +486,6 @@ public class OptionsScreenGUI {
         solAgentAttackerCheckbox.setSelected(AttackerOptions.isSolAgentAttackerCheckbox());
 
         disableLabelAttackerCheckbox.setSelected(AttackerOptions.isDisableLabelAttackerCheckbox());
-        experimentalBattlestationAttackerCheckbox.setSelected(AttackerOptions.isExperimentalBattlestationAttackerCheckbox());
         fighterPrototypeAttackerCheckbox.setSelected(AttackerOptions.isFighterPrototypeAttackerCheckbox());
         fireTeamAttackerCheckbox.setSelected(AttackerOptions.isFireTeamAttackerCheckbox());
         moraleBoostAttackerCheckbox.setSelected(AttackerOptions.isMoraleBoostAttackerCheckbox());
