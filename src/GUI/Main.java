@@ -169,8 +169,12 @@ public class Main extends Application {
                 "Nomad",
                 "Sardakk Norr",
                 "Sol",
-                "Titan of Ul",
-                "Vuil'Raith"
+                "Titans of Ul",
+                "Vuil'Raith",
+                "Winnu",
+                "Xxcha",
+                "Yin",
+                "Yssaril"
         );
         defenderFactionCB.getItems().addAll(
                 "Arborec",
@@ -191,8 +195,12 @@ public class Main extends Application {
                 "Nomad",
                 "Sardakk Norr",
                 "Sol",
-                "Titan of Ul",
-                "Vuil'Raith"
+                "Titans of Ul",
+                "Vuil'Raith",
+                "Winnu",
+                "Xxcha",
+                "Yin",
+                "Yssaril"
         );
         attackerFlagshipCB.getItems().addAll(0, 1);
         defenderFlagshipCB.getItems().addAll(0, 1);

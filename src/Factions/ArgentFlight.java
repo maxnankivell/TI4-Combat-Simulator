@@ -10,7 +10,7 @@ public class ArgentFlight extends Faction {
         //Flagship
         //Other players cannot use space cannon against your ships in this system
         flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCannonValue(7,2)
+                .addSpaceCombatValue(7,2)
                 .build();
         //Special units
         destroyer.setSpaceCombatValue(8,1);

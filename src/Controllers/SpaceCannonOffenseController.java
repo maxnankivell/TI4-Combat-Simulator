@@ -69,6 +69,16 @@ public class SpaceCannonOffenseController extends Controller{
      * Method to run through all pre-combat modifiers for the defender
      */
     public void defenderPreProcess(){
+        //Experimental battlestation
+        if (DefenderOptions.isExperimentalBattlestationDefenderCheckbox()){
+            addUnitExperimentalBattlestation(defender);
+        }
+
+        //Titans Hero
+        if (DefenderOptions.isTitansHeroDefenderCheckbox()){
+            addUnitTitansHero(defender);
+        }
+
         //Plasma scoring
         if (DefenderOptions.isPlasmaScoringDefenderCheckbox()){
             defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
@@ -84,19 +94,9 @@ public class SpaceCannonOffenseController extends Controller{
             defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
-        //Experimental battlestation
-        if (DefenderOptions.isExperimentalBattlestationDefenderCheckbox()){
-            addUnitExperimentalBattlestation(defender);
-        }
-
         //Argent flight commander
         if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()){
             defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
-        }
-
-        //Titans Hero
-        if (DefenderOptions.isTitansHeroDefenderCheckbox()){
-            addUnitTitansHero(defender);
         }
 
         //Argent flight flagship
@@ -152,6 +152,7 @@ public class SpaceCannonOffenseController extends Controller{
             if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
                 diceRolls = reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
             }
+
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {

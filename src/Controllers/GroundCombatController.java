@@ -30,7 +30,7 @@ public class GroundCombatController extends Controller{
      */
     public void attackPreProcess(){
         //Tekklar legion
-        if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()){
+        if (AttackerOptions.isTekklarLegionAttackerCheckbox()){
             tekklarLegionAttacker();
         }
 
@@ -109,14 +109,29 @@ public class GroundCombatController extends Controller{
      * Method to run through the main combat process for the attacker
      */
     public void attackerMainProcess(){
+        /**
+         * test
+         */
+        System.out.println("Attacker");
         //start rolling
         for (Unit unit : attacker.getUnitArrayList()) {
+            /**
+             * test
+             */
+            System.out.println(unit.getName());
+            System.out.println(unit.getHitValueGroundCombat() + " - " + unit.getNumDiceRollsGroundCombat());
+
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
             for (int i = 0; i < unit.getNumDiceRollsGroundCombat(); i++) {
                 diceRolls.add(diceRoll());
             }
+
+            /**
+             * test
+             */
+            System.out.println(diceRolls);
 
             //Check re-roll conditions
             //Fire team
@@ -138,14 +153,29 @@ public class GroundCombatController extends Controller{
      * Method to run through the main combat process for the defender
      */
     public void defenderMainProcess(){
+        /**
+         * test
+         */
+        System.out.println("Defender");
         //start rolling
         for (Unit unit : defender.getUnitArrayList()) {
+            /**
+             * test
+             */
+            System.out.println(unit.getName());
+            System.out.println(unit.getHitValueGroundCombat() + " - " + unit.getNumDiceRollsGroundCombat());
+
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
             for (int i = 0; i < unit.getNumDiceRollsGroundCombat(); i++) {
                 diceRolls.add(diceRoll());
             }
+
+            /**
+             * test
+             */
+            System.out.println(diceRolls);
 
             //Check re-roll conditions
             //Fire team
@@ -169,6 +199,7 @@ public class GroundCombatController extends Controller{
      * all defender ground units hit values
      */
     public void tekklarLegionAttacker(){
+        System.out.println("**");
         attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         if (defendersFaction instanceof SardakkNorr){
             defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);

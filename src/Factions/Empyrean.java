@@ -9,7 +9,7 @@ public class Empyrean extends Faction{
         super();
         //Flagship
         flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCannonValue(5,2)
+                .addSpaceCombatValue(5,2)
                 .build();
     }
 }
