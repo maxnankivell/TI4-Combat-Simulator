@@ -9,13 +9,11 @@ public class AttackerOptions {
 
     //upgrades
     private static boolean attackerFlagshipCheckBox = false;
-    private static boolean attackerWarSunCheckBox = false;
     private static boolean attackerDreadnoughtCheckBox = false;
     private static boolean attackerCarrierCheckBox = false;
     private static boolean attackerCruiserCheckBox = false;
     private static boolean attackerDestroyerCheckBox = false;
     private static boolean attackerFighterCheckBox = false;
-    private static boolean attackerMechCheckBox = false;
     private static boolean attackerInfantryCheckBox = false;
     private static boolean attackerPdsCheckBox = false;
 
@@ -73,14 +71,6 @@ public class AttackerOptions {
         AttackerOptions.attackerFlagshipCheckBox = attackerFlagshipCheckBox;
     }
 
-    public static boolean isAttackerWarSunCheckBox() {
-        return attackerWarSunCheckBox;
-    }
-
-    public static void setAttackerWarSunCheckBox(boolean attackerWarSunCheckBox) {
-        AttackerOptions.attackerWarSunCheckBox = attackerWarSunCheckBox;
-    }
-
     public static boolean isAttackerDreadnoughtCheckBox() {
         return attackerDreadnoughtCheckBox;
     }
@@ -119,14 +109,6 @@ public class AttackerOptions {
 
     public static void setAttackerFighterCheckBox(boolean attackerFighterCheckBox) {
         AttackerOptions.attackerFighterCheckBox = attackerFighterCheckBox;
-    }
-
-    public static boolean isAttackerMechCheckBox() {
-        return attackerMechCheckBox;
-    }
-
-    public static void setAttackerMechCheckBox(boolean attackerMechCheckBox) {
-        AttackerOptions.attackerMechCheckBox = attackerMechCheckBox;
     }
 
     public static boolean isAttackerInfantryCheckBox() {

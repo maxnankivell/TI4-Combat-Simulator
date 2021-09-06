@@ -77,8 +77,17 @@ public class SpaceCombatController extends Controller{
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
-                if(roll >= unit.getHitValueAFB()){
+                if(roll >= unit.getHitValueSpaceCombat()){
                     numHitsAttacker++;
+                }
+
+                //JolNar Flagship
+                if(AttackerOptions.getAttackerFactionCB() == FactionEnum.JOLNAR && unit.getName() == UnitName.FLAGSHIP && roll >= 9) {
+                    numHitsAttacker += 2;
+                }
+                //L1Z1X Flagship
+                if(AttackerOptions.getAttackerFactionCB() == FactionEnum.L1Z1X && attacker.containsName(UnitName.FLAGSHIP)) {
+                    l1Z1XFlagshipAttacker(roll, unit);
                 }
             }
         }
@@ -140,8 +149,17 @@ public class SpaceCombatController extends Controller{
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
-                if(roll >= unit.getHitValueAFB()){
+                if(roll >= unit.getHitValueSpaceCombat()){
                     numHitsDefender++;
+                }
+
+                //JolNar Flagship
+                if(DefenderOptions.getDefenderFactionCB() == FactionEnum.JOLNAR && unit.getName() == UnitName.FLAGSHIP && roll >= 9) {
+                    numHitsDefender += 2;
+                }
+                //L1Z1X Flagship
+                if(DefenderOptions.getDefenderFactionCB() == FactionEnum.L1Z1X && defender.containsName(UnitName.FLAGSHIP)) {
+                    l1Z1XFlagshipDefender(roll, unit);
                 }
             }
         }
@@ -162,6 +180,34 @@ public class SpaceCombatController extends Controller{
         for (Unit unit : myUnits.getUnitArrayList()) {
             if(unit.getName() == UnitName.FLAGSHIP){
                 unit.setNumDiceRollsSpaceCombat(opponentUnits.numOfNonFighterShips());
+            }
+        }
+    }
+
+    /**
+     * Method for the L1Z1X Flagship that produces hits against non fighter ship
+     * @param roll the number that was rolled by the unit being passed in
+     * @param unit the unit being passed in
+     */
+    private void l1Z1XFlagshipAttacker(Integer roll, Unit unit) {
+        if(unit.getName() == UnitName.FLAGSHIP || unit.getName() == UnitName.DREADNOUGHT || unit.getName() == UnitName.DREADNOUGHTUPGRADE){
+            if(roll >= unit.getHitValueSpaceCombat()){
+                numHitsAttacker--;
+                numNonFighterHitsAttacker++;
+            }
+        }
+    }
+
+    /**
+     * Method for the L1Z1X Flagship that produces hits against non fighter ship
+     * @param roll the number that was rolled by the unit being passed in
+     * @param unit the unit being passed in
+     */
+    private void l1Z1XFlagshipDefender(Integer roll, Unit unit) {
+        if(unit.getName() == UnitName.FLAGSHIP || unit.getName() == UnitName.DREADNOUGHT || unit.getName() == UnitName.DREADNOUGHTUPGRADE){
+            if(roll >= unit.getHitValueSpaceCombat()){
+                numHitsDefender--;
+                numNonFighterHitsDefender++;
             }
         }
     }

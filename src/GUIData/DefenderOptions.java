@@ -9,13 +9,11 @@ public class DefenderOptions {
 
     //unit upgrades
     private static boolean defenderFlagshipCheckBox = false;
-    private static boolean defenderWarSunCheckBox = false;
     private static boolean defenderDreadnoughtCheckBox = false;
     private static boolean defenderCarrierCheckBox = false;
     private static boolean defenderCruiserCheckBox = false;
     private static boolean defenderDestroyerCheckBox = false;
     private static boolean defenderFighterCheckBox = false;
-    private static boolean defenderMechCheckBox = false;
     private static boolean defenderInfantryCheckBox = false;
     private static boolean defenderPdsCheckBox = false;
 
@@ -75,14 +73,6 @@ public class DefenderOptions {
         DefenderOptions.defenderFlagshipCheckBox = defenderFlagshipCheckBox;
     }
 
-    public static boolean isDefenderWarSunCheckBox() {
-        return defenderWarSunCheckBox;
-    }
-
-    public static void setDefenderWarSunCheckBox(boolean defenderWarSunCheckBox) {
-        DefenderOptions.defenderWarSunCheckBox = defenderWarSunCheckBox;
-    }
-
     public static boolean isDefenderDreadnoughtCheckBox() {
         return defenderDreadnoughtCheckBox;
     }
@@ -121,14 +111,6 @@ public class DefenderOptions {
 
     public static void setDefenderFighterCheckBox(boolean defenderFighterCheckBox) {
         DefenderOptions.defenderFighterCheckBox = defenderFighterCheckBox;
-    }
-
-    public static boolean isDefenderMechCheckBox() {
-        return defenderMechCheckBox;
-    }
-
-    public static void setDefenderMechCheckBox(boolean defenderMechCheckBox) {
-        DefenderOptions.defenderMechCheckBox = defenderMechCheckBox;
     }
 
     public static boolean isDefenderInfantryCheckBox() {
