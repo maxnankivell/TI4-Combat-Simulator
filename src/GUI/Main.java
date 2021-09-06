@@ -459,7 +459,7 @@ public class Main extends Application {
         checkCheckBox();
         checkComboBox();
 
-//        SpaceCannonOffenseController();
+       SpaceCannonOffenseController controller = new  SpaceCannonOffenseController();
     }
 
     /**
@@ -474,7 +474,7 @@ public class Main extends Application {
         checkCheckBox();
         checkComboBox();
 
-//        AFBController();
+        AFBController controller = new AFBController();
     }
 
     /**
@@ -489,7 +489,7 @@ public class Main extends Application {
         checkCheckBox();
         checkComboBox();
 
-//        SpaceCombatController();
+        SpaceCombatController controller = new SpaceCombatController();
     }
 
     /**
@@ -504,7 +504,7 @@ public class Main extends Application {
         checkCheckBox();
         checkComboBox();
 
-//        BombardmentController();
+        BombardmentController controller = new BombardmentController();
     }
 
     /**
@@ -519,7 +519,7 @@ public class Main extends Application {
         checkCheckBox();
         checkComboBox();
 
-//        SpaceCannonDefenseController();
+        SpaceCannonDefenseController controller = new SpaceCannonDefenseController();
     }
 
     /**
@@ -534,7 +534,8 @@ public class Main extends Application {
         checkCheckBox();
         checkComboBox();
 
-//        InvasionController();
+        GroundCombatController controller = new GroundCombatController();
+
     }
 
     /**

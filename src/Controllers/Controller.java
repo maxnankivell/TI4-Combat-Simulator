@@ -35,6 +35,8 @@ public abstract class Controller {
         startProcess();
     }
 
+    public abstract void startProcess();
+
     /**
      * populates attackers arraylist with units
      * number of units got from attacker options
@@ -394,6 +396,35 @@ public abstract class Controller {
         return  diceRolls;
     }
 
-    public abstract void startProcess();
+    public int getNumHitsAttacker() {
+        return numHitsAttacker;
+    }
 
+    public int getNumHitsDefender() {
+        return numHitsDefender;
+    }
+
+    public int getNumInfantryHitsAttacker() {
+        return numInfantryHitsAttacker;
+    }
+
+    public int getNumInfantryHitsDefender() {
+        return numInfantryHitsDefender;
+    }
+
+    public int getNumSustainDamageHitsAttacker() {
+        return numSustainDamageHitsAttacker;
+    }
+
+    public int getNumSustainDamageHitsDefender() {
+        return numSustainDamageHitsDefender;
+    }
+
+    public int getNumNonFighterHitsAttacker() {
+        return numNonFighterHitsAttacker;
+    }
+
+    public int getNumNonFighterHitsDefender() {
+        return numNonFighterHitsDefender;
+    }
 }
