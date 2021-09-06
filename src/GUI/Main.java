@@ -460,6 +460,11 @@ public class Main extends Application {
         checkComboBox();
 
        SpaceCannonOffenseController controller = new  SpaceCannonOffenseController();
+
+       new HitScreenGUI(controller.getNumHitsAttacker(),controller.getNumHitsDefender(),
+                controller.getNumInfantryHitsAttacker(),controller.getNumInfantryHitsDefender(),
+                controller.getNumSustainDamageHitsAttacker(),controller.getNumSustainDamageHitsDefender(),
+                controller.getNumNonFighterHitsAttacker(),controller.getNumNonFighterHitsDefender());
     }
 
     /**
@@ -475,6 +480,10 @@ public class Main extends Application {
         checkComboBox();
 
         AFBController controller = new AFBController();
+        new HitScreenGUI(controller.getNumHitsAttacker(),controller.getNumHitsDefender(),
+                controller.getNumInfantryHitsAttacker(),controller.getNumInfantryHitsDefender(),
+                controller.getNumSustainDamageHitsAttacker(),controller.getNumSustainDamageHitsDefender(),
+                controller.getNumNonFighterHitsAttacker(),controller.getNumNonFighterHitsDefender());
     }
 
     /**
@@ -490,6 +499,10 @@ public class Main extends Application {
         checkComboBox();
 
         SpaceCombatController controller = new SpaceCombatController();
+        new HitScreenGUI(controller.getNumHitsAttacker(),controller.getNumHitsDefender(),
+                controller.getNumInfantryHitsAttacker(),controller.getNumInfantryHitsDefender(),
+                controller.getNumSustainDamageHitsAttacker(),controller.getNumSustainDamageHitsDefender(),
+                controller.getNumNonFighterHitsAttacker(),controller.getNumNonFighterHitsDefender());
     }
 
     /**
@@ -505,6 +518,10 @@ public class Main extends Application {
         checkComboBox();
 
         BombardmentController controller = new BombardmentController();
+        new HitScreenGUI(controller.getNumHitsAttacker(),controller.getNumHitsDefender(),
+                controller.getNumInfantryHitsAttacker(),controller.getNumInfantryHitsDefender(),
+                controller.getNumSustainDamageHitsAttacker(),controller.getNumSustainDamageHitsDefender(),
+                controller.getNumNonFighterHitsAttacker(),controller.getNumNonFighterHitsDefender());
     }
 
     /**
@@ -520,6 +537,10 @@ public class Main extends Application {
         checkComboBox();
 
         SpaceCannonDefenseController controller = new SpaceCannonDefenseController();
+        new HitScreenGUI(controller.getNumHitsAttacker(),controller.getNumHitsDefender(),
+                controller.getNumInfantryHitsAttacker(),controller.getNumInfantryHitsDefender(),
+                controller.getNumSustainDamageHitsAttacker(),controller.getNumSustainDamageHitsDefender(),
+                controller.getNumNonFighterHitsAttacker(),controller.getNumNonFighterHitsDefender());
     }
 
     /**
@@ -535,7 +556,10 @@ public class Main extends Application {
         checkComboBox();
 
         GroundCombatController controller = new GroundCombatController();
-
+        new HitScreenGUI(controller.getNumHitsAttacker(),controller.getNumHitsDefender(),
+                controller.getNumInfantryHitsAttacker(),controller.getNumInfantryHitsDefender(),
+                controller.getNumSustainDamageHitsAttacker(),controller.getNumSustainDamageHitsDefender(),
+                controller.getNumNonFighterHitsAttacker(),controller.getNumNonFighterHitsDefender());
     }
 
     /**
