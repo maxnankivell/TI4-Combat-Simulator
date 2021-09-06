@@ -451,7 +451,7 @@ public class Main extends Application {
         clearDefenderBtn.setOnAction(e -> handleClearDefender());
 
         //Add the borderPane to a scene and show it
-        Scene mainScene = new Scene(borderPane, 1024, 576);
+        Scene mainScene = new Scene(borderPane, 1152, 648);
         window.setScene(mainScene);
         window.setMaximized(true);
         window.show();
