@@ -59,7 +59,7 @@ public class SpaceCannonOffenseController extends Controller{
         }
 
         //Argent flight flagship
-        if (attackersFaction instanceof ArgentFlight && attacker.contains(new Unit.Builder(UnitName.FLAGSHIP).build())){
+        if (attackersFaction instanceof ArgentFlight && containsName(UnitName.FLAGSHIP, attacker)){
             defenderCancelled = true;
         }
     }
@@ -99,7 +99,7 @@ public class SpaceCannonOffenseController extends Controller{
         }
 
         //Argent flight flagship
-        if (defendersFaction instanceof ArgentFlight && defender.contains(new Unit.Builder(UnitName.FLAGSHIP).build())){
+        if (defendersFaction instanceof ArgentFlight && containsName(UnitName.FLAGSHIP, defender)){
             attackerCancelled = true;
         }
     }
