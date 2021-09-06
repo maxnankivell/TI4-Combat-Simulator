@@ -66,10 +66,10 @@ public abstract class Faction {
                 .addSpaceCombatValue(8,1)
                 .build();
         pds = new Unit.Builder(UnitName.PDS)
-                .addSpaceCombatValue(6,1)
+                .addSpaceCannonValue(6,1)
                 .build();
         pdsUpgrade = new Unit.Builder(UnitName.PDSUPGRADE)
-                .addSpaceCombatValue(5,1)
+                .addSpaceCannonValue(5,1)
                 .addPlanetaryDefense()
                 .build();
         infantry = new Unit.Builder(UnitName.INFANTRY)
