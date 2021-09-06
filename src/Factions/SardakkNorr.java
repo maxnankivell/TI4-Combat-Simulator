@@ -10,7 +10,7 @@ public class SardakkNorr extends Faction{
         //Flagship
         //Apply +1 to the result of each of your other ship's combat rolls in this system.
         flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCannonValue(6,2)
+                .addSpaceCombatValue(6,2)
                 .build();
         //Special units
         dreadnought.setBombardmentValue(4,2);

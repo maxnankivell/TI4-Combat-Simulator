@@ -30,7 +30,7 @@ public class GroundCombatController extends Controller{
      */
     public void attackPreProcess(){
         //Tekklar legion
-        if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()){
+        if (AttackerOptions.isTekklarLegionAttackerCheckbox()){
             tekklarLegionAttacker();
         }
 
@@ -169,6 +169,7 @@ public class GroundCombatController extends Controller{
      * all defender ground units hit values
      */
     public void tekklarLegionAttacker(){
+        System.out.println("**");
         attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         if (defendersFaction instanceof SardakkNorr){
             defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);

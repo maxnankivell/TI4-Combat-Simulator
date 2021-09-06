@@ -67,6 +67,7 @@ public abstract class Faction {
                 .build();
         pds = new Unit.Builder(UnitName.PDS)
                 .addSpaceCannonValue(6,1)
+                .addPlanetaryDefense()
                 .build();
         pdsUpgrade = new Unit.Builder(UnitName.PDSUPGRADE)
                 .addSpaceCannonValue(5,1)

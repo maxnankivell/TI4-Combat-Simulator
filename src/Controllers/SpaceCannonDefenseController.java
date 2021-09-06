@@ -9,6 +9,7 @@ import Units.UnitName;
 import java.util.ArrayList;
 
 public class SpaceCannonDefenseController extends Controller{
+    private UnitList defenderNonShips;
 
     public SpaceCannonDefenseController(){
         super();
@@ -19,6 +20,14 @@ public class SpaceCannonDefenseController extends Controller{
      */
     @Override
     public void startProcess() {
+        defenderNonShips = new UnitList();
+
+        for (Unit unit : defender.getUnitArrayList()){
+            if (!unit.isShip()){
+                defenderNonShips.add(unit);
+            }
+        }
+
         defenderPreProcess();
         attackerPreProcess();
         defenderMainProcess();
@@ -31,12 +40,12 @@ public class SpaceCannonDefenseController extends Controller{
         //Check for pre-combat modifiers
         //Antimass deflector
         if (AttackerOptions.isAntimassDeflectorAttackerCheckbox()){
-            defender.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
+            defenderNonShips.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
         }
 
         //Disable
         if (AttackerOptions.isDisableLabelAttackerCheckbox()){
-           defender.disablePDS();
+           defenderNonShips.disablePDS();
         }
     }
 
@@ -44,52 +53,50 @@ public class SpaceCannonDefenseController extends Controller{
      * Method to run through all pre-combat modifiers for the defender
      */
     public void defenderPreProcess(){
+        //Titans hero
+        if (DefenderOptions.isTitansHeroDefenderCheckbox()){
+            addUnitTitansHero(defenderNonShips);
+        }
+
         //Check for pre-combat modifiers
         //Plasma scoring
         if (DefenderOptions.isPlasmaScoringDefenderCheckbox()){
-            defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
+            defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Argent flight commander
         if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()){
-            defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
-        }
-
-        //Titans hero
-        if (DefenderOptions.isTitansHeroDefenderCheckbox()){
-            addUnitTitansHero(defender);
+            defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
     }
 
     /**
      * Method to run through the main combat process for the defender
      */
-    public void defenderMainProcess(){
+    public void defenderMainProcess() {
         //start rolling
-        for (Unit unit: defender.getUnitArrayList()){
+        for (Unit unit : defenderNonShips.getUnitArrayList()) {
+
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
-            if (!unit.isShip()) {
-
-                //roll amount of dice necessary for one unit
-                for (int i = 0; i < unit.getNumDiceRollsSpaceCannon(); i++) {
-                    diceRolls.add(diceRoll());
-                }
-
-                //Check re-roll conditions
-                //Jol Nar commander
-                if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
-                    diceRolls = reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
-                }
-
-                //Check number of hits from this unit
-                for (Integer roll : diceRolls) {
-                    if (roll >= unit.getHitValueSpaceCannon()) {
-                        numHitsDefender++;
-                    }
-                }
-
+            //roll amount of dice necessary for one unit
+            for (int i = 0; i < unit.getNumDiceRollsSpaceCannon(); i++) {
+                diceRolls.add(diceRoll());
             }
+
+            //Check re-roll conditions
+            //Jol Nar commander
+            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+                diceRolls = reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
+            }
+
+            //Check number of hits from this unit
+            for (Integer roll : diceRolls) {
+                if (roll >= unit.getHitValueSpaceCannon()) {
+                    numHitsDefender++;
+                }
+            }
+
         }
     }
 
