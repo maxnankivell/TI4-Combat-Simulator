@@ -2,6 +2,7 @@ package Controllers;
 
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
+import Player.Player;
 import Units.Unit;
 import Units.UnitList;
 import Units.UnitName;
@@ -9,7 +10,7 @@ import Units.UnitName;
 import java.util.ArrayList;
 
 public class SpaceCannonDefenseController extends Controller{
-    private UnitList defenderNonShips;
+    private Player defenderNonShips;
 
     public SpaceCannonDefenseController(){
         super();
@@ -20,13 +21,8 @@ public class SpaceCannonDefenseController extends Controller{
      */
     @Override
     public void startProcess() {
-        defenderNonShips = new UnitList();
-
-        for (Unit unit : defender.getUnitArrayList()){
-            if (!unit.isShip()){
-                defenderNonShips.add(unit);
-            }
-        }
+        defenderNonShips = new Player(defender1);
+        defenderNonShips.getUnitList().removeShips();
 
         defenderPreProcess();
         attackerPreProcess();
@@ -55,7 +51,7 @@ public class SpaceCannonDefenseController extends Controller{
     public void defenderPreProcess(){
         //Titans hero
         if (DefenderOptions.isTitansHeroDefenderCheckbox()){
-            addUnitTitansHero(defenderNonShips);
+            defenderNonShips.addUnitTitansHero();
         }
 
         //Check for pre-combat modifiers
@@ -93,7 +89,7 @@ public class SpaceCannonDefenseController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueSpaceCannon()) {
-                    numHitsDefender++;
+                    defender1.addNumHits(1);
                 }
             }
 

@@ -1,5 +1,6 @@
 package GUI;
 
+import Player.Player;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,22 +28,15 @@ public class HitScreenGUI {
     private final int numNonFighterHitsAttacker;
     private final int numNonFighterHitsDefender;
 
-    public HitScreenGUI(int numHitsAttacker,
-                        int numHitsDefender,
-                        int numInfantryHitsAttacker,
-                        int numInfantryHitsDefender,
-                        int numSustainDamageHitsAttacker,
-                        int numSustainDamageHitsDefender,
-                        int numNonFighterHitsAttacker,
-                        int numNonFighterHitsDefender) {
-        this.numHitsAttacker = numHitsAttacker;
-        this.numHitsDefender = numHitsDefender;
-        this.numInfantryHitsAttacker = numInfantryHitsAttacker;
-        this.numInfantryHitsDefender = numInfantryHitsDefender;
-        this.numSustainDamageHitsAttacker = numSustainDamageHitsAttacker;
-        this.numSustainDamageHitsDefender = numSustainDamageHitsDefender;
-        this.numNonFighterHitsAttacker = numNonFighterHitsAttacker;
-        this.numNonFighterHitsDefender = numNonFighterHitsDefender;
+    public HitScreenGUI(Player attacker, Player defender) {
+        this.numHitsAttacker = attacker.getNumHits();
+        this.numHitsDefender = defender.getNumHits();
+        this.numInfantryHitsAttacker = attacker.getNumInfantryHits();
+        this.numInfantryHitsDefender = defender.getNumInfantryHits();
+        this.numSustainDamageHitsAttacker = attacker.getNumSustainDamageHits();
+        this.numSustainDamageHitsDefender = defender.getNumSustainDamageHits();
+        this.numNonFighterHitsAttacker = attacker.getNumNonFighterHits();
+        this.numNonFighterHitsDefender = defender.getNumNonFighterHits();
 
         buildGUI();
     }

@@ -36,27 +36,27 @@ public class GroundCombatController extends Controller{
 
         //Sol agent
         if (AttackerOptions.isSolAgentAttackerCheckbox()){
-            attacker.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
+            attacker1.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
         }
 
         //Morale boost
         if (AttackerOptions.isMoraleBoostAttackerCheckbox()){
-            attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
+            attacker1.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         }
 
         //Winnu commander
         if (AttackerOptions.isWinnuCommanderAttackerCheckbox()){
-            attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
+            attacker1.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
         }
 
         //Jol Nar mech
-        if (attackersFaction instanceof JolNar && attacker.containsName(UnitName.MECH)){
-            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, -1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
+        if (attacker1.getFaction() instanceof JolNar && attacker1.getUnitList().containsName(UnitName.MECH)){
+            attacker1.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, -1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
         }
 
         //Naaz Rokha flagship
-        if (attackersFaction instanceof NaazRokha && attacker.containsName(UnitName.FLAGSHIP)){
-            attacker.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH, UnitName.MECH);
+        if (attacker1.getFaction() instanceof NaazRokha && attacker1.getUnitList().containsName(UnitName.FLAGSHIP)){
+            attacker1.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH, UnitName.MECH);
         }
     }
 
@@ -66,7 +66,7 @@ public class GroundCombatController extends Controller{
     public void defenderPreProcess(){
         //Magen defense grid
         if (DefenderOptions.isMagenDefenseGridDefenderCheckbox()){
-            numHitsDefender++;
+            defender1.addNumHits(1);
         }
 
         //Tekklar legion
@@ -76,32 +76,32 @@ public class GroundCombatController extends Controller{
 
         //Sol agent
         if (DefenderOptions.isSolAgentDefenderCheckbox()){
-            defender.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
+            defender1.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
         }
 
         //Morale boost
         if (DefenderOptions.isMoraleBoostDefenderCheckbox()){
-            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
+            defender1.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         }
 
         //Winnu commander
         if (DefenderOptions.isWinnuCommanderDefenderCheckbox()){
-            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
+            defender1.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
         }
 
         //Defending in nebula
         if (DefenderOptions.isDefendingInNebulaDefenderCheckbox()){
-            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
+            defender1.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         }
 
         //Jol Nar mech
-        if (defendersFaction instanceof JolNar && defender.containsName(UnitName.MECH)){
-            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT,-1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
+        if (defender1.getFaction() instanceof JolNar && defender1.getUnitList().containsName(UnitName.MECH)){
+            defender1.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT,-1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
         }
 
         //Naaz Rokha flagship
-        if (defendersFaction instanceof NaazRokha && defender.containsName(UnitName.FLAGSHIP)){
-            defender.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH, UnitName.MECH);
+        if (defender1.getFaction() instanceof NaazRokha && defender1.getUnitList().containsName(UnitName.FLAGSHIP)){
+            defender1.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH, UnitName.MECH);
         }
     }
 
@@ -110,7 +110,7 @@ public class GroundCombatController extends Controller{
      */
     public void attackerMainProcess(){
         //start rolling
-        for (Unit unit : attacker.getUnitArrayList()) {
+        for (Unit unit : attacker1.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -127,7 +127,7 @@ public class GroundCombatController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueGroundCombat()) {
-                    numHitsAttacker++;
+                    attacker1.addNumHits(1);
                 }
             }
 
@@ -139,7 +139,7 @@ public class GroundCombatController extends Controller{
      */
     public void defenderMainProcess(){
         //start rolling
-        for (Unit unit : defender.getUnitArrayList()) {
+        for (Unit unit : defender1.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -156,7 +156,7 @@ public class GroundCombatController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueGroundCombat()) {
-                    numHitsDefender++;
+                    defender1.addNumHits(1);
                 }
             }
 
@@ -169,10 +169,9 @@ public class GroundCombatController extends Controller{
      * all defender ground units hit values
      */
     public void tekklarLegionAttacker(){
-        System.out.println("**");
-        attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
-        if (defendersFaction instanceof SardakkNorr){
-            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
+        attacker1.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
+        if (defender1.getFaction() instanceof SardakkNorr){
+            defender1.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
         }
     }
 
@@ -182,9 +181,9 @@ public class GroundCombatController extends Controller{
      * all attacker ground units hit values
      */
     public void tekklarLegionDefender(){
-        defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
-        if (attackersFaction instanceof SardakkNorr){
-            attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
+        defender1.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
+        if (attacker1.getFaction() instanceof SardakkNorr){
+            attacker1.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
         }
     }
 

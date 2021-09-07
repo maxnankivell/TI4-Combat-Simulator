@@ -1,8 +1,10 @@
 package Controllers;
 
+import Factions.*;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import GUIData.FactionEnum;
+import Player.Player;
 import Units.Unit;
 import Units.UnitList;
 import Units.UnitName;
@@ -32,31 +34,31 @@ public class SpaceCombatController extends Controller{
      */
     public void attackerPreProcess(){
         //Populate the number of dice for the winnu flagship
-        if(AttackerOptions.getAttackerFactionCB() == FactionEnum.WINNU && attacker.containsName(UnitName.FLAGSHIP)){
-            winnuFlagship(attacker, defender);
+        if(attacker1.getFaction() instanceof Winnu && attacker1.getUnitList().containsName(UnitName.FLAGSHIP)){
+            winnuFlagship(attacker1.getUnitList(), defender1.getUnitList());
         }
 
         if(AttackerOptions.isFighterPrototypeAttackerCheckbox()){
-            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
+            attacker1.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
         }
         if(AttackerOptions.isMoraleBoostAttackerCheckbox()){
-            attacker.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
+            attacker1.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
         }
         if(AttackerOptions.isWinnuCommanderAttackerCheckbox()){
-            attacker.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -2);
+            attacker1.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -2);
         }
         if(AttackerOptions.isProphecyOfIxthAttackerCheckbox()){
-            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
+            attacker1.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
         }
-        if(AttackerOptions.getAttackerFactionCB() == FactionEnum.SARDAKKNORR && attacker.containsName(UnitName.FLAGSHIP)){
-            sardakNorrFlagship(attacker);
+        if(attacker1.getFaction() instanceof SardakkNorr && attacker1.getUnitList().containsName(UnitName.FLAGSHIP)){
+            sardakNorrFlagship(attacker1);
         }
 
-        if(AttackerOptions.getAttackerFactionCB() == FactionEnum.NAAZROKHA && attacker.containsName(UnitName.FLAGSHIP)){
-            attacker.addDiceToSpecificUnitType(CombatType.SPACECOMBAT,UnitName.MECH, UnitName.MECH);
+        if(attacker1.getFaction() instanceof NaazRokha && attacker1.getUnitList().containsName(UnitName.FLAGSHIP)){
+            attacker1.addDiceToSpecificUnitType(CombatType.SPACECOMBAT,UnitName.MECH, UnitName.MECH);
         }
         if(AttackerOptions.isBaronyAgentAttackerCheckbox()){
-            attacker.addOneDiceToBestUnit(CombatType.SPACECOMBAT);
+            attacker1.addOneDiceToBestUnit(CombatType.SPACECOMBAT);
         }
     }
 
@@ -66,7 +68,7 @@ public class SpaceCombatController extends Controller{
     public void attackerMainProcess(){
 
         //Start the rolling for each unit
-        for (Unit unit : attacker.getUnitArrayList()) {
+        for (Unit unit : attacker1.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -79,15 +81,15 @@ public class SpaceCombatController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if(roll >= unit.getHitValueSpaceCombat()){
-                    numHitsAttacker++;
+                    attacker1.addNumHits(1);
                 }
 
                 //JolNar Flagship
-                if(AttackerOptions.getAttackerFactionCB() == FactionEnum.JOLNAR && unit.getName() == UnitName.FLAGSHIP && roll >= 9) {
-                    numHitsAttacker += 2;
+                if(attacker1.getFaction() instanceof JolNar && unit.getName() == UnitName.FLAGSHIP && roll >= 9) {
+                    attacker1.addNumHits(2);
                 }
                 //L1Z1X Flagship
-                if(AttackerOptions.getAttackerFactionCB() == FactionEnum.L1Z1X && attacker.containsName(UnitName.FLAGSHIP)) {
+                if(attacker1.getFaction() instanceof L1Z1X && attacker1.getUnitList().containsName(UnitName.FLAGSHIP)) {
                     l1Z1XFlagshipAttacker(roll, unit);
                 }
             }
@@ -105,31 +107,31 @@ public class SpaceCombatController extends Controller{
      */
     private void defenderPreProcess() {
         //Populate the number of dice for the winnu flagship
-        if(DefenderOptions.getDefenderFactionCB() == FactionEnum.WINNU && defender.containsName(UnitName.FLAGSHIP)){
-            winnuFlagship(defender, attacker);
+        if(defender1.getFaction() instanceof Winnu && defender1.getUnitList().containsName(UnitName.FLAGSHIP)){
+            winnuFlagship(defender1.getUnitList(), attacker1.getUnitList());
         }
 
         if(DefenderOptions.isFighterPrototypeDefenderCheckbox()){
-            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
+            defender1.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
         }
         if(DefenderOptions.isMoraleBoostDefenderCheckbox()){
-            defender.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
+            defender1.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
         }
         if(DefenderOptions.isWinnuCommanderDefenderCheckbox()){
-            defender.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -2);
+            defender1.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -2);
         }
         if(DefenderOptions.isProphecyOfIxthDefenderCheckbox()){
-            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT, -1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
+            defender1.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT, -1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
         }
-        if(DefenderOptions.getDefenderFactionCB() == FactionEnum.SARDAKKNORR && defender.containsName(UnitName.FLAGSHIP)){
-            sardakNorrFlagship(defender);
+        if(DefenderOptions.getDefenderFactionCB() == FactionEnum.SARDAKKNORR && defender1.getUnitList().containsName(UnitName.FLAGSHIP)){
+            sardakNorrFlagship(defender1);
         }
 
-        if(DefenderOptions.getDefenderFactionCB() == FactionEnum.NAAZROKHA && defender.containsName(UnitName.FLAGSHIP)){
-            defender.addDiceToSpecificUnitType(CombatType.SPACECOMBAT, UnitName.MECH, UnitName.MECH);
+        if(defender1.getFaction() instanceof NaazRokha && defender1.getUnitList().containsName(UnitName.FLAGSHIP)){
+            defender1.addDiceToSpecificUnitType(CombatType.SPACECOMBAT, UnitName.MECH, UnitName.MECH);
         }
         if(DefenderOptions.isBaronyAgentDefenderCheckbox()){
-            defender.addOneDiceToBestUnit(CombatType.SPACECOMBAT);
+            defender1.addOneDiceToBestUnit(CombatType.SPACECOMBAT);
         }
     }
 
@@ -139,7 +141,7 @@ public class SpaceCombatController extends Controller{
     private void defenderMainProcess() {
 
         //Start the rolling for each unit
-        for (Unit unit : defender.getUnitArrayList()) {
+        for (Unit unit : defender1.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -152,15 +154,15 @@ public class SpaceCombatController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if(roll >= unit.getHitValueSpaceCombat()){
-                    numHitsDefender++;
+                    defender1.addNumHits(1);
                 }
 
                 //JolNar Flagship
-                if(DefenderOptions.getDefenderFactionCB() == FactionEnum.JOLNAR && unit.getName() == UnitName.FLAGSHIP && roll >= 9) {
-                    numHitsDefender += 2;
+                if(defender1.getFaction() instanceof JolNar && unit.getName() == UnitName.FLAGSHIP && roll >= 9) {
+                    defender1.addNumHits(1);
                 }
                 //L1Z1X Flagship
-                if(DefenderOptions.getDefenderFactionCB() == FactionEnum.L1Z1X && defender.containsName(UnitName.FLAGSHIP)) {
+                if(defender1.getFaction() instanceof L1Z1X && defender1.getUnitList().containsName(UnitName.FLAGSHIP)) {
                     l1Z1XFlagshipDefender(roll, unit);
                 }
             }
@@ -173,9 +175,9 @@ public class SpaceCombatController extends Controller{
     private void defenderPostProcess() {
     }
 
-    private void sardakNorrFlagship(UnitList myUnits){
-        myUnits.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
-        for (Unit unit : myUnits.getUnitArrayList()) {
+    private void sardakNorrFlagship(Player player){
+        player.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
+        for (Unit unit : player.getUnitArrayList()) {
             if(unit.getName() == UnitName.FLAGSHIP){
                 unit.setHitValueSpaceCombat(unit.getHitValueSpaceCombat()+1);
             }
@@ -203,8 +205,8 @@ public class SpaceCombatController extends Controller{
     private void l1Z1XFlagshipAttacker(Integer roll, Unit unit) {
         if(unit.getName() == UnitName.FLAGSHIP || unit.getName() == UnitName.DREADNOUGHT || unit.getName() == UnitName.DREADNOUGHTUPGRADE){
             if(roll >= unit.getHitValueSpaceCombat()){
-                numHitsAttacker--;
-                numNonFighterHitsAttacker++;
+                attacker1.addNumHits(-1);
+                attacker1.addNumNonFighterHits(1);
             }
         }
     }
@@ -217,8 +219,8 @@ public class SpaceCombatController extends Controller{
     private void l1Z1XFlagshipDefender(Integer roll, Unit unit) {
         if(unit.getName() == UnitName.FLAGSHIP || unit.getName() == UnitName.DREADNOUGHT || unit.getName() == UnitName.DREADNOUGHTUPGRADE){
             if(roll >= unit.getHitValueSpaceCombat()){
-                numHitsDefender--;
-                numNonFighterHitsDefender++;
+                defender1.addNumHits(-1);
+                defender1.addNumNonFighterHits(1);
             }
         }
     }

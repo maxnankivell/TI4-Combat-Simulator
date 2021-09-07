@@ -1,10 +1,9 @@
 package Controllers;
 
+import Factions.ArgentFlight;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
-import GUIData.FactionEnum;
 import Units.Unit;
-import Units.UnitList;
 import Units.UnitName;
 
 import java.util.ArrayList;
@@ -36,11 +35,11 @@ public class AFBController extends Controller{
     public void attackerPreProcess(){
         //Argent Flight Promissory note
         if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()) {
-            attacker.addOneDiceToBestUnit(CombatType.AFB);
+            attacker1.addOneDiceToBestUnit(CombatType.AFB);
         }
         //Argent Flight commander
         if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()) {
-            attacker.addOneDiceToBestUnit(CombatType.AFB);
+            attacker1.addOneDiceToBestUnit(CombatType.AFB);
         }
     }
 
@@ -49,7 +48,7 @@ public class AFBController extends Controller{
      */
     public void attackerMainProcess(){
         //Start the rolling for each unit
-        for (Unit unit : attacker.getUnitArrayList()) {
+        for (Unit unit : attacker1.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -66,11 +65,11 @@ public class AFBController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if(roll >= unit.getHitValueAFB()){
-                    numHitsAttacker++;
+                    attacker1.addNumHits(1);
                 }
                 //Argent Flight special destroyers
-                if(AttackerOptions.getAttackerFactionCB() == FactionEnum.ARGENTFLIGHT) {
-                    numInfantryHitsAttacker =+ strikeWingAlpha(roll, unit);
+                if(attacker1.getFaction() instanceof ArgentFlight) {
+                    attacker1.addNumInfantryHits(strikeWingAlpha(roll, unit));
                 }
             }
         }
@@ -81,7 +80,7 @@ public class AFBController extends Controller{
      */
     public void attackerPostProcess(){
         //Argent Flight faction ability
-        if(AttackerOptions.getAttackerFactionCB() == FactionEnum.ARGENTFLIGHT) {
+        if(attacker1.getFaction() instanceof ArgentFlight) {
             raidFormationAttacker();
         }
     }
@@ -92,11 +91,11 @@ public class AFBController extends Controller{
     private void defenderPreProcess() {
         //Argent Flight Promissory note
         if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()) {
-            defender.addOneDiceToBestUnit(CombatType.AFB);
+            defender1.addOneDiceToBestUnit(CombatType.AFB);
         }
         //Argent Flight commander
         if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()) {
-            defender.addOneDiceToBestUnit(CombatType.AFB);
+            defender1.addOneDiceToBestUnit(CombatType.AFB);
         }
     }
 
@@ -105,7 +104,7 @@ public class AFBController extends Controller{
      */
     private void defenderMainProcess() {
         //Start the rolling for each unit
-        for (Unit unit : defender.getUnitArrayList()) {
+        for (Unit unit : defender1.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -122,11 +121,11 @@ public class AFBController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if(roll >= unit.getHitValueAFB()){
-                    numHitsDefender++;
+                    defender1.addNumHits(1);
                 }
                 //Argent Flight special destroyers
-                if(DefenderOptions.getDefenderFactionCB() == FactionEnum.ARGENTFLIGHT) {
-                    numInfantryHitsDefender += strikeWingAlpha(roll, unit);
+                if(defender1.getFaction() instanceof ArgentFlight) {
+                    defender1.addNumInfantryHits(strikeWingAlpha(roll, unit));
                 }
             }
         }
@@ -137,7 +136,7 @@ public class AFBController extends Controller{
      */
     private void defenderPostProcess() {
         //Argent Flight faction ability
-        if(DefenderOptions.getDefenderFactionCB() == FactionEnum.ARGENTFLIGHT) {
+        if(defender1.getFaction() instanceof ArgentFlight) {
             raidFormationDefender();
         }
     }
@@ -159,8 +158,8 @@ public class AFBController extends Controller{
      * Method for the Argent Flight unique ability
      */
     private void raidFormationAttacker(){
-        if(numHitsAttacker > DefenderOptions.getDefenderFighterCB()){
-            numSustainDamageHitsAttacker = numHitsAttacker - DefenderOptions.getDefenderFighterCB();
+        if(attacker1.getNumHits() > (defender1.getUnitList().numberOfType(UnitName.FIGHTER) + defender1.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))){
+            attacker1.addNumSustainDamageHits(attacker1.getNumHits() - (defender1.getUnitList().numberOfType(UnitName.FIGHTER) + defender1.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE)));
         }
     }
 
@@ -168,8 +167,8 @@ public class AFBController extends Controller{
      * Method for the Argent Flight unique ability
      */
     private void raidFormationDefender(){
-        if(numHitsDefender > AttackerOptions.getAttackerFighterCB()){
-            numSustainDamageHitsDefender = numHitsDefender - AttackerOptions.getAttackerFighterCB();
+        if(defender1.getNumHits() > (attacker1.getUnitList().numberOfType(UnitName.FIGHTER) + attacker1.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))){
+            defender1.addNumSustainDamageHits(defender1.getNumHits() - (attacker1.getUnitList().numberOfType(UnitName.FIGHTER) + attacker1.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE)));
         }
     }
 
