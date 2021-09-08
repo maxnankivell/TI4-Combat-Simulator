@@ -3,7 +3,6 @@ package Controllers;
 import Factions.ArgentFlight;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
-import Player.Player;
 import Units.Unit;
 import Units.UnitName;
 
@@ -54,13 +53,13 @@ public class AFBController extends Controller{
 
             //roll amount of dice necessary for one unit
             for (int i=0; i<unit.getNumDiceRollsAFB(); i++){
-                diceRolls.add(diceRoll());
+                diceRolls.add(Roller.diceRoll());
             }
 
             //Check re-roll conditions
             //Jol Nar commander
             if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
-                diceRolls = reRollMissedDice(CombatType.AFB, diceRolls, unit);
+                Roller.reRollMissedDice(CombatType.AFB, diceRolls, unit);
             }
 
             //Check number of hits from this unit
@@ -82,7 +81,7 @@ public class AFBController extends Controller{
     public void attackerPostProcess(){
         //Argent Flight faction ability
         if(attacker.getFaction() instanceof ArgentFlight) {
-            raidFormation(attacker, defender);
+            Abilities.raidFormation(attacker, defender);
         }
     }
 
@@ -110,13 +109,13 @@ public class AFBController extends Controller{
 
             //roll amount of dice necessary for one unit
             for (int i=0; i<unit.getNumDiceRollsAFB(); i++){
-                diceRolls.add(diceRoll());
+                diceRolls.add(Roller.diceRoll());
             }
 
             //Check re-roll conditions
             //Jol Nar commander
             if (DefenderOptions.isJolNarCommanderDefenderCheckbox()) {
-                diceRolls = reRollMissedDice(CombatType.AFB, diceRolls, unit);
+                Roller.reRollMissedDice(CombatType.AFB, diceRolls, unit);
             }
 
             //Check number of hits from this unit
@@ -138,16 +137,7 @@ public class AFBController extends Controller{
     private void defenderPostProcess() {
         //Argent Flight faction ability
         if(defender.getFaction() instanceof ArgentFlight) {
-            raidFormation(defender, attacker);
-        }
-    }
-
-    /**
-     * Method for the Argent Flight unique ability
-     */
-    private void raidFormation(Player currentPlayer, Player otherPlayer){
-        if(currentPlayer.getNumHits() > (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER) + otherPlayer.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))){
-            currentPlayer.addNumSustainDamageHits((currentPlayer.getNumHits() - (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER) + otherPlayer.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))));
+            Abilities.raidFormation(defender, attacker);
         }
     }
 }

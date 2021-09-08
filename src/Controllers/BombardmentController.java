@@ -2,7 +2,6 @@ package Controllers;
 
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
-import Player.Player;
 import Units.Unit;
 import Units.UnitName;
 
@@ -29,7 +28,7 @@ public class BombardmentController extends Controller{
     public void attackerPreProcess(){
         //Blitz
         if (AttackerOptions.isBlitzAttackerCheckbox()){
-            blitz(attacker);
+            Abilities.blitz(attacker);
         }
 
         //Plasma scoring
@@ -83,13 +82,13 @@ public class BombardmentController extends Controller{
 
             //roll amount of dice necessary for one unit
             for (int i = 0; i < unit.getNumDiceRollsBombardment(); i++) {
-                diceRolls.add(diceRoll());
+                diceRolls.add(Roller.diceRoll());
             }
 
             //Check re-roll conditions
             //Jol Nar commander
             if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
-                diceRolls = reRollMissedDice(CombatType.BOMBARDMENT, diceRolls, unit);
+                Roller.reRollMissedDice(CombatType.BOMBARDMENT, diceRolls, unit);
             }
 
             //Check number of hits from this unit
@@ -101,13 +100,4 @@ public class BombardmentController extends Controller{
 
         }
     }
-
-    public void blitz(Player player){
-        for (Unit unit : player.getUnitArrayList()){
-            if (unit.isNonFighterShip() && unit.getNumDiceRollsBombardment()==0){
-                unit.setBombardmentValue(6,1);
-            }
-        }
-    }
-
 }

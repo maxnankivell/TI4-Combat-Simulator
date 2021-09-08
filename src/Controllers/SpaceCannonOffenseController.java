@@ -114,13 +114,13 @@ public class SpaceCannonOffenseController extends Controller{
 
             //roll amount of dice necessary for one unit
             for (int i = 0; i < unit.getNumDiceRollsSpaceCannon(); i++) {
-                diceRolls.add(diceRoll());
+                diceRolls.add(Roller.diceRoll());
             }
 
             //Check re-roll conditions
             //Jol Nar commander
             if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
-                diceRolls = reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
+                Roller.reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
             }
 
             //Check number of hits from this unit
@@ -142,13 +142,13 @@ public class SpaceCannonOffenseController extends Controller{
 
             //roll amount of dice necessary for one unit
             for (int i = 0; i < unit.getNumDiceRollsSpaceCannon(); i++) {
-                diceRolls.add(diceRoll());
+                diceRolls.add(Roller.diceRoll());
             }
 
             //Check re-roll conditions
             //Jol Nar commander
             if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
-                diceRolls = reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
+                Roller.reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
             }
 
 

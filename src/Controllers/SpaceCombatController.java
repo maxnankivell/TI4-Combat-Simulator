@@ -4,7 +4,6 @@ import Factions.*;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import Factions.FactionEnum;
-import Player.Player;
 import Units.Unit;
 import Units.UnitName;
 
@@ -23,9 +22,6 @@ public class SpaceCombatController extends Controller{
 
         attackerMainProcess();
         defenderMainProcess();
-
-        attackerPostProcess();
-        defenderPostProcess();
     }
 
     /**
@@ -34,7 +30,7 @@ public class SpaceCombatController extends Controller{
     public void attackerPreProcess(){
         //Populate the number of dice for the winnu flagship
         if(attacker.getFaction() instanceof Winnu && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
-            winnuFlagship(attacker, defender);
+            Abilities.winnuFlagship(attacker, defender);
         }
 
         if(AttackerOptions.isFighterPrototypeAttackerCheckbox()){
@@ -50,7 +46,7 @@ public class SpaceCombatController extends Controller{
             attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
         }
         if(attacker.getFaction() instanceof SardakkNorr && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
-            sardakkNorrFlagship(attacker);
+            Abilities.sardakkNorrFlagship(attacker);
         }
 
         if(attacker.getFaction() instanceof NaazRokha && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
@@ -72,7 +68,7 @@ public class SpaceCombatController extends Controller{
 
             //roll amount of dice necessary for one unit
             for (int i=0; i<unit.getNumDiceRollsSpaceCombat(); i++){
-                diceRolls.add(diceRoll());
+                diceRolls.add(Roller.diceRoll());
             }
 
             //Check re-roll conditions
@@ -97,18 +93,12 @@ public class SpaceCombatController extends Controller{
     }
 
     /**
-     * Method to run through all post-combat modifiers for the attacker
-     */
-    public void attackerPostProcess(){
-    }
-
-    /**
      * Method to run through all pre-combat modifiers for the defender
      */
     private void defenderPreProcess() {
         //Populate the number of dice for the winnu flagship
         if(defender.getFaction() instanceof Winnu && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
-            winnuFlagship(defender, attacker);
+            Abilities.winnuFlagship(defender, attacker);
         }
 
         if(DefenderOptions.isFighterPrototypeDefenderCheckbox()){
@@ -124,7 +114,7 @@ public class SpaceCombatController extends Controller{
             defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT, -1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
         }
         if(DefenderOptions.getDefenderFactionCB() == FactionEnum.SARDAKKNORR && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
-            sardakkNorrFlagship(defender);
+            Abilities.sardakkNorrFlagship(defender);
         }
 
         if(defender.getFaction() instanceof NaazRokha && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
@@ -146,7 +136,7 @@ public class SpaceCombatController extends Controller{
 
             //roll amount of dice necessary for one unit
             for (int i=0; i<unit.getNumDiceRollsSpaceCombat(); i++){
-                diceRolls.add(diceRoll());
+                diceRolls.add(Roller.diceRoll());
             }
 
             //Check re-roll conditions
@@ -166,34 +156,6 @@ public class SpaceCombatController extends Controller{
                     defender.addNumHits(-1);
                     defender.addNumNonFighterHits(1);
                 }
-            }
-        }
-    }
-
-    /**
-     * Method to run through all post-combat modifiers for the defender
-     */
-    private void defenderPostProcess() {
-    }
-
-    private void sardakkNorrFlagship(Player player){
-        player.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
-        for (Unit unit : player.getUnitArrayList()) {
-            if(unit.getName() == UnitName.FLAGSHIP){
-                unit.setHitValueSpaceCombat(unit.getHitValueSpaceCombat()+1);
-            }
-        }
-    }
-
-    /**
-     * Method to set the number of dice the winnu flagship will roll
-     * @param currentPlayer current player
-     * @param otherPlayer Other player
-     */
-    private void winnuFlagship(Player currentPlayer, Player otherPlayer) {
-        for (Unit unit : currentPlayer.getUnitArrayList()) {
-            if(unit.getName() == UnitName.FLAGSHIP){
-                unit.setNumDiceRollsSpaceCombat(otherPlayer.getUnitList().numOfNonFighterShips());
             }
         }
     }

@@ -2,10 +2,8 @@ package Controllers;
 
 import Factions.JolNar;
 import Factions.NaazRokha;
-import Factions.SardakkNorr;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
-import Player.Player;
 import Units.Unit;
 import Units.UnitName;
 
@@ -32,7 +30,7 @@ public class GroundCombatController extends Controller{
     public void attackPreProcess(){
         //Tekklar legion
         if (AttackerOptions.isTekklarLegionAttackerCheckbox()){
-            tekklarLegion(attacker, defender);
+            Abilities.tekklarLegion(attacker, defender);
         }
 
         //Sol agent
@@ -72,7 +70,7 @@ public class GroundCombatController extends Controller{
 
         //Tekklar legion
         if (DefenderOptions.isTekklarLegionDefenderCheckbox()){
-            tekklarLegion(defender, attacker);
+            Abilities.tekklarLegion(defender, attacker);
         }
 
         //Sol agent
@@ -116,13 +114,13 @@ public class GroundCombatController extends Controller{
 
             //roll amount of dice necessary for one unit
             for (int i = 0; i < unit.getNumDiceRollsGroundCombat(); i++) {
-                diceRolls.add(diceRoll());
+                diceRolls.add(Roller.diceRoll());
             }
 
             //Check re-roll conditions
             //Fire team
             if (AttackerOptions.isFireTeamAttackerCheckbox()) {
-                diceRolls = reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
+                Roller.reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
             }
 
             //Check number of hits from this unit
@@ -145,13 +143,13 @@ public class GroundCombatController extends Controller{
 
             //roll amount of dice necessary for one unit
             for (int i = 0; i < unit.getNumDiceRollsGroundCombat(); i++) {
-                diceRolls.add(diceRoll());
+                diceRolls.add(Roller.diceRoll());
             }
 
             //Check re-roll conditions
             //Fire team
             if (DefenderOptions.isFireTeamDefenderCheckbox()) {
-                diceRolls = reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
+                Roller.reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
             }
 
             //Check number of hits from this unit
@@ -163,17 +161,4 @@ public class GroundCombatController extends Controller{
 
         }
     }
-
-    /**
-     * subtracts one from all opposing player ground units hit values
-     * if the current player is Sardakk Norr then add one to
-     * all current player ground units hit values
-     */
-    public void tekklarLegion(Player currentPlayer, Player otherPlayer){
-        currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
-        if (otherPlayer.getFaction() instanceof SardakkNorr){
-            otherPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
-        }
-    }
-
 }
