@@ -1,5 +1,7 @@
 package GUIData;
 
+import Factions.FactionEnum;
+
 /**
  * Class to store the state of all interactive GUI elements for the defender
  * So that they can be used by other classes in the program

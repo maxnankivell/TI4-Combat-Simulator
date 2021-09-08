@@ -1,4 +1,4 @@
-package GUIData;
+package Factions;
 
 /**
  * Enum for every faction in the game

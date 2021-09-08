@@ -3,10 +3,9 @@ package Controllers;
 import Factions.*;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
-import GUIData.FactionEnum;
+import Factions.FactionEnum;
 import Player.Player;
 import Units.Unit;
-import Units.UnitList;
 import Units.UnitName;
 
 import java.util.ArrayList;
@@ -51,7 +50,7 @@ public class SpaceCombatController extends Controller{
             attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
         }
         if(attacker.getFaction() instanceof SardakkNorr && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
-            sardakNorrFlagship(attacker);
+            sardakkNorrFlagship(attacker);
         }
 
         if(attacker.getFaction() instanceof NaazRokha && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
@@ -125,7 +124,7 @@ public class SpaceCombatController extends Controller{
             defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT, -1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
         }
         if(DefenderOptions.getDefenderFactionCB() == FactionEnum.SARDAKKNORR && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
-            sardakNorrFlagship(defender);
+            sardakkNorrFlagship(defender);
         }
 
         if(defender.getFaction() instanceof NaazRokha && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
@@ -177,7 +176,7 @@ public class SpaceCombatController extends Controller{
     private void defenderPostProcess() {
     }
 
-    private void sardakNorrFlagship(Player player){
+    private void sardakkNorrFlagship(Player player){
         player.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
         for (Unit unit : player.getUnitArrayList()) {
             if(unit.getName() == UnitName.FLAGSHIP){

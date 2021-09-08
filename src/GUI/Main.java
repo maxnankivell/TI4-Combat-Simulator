@@ -3,7 +3,7 @@ package GUI;
 import Controllers.*;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
-import GUIData.FactionEnum;
+import Factions.FactionEnum;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;

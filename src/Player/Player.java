@@ -4,7 +4,7 @@ import Controllers.CombatType;
 import Factions.*;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
-import GUIData.FactionEnum;
+import Factions.FactionEnum;
 import Units.Unit;
 import Units.UnitList;
 import Units.UnitName;
