@@ -35,17 +35,17 @@ public class SpaceCannonOffenseController extends Controller{
     public void attackerPreProcess(){
         //Plasma scoring
         if (AttackerOptions.isPlasmaScoringAttackerCheckbox()){
-            attacker1.addOneDiceToBestUnit(CombatType.SPACECANNON);
+            attacker.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Antimass deflector
         if (AttackerOptions.isAntimassDeflectorAttackerCheckbox()){
-            defender1.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
+            defender.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
         }
 
         //Strike wing ambuscade
         if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()){
-            attacker1.addOneDiceToBestUnit(CombatType.SPACECANNON);
+            attacker.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Solar flare
@@ -55,11 +55,11 @@ public class SpaceCannonOffenseController extends Controller{
 
         //Argent flight commander
         if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()){
-            attacker1.addOneDiceToBestUnit(CombatType.SPACECANNON);
+            attacker.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Argent flight flagship
-        if (attacker1.getFaction() instanceof ArgentFlight && attacker1.getUnitList().containsName(UnitName.FLAGSHIP)){
+        if (attacker.getFaction() instanceof ArgentFlight && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
             defenderCancelled = true;
         }
     }
@@ -70,36 +70,36 @@ public class SpaceCannonOffenseController extends Controller{
     public void defenderPreProcess(){
         //Experimental battlestation
         if (DefenderOptions.isExperimentalBattlestationDefenderCheckbox()){
-            defender1.addUnitExperimentalBattlestation();
+            defender.addUnitExperimentalBattlestation();
         }
 
         //Titans Hero
         if (DefenderOptions.isTitansHeroDefenderCheckbox()){
-            defender1.addUnitTitansHero();
+            defender.addUnitTitansHero();
         }
 
         //Plasma scoring
         if (DefenderOptions.isPlasmaScoringDefenderCheckbox()){
-            defender1.addOneDiceToBestUnit(CombatType.SPACECANNON);
+            defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Antimass deflector
         if (DefenderOptions.isAntimassDeflectorDefenderCheckbox()){
-            attacker1.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
+            attacker.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
         }
 
         //Strike wing ambuscade
         if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()){
-            defender1.addOneDiceToBestUnit(CombatType.SPACECANNON);
+            defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Argent flight commander
         if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()){
-            defender1.addOneDiceToBestUnit(CombatType.SPACECANNON);
+            defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Argent flight flagship
-        if (defender1.getFaction() instanceof ArgentFlight && defender1.getUnitList().containsName(UnitName.FLAGSHIP)){
+        if (defender.getFaction() instanceof ArgentFlight && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
             attackerCancelled = true;
         }
     }
@@ -109,7 +109,7 @@ public class SpaceCannonOffenseController extends Controller{
      */
     public void attackerMainProcess(){
         //start rolling
-        for (Unit unit : attacker1.getUnitArrayList()) {
+        for (Unit unit : attacker.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -126,7 +126,7 @@ public class SpaceCannonOffenseController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueSpaceCannon()) {
-                    attacker1.addNumHits(1);
+                    attacker.addNumHits(1);
                 }
             }
         }
@@ -137,7 +137,7 @@ public class SpaceCannonOffenseController extends Controller{
      */
     public void defenderMainProcess() {
         //start rolling
-        for (Unit unit : defender1.getUnitArrayList()) {
+        for (Unit unit : defender.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -155,7 +155,7 @@ public class SpaceCannonOffenseController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueSpaceCannon()) {
-                    defender1.addNumHits(1);
+                    defender.addNumHits(1);
                 }
             }
         }

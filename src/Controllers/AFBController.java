@@ -3,6 +3,7 @@ package Controllers;
 import Factions.ArgentFlight;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
+import Player.Player;
 import Units.Unit;
 import Units.UnitName;
 
@@ -35,11 +36,11 @@ public class AFBController extends Controller{
     public void attackerPreProcess(){
         //Argent Flight Promissory note
         if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()) {
-            attacker1.addOneDiceToBestUnit(CombatType.AFB);
+            attacker.addOneDiceToBestUnit(CombatType.AFB);
         }
         //Argent Flight commander
         if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()) {
-            attacker1.addOneDiceToBestUnit(CombatType.AFB);
+            attacker.addOneDiceToBestUnit(CombatType.AFB);
         }
     }
 
@@ -48,7 +49,7 @@ public class AFBController extends Controller{
      */
     public void attackerMainProcess(){
         //Start the rolling for each unit
-        for (Unit unit : attacker1.getUnitArrayList()) {
+        for (Unit unit : attacker.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -65,11 +66,11 @@ public class AFBController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if(roll >= unit.getHitValueAFB()){
-                    attacker1.addNumHits(1);
+                    attacker.addNumHits(1);
                 }
                 //Argent Flight special destroyers
-                if(attacker1.getFaction() instanceof ArgentFlight) {
-                    attacker1.addNumInfantryHits(strikeWingAlpha(roll, unit));
+                if(attacker.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYERUPGRADE && roll >= 9) {
+                    attacker.addNumInfantryHits(1);
                 }
             }
         }
@@ -80,8 +81,8 @@ public class AFBController extends Controller{
      */
     public void attackerPostProcess(){
         //Argent Flight faction ability
-        if(attacker1.getFaction() instanceof ArgentFlight) {
-            raidFormationAttacker();
+        if(attacker.getFaction() instanceof ArgentFlight) {
+            attacker.addNumSustainDamageHits(raidFormation(attacker, defender));
         }
     }
 
@@ -91,11 +92,11 @@ public class AFBController extends Controller{
     private void defenderPreProcess() {
         //Argent Flight Promissory note
         if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()) {
-            defender1.addOneDiceToBestUnit(CombatType.AFB);
+            defender.addOneDiceToBestUnit(CombatType.AFB);
         }
         //Argent Flight commander
         if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()) {
-            defender1.addOneDiceToBestUnit(CombatType.AFB);
+            defender.addOneDiceToBestUnit(CombatType.AFB);
         }
     }
 
@@ -104,7 +105,7 @@ public class AFBController extends Controller{
      */
     private void defenderMainProcess() {
         //Start the rolling for each unit
-        for (Unit unit : defender1.getUnitArrayList()) {
+        for (Unit unit : defender.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -121,11 +122,11 @@ public class AFBController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if(roll >= unit.getHitValueAFB()){
-                    defender1.addNumHits(1);
+                    defender.addNumHits(1);
                 }
                 //Argent Flight special destroyers
-                if(defender1.getFaction() instanceof ArgentFlight) {
-                    defender1.addNumInfantryHits(strikeWingAlpha(roll, unit));
+                if(defender.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYERUPGRADE && roll >= 9) {
+                    defender.addNumInfantryHits(1);
                 }
             }
         }
@@ -136,40 +137,20 @@ public class AFBController extends Controller{
      */
     private void defenderPostProcess() {
         //Argent Flight faction ability
-        if(defender1.getFaction() instanceof ArgentFlight) {
-            raidFormationDefender();
-        }
-    }
-
-    /**
-     * Method for the Argent Flight unique destroyers
-     * @param roll the number that was rolled by the destroyer being passed in
-     * @param unit the destroyer being passed in
-     * @return if the roll was a critical or not
-     */
-    private int strikeWingAlpha(int roll, Unit unit){
-        if(unit.getName() == UnitName.DESTROYERUPGRADE && roll >= 9){
-            return 1;
-        }
-        return 0;
-    }
-
-    /**
-     * Method for the Argent Flight unique ability
-     */
-    private void raidFormationAttacker(){
-        if(attacker1.getNumHits() > (defender1.getUnitList().numberOfType(UnitName.FIGHTER) + defender1.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))){
-            attacker1.addNumSustainDamageHits(attacker1.getNumHits() - (defender1.getUnitList().numberOfType(UnitName.FIGHTER) + defender1.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE)));
+        if(defender.getFaction() instanceof ArgentFlight) {
+            defender.addNumSustainDamageHits(raidFormation(defender, attacker));
         }
     }
 
     /**
      * Method for the Argent Flight unique ability
+     * @return Number of sustain damage hits
      */
-    private void raidFormationDefender(){
-        if(defender1.getNumHits() > (attacker1.getUnitList().numberOfType(UnitName.FIGHTER) + attacker1.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))){
-            defender1.addNumSustainDamageHits(defender1.getNumHits() - (attacker1.getUnitList().numberOfType(UnitName.FIGHTER) + attacker1.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE)));
+    private int raidFormation(Player currentPlayer, Player otherPlayer){
+        if(currentPlayer.getNumHits() > (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER) + otherPlayer.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))){
+            return (currentPlayer.getNumHits() - (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER) + otherPlayer.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE)));
+        }else {
+            return 0;
         }
     }
-
 }

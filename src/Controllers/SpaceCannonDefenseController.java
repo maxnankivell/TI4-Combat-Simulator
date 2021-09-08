@@ -4,8 +4,6 @@ import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
 import Player.Player;
 import Units.Unit;
-import Units.UnitList;
-import Units.UnitName;
 
 import java.util.ArrayList;
 
@@ -21,7 +19,7 @@ public class SpaceCannonDefenseController extends Controller{
      */
     @Override
     public void startProcess() {
-        defenderNonShips = new Player(defender1);
+        defenderNonShips = new Player(defender);
         defenderNonShips.getUnitList().removeShips();
 
         defenderPreProcess();
@@ -89,7 +87,7 @@ public class SpaceCannonDefenseController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueSpaceCannon()) {
-                    defender1.addNumHits(1);
+                    defender.addNumHits(1);
                 }
             }
 

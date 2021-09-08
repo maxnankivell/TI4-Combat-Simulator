@@ -20,7 +20,7 @@ public class BombardmentController extends Controller{
         attackerPreProcess();
         defensePreProcess();
 
-        if ((!defender1.getUnitList().containsPlanetryShield() || planetaryShieldCancelled) && !bombardmentCancelled){
+        if ((!defender.getUnitList().containsPlanetryShield() || planetaryShieldCancelled) && !bombardmentCancelled){
             attackerMainProcess();
         }
     }
@@ -33,22 +33,22 @@ public class BombardmentController extends Controller{
 
         //Plasma scoring
         if (AttackerOptions.isPlasmaScoringAttackerCheckbox()){
-            attacker1.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
+            attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
         }
 
         //Strike wing ambush
         if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()){
-            attacker1.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
+            attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
         }
 
         //Disable
         if (AttackerOptions.isDisableLabelAttackerCheckbox()){
-            defender1.disablePDS();
+            defender.disablePDS();
         }
 
         //Argent flight commander
         if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()){
-            attacker1.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
+            attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
         }
 
         //L1Z1X commander
@@ -57,7 +57,7 @@ public class BombardmentController extends Controller{
         }
 
         //warsuns
-        if (attacker1.getUnitList().containsName(UnitName.WARSUN)){
+        if (attacker.getUnitList().containsName(UnitName.WARSUN)){
             planetaryShieldCancelled = true;
         }
     }
@@ -65,7 +65,7 @@ public class BombardmentController extends Controller{
     public void defensePreProcess(){
         //Bunker
         if (DefenderOptions.isBunkerLabelDefenderCheckbox()){
-            attacker1.changeHitValueOfAllUnits(CombatType.BOMBARDMENT, 4);
+            attacker.changeHitValueOfAllUnits(CombatType.BOMBARDMENT, 4);
         }
 
         //Convention of war
@@ -77,7 +77,7 @@ public class BombardmentController extends Controller{
 
     public void attackerMainProcess(){
         //start rolling
-        for (Unit unit : attacker1.getUnitArrayList()) {
+        for (Unit unit : attacker.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -94,7 +94,7 @@ public class BombardmentController extends Controller{
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueBombardment()) {
-                    attacker1.addNumHits(1);
+                    attacker.addNumHits(1);
                 }
             }
 
@@ -102,7 +102,7 @@ public class BombardmentController extends Controller{
     }
 
     public void blitz(){
-        for (Unit unit : attacker1.getUnitArrayList()){
+        for (Unit unit : attacker.getUnitArrayList()){
             if (unit.isNonFighterShip() && unit.getNumDiceRollsBombardment()==0){
                 unit.setBombardmentValue(6,1);
             }

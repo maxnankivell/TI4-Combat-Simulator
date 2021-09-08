@@ -1,23 +1,18 @@
 package Controllers;
 
-import Factions.*;
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
 import Player.*;
 import Units.Unit;
-import Units.UnitList;
-import Units.UnitName;
 
 import java.util.ArrayList;
 
 public abstract class Controller {
-    protected Player attacker1;
-    protected Player defender1;
+    protected Player attacker;
+    protected Player defender;
     private Object IOException;
 
     public Controller(){
-        attacker1 = new Player(PlayerRole.ATTACKER);
-        defender1 = new Player(PlayerRole.DEFENDER);
+        attacker = new Player(PlayerRole.ATTACKER);
+        defender = new Player(PlayerRole.DEFENDER);
 
         startProcess();
     }
@@ -79,11 +74,11 @@ public abstract class Controller {
         return  diceRolls;
     }
 
-    public Player getAttacker1() {
-        return attacker1;
+    public Player getAttacker() {
+        return attacker;
     }
 
-    public Player getDefender1() {
-        return defender1;
+    public Player getDefender() {
+        return defender;
     }
 }
