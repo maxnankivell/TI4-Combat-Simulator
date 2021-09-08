@@ -4,6 +4,9 @@ import Units.Unit;
 
 import java.util.ArrayList;
 
+/**
+ * Class for all actions to do with rolling dice
+ */
 public class Roller {
 
     /**
@@ -20,7 +23,7 @@ public class Roller {
      * @param diceRolls the list of dice rolls of which the missed dice will be rerolled
      * @param unit the unit whose dice are being rerolled
      */
-    public static ArrayList<Integer> reRollMissedDice(CombatType combatType, ArrayList<Integer> diceRolls, Unit unit) {
+    public static void reRollMissedDice(CombatType combatType, ArrayList<Integer> diceRolls, Unit unit) {
         switch (combatType){
             case AFB:
                 for (int i = 0; i < diceRolls.size(); i++) {
@@ -58,6 +61,5 @@ public class Roller {
                 }
                 break;
         }
-        return  diceRolls;
     }
 }
