@@ -2,6 +2,7 @@ package Controllers;
 
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
+import Player.Player;
 import Units.Unit;
 import Units.UnitName;
 
@@ -28,7 +29,7 @@ public class BombardmentController extends Controller{
     public void attackerPreProcess(){
         //Blitz
         if (AttackerOptions.isBlitzAttackerCheckbox()){
-            blitz();
+            blitz(attacker);
         }
 
         //Plasma scoring
@@ -101,8 +102,8 @@ public class BombardmentController extends Controller{
         }
     }
 
-    public void blitz(){
-        for (Unit unit : attacker.getUnitArrayList()){
+    public void blitz(Player player){
+        for (Unit unit : player.getUnitArrayList()){
             if (unit.isNonFighterShip() && unit.getNumDiceRollsBombardment()==0){
                 unit.setBombardmentValue(6,1);
             }

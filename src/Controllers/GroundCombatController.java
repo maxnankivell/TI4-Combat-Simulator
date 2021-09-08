@@ -5,6 +5,7 @@ import Factions.NaazRokha;
 import Factions.SardakkNorr;
 import GUIData.AttackerOptions;
 import GUIData.DefenderOptions;
+import Player.Player;
 import Units.Unit;
 import Units.UnitName;
 
@@ -31,7 +32,7 @@ public class GroundCombatController extends Controller{
     public void attackPreProcess(){
         //Tekklar legion
         if (AttackerOptions.isTekklarLegionAttackerCheckbox()){
-            tekklarLegionAttacker();
+            tekklarLegion(attacker, defender);
         }
 
         //Sol agent
@@ -71,7 +72,7 @@ public class GroundCombatController extends Controller{
 
         //Tekklar legion
         if (DefenderOptions.isTekklarLegionDefenderCheckbox()){
-            tekklarLegionDefender();
+            tekklarLegion(defender, attacker);
         }
 
         //Sol agent
@@ -164,26 +165,14 @@ public class GroundCombatController extends Controller{
     }
 
     /**
-     * subtracts one from all attacker ground units hit values
-     * if the defender is Sardakk Norr then add one to
-     * all defender ground units hit values
+     * subtracts one from all opposing player ground units hit values
+     * if the current player is Sardakk Norr then add one to
+     * all current player ground units hit values
      */
-    public void tekklarLegionAttacker(){
-        attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
-        if (defender.getFaction() instanceof SardakkNorr){
-            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
-        }
-    }
-
-    /**
-     * subtracts one from all defender ground units hit values
-     * if the attacker is Sardakk Norr then add one to
-     * all attacker ground units hit values
-     */
-    public void tekklarLegionDefender(){
-        defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
-        if (attacker.getFaction() instanceof SardakkNorr){
-            attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
+    public void tekklarLegion(Player currentPlayer, Player otherPlayer){
+        currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
+        if (otherPlayer.getFaction() instanceof SardakkNorr){
+            otherPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
         }
     }
 

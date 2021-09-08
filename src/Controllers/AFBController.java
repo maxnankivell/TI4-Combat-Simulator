@@ -82,7 +82,7 @@ public class AFBController extends Controller{
     public void attackerPostProcess(){
         //Argent Flight faction ability
         if(attacker.getFaction() instanceof ArgentFlight) {
-            attacker.addNumSustainDamageHits(raidFormation(attacker, defender));
+            raidFormation(attacker, defender);
         }
     }
 
@@ -138,19 +138,16 @@ public class AFBController extends Controller{
     private void defenderPostProcess() {
         //Argent Flight faction ability
         if(defender.getFaction() instanceof ArgentFlight) {
-            defender.addNumSustainDamageHits(raidFormation(defender, attacker));
+            raidFormation(defender, attacker);
         }
     }
 
     /**
      * Method for the Argent Flight unique ability
-     * @return Number of sustain damage hits
      */
-    private int raidFormation(Player currentPlayer, Player otherPlayer){
+    private void raidFormation(Player currentPlayer, Player otherPlayer){
         if(currentPlayer.getNumHits() > (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER) + otherPlayer.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))){
-            return (currentPlayer.getNumHits() - (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER) + otherPlayer.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE)));
-        }else {
-            return 0;
+            currentPlayer.addNumSustainDamageHits((currentPlayer.getNumHits() - (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER) + otherPlayer.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))));
         }
     }
 }

@@ -306,6 +306,13 @@ public class Unit {
                 name == UnitName.FIGHTERUPGRADE;
     }
 
+    public boolean isFlagshipOrDreadnought(){
+        return name == UnitName.FLAGSHIP ||
+                name == UnitName.FLAGSHIPUPGRADE ||
+                name == UnitName.DREADNOUGHT ||
+                name == UnitName.DREADNOUGHTUPGRADE;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

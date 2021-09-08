@@ -35,7 +35,7 @@ public class SpaceCombatController extends Controller{
     public void attackerPreProcess(){
         //Populate the number of dice for the winnu flagship
         if(attacker.getFaction() instanceof Winnu && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
-            winnuFlagship(attacker.getUnitList(), defender.getUnitList());
+            winnuFlagship(attacker, defender);
         }
 
         if(AttackerOptions.isFighterPrototypeAttackerCheckbox()){
@@ -89,8 +89,9 @@ public class SpaceCombatController extends Controller{
                     attacker.addNumHits(2);
                 }
                 //L1Z1X Flagship
-                if(attacker.getFaction() instanceof L1Z1X && attacker.getUnitList().containsName(UnitName.FLAGSHIP)) {
-                    l1Z1XFlagshipAttacker(roll, unit);
+                if(attacker.getFaction() instanceof L1Z1X && attacker.getUnitList().containsName(UnitName.FLAGSHIP) && unit.isFlagshipOrDreadnought() && roll >= unit.getHitValueSpaceCombat()) {
+                    attacker.addNumHits(-1);
+                    attacker.addNumNonFighterHits(1);
                 }
             }
         }
@@ -108,7 +109,7 @@ public class SpaceCombatController extends Controller{
     private void defenderPreProcess() {
         //Populate the number of dice for the winnu flagship
         if(defender.getFaction() instanceof Winnu && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
-            winnuFlagship(defender.getUnitList(), attacker.getUnitList());
+            winnuFlagship(defender, attacker);
         }
 
         if(DefenderOptions.isFighterPrototypeDefenderCheckbox()){
@@ -162,8 +163,9 @@ public class SpaceCombatController extends Controller{
                     defender.addNumHits(1);
                 }
                 //L1Z1X Flagship
-                if(defender.getFaction() instanceof L1Z1X && defender.getUnitList().containsName(UnitName.FLAGSHIP)) {
-                    l1Z1XFlagshipDefender(roll, unit);
+                if(defender.getFaction() instanceof L1Z1X && defender.getUnitList().containsName(UnitName.FLAGSHIP) && unit.isFlagshipOrDreadnought() && roll >= unit.getHitValueSpaceCombat()) {
+                    defender.addNumHits(-1);
+                    defender.addNumNonFighterHits(1);
                 }
             }
         }
@@ -186,41 +188,13 @@ public class SpaceCombatController extends Controller{
 
     /**
      * Method to set the number of dice the winnu flagship will roll
-     * @param myUnits Arraylist of the current players units
-     * @param opponentUnits Arraylist of the opponent players units
+     * @param currentPlayer current player
+     * @param otherPlayer Other player
      */
-    private void winnuFlagship(UnitList myUnits, UnitList opponentUnits) {
-        for (Unit unit : myUnits.getUnitArrayList()) {
+    private void winnuFlagship(Player currentPlayer, Player otherPlayer) {
+        for (Unit unit : currentPlayer.getUnitArrayList()) {
             if(unit.getName() == UnitName.FLAGSHIP){
-                unit.setNumDiceRollsSpaceCombat(opponentUnits.numOfNonFighterShips());
-            }
-        }
-    }
-
-    /**
-     * Method for the L1Z1X Flagship that produces hits against non fighter ship
-     * @param roll the number that was rolled by the unit being passed in
-     * @param unit the unit being passed in
-     */
-    private void l1Z1XFlagshipAttacker(Integer roll, Unit unit) {
-        if(unit.getName() == UnitName.FLAGSHIP || unit.getName() == UnitName.DREADNOUGHT || unit.getName() == UnitName.DREADNOUGHTUPGRADE){
-            if(roll >= unit.getHitValueSpaceCombat()){
-                attacker.addNumHits(-1);
-                attacker.addNumNonFighterHits(1);
-            }
-        }
-    }
-
-    /**
-     * Method for the L1Z1X Flagship that produces hits against non fighter ship
-     * @param roll the number that was rolled by the unit being passed in
-     * @param unit the unit being passed in
-     */
-    private void l1Z1XFlagshipDefender(Integer roll, Unit unit) {
-        if(unit.getName() == UnitName.FLAGSHIP || unit.getName() == UnitName.DREADNOUGHT || unit.getName() == UnitName.DREADNOUGHTUPGRADE){
-            if(roll >= unit.getHitValueSpaceCombat()){
-                defender.addNumHits(-1);
-                defender.addNumNonFighterHits(1);
+                unit.setNumDiceRollsSpaceCombat(otherPlayer.getUnitList().numOfNonFighterShips());
             }
         }
     }
