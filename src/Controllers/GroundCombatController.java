@@ -50,12 +50,12 @@ public class GroundCombatController extends Controller{
 
         //Jol Nar mech
         if (attacker.getFaction() instanceof JolNar && attacker.getUnitList().containsName(UnitName.MECH)){
-            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, -1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
+            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, -1, UnitName.INFANTRY);
         }
 
         //Naaz Rokha flagship
         if (attacker.getFaction() instanceof NaazRokha && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
-            attacker.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH, UnitName.MECH);
+            attacker.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH);
         }
     }
 
@@ -95,12 +95,12 @@ public class GroundCombatController extends Controller{
 
         //Jol Nar mech
         if (defender.getFaction() instanceof JolNar && defender.getUnitList().containsName(UnitName.MECH)){
-            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT,-1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
+            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT,-1, UnitName.INFANTRY);
         }
 
         //Naaz Rokha flagship
         if (defender.getFaction() instanceof NaazRokha && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
-            defender.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH, UnitName.MECH);
+            defender.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH);
         }
     }
 

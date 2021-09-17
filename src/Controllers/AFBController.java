@@ -68,7 +68,7 @@ public class AFBController extends Controller{
                     attacker.addNumHits(1);
                 }
                 //Argent Flight special destroyers
-                if(attacker.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYERUPGRADE && roll >= 9) {
+                if(attacker.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYER && unit.isUpgraded() && roll >= 9) {
                     attacker.addNumInfantryHits(1);
                 }
             }
@@ -124,7 +124,7 @@ public class AFBController extends Controller{
                     defender.addNumHits(1);
                 }
                 //Argent Flight special destroyers
-                if(defender.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYERUPGRADE && roll >= 9) {
+                if(defender.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYER && unit.isUpgraded() && roll >= 9) {
                     defender.addNumInfantryHits(1);
                 }
             }

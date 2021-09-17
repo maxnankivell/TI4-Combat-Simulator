@@ -20,7 +20,7 @@ public class BombardmentController extends Controller{
         attackerPreProcess();
         defensePreProcess();
 
-        if ((!defender.getUnitList().containsPlanetryShield() || planetaryShieldCancelled) && !bombardmentCancelled){
+        if ((!defender.getUnitList().containsPlanetaryShield() || planetaryShieldCancelled) && !bombardmentCancelled){
             attackerMainProcess();
         }
     }

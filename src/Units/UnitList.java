@@ -1,7 +1,5 @@
 package Units;
 
-import Controllers.CombatType;
-
 import java.util.ArrayList;
 
 public class UnitList {
@@ -39,9 +37,9 @@ public class UnitList {
      * checks if any unit has a planetary shield
      * @return if any unit has a planetary shield
      */
-    public boolean containsPlanetryShield(){
+    public boolean containsPlanetaryShield(){
         for (Unit unit : unitArrayList) {
-            if(unit.hasPlanetaryShield()){
+            if(unit.isPlanetaryShield()){
                 return true;
             }
         }

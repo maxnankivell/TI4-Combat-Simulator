@@ -8,10 +8,8 @@ public class ClanOfSaar extends Faction{
     public ClanOfSaar(){
         super();
         //flagship
-        flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCombatValue(5,2)
-                .addAFBValue(6,4)
-                .build();
+        flagship.setSpaceCombatValue(5, 2);
+        flagship.setAFBValue(6, 4);
     }
 
 }

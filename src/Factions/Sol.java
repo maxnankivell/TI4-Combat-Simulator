@@ -8,12 +8,17 @@ public class Sol extends Faction{
     public Sol(){
         super();
         //flagship
-        flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCombatValue(5,2)
-                .build();
+        flagship.setSpaceCombatValue(5, 2);
+
         //special units
         infantry.setGroundCombatValue(7,1);
-        infantryUpgrade.setGroundCombatValue(6,1);
         //upgraded carriers have sd
+    }
+
+    public void upgradeInfantry(){
+        infantry = new Unit.Builder(UnitName.INFANTRY)
+                .addIsUpgraded()
+                .addGroundCombatValue(6,1)
+                .build();
     }
 }

@@ -11,8 +11,8 @@ public class Abilities {
      * Method for the Argent Flight unique ability
      */
     public static void raidFormation(Player currentPlayer, Player otherPlayer){
-        if(currentPlayer.getNumHits() > (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER) + otherPlayer.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))){
-            currentPlayer.addNumSustainDamageHits((currentPlayer.getNumHits() - (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER) + otherPlayer.getUnitList().numberOfType(UnitName.FIGHTERUPGRADE))));
+        if(currentPlayer.getNumHits() > (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER))){
+            currentPlayer.addNumSustainDamageHits((currentPlayer.getNumHits() - (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER))));
         }
     }
 

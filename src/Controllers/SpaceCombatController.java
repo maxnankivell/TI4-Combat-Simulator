@@ -34,7 +34,7 @@ public class SpaceCombatController extends Controller{
         }
 
         if(AttackerOptions.isFighterPrototypeAttackerCheckbox()){
-            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
+            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER);
         }
         if(AttackerOptions.isMoraleBoostAttackerCheckbox()){
             attacker.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
@@ -43,14 +43,14 @@ public class SpaceCombatController extends Controller{
             attacker.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -2);
         }
         if(AttackerOptions.isProphecyOfIxthAttackerCheckbox()){
-            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
+            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-1, UnitName.FIGHTER);
         }
         if(attacker.getFaction() instanceof SardakkNorr && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
             Abilities.sardakkNorrFlagship(attacker);
         }
 
         if(attacker.getFaction() instanceof NaazRokha && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
-            attacker.addDiceToSpecificUnitType(CombatType.SPACECOMBAT,UnitName.MECH, UnitName.MECH);
+            attacker.addDiceToSpecificUnitType(CombatType.SPACECOMBAT,UnitName.MECH);
         }
         if(AttackerOptions.isBaronyAgentAttackerCheckbox()){
             attacker.addOneDiceToBestUnit(CombatType.SPACECOMBAT);
@@ -102,7 +102,7 @@ public class SpaceCombatController extends Controller{
         }
 
         if(DefenderOptions.isFighterPrototypeDefenderCheckbox()){
-            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
+            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER);
         }
         if(DefenderOptions.isMoraleBoostDefenderCheckbox()){
             defender.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
@@ -111,14 +111,14 @@ public class SpaceCombatController extends Controller{
             defender.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -2);
         }
         if(DefenderOptions.isProphecyOfIxthDefenderCheckbox()){
-            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT, -1, UnitName.FIGHTER, UnitName.FIGHTERUPGRADE);
+            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT, -1, UnitName.FIGHTER);
         }
         if(DefenderOptions.getDefenderFactionCB() == FactionEnum.SARDAKKNORR && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
             Abilities.sardakkNorrFlagship(defender);
         }
 
         if(defender.getFaction() instanceof NaazRokha && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
-            defender.addDiceToSpecificUnitType(CombatType.SPACECOMBAT, UnitName.MECH, UnitName.MECH);
+            defender.addDiceToSpecificUnitType(CombatType.SPACECOMBAT, UnitName.MECH);
         }
         if(DefenderOptions.isBaronyAgentDefenderCheckbox()){
             defender.addOneDiceToBestUnit(CombatType.SPACECOMBAT);
