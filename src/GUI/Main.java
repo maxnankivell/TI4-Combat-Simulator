@@ -66,6 +66,9 @@ public class Main extends Application {
     ComboBox<Object> attackerPdsCB;
     ComboBox<Object> defenderPdsCB;
 
+    //GUI data
+
+
     public static void main(String[] args) {
         launch(args);
     }
