@@ -2,14 +2,13 @@ package Controllers;
 
 import Factions.ArgentFlight;
 import GUI.OptionData;
+import Player.*;
 import Units.Unit;
 import Units.UnitName;
 
 import java.util.ArrayList;
 
 public class SpaceCannonOffenseController extends Controller{
-    private boolean attackerCancelled = false;
-    private boolean defenderCancelled = false;
 
     public SpaceCannonOffenseController(){
         super();
@@ -17,98 +16,63 @@ public class SpaceCannonOffenseController extends Controller{
 
     @Override
     public void startProcess() {
-        attackerPreProcess();
-        defenderPreProcess();
+        boolean defenderCancelled = preProcess(attacker, defender);
+        boolean attackerCancelled = preProcess(defender, attacker);
 
-        if (!attackerCancelled){
-            attackerMainProcess();
-        }
-        if (!defenderCancelled){
-            defenderMainProcess();
-        }
+        if (!attackerCancelled) mainProcess(attacker);
+        if (!defenderCancelled) mainProcess(defender);
     }
 
     /**
      * Method to run through all pre-combat modifiers for the attacker
      */
-    public void attackerPreProcess(){
-        //Plasma scoring
-        if (attacker.getOptionData().get(OptionData.PLASMASCORING)){
-            attacker.addOneDiceToBestUnit(CombatType.SPACECANNON);
-        }
+    public boolean preProcess(Player currentPlayer, Player otherPlayer){
 
-        //Antimass deflector
-        if (attacker.getOptionData().get(OptionData.ANTIMASSDEFLECTOR)){
-            defender.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
-        }
+        if (currentPlayer.getRole() == PlayerRole.DEFENDER){
+            //Experimental battlestation
+            if (currentPlayer.getOptionData().get(OptionData.EXPERIMENTALBATTLESTATION))
+                currentPlayer.addUnitExperimentalBattlestation();
 
-        //Strike wing ambuscade
-        if (attacker.getOptionData().get(OptionData.STRIKEWINGAMBUSH)){
-            attacker.addOneDiceToBestUnit(CombatType.SPACECANNON);
-        }
-
-        //Solar flare
-        if (attacker.getOptionData().get(OptionData.SOLARFLAIR)){
-            defenderCancelled = true;
-        }
-
-        //Argent flight commander
-        if (attacker.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)){
-            attacker.addOneDiceToBestUnit(CombatType.SPACECANNON);
-        }
-
-        //Argent flight flagship
-        if (attacker.getFaction() instanceof ArgentFlight && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
-            defenderCancelled = true;
-        }
-    }
-
-    /**
-     * Method to run through all pre-combat modifiers for the defender
-     */
-    public void defenderPreProcess(){
-        //Experimental battlestation
-        if (defender.getOptionData().get(OptionData.EXPERIMENTALBATTLESTATION)){
-            defender.addUnitExperimentalBattlestation();
-        }
-
-        //Titans Hero
-        if (defender.getOptionData().get(OptionData.TITANSHERO)){
-            defender.addUnitTitansHero();
+            //Titans Hero
+            if (currentPlayer.getOptionData().get(OptionData.TITANSHERO))
+                currentPlayer.addUnitTitansHero();
         }
 
         //Plasma scoring
-        if (defender.getOptionData().get(OptionData.PLASMASCORING)){
-            defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
-        }
+        if (currentPlayer.getOptionData().get(OptionData.PLASMASCORING))
+            currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
 
         //Antimass deflector
-        if (defender.getOptionData().get(OptionData.ANTIMASSDEFLECTOR)){
-            attacker.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
-        }
+        if (currentPlayer.getOptionData().get(OptionData.ANTIMASSDEFLECTOR))
+            otherPlayer.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
 
         //Strike wing ambuscade
-        if (defender.getOptionData().get(OptionData.STRIKEWINGAMBUSH)){
-            defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
-        }
+        if (currentPlayer.getOptionData().get(OptionData.STRIKEWINGAMBUSH))
+            currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
 
         //Argent flight commander
-        if (defender.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)){
-            defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
+        if (currentPlayer.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER))
+            currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
+
+        if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
+            //Solar flare
+            if (currentPlayer.getOptionData().get(OptionData.SOLARFLAIR))
+                return true;
         }
 
         //Argent flight flagship
-        if (defender.getFaction() instanceof ArgentFlight && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
-            attackerCancelled = true;
-        }
+        if (attacker.getFaction() instanceof ArgentFlight && attacker.getUnitList().containsName(UnitName.FLAGSHIP))
+            return true;
+
+        return false;
     }
 
     /**
-     * Method to run through the main combat process for the attacker
+     * Method to run through the main combat process
      */
-    public void attackerMainProcess(){
+    public void mainProcess(Player currentPlayer){
         //start rolling
-        for (Unit unit : attacker.getUnitArrayList()) {
+        for (Unit unit : currentPlayer.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -118,42 +82,14 @@ public class SpaceCannonOffenseController extends Controller{
 
             //Check re-roll conditions
             //Jol Nar commander
-            if (attacker.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
+            if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
                 Roller.reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
             }
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueSpaceCannon()) {
-                    attacker.addNumHits(1);
-                }
-            }
-        }
-    }
-
-    /**
-     * Method to run through the main combat process for the defender
-     */
-    public void defenderMainProcess() {
-        //start rolling
-        for (Unit unit : defender.getUnitArrayList()) {
-            ArrayList<Integer> diceRolls = new ArrayList<>();
-
-            //roll amount of dice necessary for one unit
-            for (int i = 0; i < unit.getNumDiceRollsSpaceCannon(); i++) {
-                diceRolls.add(Roller.diceRoll());
-            }
-
-            //Check re-roll conditions
-            //Jol Nar commander
-            if (defender.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
-                Roller.reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
-            }
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if (roll >= unit.getHitValueSpaceCannon()) {
-                    defender.addNumHits(1);
+                    currentPlayer.addNumHits(1);
                 }
             }
         }

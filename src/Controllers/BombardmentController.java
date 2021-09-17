@@ -1,14 +1,13 @@
 package Controllers;
 
 import GUI.OptionData;
+import Player.*;
 import Units.Unit;
 import Units.UnitName;
 
 import java.util.ArrayList;
 
 public class BombardmentController extends Controller{
-    private boolean planetaryShieldCancelled = false;
-    private boolean bombardmentCancelled = false;
 
     public BombardmentController(){
         super();
@@ -16,67 +15,63 @@ public class BombardmentController extends Controller{
 
     @Override
     public void startProcess() {
-        attackerPreProcess();
-        defensePreProcess();
+        boolean planetaryShieldCancelled = preProcess(attacker, defender);
+        boolean bombardmentCancelled = preProcess(defender, attacker);
 
         if ((!defender.getUnitList().containsPlanetaryShield() || planetaryShieldCancelled) && !bombardmentCancelled){
-            attackerMainProcess();
+            mainProcess(attacker);
         }
     }
 
-    public void attackerPreProcess(){
-        //Blitz
-        if (attacker.getOptionData().get(OptionData.BLITZ)){
-            Abilities.blitz(attacker);
+    public boolean preProcess(Player currentPlayer, Player otherPlayer){
+
+        if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
+            //Blitz
+            if (attacker.getOptionData().get(OptionData.BLITZ))
+                Abilities.blitz(attacker);
+
+            //Plasma scoring
+            if (attacker.getOptionData().get(OptionData.PLASMASCORING))
+                attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
+
+            //Strike wing ambush
+            if (attacker.getOptionData().get(OptionData.STRIKEWINGAMBUSH))
+                attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
+
+            //Disable
+            if (attacker.getOptionData().get(OptionData.DISABLE))
+                defender.disablePDS();
+
+            //Argent flight commander
+            if (attacker.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER))
+                attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
+
+            //L1Z1X commander
+            if (attacker.getOptionData().get(OptionData.L1Z1XCOMMANDER))
+                return true;
+
+            //warsuns
+            if (attacker.getUnitList().containsName(UnitName.WARSUN))
+                return true;
         }
 
-        //Plasma scoring
-        if (attacker.getOptionData().get(OptionData.PLASMASCORING)){
-            attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
+        if (currentPlayer.getRole() == PlayerRole.DEFENDER){
+            //Bunker
+            if (currentPlayer.getOptionData().get(OptionData.BUNKER))
+                otherPlayer.changeHitValueOfAllUnits(CombatType.BOMBARDMENT, 4);
+
+            //Convention of war
+            //assumes all planets are cultural if checked
+            if (currentPlayer.getOptionData().get(OptionData.CONVENTIONSOFWAR))
+                return true;
         }
 
-        //Strike wing ambush
-        if (attacker.getOptionData().get(OptionData.STRIKEWINGAMBUSH)){
-            attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
-        }
-
-        //Disable
-        if (attacker.getOptionData().get(OptionData.DISABLE)){
-            defender.disablePDS();
-        }
-
-        //Argent flight commander
-        if (attacker.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)){
-            attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
-        }
-
-        //L1Z1X commander
-        if (attacker.getOptionData().get(OptionData.L1Z1XCOMMANDER)){
-            planetaryShieldCancelled = true;
-        }
-
-        //warsuns
-        if (attacker.getUnitList().containsName(UnitName.WARSUN)){
-            planetaryShieldCancelled = true;
-        }
+        return false;
     }
 
-    public void defensePreProcess(){
-        //Bunker
-        if (defender.getOptionData().get(OptionData.BUNKER)){
-            attacker.changeHitValueOfAllUnits(CombatType.BOMBARDMENT, 4);
-        }
-
-        //Convention of war
-        //assumes all planets are cultural if checked
-        if (defender.getOptionData().get(OptionData.CONVENTIONSOFWAR)){
-            bombardmentCancelled = true;
-        }
-    }
-
-    public void attackerMainProcess(){
+    public void mainProcess(Player currentPlayer){
         //start rolling
-        for (Unit unit : attacker.getUnitArrayList()) {
+        for (Unit unit : currentPlayer.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -86,14 +81,14 @@ public class BombardmentController extends Controller{
 
             //Check re-roll conditions
             //Jol Nar commander
-            if (attacker.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
+            if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
                 Roller.reRollMissedDice(CombatType.BOMBARDMENT, diceRolls, unit);
             }
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueBombardment()) {
-                    attacker.addNumHits(1);
+                    currentPlayer.addNumHits(1);
                 }
             }
 
