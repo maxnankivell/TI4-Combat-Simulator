@@ -8,12 +8,18 @@ public class TitansOfUl extends Faction {
 
     public TitansOfUl(){
         super();
-        //flagship
-        flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCombatValue(7,2)
-                .build();
+        //flagship is default
+
         //special units
-        pds.setGroundCombatValue(6,1);
-        pds.setGroundCombatValue(5,1);
+        pds.setGroundCombatValue(7,1);
+    }
+
+    public void upgradePds(){
+        pds = new Unit.Builder(UnitName.PDS)
+                .addIsUpgraded()
+                .addSpaceCannonValue(5,1)
+                .addGroundCombatValue(6, 1)
+                .addIsPlanetaryShield()
+                .build();
     }
 }

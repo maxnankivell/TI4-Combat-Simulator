@@ -1,10 +1,10 @@
 package Controllers;
 
 import Factions.ArgentFlight;
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
+import GUI.OptionData;
 import Units.Unit;
 import Units.UnitName;
+import Player.*;
 
 import java.util.ArrayList;
 
@@ -19,36 +19,36 @@ public class AFBController extends Controller{
      */
     @Override
     public void startProcess() {
-        attackerPreProcess();
-        defenderPreProcess();
+        preProcess(attacker);
+        preProcess(defender);
 
-        attackerMainProcess();
-        defenderMainProcess();
+        mainProcess(attacker);
+        mainProcess(defender);
 
-        attackerPostProcess();
-        defenderPostProcess();
+        postProcess(attacker, defender);
+        postProcess(defender, attacker);
     }
 
     /**
-     * Method to run through all pre-combat modifiers for the attacker
+     * Method to run through all pre-combat modifiers
      */
-    public void attackerPreProcess(){
+    public void preProcess(Player currentPlayer){
         //Argent Flight Promissory note
-        if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()) {
-            attacker.addOneDiceToBestUnit(CombatType.AFB);
+        if (currentPlayer.getOptionData().get(OptionData.STRIKEWINGAMBUSH)) {
+            currentPlayer.addOneDiceToBestUnit(CombatType.AFB);
         }
         //Argent Flight commander
-        if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()) {
-            attacker.addOneDiceToBestUnit(CombatType.AFB);
+        if (currentPlayer.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)) {
+            currentPlayer.addOneDiceToBestUnit(CombatType.AFB);
         }
     }
 
     /**
-     * Method to run through the main combat process for the attacker
+     * Method to run through the main combat process
      */
-    public void attackerMainProcess(){
+    private void mainProcess(Player currentPlayer) {
         //Start the rolling for each unit
-        for (Unit unit : attacker.getUnitArrayList()) {
+        for (Unit unit : currentPlayer.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -58,86 +58,30 @@ public class AFBController extends Controller{
 
             //Check re-roll conditions
             //Jol Nar commander
-            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+            if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
                 Roller.reRollMissedDice(CombatType.AFB, diceRolls, unit);
             }
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if(roll >= unit.getHitValueAFB()){
-                    attacker.addNumHits(1);
+                    currentPlayer.addNumHits(1);
                 }
                 //Argent Flight special destroyers
-                if(attacker.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYERUPGRADE && roll >= 9) {
-                    attacker.addNumInfantryHits(1);
+                if(currentPlayer.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYER && unit.isUpgraded() && roll >= 9) {
+                    currentPlayer.addNumInfantryHits(1);
                 }
             }
         }
     }
 
     /**
-     * Method to run through all post-combat modifiers for the attacker
+     * Method to run through all post-combat modifiers
      */
-    public void attackerPostProcess(){
+    private void postProcess(Player currentPlayer, Player otherPlayer) {
         //Argent Flight faction ability
-        if(attacker.getFaction() instanceof ArgentFlight) {
-            Abilities.raidFormation(attacker, defender);
-        }
-    }
-
-    /**
-     * Method to run through all pre-combat modifiers for the defender
-     */
-    private void defenderPreProcess() {
-        //Argent Flight Promissory note
-        if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()) {
-            defender.addOneDiceToBestUnit(CombatType.AFB);
-        }
-        //Argent Flight commander
-        if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()) {
-            defender.addOneDiceToBestUnit(CombatType.AFB);
-        }
-    }
-
-    /**
-     * Method to run through the main combat process for the defender
-     */
-    private void defenderMainProcess() {
-        //Start the rolling for each unit
-        for (Unit unit : defender.getUnitArrayList()) {
-            ArrayList<Integer> diceRolls = new ArrayList<>();
-
-            //roll amount of dice necessary for one unit
-            for (int i=0; i<unit.getNumDiceRollsAFB(); i++){
-                diceRolls.add(Roller.diceRoll());
-            }
-
-            //Check re-roll conditions
-            //Jol Nar commander
-            if (DefenderOptions.isJolNarCommanderDefenderCheckbox()) {
-                Roller.reRollMissedDice(CombatType.AFB, diceRolls, unit);
-            }
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if(roll >= unit.getHitValueAFB()){
-                    defender.addNumHits(1);
-                }
-                //Argent Flight special destroyers
-                if(defender.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYERUPGRADE && roll >= 9) {
-                    defender.addNumInfantryHits(1);
-                }
-            }
-        }
-    }
-
-    /**
-     * Method to run through all post-combat modifiers for the defender
-     */
-    private void defenderPostProcess() {
-        //Argent Flight faction ability
-        if(defender.getFaction() instanceof ArgentFlight) {
-            Abilities.raidFormation(defender, attacker);
+        if(currentPlayer.getFaction() instanceof ArgentFlight) {
+            Abilities.raidFormation(currentPlayer, otherPlayer);
         }
     }
 }

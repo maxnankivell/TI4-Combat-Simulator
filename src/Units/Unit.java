@@ -18,7 +18,8 @@ public class Unit {
     private int hitValueBombardment;
     private int numDiceRollsBombardment;
 
-    private boolean planetaryShield;
+    private boolean isUpgraded;
+    private boolean isPlanetaryShield;
 
     /**
      * gets values for fields from Builder object
@@ -36,7 +37,8 @@ public class Unit {
         this.numDiceRollsGroundCombat = builder.numDiceRollsGroundCombat;
         this.hitValueBombardment = builder.hitValueBombardment;
         this.numDiceRollsBombardment = builder.numDiceRollsBombardment;
-        this.planetaryShield = builder.planetaryShield;
+        this.isPlanetaryShield = builder.isPlanetaryShield;
+        this.isUpgraded = builder.isUpgraded;
     }
 
     /**
@@ -55,7 +57,8 @@ public class Unit {
         this.numDiceRollsGroundCombat = master.numDiceRollsGroundCombat;
         this.hitValueBombardment = master.hitValueBombardment;
         this.numDiceRollsBombardment = master.numDiceRollsBombardment;
-        this.planetaryShield = master.planetaryShield;
+        this.isPlanetaryShield = master.isPlanetaryShield;
+        this.isUpgraded = master.isUpgraded;
     }
 
     public static class Builder{
@@ -72,7 +75,8 @@ public class Unit {
         private int hitValueBombardment = 0;
         private int numDiceRollsBombardment = 0;
 
-        private boolean planetaryShield = false;
+        private boolean isUpgraded = false;
+        private boolean isPlanetaryShield = false;
 
         /**
          * fills mandatory fields
@@ -146,8 +150,17 @@ public class Unit {
          * adds planetary defense to a unit
          * @return the builder
          */
-        public Builder addPlanetaryDefense(){
-            this.planetaryShield = true;
+        public Builder addIsPlanetaryShield(){
+            this.isPlanetaryShield = true;
+            return this;
+        }
+
+        /**
+         * adds upgrade to a unit
+         * @return the builder
+         */
+        public Builder addIsUpgraded(){
+            this.isUpgraded = true;
             return this;
         }
 
@@ -251,12 +264,20 @@ public class Unit {
         this.numDiceRollsBombardment = numDiceRollsBombardment;
     }
 
-    public boolean hasPlanetaryShield() {
-        return planetaryShield;
+    public boolean isUpgraded() {
+        return isUpgraded;
+    }
+
+    public void setUpgraded(boolean upgraded) {
+        isUpgraded = upgraded;
+    }
+
+    public boolean isPlanetaryShield() {
+        return isPlanetaryShield;
     }
 
     public void setPlanetaryShield(boolean planetaryShield) {
-        this.planetaryShield = planetaryShield;
+        this.isPlanetaryShield = planetaryShield;
     }
 
     //adds or changes units abilities
@@ -288,29 +309,19 @@ public class Unit {
 
     public boolean isNonFighterShip(){
         return name == UnitName.CARRIER ||
-                name == UnitName.CARRIERUPGRADE ||
                 name == UnitName.CRUISER ||
-                name == UnitName.CRUISERUPGRADE ||
                 name == UnitName.FLAGSHIP ||
-                name == UnitName.FLAGSHIPUPGRADE ||
                 name == UnitName.DESTROYER ||
-                name == UnitName.DESTROYERUPGRADE ||
                 name == UnitName.DREADNOUGHT ||
-                name == UnitName.DREADNOUGHTUPGRADE ||
                 name == UnitName.WARSUN;
     }
 
     public boolean isShip(){
-        return isNonFighterShip() ||
-                name == UnitName.FIGHTER ||
-                name == UnitName.FIGHTERUPGRADE;
+        return isNonFighterShip() || name == UnitName.FIGHTER;
     }
 
     public boolean isFlagshipOrDreadnought(){
-        return name == UnitName.FLAGSHIP ||
-                name == UnitName.FLAGSHIPUPGRADE ||
-                name == UnitName.DREADNOUGHT ||
-                name == UnitName.DREADNOUGHTUPGRADE;
+        return name == UnitName.FLAGSHIP || name == UnitName.DREADNOUGHT;
     }
 
     @Override

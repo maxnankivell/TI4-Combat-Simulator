@@ -9,11 +9,16 @@ public class NaazRokha extends Faction {
         super();
         //flagship
         //Your mechs in this system roll 1 additional die during combat.
-        flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCombatValue(9,2)
-                .build();
+        flagship.setSpaceCombatValue(9, 2);
+
         //special units
         mech.setNumDiceRollsGroundCombat(2);
         mech.setSpaceCombatValue(8,2);
+    }
+
+    public void upgradeFlagship(){
+        flagship = new Unit.Builder(UnitName.FLAGSHIP)
+                .addSpaceCombatValue(9, 2)
+                .build();
     }
 }

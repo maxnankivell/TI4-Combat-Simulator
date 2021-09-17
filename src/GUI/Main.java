@@ -1,8 +1,6 @@
 package GUI;
 
 import Controllers.*;
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
 import Factions.FactionEnum;
 import javafx.application.Application;
 import javafx.geometry.HPos;
@@ -18,6 +16,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.EnumMap;
 
 /**
  * Main class will be in charge of the GUI for the main window
@@ -65,6 +65,17 @@ public class Main extends Application {
     ComboBox<Object> defenderInfantryCB;
     ComboBox<Object> attackerPdsCB;
     ComboBox<Object> defenderPdsCB;
+
+    //GUI data
+    private static FactionEnum attackerFaction;
+    private static EnumMap<UpgradeData, Boolean> attackerUpgradeData = new EnumMap<UpgradeData, Boolean>(UpgradeData.class);
+    private static EnumMap<OptionData, Boolean> attackerOptionData = new EnumMap<OptionData, Boolean>(OptionData.class);
+    private static EnumMap<UnitCountData, Integer> attackerUnitCountData = new EnumMap<UnitCountData, Integer>(UnitCountData.class);
+
+    private static FactionEnum defenderFaction;
+    private static EnumMap<UpgradeData, Boolean> defenderUpgradeData = new EnumMap<UpgradeData, Boolean>(UpgradeData.class);
+    private static EnumMap<OptionData, Boolean> defenderOptionData = new EnumMap<OptionData, Boolean>(OptionData.class);
+    private static EnumMap<UnitCountData, Integer> defenderUnitCountData = new EnumMap<UnitCountData, Integer>(UnitCountData.class);
 
     public static void main(String[] args) {
         launch(args);
@@ -598,23 +609,24 @@ public class Main extends Application {
      */
     private void checkCheckBox(){
 
-        AttackerOptions.setAttackerFlagshipCheckBox(attackerFlagshipCheckBox.isSelected());
-        AttackerOptions.setAttackerDreadnoughtCheckBox(attackerDreadnoughtCheckBox.isSelected());
-        AttackerOptions.setAttackerCarrierCheckBox(attackerCarrierCheckBox.isSelected());
-        AttackerOptions.setAttackerCruiserCheckBox(attackerCruiserCheckBox.isSelected());
-        AttackerOptions.setAttackerDestroyerCheckBox(attackerDestroyerCheckBox.isSelected());
-        AttackerOptions.setAttackerFighterCheckBox(attackerFighterCheckBox.isSelected());
-        AttackerOptions.setAttackerInfantryCheckBox(attackerInfantryCheckBox.isSelected());
-        AttackerOptions.setAttackerPdsCheckBox(attackerPdsCheckBox.isSelected());
+        attackerUpgradeData.put(UpgradeData.ISFLAGSHIPUPGRADED, attackerFlagshipCheckBox.isSelected());
+        attackerUpgradeData.put(UpgradeData.ISDREADNOUGHTUPGRADED, attackerDreadnoughtCheckBox.isSelected());
+        attackerUpgradeData.put(UpgradeData.ISCARRIERUPGRADED, attackerCarrierCheckBox.isSelected());
+        attackerUpgradeData.put(UpgradeData.ISCRUISERUPGRADED, attackerCruiserCheckBox.isSelected());
+        attackerUpgradeData.put(UpgradeData.ISDESTROYERUPGRADED, attackerDestroyerCheckBox.isSelected());
+        attackerUpgradeData.put(UpgradeData.ISFIGHTERUPGRADED, attackerFighterCheckBox.isSelected());
+        attackerUpgradeData.put(UpgradeData.ISINFANTRYUPGRADED, attackerInfantryCheckBox.isSelected());
+        attackerUpgradeData.put(UpgradeData.ISPDSUPGRADED, attackerPdsCheckBox.isSelected());
 
-        DefenderOptions.setDefenderFlagshipCheckBox(defenderFlagshipCheckBox.isSelected());
-        DefenderOptions.setDefenderDreadnoughtCheckBox(defenderDreadnoughtCheckBox.isSelected());
-        DefenderOptions.setDefenderCarrierCheckBox(defenderCarrierCheckBox.isSelected());
-        DefenderOptions.setDefenderCruiserCheckBox(defenderCruiserCheckBox.isSelected());
-        DefenderOptions.setDefenderDestroyerCheckBox(defenderDestroyerCheckBox.isSelected());
-        DefenderOptions.setDefenderFighterCheckBox(defenderFighterCheckBox.isSelected());
-        DefenderOptions.setDefenderInfantryCheckBox(defenderInfantryCheckBox.isSelected());
-        DefenderOptions.setDefenderPdsCheckBox(defenderPdsCheckBox.isSelected());
+        defenderUpgradeData.put(UpgradeData.ISFLAGSHIPUPGRADED, defenderFlagshipCheckBox.isSelected());
+        defenderUpgradeData.put(UpgradeData.ISDREADNOUGHTUPGRADED, defenderDreadnoughtCheckBox.isSelected());
+        defenderUpgradeData.put(UpgradeData.ISCARRIERUPGRADED, defenderCarrierCheckBox.isSelected());
+        defenderUpgradeData.put(UpgradeData.ISCRUISERUPGRADED, defenderCruiserCheckBox.isSelected());
+        defenderUpgradeData.put(UpgradeData.ISDESTROYERUPGRADED, defenderDestroyerCheckBox.isSelected());
+        defenderUpgradeData.put(UpgradeData.ISFIGHTERUPGRADED, defenderFighterCheckBox.isSelected());
+        defenderUpgradeData.put(UpgradeData.ISINFANTRYUPGRADED, defenderInfantryCheckBox.isSelected());
+        defenderUpgradeData.put(UpgradeData.ISPDSUPGRADED, defenderPdsCheckBox.isSelected());
+
     }
 
     /**
@@ -625,34 +637,98 @@ public class Main extends Application {
         String attackerFactionName = (String) attackerFactionCB.getValue();
         attackerFactionName = attackerFactionName.replaceAll("[^a-zA-Z0-9]", "");
         attackerFactionName = attackerFactionName.toUpperCase();
-
-        AttackerOptions.setAttackerFactionCB(FactionEnum.valueOf(attackerFactionName));
-        AttackerOptions.setAttackerFlagshipCB((Integer) attackerFlagshipCB.getValue());
-        AttackerOptions.setAttackerWarSunCB((Integer) attackerWarSunCB.getValue());
-        AttackerOptions.setAttackerDreadnoughtCB((Integer) attackerDreadnoughtCB.getValue());
-        AttackerOptions.setAttackerCarrierCB((Integer) attackerCarrierCB.getValue());
-        AttackerOptions.setAttackerCruiserCB((Integer) attackerCruiserCB.getValue());
-        AttackerOptions.setAttackerDestroyerCB((Integer) attackerDestroyerCB.getValue());
-        AttackerOptions.setAttackerFighterCB((Integer) attackerFighterCB.getValue());
-        AttackerOptions.setAttackerMechCB((Integer) attackerMechCB.getValue());
-        AttackerOptions.setAttackerInfantryCB((Integer) attackerInfantryCB.getValue());
-        AttackerOptions.setAttackerPdsCB((Integer) attackerPdsCB.getValue());
+        attackerFaction = FactionEnum.valueOf(attackerFactionName);
 
         String defenderFactionName = (String) defenderFactionCB.getValue();
         defenderFactionName = defenderFactionName.replaceAll("[^a-zA-Z0-9]", "");
         defenderFactionName = defenderFactionName.toUpperCase();
+        defenderFaction = FactionEnum.valueOf(defenderFactionName);
 
-        DefenderOptions.setDefenderFactionCB(FactionEnum.valueOf(defenderFactionName));
-        DefenderOptions.setDefenderFlagshipCB((Integer) defenderFlagshipCB.getValue());
-        DefenderOptions.setDefenderWarSunCB((Integer) defenderWarSunCB.getValue());
-        DefenderOptions.setDefenderDreadnoughtCB((Integer) defenderDreadnoughtCB.getValue());
-        DefenderOptions.setDefenderCarrierCB((Integer) defenderCarrierCB.getValue());
-        DefenderOptions.setDefenderCruiserCB((Integer) defenderCruiserCB.getValue());
-        DefenderOptions.setDefenderDestroyerCB((Integer) defenderDestroyerCB.getValue());
-        DefenderOptions.setDefenderFighterCB((Integer) defenderFighterCB.getValue());
-        DefenderOptions.setDefenderMechCB((Integer) defenderMechCB.getValue());
-        DefenderOptions.setDefenderInfantryCB((Integer) defenderInfantryCB.getValue());
-        DefenderOptions.setDefenderPdsCB((Integer) defenderPdsCB.getValue());
+        attackerUnitCountData.put(UnitCountData.FLAGSHIPCOUNT, (Integer) attackerFlagshipCB.getValue());
+        attackerUnitCountData.put(UnitCountData.WARSUNCOUNT, (Integer) attackerWarSunCB.getValue());
+        attackerUnitCountData.put(UnitCountData.DREADNOUGHTCOUNT, (Integer) attackerDreadnoughtCB.getValue());
+        attackerUnitCountData.put(UnitCountData.CARRIERCOUNT, (Integer) attackerCarrierCB.getValue());
+        attackerUnitCountData.put(UnitCountData.CRUISERCOUNT, (Integer) attackerCruiserCB.getValue());
+        attackerUnitCountData.put(UnitCountData.DESTROYERCOUNT, (Integer) attackerDestroyerCB.getValue());
+        attackerUnitCountData.put(UnitCountData.FIGHTERCOUNT, (Integer) attackerFighterCB.getValue());
+        attackerUnitCountData.put(UnitCountData.MECHCOUNT, (Integer) attackerMechCB.getValue());
+        attackerUnitCountData.put(UnitCountData.INFANTRYCOUNT, (Integer) attackerInfantryCB.getValue());
+        attackerUnitCountData.put(UnitCountData.PDSCOUNT, (Integer) attackerPdsCB.getValue());
 
+        defenderUnitCountData.put(UnitCountData.FLAGSHIPCOUNT, (Integer) defenderFlagshipCB.getValue());
+        defenderUnitCountData.put(UnitCountData.WARSUNCOUNT, (Integer) defenderWarSunCB.getValue());
+        defenderUnitCountData.put(UnitCountData.DREADNOUGHTCOUNT, (Integer) defenderDreadnoughtCB.getValue());
+        defenderUnitCountData.put(UnitCountData.CARRIERCOUNT, (Integer) defenderCarrierCB.getValue());
+        defenderUnitCountData.put(UnitCountData.CRUISERCOUNT, (Integer) defenderCruiserCB.getValue());
+        defenderUnitCountData.put(UnitCountData.DESTROYERCOUNT, (Integer) defenderDestroyerCB.getValue());
+        defenderUnitCountData.put(UnitCountData.FIGHTERCOUNT, (Integer) defenderFighterCB.getValue());
+        defenderUnitCountData.put(UnitCountData.MECHCOUNT, (Integer) defenderMechCB.getValue());
+        defenderUnitCountData.put(UnitCountData.INFANTRYCOUNT, (Integer) defenderInfantryCB.getValue());
+        defenderUnitCountData.put(UnitCountData.PDSCOUNT, (Integer) defenderPdsCB.getValue());
+
+    }
+
+    public static FactionEnum getAttackerFaction() {
+        return attackerFaction;
+    }
+
+    public static void setAttackerFaction(FactionEnum attackerFaction) {
+        Main.attackerFaction = attackerFaction;
+    }
+
+    public static EnumMap<UpgradeData, Boolean> getAttackerUpgradeData() {
+        return attackerUpgradeData;
+    }
+
+    public static void setAttackerUpgradeData(EnumMap<UpgradeData, Boolean> attackerUpgradeData) {
+        Main.attackerUpgradeData = attackerUpgradeData;
+    }
+
+    public static EnumMap<OptionData, Boolean> getAttackerOptionData() {
+        return attackerOptionData;
+    }
+
+    public static void setAttackerOptionData(EnumMap<OptionData, Boolean> attackerOptionData) {
+        Main.attackerOptionData = attackerOptionData;
+    }
+
+    public static EnumMap<UnitCountData, Integer> getAttackerUnitCountData() {
+        return attackerUnitCountData;
+    }
+
+    public static void setAttackerUnitCountData(EnumMap<UnitCountData, Integer> attackerUnitCountData) {
+        Main.attackerUnitCountData = attackerUnitCountData;
+    }
+
+    public static FactionEnum getDefenderFaction() {
+        return defenderFaction;
+    }
+
+    public static void setDefenderFaction(FactionEnum defenderFaction) {
+        Main.defenderFaction = defenderFaction;
+    }
+
+    public static EnumMap<UpgradeData, Boolean> getDefenderUpgradeData() {
+        return defenderUpgradeData;
+    }
+
+    public static void setDefenderUpgradeData(EnumMap<UpgradeData, Boolean> defenderUpgradeData) {
+        Main.defenderUpgradeData = defenderUpgradeData;
+    }
+
+    public static EnumMap<OptionData, Boolean> getDefenderOptionData() {
+        return defenderOptionData;
+    }
+
+    public static void setDefenderOptionData(EnumMap<OptionData, Boolean> defenderOptionData) {
+        Main.defenderOptionData = defenderOptionData;
+    }
+
+    public static EnumMap<UnitCountData, Integer> getDefenderUnitCountData() {
+        return defenderUnitCountData;
+    }
+
+    public static void setDefenderUnitCountData(EnumMap<UnitCountData, Integer> defenderUnitCountData) {
+        Main.defenderUnitCountData = defenderUnitCountData;
     }
 }

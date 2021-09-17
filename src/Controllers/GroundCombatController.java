@@ -2,8 +2,8 @@ package Controllers;
 
 import Factions.JolNar;
 import Factions.NaazRokha;
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
+import GUI.OptionData;
+import Player.*;
 import Units.Unit;
 import Units.UnitName;
 
@@ -17,99 +17,59 @@ public class GroundCombatController extends Controller{
 
     @Override
     public void startProcess() {
-        attackPreProcess();
-        defenderPreProcess();
+        preProcess(attacker, defender);
+        preProcess(defender, attacker);
 
-        attackerMainProcess();
-        defenderMainProcess();
+        mainProcess(attacker);
+        mainProcess(defender);
     }
 
     /**
-     * Method to run through all pre-combat modifiers for the attacker
+     * Method to run through all pre-combat modifiers
      */
-    public void attackPreProcess(){
-        //Tekklar legion
-        if (AttackerOptions.isTekklarLegionAttackerCheckbox()){
-            Abilities.tekklarLegion(attacker, defender);
-        }
+    public void preProcess(Player currentPlayer, Player otherPlayer){
 
-        //Sol agent
-        if (AttackerOptions.isSolAgentAttackerCheckbox()){
-            attacker.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
-        }
+        if(currentPlayer.getRole() == PlayerRole.DEFENDER) {
+            //Defending in nebula
+            if (currentPlayer.getOptionData().get(OptionData.DEFENDINGINNEBULA))
+                currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
 
-        //Morale boost
-        if (AttackerOptions.isMoraleBoostAttackerCheckbox()){
-            attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
-        }
-
-        //Winnu commander
-        if (AttackerOptions.isWinnuCommanderAttackerCheckbox()){
-            attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
-        }
-
-        //Jol Nar mech
-        if (attacker.getFaction() instanceof JolNar && attacker.getUnitList().containsName(UnitName.MECH)){
-            attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, -1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
-        }
-
-        //Naaz Rokha flagship
-        if (attacker.getFaction() instanceof NaazRokha && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
-            attacker.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH, UnitName.MECH);
-        }
-    }
-
-    /**
-     * Method to run through all pre-combat modifiers for the defender
-     */
-    public void defenderPreProcess(){
-        //Magen defense grid
-        if (DefenderOptions.isMagenDefenseGridDefenderCheckbox()){
-            defender.addNumHits(1);
+            //Magen defense grid
+            if (currentPlayer.getOptionData().get(OptionData.MAGENDEFENSEGRID))
+                currentPlayer.addNumHits(1);
         }
 
         //Tekklar legion
-        if (DefenderOptions.isTekklarLegionDefenderCheckbox()){
-            Abilities.tekklarLegion(defender, attacker);
-        }
-
-        //Sol agent
-        if (DefenderOptions.isSolAgentDefenderCheckbox()){
-            defender.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
-        }
+        if (currentPlayer.getOptionData().get(OptionData.TEKKLARLEGION))
+            Abilities.tekklarLegion(currentPlayer, otherPlayer);
 
         //Morale boost
-        if (DefenderOptions.isMoraleBoostDefenderCheckbox()){
-            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
-        }
+        if (currentPlayer.getOptionData().get(OptionData.MORALEBOOST))
+            currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
 
         //Winnu commander
-        if (DefenderOptions.isWinnuCommanderDefenderCheckbox()){
-            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
-        }
+        if (currentPlayer.getOptionData().get(OptionData.WINNUCOMMANDER))
+            currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
 
-        //Defending in nebula
-        if (DefenderOptions.isDefendingInNebulaDefenderCheckbox()){
-            defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
-        }
+        //Sol agent
+        if (currentPlayer.getOptionData().get(OptionData.SOLAGENT))
+            currentPlayer.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
 
         //Jol Nar mech
-        if (defender.getFaction() instanceof JolNar && defender.getUnitList().containsName(UnitName.MECH)){
-            defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT,-1, UnitName.INFANTRY, UnitName.INFANTRYUPGRADE);
-        }
+        if (currentPlayer.getFaction() instanceof JolNar && currentPlayer.getUnitList().containsName(UnitName.MECH))
+            currentPlayer.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, -1, UnitName.INFANTRY);
 
         //Naaz Rokha flagship
-        if (defender.getFaction() instanceof NaazRokha && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
-            defender.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH, UnitName.MECH);
-        }
+        if (currentPlayer.getFaction() instanceof NaazRokha && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP))
+            currentPlayer.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH);
     }
 
     /**
-     * Method to run through the main combat process for the attacker
+     * Method to run through the main combat process
      */
-    public void attackerMainProcess(){
+    public void mainProcess(Player currentPlayer){
         //start rolling
-        for (Unit unit : attacker.getUnitArrayList()) {
+        for (Unit unit : currentPlayer.getUnitArrayList()) {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
@@ -119,43 +79,14 @@ public class GroundCombatController extends Controller{
 
             //Check re-roll conditions
             //Fire team
-            if (AttackerOptions.isFireTeamAttackerCheckbox()) {
+            if (currentPlayer.getOptionData().get(OptionData.FIRETEAM)) {
                 Roller.reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
             }
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueGroundCombat()) {
-                    attacker.addNumHits(1);
-                }
-            }
-
-        }
-    }
-
-    /**
-     * Method to run through the main combat process for the defender
-     */
-    public void defenderMainProcess(){
-        //start rolling
-        for (Unit unit : defender.getUnitArrayList()) {
-            ArrayList<Integer> diceRolls = new ArrayList<>();
-
-            //roll amount of dice necessary for one unit
-            for (int i = 0; i < unit.getNumDiceRollsGroundCombat(); i++) {
-                diceRolls.add(Roller.diceRoll());
-            }
-
-            //Check re-roll conditions
-            //Fire team
-            if (DefenderOptions.isFireTeamDefenderCheckbox()) {
-                Roller.reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
-            }
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if (roll >= unit.getHitValueGroundCombat()) {
-                    defender.addNumHits(1);
+                    currentPlayer.addNumHits(1);
                 }
             }
 

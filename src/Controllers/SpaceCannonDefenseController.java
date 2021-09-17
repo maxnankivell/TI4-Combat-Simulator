@@ -1,8 +1,7 @@
 package Controllers;
 
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
-import Player.Player;
+import GUI.OptionData;
+import Player.*;
 import Units.Unit;
 
 import java.util.ArrayList;
@@ -22,52 +21,53 @@ public class SpaceCannonDefenseController extends Controller{
         defenderNonShips = new Player(defender);
         defenderNonShips.getUnitList().removeShips();
 
-        defenderPreProcess();
-        attackerPreProcess();
-        defenderMainProcess();
+        preProcess(defender, attacker);
+        preProcess(attacker, defender);
+
+        mainProcess(defender);
     }
 
     /**
-     * Method to run through all pre-combat modifiers for the attacker
+     * Method to run through all pre-combat modifiers
      */
-    public void attackerPreProcess(){
-        //Check for pre-combat modifiers
-        //Antimass deflector
-        if (AttackerOptions.isAntimassDeflectorAttackerCheckbox()){
-            defenderNonShips.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
+    public void preProcess(Player currentPlayer, Player otherPlayer){
+
+        if (currentPlayer.getRole() == PlayerRole.DEFENDER) {
+            //Titans hero
+            if (currentPlayer.getOptionData().get(OptionData.TITANSHERO)) {
+                defenderNonShips.addUnitTitansHero();
+            }
+
+            //Check for pre-combat modifiers
+            //Plasma scoring
+            if (currentPlayer.getOptionData().get(OptionData.PLASMASCORING)) {
+                defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
+            }
+
+            //Argent flight commander
+            if (currentPlayer.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)) {
+                defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
+            }
         }
 
-        //Disable
-        if (AttackerOptions.isDisableLabelAttackerCheckbox()){
-           defenderNonShips.disablePDS();
+        if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
+            //Check for pre-combat modifiers
+            //Antimass deflector
+            if (currentPlayer.getOptionData().get(OptionData.ANTIMASSDEFLECTOR)) {
+                defenderNonShips.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
+            }
+
+            //Disable
+            if (currentPlayer.getOptionData().get(OptionData.DISABLE)) {
+                defenderNonShips.disablePDS();
+            }
         }
     }
 
     /**
-     * Method to run through all pre-combat modifiers for the defender
+     * Method to run through the main combat process
      */
-    public void defenderPreProcess(){
-        //Titans hero
-        if (DefenderOptions.isTitansHeroDefenderCheckbox()){
-            defenderNonShips.addUnitTitansHero();
-        }
-
-        //Check for pre-combat modifiers
-        //Plasma scoring
-        if (DefenderOptions.isPlasmaScoringDefenderCheckbox()){
-            defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
-        }
-
-        //Argent flight commander
-        if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()){
-            defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
-        }
-    }
-
-    /**
-     * Method to run through the main combat process for the defender
-     */
-    public void defenderMainProcess() {
+    public void mainProcess(Player currentPlayer) {
         //start rolling
         for (Unit unit : defenderNonShips.getUnitArrayList()) {
 
@@ -80,14 +80,14 @@ public class SpaceCannonDefenseController extends Controller{
 
             //Check re-roll conditions
             //Jol Nar commander
-            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+            if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
                 Roller.reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
             }
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
                 if (roll >= unit.getHitValueSpaceCannon()) {
-                    defender.addNumHits(1);
+                    currentPlayer.addNumHits(1);
                 }
             }
 

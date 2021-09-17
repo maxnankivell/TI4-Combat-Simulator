@@ -1,16 +1,12 @@
 package Factions;
 
-import Units.Unit;
-import Units.UnitName;
-
 public class BaronyOfLetnev extends Faction{
 
-    public BaronyOfLetnev(){
+    public BaronyOfLetnev() {
         super();
         //flagship
-        flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCombatValue(5,2)
-                .addBombardmentValue(5,3)
-                .build();
+        flagship.setSpaceCombatValue(5, 2);
+        flagship.setBombardmentValue(5, 3);
     }
+
 }

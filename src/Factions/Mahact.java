@@ -8,8 +8,8 @@ public class Mahact extends Faction {
     public Mahact(){
         super();
         //flagship
-        flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCombatValue(5,2)
-                .build();
+        flagship.setSpaceCombatValue(5, 2);
+
     }
+
 }

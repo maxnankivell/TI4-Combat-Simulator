@@ -12,6 +12,8 @@
 /.idea
 /out
 /src/META-INF
+.DS_Store
+
 
 
 # Mobile Tools for Java (J2ME)
