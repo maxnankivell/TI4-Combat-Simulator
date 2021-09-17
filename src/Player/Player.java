@@ -2,14 +2,17 @@ package Player;
 
 import Controllers.CombatType;
 import Factions.*;
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
+import GUI.Main;
+import GUI.OptionData;
+import GUI.UnitCountData;
+import GUI.UpgradeData;
 import Factions.FactionEnum;
 import Units.Unit;
 import Units.UnitList;
 import Units.UnitName;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 
 public class Player {
 
@@ -20,11 +23,17 @@ public class Player {
     private int numInfantryHits;
     private int numSustainDamageHits;
     private int numNonFighterHits;
+    private FactionEnum factionEnum;
+    private EnumMap<UpgradeData, Boolean> upgradeData;
+    private EnumMap<OptionData, Boolean> optionData;
+    private EnumMap<UnitCountData, Integer> unitCountData;
 
     //Main constructor
     public Player(PlayerRole role) {
         this.role = role;
-        faction = populateFaction();
+
+        populateDataFields();
+        populateFaction();
         upgradeUnits();
         unitList = populateUnitList();
     }
@@ -38,22 +47,35 @@ public class Player {
         this.numInfantryHits = master.getNumInfantryHits();
         this.numSustainDamageHits = master.getNumSustainDamageHits();
         this.numNonFighterHits = master.getNumNonFighterHits();
+        this.factionEnum = master.getFactionEnum();
+        this.upgradeData = master.getUpgradeData();
+        this.optionData = master.getOptionData();
+        this.unitCountData = master.getUnitCountData();
+    }
+
+    private void populateDataFields(){
+        switch (role){
+            case ATTACKER -> {
+                factionEnum = Main.getAttackerFaction();
+                upgradeData = Main.getAttackerUpgradeData();
+                optionData = Main.getAttackerOptionData();
+                unitCountData = Main.getAttackerUnitCountData();
+            }
+            case DEFENDER -> {
+                factionEnum = Main.getDefenderFaction();
+                upgradeData = Main.getDefenderUpgradeData();
+                optionData = Main.getDefenderOptionData();
+                unitCountData = Main.getDefenderUnitCountData();
+            }
+        }
     }
 
     /**
      * populates a the faction field with the
      * user inputted faction
      */
-    private Faction populateFaction(){
-        FactionEnum inputFaction;
-        Faction faction;
-        if(role == PlayerRole.ATTACKER){
-            inputFaction = AttackerOptions.getAttackerFactionCB();
-        }else {
-            inputFaction = DefenderOptions.getDefenderFactionCB();
-        }
-
-        faction = switch (inputFaction) {
+    private void populateFaction(){
+        faction = switch (factionEnum) {
             case ARBOREC -> new Arborec();
             case ARGENTFLIGHT -> new ArgentFlight();
             case BARONYOFLETNEV -> new BaronyOfLetnev();
@@ -79,32 +101,19 @@ public class Player {
             case YIN -> new Yin();
             case YSSARIL -> new Yssaril();
         };
-
-        return faction;
     }
 
     private void upgradeUnits(){
         boolean isFlagshipUpgraded, isDreadnoughtUpgraded, isCarrierUpgraded, isCruiserUpgraded, isDestroyerUpgraded, isFighterUpgraded, isInfantryUpgraded, isPdsUpgraded;
 
-        if(role == PlayerRole.ATTACKER){
-            isFlagshipUpgraded = AttackerOptions.isAttackerFlagshipCheckBox();
-            isDreadnoughtUpgraded = AttackerOptions.isAttackerDreadnoughtCheckBox();
-            isCarrierUpgraded = AttackerOptions.isAttackerCarrierCheckBox();
-            isCruiserUpgraded = AttackerOptions.isAttackerCruiserCheckBox();
-            isDestroyerUpgraded = AttackerOptions.isAttackerDestroyerCheckBox();
-            isFighterUpgraded = AttackerOptions.isAttackerFighterCheckBox();
-            isInfantryUpgraded = AttackerOptions.isAttackerInfantryCheckBox();
-            isPdsUpgraded = AttackerOptions.isAttackerPdsCheckBox();
-        }else {
-            isFlagshipUpgraded = DefenderOptions.isDefenderFlagshipCheckBox();
-            isDreadnoughtUpgraded = DefenderOptions.isDefenderDreadnoughtCheckBox();
-            isCarrierUpgraded = DefenderOptions.isDefenderCarrierCheckBox();
-            isCruiserUpgraded = DefenderOptions.isDefenderCruiserCheckBox();
-            isDestroyerUpgraded = DefenderOptions.isDefenderDestroyerCheckBox();
-            isFighterUpgraded = DefenderOptions.isDefenderFighterCheckBox();
-            isInfantryUpgraded = DefenderOptions.isDefenderInfantryCheckBox();
-            isPdsUpgraded = DefenderOptions.isDefenderPdsCheckBox();
-        }
+        isFlagshipUpgraded = upgradeData.get(UpgradeData.ISFLAGSHIPUPGRADED);
+        isDreadnoughtUpgraded = upgradeData.get(UpgradeData.ISDREADNOUGHTUPGRADED);
+        isCarrierUpgraded = upgradeData.get(UpgradeData.ISCARRIERUPGRADED);
+        isCruiserUpgraded = upgradeData.get(UpgradeData.ISCRUISERUPGRADED);
+        isDestroyerUpgraded = upgradeData.get(UpgradeData.ISDESTROYERUPGRADED);
+        isFighterUpgraded = upgradeData.get(UpgradeData.ISFIGHTERUPGRADED);
+        isInfantryUpgraded = upgradeData.get(UpgradeData.ISINFANTRYUPGRADED);
+        isPdsUpgraded = upgradeData.get(UpgradeData.ISPDSUPGRADED);
 
         if (isFlagshipUpgraded && faction instanceof Nomad) faction.upgradeFlagship(); //Only Nomad can upgrade
         if (isDreadnoughtUpgraded) faction.upgradeDreadnought();
@@ -127,29 +136,16 @@ public class Player {
         UnitList units = new UnitList();
         int numFlagships, numWarsuns, numDreadnoughts, numCarriers, numCrusiers, numDestroyers, numFighters, numMechs, numInfantry, numPDSs;
 
-        if(role == PlayerRole.ATTACKER){
-            numFlagships = AttackerOptions.getAttackerFlagshipCB();
-            numWarsuns = AttackerOptions.getAttackerWarSunCB();
-            numDreadnoughts = AttackerOptions.getAttackerDreadnoughtCB();
-            numCarriers = AttackerOptions.getAttackerCarrierCB();
-            numCrusiers = AttackerOptions.getAttackerCruiserCB();
-            numDestroyers = AttackerOptions.getAttackerDestroyerCB();
-            numFighters = AttackerOptions.getAttackerFighterCB();
-            numMechs = AttackerOptions.getAttackerMechCB();
-            numInfantry = AttackerOptions.getAttackerInfantryCB();
-            numPDSs = AttackerOptions.getAttackerPdsCB();
-        }else {
-            numFlagships = DefenderOptions.getDefenderFlagshipCB();
-            numWarsuns = DefenderOptions.getDefenderWarSunCB();
-            numDreadnoughts = DefenderOptions.getDefenderDreadnoughtCB();
-            numCarriers = DefenderOptions.getDefenderCarrierCB();
-            numCrusiers = DefenderOptions.getDefenderCruiserCB();
-            numDestroyers = DefenderOptions.getDefenderDestroyerCB();
-            numFighters = DefenderOptions.getDefenderFighterCB();
-            numMechs = DefenderOptions.getDefenderMechCB();
-            numInfantry = DefenderOptions.getDefenderInfantryCB();
-            numPDSs = DefenderOptions.getDefenderPdsCB();
-        }
+        numFlagships = unitCountData.get(UnitCountData.FLAGSHIPCOUNT);
+        numWarsuns = unitCountData.get(UnitCountData.WARSUNCOUNT);
+        numDreadnoughts = unitCountData.get(UnitCountData.DREADNOUGHTCOUNT);
+        numCarriers = unitCountData.get(UnitCountData.CARRIERCOUNT);
+        numCrusiers = unitCountData.get(UnitCountData.CRUISERCOUNT);
+        numDestroyers = unitCountData.get(UnitCountData.DESTROYERCOUNT);
+        numFighters = unitCountData.get(UnitCountData.FIGHTERCOUNT);
+        numMechs = unitCountData.get(UnitCountData.MECHCOUNT);
+        numInfantry = unitCountData.get(UnitCountData.INFANTRYCOUNT);
+        numPDSs = unitCountData.get(UnitCountData.PDSCOUNT);
 
         for (int i = 0; i < numFlagships; i++) units.add(new Unit(faction.getFlagship()));
         for (int i = 0; i < numWarsuns; i++) units.add(new Unit(faction.getWarsun()));
@@ -421,6 +417,22 @@ public class Player {
 
     public int getNumNonFighterHits() {
         return numNonFighterHits;
+    }
+
+    public FactionEnum getFactionEnum() {
+        return factionEnum;
+    }
+
+    public EnumMap<UpgradeData, Boolean> getUpgradeData() {
+        return upgradeData;
+    }
+
+    public EnumMap<OptionData, Boolean> getOptionData() {
+        return optionData;
+    }
+
+    public EnumMap<UnitCountData, Integer> getUnitCountData() {
+        return unitCountData;
     }
 
     public UnitList getUnitList(){

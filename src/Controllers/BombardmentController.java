@@ -1,7 +1,6 @@
 package Controllers;
 
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
+import GUI.OptionData;
 import Units.Unit;
 import Units.UnitName;
 
@@ -27,32 +26,32 @@ public class BombardmentController extends Controller{
 
     public void attackerPreProcess(){
         //Blitz
-        if (AttackerOptions.isBlitzAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.BLITZ)){
             Abilities.blitz(attacker);
         }
 
         //Plasma scoring
-        if (AttackerOptions.isPlasmaScoringAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.PLASMASCORING)){
             attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
         }
 
         //Strike wing ambush
-        if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.STRIKEWINGAMBUSH)){
             attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
         }
 
         //Disable
-        if (AttackerOptions.isDisableLabelAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.DISABLE)){
             defender.disablePDS();
         }
 
         //Argent flight commander
-        if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)){
             attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
         }
 
         //L1Z1X commander
-        if (AttackerOptions.isL1Z1XCommanderAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.L1Z1XCOMMANDER)){
             planetaryShieldCancelled = true;
         }
 
@@ -64,13 +63,13 @@ public class BombardmentController extends Controller{
 
     public void defensePreProcess(){
         //Bunker
-        if (DefenderOptions.isBunkerLabelDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.BUNKER)){
             attacker.changeHitValueOfAllUnits(CombatType.BOMBARDMENT, 4);
         }
 
         //Convention of war
         //assumes all planets are cultural if checked
-        if (DefenderOptions.isConventionsOfWarDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.CONVENTIONSOFWAR)){
             bombardmentCancelled = true;
         }
     }
@@ -87,7 +86,7 @@ public class BombardmentController extends Controller{
 
             //Check re-roll conditions
             //Jol Nar commander
-            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+            if (attacker.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
                 Roller.reRollMissedDice(CombatType.BOMBARDMENT, diceRolls, unit);
             }
 

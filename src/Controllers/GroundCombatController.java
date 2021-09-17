@@ -2,8 +2,7 @@ package Controllers;
 
 import Factions.JolNar;
 import Factions.NaazRokha;
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
+import GUI.OptionData;
 import Units.Unit;
 import Units.UnitName;
 
@@ -29,22 +28,22 @@ public class GroundCombatController extends Controller{
      */
     public void attackPreProcess(){
         //Tekklar legion
-        if (AttackerOptions.isTekklarLegionAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.TEKKLARLEGION)){
             Abilities.tekklarLegion(attacker, defender);
         }
 
         //Sol agent
-        if (AttackerOptions.isSolAgentAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.SOLAGENT)){
             attacker.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
         }
 
         //Morale boost
-        if (AttackerOptions.isMoraleBoostAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.MORALEBOOST)){
             attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         }
 
         //Winnu commander
-        if (AttackerOptions.isWinnuCommanderAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.WINNUCOMMANDER)){
             attacker.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
         }
 
@@ -64,32 +63,32 @@ public class GroundCombatController extends Controller{
      */
     public void defenderPreProcess(){
         //Magen defense grid
-        if (DefenderOptions.isMagenDefenseGridDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.MAGENDEFENSEGRID)){
             defender.addNumHits(1);
         }
 
         //Tekklar legion
-        if (DefenderOptions.isTekklarLegionDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.TEKKLARLEGION)){
             Abilities.tekklarLegion(defender, attacker);
         }
 
         //Sol agent
-        if (DefenderOptions.isSolAgentDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.SOLAGENT)){
             defender.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
         }
 
         //Morale boost
-        if (DefenderOptions.isMoraleBoostDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.MORALEBOOST)){
             defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         }
 
         //Winnu commander
-        if (DefenderOptions.isWinnuCommanderDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.WINNUCOMMANDER)){
             defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
         }
 
         //Defending in nebula
-        if (DefenderOptions.isDefendingInNebulaDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.DEFENDINGINNEBULA)){
             defender.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
         }
 
@@ -119,7 +118,7 @@ public class GroundCombatController extends Controller{
 
             //Check re-roll conditions
             //Fire team
-            if (AttackerOptions.isFireTeamAttackerCheckbox()) {
+            if (attacker.getOptionData().get(OptionData.FIRETEAM)) {
                 Roller.reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
             }
 
@@ -148,7 +147,7 @@ public class GroundCombatController extends Controller{
 
             //Check re-roll conditions
             //Fire team
-            if (DefenderOptions.isFireTeamDefenderCheckbox()) {
+            if (defender.getOptionData().get(OptionData.FIRETEAM)) {
                 Roller.reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
             }
 

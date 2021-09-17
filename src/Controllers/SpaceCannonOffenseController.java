@@ -1,8 +1,7 @@
 package Controllers;
 
 import Factions.ArgentFlight;
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
+import GUI.OptionData;
 import Units.Unit;
 import Units.UnitName;
 
@@ -34,27 +33,27 @@ public class SpaceCannonOffenseController extends Controller{
      */
     public void attackerPreProcess(){
         //Plasma scoring
-        if (AttackerOptions.isPlasmaScoringAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.PLASMASCORING)){
             attacker.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Antimass deflector
-        if (AttackerOptions.isAntimassDeflectorAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.ANTIMASSDEFLECTOR)){
             defender.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
         }
 
         //Strike wing ambuscade
-        if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.STRIKEWINGAMBUSH)){
             attacker.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Solar flare
-        if (AttackerOptions.isSolarFlairAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.SOLARFLAIR)){
             defenderCancelled = true;
         }
 
         //Argent flight commander
-        if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)){
             attacker.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
@@ -69,32 +68,32 @@ public class SpaceCannonOffenseController extends Controller{
      */
     public void defenderPreProcess(){
         //Experimental battlestation
-        if (DefenderOptions.isExperimentalBattlestationDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.EXPERIMENTALBATTLESTATION)){
             defender.addUnitExperimentalBattlestation();
         }
 
         //Titans Hero
-        if (DefenderOptions.isTitansHeroDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.TITANSHERO)){
             defender.addUnitTitansHero();
         }
 
         //Plasma scoring
-        if (DefenderOptions.isPlasmaScoringDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.PLASMASCORING)){
             defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Antimass deflector
-        if (DefenderOptions.isAntimassDeflectorDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.ANTIMASSDEFLECTOR)){
             attacker.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
         }
 
         //Strike wing ambuscade
-        if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.STRIKEWINGAMBUSH)){
             defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Argent flight commander
-        if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)){
             defender.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
@@ -119,7 +118,7 @@ public class SpaceCannonOffenseController extends Controller{
 
             //Check re-roll conditions
             //Jol Nar commander
-            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+            if (attacker.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
                 Roller.reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
             }
 
@@ -147,10 +146,9 @@ public class SpaceCannonOffenseController extends Controller{
 
             //Check re-roll conditions
             //Jol Nar commander
-            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+            if (defender.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
                 Roller.reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
             }
-
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {

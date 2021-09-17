@@ -1,9 +1,8 @@
 package Controllers;
 
 import Factions.*;
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
 import Factions.FactionEnum;
+import GUI.OptionData;
 import Units.Unit;
 import Units.UnitName;
 
@@ -33,16 +32,16 @@ public class SpaceCombatController extends Controller{
             Abilities.winnuFlagship(attacker, defender);
         }
 
-        if(AttackerOptions.isFighterPrototypeAttackerCheckbox()){
+        if(attacker.getOptionData().get(OptionData.FIGHTERPROTOTYPE)){
             attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER);
         }
-        if(AttackerOptions.isMoraleBoostAttackerCheckbox()){
+        if(attacker.getOptionData().get(OptionData.MORALEBOOST)){
             attacker.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
         }
-        if(AttackerOptions.isWinnuCommanderAttackerCheckbox()){
+        if(attacker.getOptionData().get(OptionData.WINNUCOMMANDER)){
             attacker.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -2);
         }
-        if(AttackerOptions.isProphecyOfIxthAttackerCheckbox()){
+        if(attacker.getOptionData().get(OptionData.PROPHECYOFIXTH)){
             attacker.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-1, UnitName.FIGHTER);
         }
         if(attacker.getFaction() instanceof SardakkNorr && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
@@ -52,7 +51,7 @@ public class SpaceCombatController extends Controller{
         if(attacker.getFaction() instanceof NaazRokha && attacker.getUnitList().containsName(UnitName.FLAGSHIP)){
             attacker.addDiceToSpecificUnitType(CombatType.SPACECOMBAT,UnitName.MECH);
         }
-        if(AttackerOptions.isBaronyAgentAttackerCheckbox()){
+        if(attacker.getOptionData().get(OptionData.BARONYAGENT)){
             attacker.addOneDiceToBestUnit(CombatType.SPACECOMBAT);
         }
     }
@@ -101,26 +100,26 @@ public class SpaceCombatController extends Controller{
             Abilities.winnuFlagship(defender, attacker);
         }
 
-        if(DefenderOptions.isFighterPrototypeDefenderCheckbox()){
+        if(defender.getOptionData().get(OptionData.FIGHTERPROTOTYPE)){
             defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER);
         }
-        if(DefenderOptions.isMoraleBoostDefenderCheckbox()){
+        if(defender.getOptionData().get(OptionData.MORALEBOOST)){
             defender.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
         }
-        if(DefenderOptions.isWinnuCommanderDefenderCheckbox()){
+        if(defender.getOptionData().get(OptionData.WINNUCOMMANDER)){
             defender.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -2);
         }
-        if(DefenderOptions.isProphecyOfIxthDefenderCheckbox()){
+        if(defender.getOptionData().get(OptionData.PROPHECYOFIXTH)){
             defender.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT, -1, UnitName.FIGHTER);
         }
-        if(DefenderOptions.getDefenderFactionCB() == FactionEnum.SARDAKKNORR && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
+        if(defender.getFaction() instanceof SardakkNorr && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
             Abilities.sardakkNorrFlagship(defender);
         }
 
         if(defender.getFaction() instanceof NaazRokha && defender.getUnitList().containsName(UnitName.FLAGSHIP)){
             defender.addDiceToSpecificUnitType(CombatType.SPACECOMBAT, UnitName.MECH);
         }
-        if(DefenderOptions.isBaronyAgentDefenderCheckbox()){
+        if(defender.getOptionData().get(OptionData.BARONYAGENT)){
             defender.addOneDiceToBestUnit(CombatType.SPACECOMBAT);
         }
     }

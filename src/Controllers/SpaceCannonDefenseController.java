@@ -1,10 +1,10 @@
 package Controllers;
 
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
+import GUI.OptionData;
 import Player.Player;
 import Units.Unit;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class SpaceCannonDefenseController extends Controller{
@@ -33,12 +33,12 @@ public class SpaceCannonDefenseController extends Controller{
     public void attackerPreProcess(){
         //Check for pre-combat modifiers
         //Antimass deflector
-        if (AttackerOptions.isAntimassDeflectorAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.ANTIMASSDEFLECTOR)){
             defenderNonShips.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
         }
 
         //Disable
-        if (AttackerOptions.isDisableLabelAttackerCheckbox()){
+        if (attacker.getOptionData().get(OptionData.DISABLE)){
            defenderNonShips.disablePDS();
         }
     }
@@ -48,18 +48,18 @@ public class SpaceCannonDefenseController extends Controller{
      */
     public void defenderPreProcess(){
         //Titans hero
-        if (DefenderOptions.isTitansHeroDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.TITANSHERO)){
             defenderNonShips.addUnitTitansHero();
         }
 
         //Check for pre-combat modifiers
         //Plasma scoring
-        if (DefenderOptions.isPlasmaScoringDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.PLASMASCORING)){
             defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
 
         //Argent flight commander
-        if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()){
+        if (defender.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)){
             defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
         }
     }
@@ -80,7 +80,7 @@ public class SpaceCannonDefenseController extends Controller{
 
             //Check re-roll conditions
             //Jol Nar commander
-            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+            if (defender.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
                 Roller.reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
             }
 

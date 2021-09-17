@@ -1,8 +1,7 @@
 package Controllers;
 
 import Factions.ArgentFlight;
-import GUIData.AttackerOptions;
-import GUIData.DefenderOptions;
+import GUI.OptionData;
 import Units.Unit;
 import Units.UnitName;
 
@@ -34,11 +33,11 @@ public class AFBController extends Controller{
      */
     public void attackerPreProcess(){
         //Argent Flight Promissory note
-        if (AttackerOptions.isStrikeWingAmbushAttackerCheckbox()) {
+        if (attacker.getOptionData().get(OptionData.STRIKEWINGAMBUSH)) {
             attacker.addOneDiceToBestUnit(CombatType.AFB);
         }
         //Argent Flight commander
-        if (AttackerOptions.isArgentFlightCommanderAttackerCheckbox()) {
+        if (attacker.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)) {
             attacker.addOneDiceToBestUnit(CombatType.AFB);
         }
     }
@@ -58,7 +57,7 @@ public class AFBController extends Controller{
 
             //Check re-roll conditions
             //Jol Nar commander
-            if (AttackerOptions.isJolNarCommanderAttackerCheckbox()) {
+            if (attacker.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
                 Roller.reRollMissedDice(CombatType.AFB, diceRolls, unit);
             }
 
@@ -90,11 +89,11 @@ public class AFBController extends Controller{
      */
     private void defenderPreProcess() {
         //Argent Flight Promissory note
-        if (DefenderOptions.isStrikeWingAmbushDefenderCheckbox()) {
+        if (defender.getOptionData().get(OptionData.STRIKEWINGAMBUSH)) {
             defender.addOneDiceToBestUnit(CombatType.AFB);
         }
         //Argent Flight commander
-        if (DefenderOptions.isArgentFlightCommanderDefenderCheckbox()) {
+        if (defender.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)) {
             defender.addOneDiceToBestUnit(CombatType.AFB);
         }
     }
@@ -114,7 +113,7 @@ public class AFBController extends Controller{
 
             //Check re-roll conditions
             //Jol Nar commander
-            if (DefenderOptions.isJolNarCommanderDefenderCheckbox()) {
+            if (defender.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
                 Roller.reRollMissedDice(CombatType.AFB, diceRolls, unit);
             }
 
