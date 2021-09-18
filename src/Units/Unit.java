@@ -1,5 +1,7 @@
 package Units;
 
+import Controllers.CombatType;
+
 import java.util.Objects;
 
 public class Unit {
@@ -174,6 +176,100 @@ public class Unit {
 
     }
 
+    public void setBombardmentValue(int hitValueBombardment, int numDiceRollsBombardment) {
+        this.hitValueBombardment = hitValueBombardment;
+        this.numDiceRollsBombardment = numDiceRollsBombardment;
+    }
+
+    public void setGroundCombatValue(int hitValueGroundCombat, int numDiceRollsGroundCombat) {
+        this.hitValueGroundCombat = hitValueGroundCombat;
+        this.numDiceRollsGroundCombat = numDiceRollsGroundCombat;
+    }
+
+    public void setAFBValue(int hitValueAFB, int numDiceRollsAFB) {
+        this.hitValueAFB = hitValueAFB;
+        this.numDiceRollsAFB = numDiceRollsAFB;
+    }
+
+    public void setSpaceCannonValue(int hitValueSpaceCannon, int numDiceRollsSpaceCannon) {
+        this.hitValueSpaceCannon = hitValueSpaceCannon;
+        this.numDiceRollsSpaceCannon = numDiceRollsSpaceCannon;
+    }
+
+    public void setSpaceCombatValue(int hitValueSpaceCombat, int numDiceRollsSpaceCombat) {
+        this.hitValueSpaceCombat = hitValueSpaceCombat;
+        this.numDiceRollsSpaceCombat = numDiceRollsSpaceCombat;
+    }
+
+    public int getHitValue(CombatType combatType) {
+        return switch (combatType) {
+            case AFB -> hitValueAFB;
+            case BOMBARDMENT -> hitValueBombardment;
+            case GROUNDCOMBAT -> hitValueGroundCombat;
+            case SPACECOMBAT -> hitValueSpaceCombat;
+            case SPACECANNON -> hitValueSpaceCannon;
+        };
+    }
+
+    public int getNumDiceRolls(CombatType combatType) {
+        return switch (combatType) {
+            case AFB -> numDiceRollsAFB;
+            case BOMBARDMENT -> numDiceRollsBombardment;
+            case GROUNDCOMBAT -> numDiceRollsGroundCombat;
+            case SPACECOMBAT -> numDiceRollsSpaceCombat;
+            case SPACECANNON -> numDiceRollsSpaceCannon;
+        };
+    }
+
+    public void addNumDiceRolls(CombatType combatType, int numDice) {
+        switch (combatType) {
+            case AFB -> numDiceRollsAFB += numDice;
+            case BOMBARDMENT -> numDiceRollsBombardment += numDice;
+            case GROUNDCOMBAT -> numDiceRollsGroundCombat += numDice;
+            case SPACECOMBAT -> numDiceRollsSpaceCombat += numDice;
+            case SPACECANNON -> numDiceRollsSpaceCannon += numDice;
+        }
+    }
+
+    public void addHitValue(CombatType combatType, int hitVal) {
+        switch (combatType) {
+            case AFB -> hitValueAFB += hitVal;
+            case BOMBARDMENT -> hitValueBombardment += hitVal;
+            case GROUNDCOMBAT -> hitValueGroundCombat += hitVal;
+            case SPACECOMBAT -> hitValueSpaceCombat += hitVal;
+            case SPACECANNON -> hitValueSpaceCannon += hitVal;
+        }
+    }
+
+    public boolean isNonFighterShip(){
+        return name == UnitName.CARRIER ||
+                name == UnitName.CRUISER ||
+                name == UnitName.FLAGSHIP ||
+                name == UnitName.DESTROYER ||
+                name == UnitName.DREADNOUGHT ||
+                name == UnitName.WARSUN;
+    }
+
+    public boolean isShip(){
+        return isNonFighterShip() || name == UnitName.FIGHTER;
+    }
+
+    public boolean isFlagshipOrDreadnought(){
+        return name == UnitName.FLAGSHIP || name == UnitName.DREADNOUGHT;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Unit unit = (Unit) o;
+        return name == unit.name;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 
     //getters and setters for fields
     public UnitName getName() {
@@ -280,60 +376,4 @@ public class Unit {
         this.isPlanetaryShield = planetaryShield;
     }
 
-    //adds or changes units abilities
-
-    public void setBombardmentValue(int hitValueBombardment, int numDiceRollsBombardment) {
-        this.hitValueBombardment = hitValueBombardment;
-        this.numDiceRollsBombardment = numDiceRollsBombardment;
-    }
-
-    public void setGroundCombatValue(int hitValueGroundCombat, int numDiceRollsGroundCombat) {
-        this.hitValueGroundCombat = hitValueGroundCombat;
-        this.numDiceRollsGroundCombat = numDiceRollsGroundCombat;
-    }
-
-    public void setAFBValue(int hitValueAFB, int numDiceRollsAFB) {
-        this.hitValueAFB = hitValueAFB;
-        this.numDiceRollsAFB = numDiceRollsAFB;
-    }
-
-    public void setSpaceCannonValue(int hitValueSpaceCannon, int numDiceRollsSpaceCannon) {
-        this.hitValueSpaceCannon = hitValueSpaceCannon;
-        this.numDiceRollsSpaceCannon = numDiceRollsSpaceCannon;
-    }
-
-    public void setSpaceCombatValue(int hitValueSpaceCombat, int numDiceRollsSpaceCombat) {
-        this.hitValueSpaceCombat = hitValueSpaceCombat;
-        this.numDiceRollsSpaceCombat = numDiceRollsSpaceCombat;
-    }
-
-    public boolean isNonFighterShip(){
-        return name == UnitName.CARRIER ||
-                name == UnitName.CRUISER ||
-                name == UnitName.FLAGSHIP ||
-                name == UnitName.DESTROYER ||
-                name == UnitName.DREADNOUGHT ||
-                name == UnitName.WARSUN;
-    }
-
-    public boolean isShip(){
-        return isNonFighterShip() || name == UnitName.FIGHTER;
-    }
-
-    public boolean isFlagshipOrDreadnought(){
-        return name == UnitName.FLAGSHIP || name == UnitName.DREADNOUGHT;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Unit unit = (Unit) o;
-        return name == unit.name;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
 }

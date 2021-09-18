@@ -1,7 +1,6 @@
 package Controllers;
 
 import Factions.*;
-import Factions.FactionEnum;
 import GUI.OptionData;
 import Player.Player;
 import Units.Unit;
@@ -31,7 +30,7 @@ public class SpaceCombatController extends Controller{
 
         //Populate the number of dice for the winnu flagship
         if(currentPlayer.getFaction() instanceof Winnu && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)){
-            Abilities.winnuFlagship(currentPlayer, otherPlayer);
+            Winnu.winnuFlagship(currentPlayer, otherPlayer);
         }
 
         if(currentPlayer.getOptionData().get(OptionData.FIGHTERPROTOTYPE)){
@@ -47,7 +46,7 @@ public class SpaceCombatController extends Controller{
             currentPlayer.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-1, UnitName.FIGHTER);
         }
         if(currentPlayer.getFaction() instanceof SardakkNorr && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)){
-            Abilities.sardakkNorrFlagship(currentPlayer);
+            SardakkNorr.sardakkNorrFlagship(currentPlayer);
         }
 
         if(currentPlayer.getFaction() instanceof NaazRokha && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)){

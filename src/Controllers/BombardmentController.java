@@ -1,5 +1,6 @@
 package Controllers;
 
+import Factions.ArgentFlight;
 import GUI.OptionData;
 import Player.*;
 import Units.Unit;
@@ -28,7 +29,7 @@ public class BombardmentController extends Controller{
         if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
             //Blitz
             if (attacker.getOptionData().get(OptionData.BLITZ))
-                Abilities.blitz(attacker);
+                ArgentFlight.blitz(attacker);
 
             //Plasma scoring
             if (attacker.getOptionData().get(OptionData.PLASMASCORING))

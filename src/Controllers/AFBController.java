@@ -81,7 +81,7 @@ public class AFBController extends Controller{
     private void postProcess(Player currentPlayer, Player otherPlayer) {
         //Argent Flight faction ability
         if(currentPlayer.getFaction() instanceof ArgentFlight) {
-            Abilities.raidFormation(currentPlayer, otherPlayer);
+            ArgentFlight.raidFormation(currentPlayer, otherPlayer);
         }
     }
 }

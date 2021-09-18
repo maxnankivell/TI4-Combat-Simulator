@@ -198,62 +198,13 @@ public class Player {
      */
     public void addOneDiceToBestUnit(CombatType combatType){
         Unit lowestHitValue = unitList.get(0);
-        switch (combatType){
-            case AFB:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if ((unit.getHitValueAFB()<lowestHitValue.getHitValueAFB() && unit.getHitValueAFB()!=0)
-                            || lowestHitValue.getHitValueAFB()==0){
-                        lowestHitValue=unit;
-                    }
-                }
-                if (lowestHitValue.getHitValueAFB()!=0) {
-                    lowestHitValue.setNumDiceRollsAFB(lowestHitValue.getNumDiceRollsAFB() + 1);
-                }
-                break;
-            case BOMBARDMENT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if ((unit.getHitValueBombardment()<lowestHitValue.getHitValueBombardment() && unit.getHitValueBombardment()!=0)
-                            || lowestHitValue.getHitValueBombardment()==0){
-                        lowestHitValue=unit;
-                    }
-                }
-                if (lowestHitValue.getHitValueBombardment()!=0) {
-                    lowestHitValue.setNumDiceRollsBombardment(lowestHitValue.getNumDiceRollsBombardment() + 1);
-                }
-                break;
-            case SPACECANNON:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if ((unit.getHitValueSpaceCannon()<lowestHitValue.getHitValueSpaceCannon() && unit.getHitValueSpaceCannon()!=0)
-                            || lowestHitValue.getHitValueSpaceCannon()==0){
-                        lowestHitValue=unit;
-                    }
-                }
-                if (lowestHitValue.getHitValueSpaceCannon()!=0) {
-                    lowestHitValue.setNumDiceRollsSpaceCannon(lowestHitValue.getNumDiceRollsSpaceCannon() + 1);
-                }
-                break;
-            case SPACECOMBAT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if ((unit.getHitValueSpaceCombat()<lowestHitValue.getHitValueSpaceCombat() && unit.getHitValueSpaceCombat()!=0)
-                            || lowestHitValue.getHitValueSpaceCombat()==0){
-                        lowestHitValue=unit;
-                    }
-                }
-                if (lowestHitValue.getHitValueSpaceCombat()!=0) {
-                    lowestHitValue.setNumDiceRollsSpaceCombat(lowestHitValue.getNumDiceRollsSpaceCombat() + 1);
-                }
-                break;
-            case GROUNDCOMBAT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if ((unit.getHitValueGroundCombat()<lowestHitValue.getHitValueGroundCombat()) && unit.getHitValueGroundCombat()!=0
-                            || lowestHitValue.getHitValueGroundCombat()==0){
-                        lowestHitValue=unit;
-                    }
-                }
-                if (lowestHitValue.getHitValueGroundCombat()!=0) {
-                    lowestHitValue.setNumDiceRollsGroundCombat(lowestHitValue.getNumDiceRollsGroundCombat() + 1);
-                }
-                break;
+        for (Unit unit : unitList.getUnitArrayList()) {
+            if ((unit.getHitValue(combatType) < lowestHitValue.getHitValue(combatType) && unit.getHitValue(combatType) != 0) || lowestHitValue.getHitValue(combatType) == 0) {
+                lowestHitValue = unit;
+            }
+        }
+        if (lowestHitValue.getHitValue(combatType) != 0) {
+            lowestHitValue.addNumDiceRolls(combatType, 1);
         }
     }
 
@@ -263,42 +214,10 @@ public class Player {
      * @param unitName name of unit
      */
     public void addDiceToSpecificUnitType(CombatType combatType, UnitName unitName){
-        switch (combatType){
-            case AFB:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if(unit.getName() == unitName && unit.getNumDiceRollsAFB()!=0){
-                        unit.setNumDiceRollsAFB(unit.getNumDiceRollsAFB()+1);
-                    }
-                }
-                break;
-            case BOMBARDMENT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if(unit.getName() == unitName && unit.getNumDiceRollsBombardment()!=0){
-                        unit.setNumDiceRollsBombardment(unit.getNumDiceRollsBombardment()+1);
-                    }
-                }
-                break;
-            case SPACECANNON:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if(unit.getName() == unitName && unit.getNumDiceRollsSpaceCannon()!=0){
-                        unit.setNumDiceRollsSpaceCannon(unit.getNumDiceRollsSpaceCannon()+1);
-                    }
-                }
-                break;
-            case SPACECOMBAT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if(unit.getName() == unitName && unit.getNumDiceRollsSpaceCombat()!=0){
-                        unit.setNumDiceRollsSpaceCombat(unit.getNumDiceRollsSpaceCombat()+1);
-                    }
-                }
-                break;
-            case GROUNDCOMBAT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if(unit.getName() == unitName && unit.getNumDiceRollsGroundCombat()!=0){
-                        unit.setNumDiceRollsGroundCombat(unit.getNumDiceRollsGroundCombat()+1);
-                    }
-                }
-                break;
+        for (Unit unit : unitList.getUnitArrayList()) {
+            if (unit.getName() == unitName && unit.getNumDiceRolls(combatType) != 0) {
+                unit.addNumDiceRolls(combatType, 1);
+            }
         }
     }
 
@@ -308,44 +227,10 @@ public class Player {
      * @param addAmount amount added to the units hit values
      */
     public void changeHitValueOfAllUnits(CombatType combatType, int addAmount){
-        switch (combatType){
-            case AFB:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if (unit.getHitValueAFB()!=0) {
-                        unit.setHitValueAFB(unit.getHitValueAFB() + addAmount);
-                    }
-                }
-                break;
-            case BOMBARDMENT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if (unit.getHitValueBombardment()!=0) {
-                        if (unit.getHitValueBombardment()!=0) {
-                            unit.setHitValueBombardment(unit.getHitValueBombardment() + addAmount);
-                        }
-                    }
-                }
-                break;
-            case SPACECANNON:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if (unit.getHitValueSpaceCannon()!=0) {
-                        unit.setHitValueSpaceCannon(unit.getHitValueSpaceCannon() + addAmount);
-                    }
-                }
-                break;
-            case SPACECOMBAT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if (unit.getHitValueSpaceCombat()!=0) {
-                        unit.setHitValueSpaceCombat(unit.getHitValueSpaceCombat() + addAmount);
-                    }
-                }
-                break;
-            case GROUNDCOMBAT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if (unit.getHitValueGroundCombat()!=0) {
-                        unit.setHitValueGroundCombat(unit.getHitValueGroundCombat() + addAmount);
-                    }
-                }
-                break;
+        for (Unit unit : unitList.getUnitArrayList()) {
+            if (unit.getHitValue(combatType) != 0) {
+                unit.addHitValue(combatType, addAmount);
+            }
         }
     }
 
@@ -356,42 +241,10 @@ public class Player {
      * @param unitName name of unit
      */
     public void changeHitValueOfAllUnitsOfSpecificType(CombatType combatType, int addAmount, UnitName unitName){
-        switch (combatType){
-            case AFB:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if(unit.getName() == unitName && unit.getHitValueAFB()!=0){
-                        unit.setHitValueAFB(unit.getHitValueAFB()+addAmount);
-                    }
-                }
-                break;
-            case BOMBARDMENT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if(unit.getName() == unitName && unit.getHitValueBombardment()!=0){
-                        unit.setHitValueBombardment(unit.getHitValueBombardment()+addAmount);
-                    }
-                }
-                break;
-            case SPACECANNON:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if(unit.getName() == unitName && unit.getHitValueSpaceCannon()!=0){
-                        unit.setHitValueSpaceCannon(unit.getHitValueSpaceCannon()+addAmount);
-                    }
-                }
-                break;
-            case SPACECOMBAT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if(unit.getName() == unitName && unit.getHitValueSpaceCombat()!=0){
-                        unit.setHitValueSpaceCombat(unit.getHitValueSpaceCombat()+addAmount);
-                    }
-                }
-                break;
-            case GROUNDCOMBAT:
-                for (Unit unit: unitList.getUnitArrayList()){
-                    if(unit.getName() == unitName && unit.getHitValueGroundCombat()!=0){
-                        unit.setHitValueGroundCombat(unit.getHitValueGroundCombat()+addAmount);
-                    }
-                }
-                break;
+        for (Unit unit : unitList.getUnitArrayList()) {
+            if (unit.getName() == unitName && unit.getHitValue(combatType) != 0) {
+                unit.addHitValue(combatType, addAmount);
+            }
         }
     }
 
