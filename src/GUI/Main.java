@@ -68,14 +68,14 @@ public class Main extends Application {
 
     //GUI data
     private static FactionEnum attackerFaction;
-    private static EnumMap<UpgradeData, Boolean> attackerUpgradeData = new EnumMap<UpgradeData, Boolean>(UpgradeData.class);
-    private static EnumMap<OptionData, Boolean> attackerOptionData = new EnumMap<OptionData, Boolean>(OptionData.class);
-    private static EnumMap<UnitCountData, Integer> attackerUnitCountData = new EnumMap<UnitCountData, Integer>(UnitCountData.class);
+    private static EnumMap<UpgradeData, Boolean> attackerUpgradeData;
+    private static EnumMap<OptionData, Boolean> attackerOptionData;
+    private static EnumMap<UnitCountData, Integer> attackerUnitCountData;
 
     private static FactionEnum defenderFaction;
-    private static EnumMap<UpgradeData, Boolean> defenderUpgradeData = new EnumMap<UpgradeData, Boolean>(UpgradeData.class);
-    private static EnumMap<OptionData, Boolean> defenderOptionData = new EnumMap<OptionData, Boolean>(OptionData.class);
-    private static EnumMap<UnitCountData, Integer> defenderUnitCountData = new EnumMap<UnitCountData, Integer>(UnitCountData.class);
+    private static EnumMap<UpgradeData, Boolean> defenderUpgradeData;
+    private static EnumMap<OptionData, Boolean> defenderOptionData;
+    private static EnumMap<UnitCountData, Integer> defenderUnitCountData;
 
     public static void main(String[] args) {
         launch(args);
@@ -83,6 +83,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+        //Initialise EnumMaps
+        initialiseEnumMaps();
 
         //Set stage to be called window and give title
         window = primaryStage;
@@ -602,6 +605,31 @@ public class Main extends Application {
         defenderMechCB.setValue(0);
         defenderInfantryCB.setValue(0);
         defenderPdsCB.setValue(0);
+    }
+
+    private void initialiseEnumMaps() {
+        attackerUpgradeData = new EnumMap<>(UpgradeData.class);
+        attackerOptionData = new EnumMap<>(OptionData.class);
+        attackerUnitCountData = new EnumMap<>(UnitCountData.class);
+
+        defenderUpgradeData = new EnumMap<>(UpgradeData.class);
+        defenderOptionData = new EnumMap<>(OptionData.class);
+        defenderUnitCountData = new EnumMap<>(UnitCountData.class);
+
+        for (UpgradeData upgradeData : UpgradeData.values()) {
+            attackerUpgradeData.put(upgradeData, false);
+            defenderUpgradeData.put(upgradeData, false);
+        }
+
+        for (OptionData optionData : OptionData.values()) {
+            attackerOptionData.put(optionData, false);
+            defenderOptionData.put(optionData, false);
+        }
+
+        for (UnitCountData unitCountData : UnitCountData.values()) {
+            attackerUnitCountData.put(unitCountData, 0);
+            defenderUnitCountData.put(unitCountData, 0);
+        }
     }
 
     /**
