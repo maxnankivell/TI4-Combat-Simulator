@@ -5,10 +5,7 @@ import Factions.NaazRokha;
 import Factions.SardakkNorr;
 import GUI.OptionData;
 import Player.*;
-import Units.Unit;
 import Units.UnitName;
-
-import java.util.ArrayList;
 
 public class GroundCombatController extends Controller{
 
@@ -21,8 +18,10 @@ public class GroundCombatController extends Controller{
         preProcess(attacker, defender);
         preProcess(defender, attacker);
 
-        mainProcess(attacker);
-        mainProcess(defender);
+        Roller attackerRoller = new Roller(attacker, CombatType.GROUNDCOMBAT);
+        attackerRoller.mainProcess();
+        Roller defenderRoller = new Roller(defender, CombatType.GROUNDCOMBAT);
+        defenderRoller.mainProcess();
     }
 
     /**
@@ -65,32 +64,4 @@ public class GroundCombatController extends Controller{
             currentPlayer.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH);
     }
 
-    /**
-     * Method to run through the main combat process
-     */
-    public void mainProcess(Player currentPlayer){
-        //start rolling
-        for (Unit unit : currentPlayer.getUnitArrayList()) {
-            ArrayList<Integer> diceRolls = new ArrayList<>();
-
-            //roll amount of dice necessary for one unit
-            for (int i = 0; i < unit.getNumDiceRollsGroundCombat(); i++) {
-                diceRolls.add(Roller.diceRoll());
-            }
-
-            //Check re-roll conditions
-            //Fire team
-            if (currentPlayer.getOptionData().get(OptionData.FIRETEAM)) {
-                Roller.reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
-            }
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if (roll >= unit.getHitValueGroundCombat()) {
-                    currentPlayer.addNumHits(1);
-                }
-            }
-
-        }
-    }
 }

@@ -3,10 +3,7 @@ package Controllers;
 import Factions.*;
 import GUI.OptionData;
 import Player.Player;
-import Units.Unit;
 import Units.UnitName;
-
-import java.util.ArrayList;
 
 public class SpaceCombatController extends Controller{
 
@@ -19,8 +16,10 @@ public class SpaceCombatController extends Controller{
         preProcess(attacker, defender);
         preProcess(defender, attacker);
 
-        mainProcess(attacker);
-        mainProcess(defender);
+        Roller attackerRoller = new Roller(attacker, CombatType.SPACECOMBAT);
+        attackerRoller.mainProcess();
+        Roller defenderRoller = new Roller(defender, CombatType.SPACECOMBAT);
+        defenderRoller.mainProcess();
     }
 
     /**
@@ -57,38 +56,4 @@ public class SpaceCombatController extends Controller{
         }
     }
 
-    /**
-     * Method to run through the main combat process for the attacker
-     */
-    public void mainProcess(Player currentPlayer){
-
-        //Start the rolling for each unit
-        for (Unit unit : currentPlayer.getUnitArrayList()) {
-            ArrayList<Integer> diceRolls = new ArrayList<>();
-
-            //roll amount of dice necessary for one unit
-            for (int i=0; i<unit.getNumDiceRollsSpaceCombat(); i++){
-                diceRolls.add(Roller.diceRoll());
-            }
-
-            //Check re-roll conditions
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if(roll >= unit.getHitValueSpaceCombat()){
-                    currentPlayer.addNumHits(1);
-                }
-
-                //JolNar Flagship
-                if(currentPlayer.getFaction() instanceof JolNar && unit.getName() == UnitName.FLAGSHIP && roll >= 9) {
-                    currentPlayer.addNumHits(2);
-                }
-                //L1Z1X Flagship
-                if(currentPlayer.getFaction() instanceof L1Z1X && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP) && unit.isFlagshipOrDreadnought() && roll >= unit.getHitValueSpaceCombat()) {
-                    currentPlayer.addNumHits(-1);
-                    currentPlayer.addNumNonFighterHits(1);
-                }
-            }
-        }
-    }
 }

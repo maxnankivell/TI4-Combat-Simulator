@@ -2,9 +2,6 @@ package Controllers;
 
 import GUI.OptionData;
 import Player.*;
-import Units.Unit;
-
-import java.util.ArrayList;
 
 public class SpaceCannonDefenseController extends Controller{
     private Player defenderNonShips;
@@ -24,7 +21,8 @@ public class SpaceCannonDefenseController extends Controller{
         preProcess(defender, attacker);
         preProcess(attacker, defender);
 
-        mainProcess(defender);
+        Roller defenderRoller = new Roller(defender, CombatType.SPACECANNON);
+        defenderRoller.mainProcess();
     }
 
     /**
@@ -63,36 +61,5 @@ public class SpaceCannonDefenseController extends Controller{
             }
         }
     }
-
-    /**
-     * Method to run through the main combat process
-     */
-    public void mainProcess(Player currentPlayer) {
-        //start rolling
-        for (Unit unit : defenderNonShips.getUnitArrayList()) {
-
-            ArrayList<Integer> diceRolls = new ArrayList<>();
-
-            //roll amount of dice necessary for one unit
-            for (int i = 0; i < unit.getNumDiceRollsSpaceCannon(); i++) {
-                diceRolls.add(Roller.diceRoll());
-            }
-
-            //Check re-roll conditions
-            //Jol Nar commander
-            if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
-                Roller.reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
-            }
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if (roll >= unit.getHitValueSpaceCannon()) {
-                    currentPlayer.addNumHits(1);
-                }
-            }
-
-        }
-    }
-
 
 }

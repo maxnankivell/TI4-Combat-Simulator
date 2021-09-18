@@ -3,10 +3,8 @@ package Controllers;
 import Factions.ArgentFlight;
 import GUI.OptionData;
 import Player.*;
-import Units.Unit;
 import Units.UnitName;
 
-import java.util.ArrayList;
 
 public class BombardmentController extends Controller{
 
@@ -20,7 +18,8 @@ public class BombardmentController extends Controller{
         boolean bombardmentCancelled = preProcess(defender, attacker);
 
         if ((!defender.getUnitList().containsPlanetaryShield() || planetaryShieldCancelled) && !bombardmentCancelled){
-            mainProcess(attacker);
+            Roller attackerRoller = new Roller(attacker, CombatType.BOMBARDMENT);
+            attackerRoller.mainProcess();
         }
     }
 
@@ -68,31 +67,5 @@ public class BombardmentController extends Controller{
         }
 
         return false;
-    }
-
-    public void mainProcess(Player currentPlayer){
-        //start rolling
-        for (Unit unit : currentPlayer.getUnitArrayList()) {
-            ArrayList<Integer> diceRolls = new ArrayList<>();
-
-            //roll amount of dice necessary for one unit
-            for (int i = 0; i < unit.getNumDiceRollsBombardment(); i++) {
-                diceRolls.add(Roller.diceRoll());
-            }
-
-            //Check re-roll conditions
-            //Jol Nar commander
-            if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
-                Roller.reRollMissedDice(CombatType.BOMBARDMENT, diceRolls, unit);
-            }
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if (roll >= unit.getHitValueBombardment()) {
-                    currentPlayer.addNumHits(1);
-                }
-            }
-
-        }
     }
 }
