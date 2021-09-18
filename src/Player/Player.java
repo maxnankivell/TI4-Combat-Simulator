@@ -2,10 +2,10 @@ package Player;
 
 import Controllers.CombatType;
 import Factions.*;
-import GUI.Main;
 import GUI.OptionData;
 import GUI.UnitCountData;
 import GUI.UpgradeData;
+import GUI.GUIData;
 import Factions.FactionEnum;
 import Units.Unit;
 import Units.UnitList;
@@ -19,10 +19,12 @@ public class Player {
     private UnitList unitList;
     private Faction faction;
     private PlayerRole role;
+
     private int numHits;
     private int numInfantryHits;
     private int numSustainDamageHits;
     private int numNonFighterHits;
+
     private FactionEnum factionEnum;
     private EnumMap<UpgradeData, Boolean> upgradeData;
     private EnumMap<OptionData, Boolean> optionData;
@@ -56,16 +58,16 @@ public class Player {
     private void populateDataFields(){
         switch (role){
             case ATTACKER -> {
-                factionEnum = Main.getAttackerFaction();
-                upgradeData = Main.getAttackerUpgradeData();
-                optionData = Main.getAttackerOptionData();
-                unitCountData = Main.getAttackerUnitCountData();
+                factionEnum = GUIData.getInstance().getAttackerFaction();
+                upgradeData = GUIData.getInstance().getAttackerUpgradeData();
+                optionData = GUIData.getInstance().getAttackerOptionData();
+                unitCountData = GUIData.getInstance().getAttackerUnitCountData();
             }
             case DEFENDER -> {
-                factionEnum = Main.getDefenderFaction();
-                upgradeData = Main.getDefenderUpgradeData();
-                optionData = Main.getDefenderOptionData();
-                unitCountData = Main.getDefenderUnitCountData();
+                factionEnum = GUIData.getInstance().getDefenderFaction();
+                upgradeData = GUIData.getInstance().getDefenderUpgradeData();
+                optionData = GUIData.getInstance().getDefenderOptionData();
+                unitCountData = GUIData.getInstance().getDefenderUnitCountData();
             }
         }
     }

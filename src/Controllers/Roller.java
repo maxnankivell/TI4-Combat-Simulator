@@ -33,7 +33,7 @@ public class Roller {
             ArrayList<Integer> diceRolls = new ArrayList<>();
 
             //roll amount of dice necessary for one unit
-            for (int i=0; i<unit.getNumDiceRollsSpaceCombat(); i++){
+            for (int i=0; i<unit.getNumDiceRolls(combatType); i++){
                 diceRolls.add(diceRoll());
             }
 
@@ -68,7 +68,7 @@ public class Roller {
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
-                if(roll >= unit.getHitValueSpaceCombat()){
+                if(roll >= unit.getHitValue(combatType)){
                     currentPlayer.addNumHits(1);
                 }
 
