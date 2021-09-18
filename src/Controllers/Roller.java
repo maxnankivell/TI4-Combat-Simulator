@@ -38,33 +38,8 @@ public class Roller {
             }
 
             //Check re-roll conditions
-            switch (combatType){
-                case AFB -> {
-                    //Jol Nar commander
-                    if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
-                        reRollMissedDice(CombatType.AFB, diceRolls, unit);
-                    }
-                }
-                case BOMBARDMENT -> {
-                    //Jol Nar commander
-                    if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
-                        reRollMissedDice(CombatType.BOMBARDMENT, diceRolls, unit);
-                    }
-                }
-                case GROUNDCOMBAT -> {
-                    //Fire team
-                    if (currentPlayer.getOptionData().get(OptionData.FIRETEAM)) {
-                        reRollMissedDice(CombatType.GROUNDCOMBAT, diceRolls, unit);
-                    }
-                }
-                case SPACECOMBAT -> {}
-                case SPACECANNON -> {
-                    //Jol Nar commander
-                    if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
-                        reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
-                    }
-                }
-            }
+            checkForJolNarCommander(combatType, diceRolls, unit);
+            checkForFireTeam(combatType, diceRolls, unit);
 
             //Check number of hits from this unit
             for (Integer roll : diceRolls) {
@@ -72,28 +47,10 @@ public class Roller {
                     currentPlayer.addNumHits(1);
                 }
 
-                switch (combatType){
-                    case AFB -> {
-                        //Argent Flight special destroyers
-                        if(currentPlayer.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYER && unit.isUpgraded() && roll >= 9) {
-                            currentPlayer.addNumInfantryHits(1);
-                        }
-                    }
-                    case BOMBARDMENT -> {}
-                    case GROUNDCOMBAT -> {}
-                    case SPACECOMBAT -> {
-                        //JolNar Flagship
-                        if(currentPlayer.getFaction() instanceof JolNar && unit.getName() == UnitName.FLAGSHIP && roll >= 9) {
-                            currentPlayer.addNumHits(2);
-                        }
-                        //L1Z1X Flagship
-                        if(currentPlayer.getFaction() instanceof L1Z1X && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP) && unit.isFlagshipOrDreadnought() && roll >= unit.getHitValueSpaceCombat()) {
-                            currentPlayer.addNumHits(-1);
-                            currentPlayer.addNumNonFighterHits(1);
-                        }
-                    }
-                    case SPACECANNON -> {}
-                }
+                //Check for special types of hits
+                checkForArgentFlightDestroyers(combatType, unit, roll);
+                checkForJolNarFlagship(combatType, unit, roll);
+                checkForL1Z1XFlagship(combatType, unit, roll);
             }
         }
     }
@@ -117,6 +74,34 @@ public class Roller {
             if (diceRolls.get(i) < unit.getHitValue(combatType)) {
                 diceRolls.set(i, diceRoll());
             }
+        }
+    }
+
+    private void checkForJolNarCommander(CombatType combatType, ArrayList<Integer> diceRolls, Unit unit) {
+        if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER) && (combatType == CombatType.AFB || combatType == CombatType.BOMBARDMENT || combatType == CombatType.SPACECANNON))
+            reRollMissedDice(combatType, diceRolls, unit);
+    }
+
+    private void checkForFireTeam(CombatType combatType, ArrayList<Integer> diceRolls, Unit unit) {
+        if (currentPlayer.getOptionData().get(OptionData.FIRETEAM) && combatType == CombatType.GROUNDCOMBAT)
+            reRollMissedDice(combatType, diceRolls, unit);
+    }
+
+    private void checkForArgentFlightDestroyers(CombatType combatType, Unit unit, Integer roll) {
+        if(currentPlayer.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYER && unit.isUpgraded() && roll >= 9 && combatType == CombatType.AFB)
+            currentPlayer.addNumInfantryHits(1);
+    }
+
+    private void checkForJolNarFlagship(CombatType combatType, Unit unit, Integer roll) {
+        if(currentPlayer.getFaction() instanceof JolNar && unit.getName() == UnitName.FLAGSHIP && roll >= 9 && combatType == CombatType.SPACECOMBAT) {
+            currentPlayer.addNumHits(2);
+        }
+    }
+
+    private void checkForL1Z1XFlagship(CombatType combatType, Unit unit, Integer roll) {
+        if(currentPlayer.getFaction() instanceof L1Z1X && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP) && unit.isFlagshipOrDreadnought() && roll >= unit.getHitValueSpaceCombat() && combatType == CombatType.SPACECOMBAT) {
+            currentPlayer.addNumHits(-1);
+            currentPlayer.addNumNonFighterHits(1);
         }
     }
 }
