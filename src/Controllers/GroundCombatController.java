@@ -2,6 +2,7 @@ package Controllers;
 
 import Factions.JolNar;
 import Factions.NaazRokha;
+import Factions.SardakkNorr;
 import GUI.OptionData;
 import Player.*;
 import Units.Unit;
@@ -41,7 +42,7 @@ public class GroundCombatController extends Controller{
 
         //Tekklar legion
         if (currentPlayer.getOptionData().get(OptionData.TEKKLARLEGION))
-            Abilities.tekklarLegion(currentPlayer, otherPlayer);
+            SardakkNorr.tekklarLegion(currentPlayer, otherPlayer);
 
         //Morale boost
         if (currentPlayer.getOptionData().get(OptionData.MORALEBOOST))

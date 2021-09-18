@@ -24,42 +24,10 @@ public class Roller {
      * @param unit the unit whose dice are being rerolled
      */
     public static void reRollMissedDice(CombatType combatType, ArrayList<Integer> diceRolls, Unit unit) {
-        switch (combatType){
-            case AFB:
-                for (int i = 0; i < diceRolls.size(); i++) {
-                    if(diceRolls.get(i) < unit.getHitValueAFB()){
-                        diceRolls.set(i, diceRoll());
-                    }
-                }
-                break;
-            case BOMBARDMENT:
-                for (int i = 0; i < diceRolls.size(); i++) {
-                    if(diceRolls.get(i) < unit.getHitValueBombardment()){
-                        diceRolls.set(i, diceRoll());
-                    }
-                }
-                break;
-            case SPACECANNON:
-                for (int i = 0; i < diceRolls.size(); i++) {
-                    if(diceRolls.get(i) < unit.getHitValueSpaceCannon()){
-                        diceRolls.set(i, diceRoll());
-                    }
-                }
-                break;
-            case SPACECOMBAT:
-                for (int i = 0; i < diceRolls.size(); i++) {
-                    if(diceRolls.get(i) < unit.getHitValueSpaceCombat()){
-                        diceRolls.set(i, diceRoll());
-                    }
-                }
-                break;
-            case GROUNDCOMBAT:
-                for (int i = 0; i < diceRolls.size(); i++) {
-                    if(diceRolls.get(i) < unit.getHitValueGroundCombat()){
-                        diceRolls.set(i, diceRoll());
-                    }
-                }
-                break;
+        for (int i = 0; i < diceRolls.size(); i++) {
+            if (diceRolls.get(i) < unit.getHitValue(combatType)) {
+                diceRolls.set(i, diceRoll());
+            }
         }
     }
 }
