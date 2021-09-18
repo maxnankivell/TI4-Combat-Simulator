@@ -15,8 +15,8 @@ public class GroundCombatController extends Controller{
 
     @Override
     public void startProcess() {
-        preProcess(attacker, defender);
-        preProcess(defender, attacker);
+        preRollChecks(attacker, defender);
+        preRollChecks(defender, attacker);
 
         Roller attackerRoller = new Roller(attacker, CombatType.GROUNDCOMBAT);
         attackerRoller.mainProcess();
@@ -27,39 +27,59 @@ public class GroundCombatController extends Controller{
     /**
      * Method to run through all pre-combat modifiers
      */
-    public void preProcess(Player currentPlayer, Player otherPlayer){
+    public void preRollChecks(Player currentPlayer, Player otherPlayer){
 
-        if(currentPlayer.getRole() == PlayerRole.DEFENDER) {
-            //Defending in nebula
-            if (currentPlayer.getOptionData().get(OptionData.DEFENDINGINNEBULA))
-                currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
+        checkForDefendingInNebula(currentPlayer);
+        checkForMagenDefenseGrid(currentPlayer);
+        checkForTekklarLegion(currentPlayer, otherPlayer);
+        checkForMoraleBoost(currentPlayer);
+        checkForWinnuCommander(currentPlayer);
+        checkForSolAgent(currentPlayer);
+        checkForJolNarMech(currentPlayer);
+        checkForNaazRokhaFlagship(currentPlayer);
 
-            //Magen defense grid
-            if (currentPlayer.getOptionData().get(OptionData.MAGENDEFENSEGRID))
-                currentPlayer.addNumHits(1);
+    }
+
+    private void checkForDefendingInNebula(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.DEFENDINGINNEBULA) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+            currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
+    }
+
+    private void checkForMagenDefenseGrid(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.MAGENDEFENSEGRID) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+            currentPlayer.addNumHits(1);
+    }
+
+    private void checkForTekklarLegion(Player currentPlayer, Player otherPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.TEKKLARLEGION)) {
+            currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
+            if (otherPlayer.getFaction() instanceof SardakkNorr){
+                otherPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
+            }
         }
+    }
 
-        //Tekklar legion
-        if (currentPlayer.getOptionData().get(OptionData.TEKKLARLEGION))
-            SardakkNorr.tekklarLegion(currentPlayer, otherPlayer);
-
-        //Morale boost
+    private void checkForMoraleBoost(Player currentPlayer) {
         if (currentPlayer.getOptionData().get(OptionData.MORALEBOOST))
             currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
+    }
 
-        //Winnu commander
+    private void checkForWinnuCommander(Player currentPlayer) {
         if (currentPlayer.getOptionData().get(OptionData.WINNUCOMMANDER))
             currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -2);
+    }
 
-        //Sol agent
+    private void checkForSolAgent(Player currentPlayer) {
         if (currentPlayer.getOptionData().get(OptionData.SOLAGENT))
             currentPlayer.addOneDiceToBestUnit(CombatType.GROUNDCOMBAT);
+    }
 
-        //Jol Nar mech
+    private void checkForJolNarMech(Player currentPlayer) {
         if (currentPlayer.getFaction() instanceof JolNar && currentPlayer.getUnitList().containsName(UnitName.MECH))
             currentPlayer.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, -1, UnitName.INFANTRY);
+    }
 
-        //Naaz Rokha flagship
+    private void checkForNaazRokhaFlagship(Player currentPlayer) {
         if (currentPlayer.getFaction() instanceof NaazRokha && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP))
             currentPlayer.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH);
     }

@@ -18,8 +18,8 @@ public class SpaceCannonDefenseController extends Controller{
         defenderNonShips = new Player(defender);
         defenderNonShips.getUnitList().removeShips();
 
-        preProcess(defender, attacker);
-        preProcess(attacker, defender);
+        preRollChecks(defender);
+        preRollChecks(attacker);
 
         Roller defenderRoller = new Roller(defender, CombatType.SPACECANNON);
         defenderRoller.mainProcess();
@@ -28,38 +28,39 @@ public class SpaceCannonDefenseController extends Controller{
     /**
      * Method to run through all pre-combat modifiers
      */
-    public void preProcess(Player currentPlayer, Player otherPlayer){
+    public void preRollChecks(Player currentPlayer){
 
-        if (currentPlayer.getRole() == PlayerRole.DEFENDER) {
-            //Titans hero
-            if (currentPlayer.getOptionData().get(OptionData.TITANSHERO)) {
-                defenderNonShips.addUnitTitansHero();
-            }
+        checkForTitansHero(currentPlayer);
+        checkForPlasmaScoring(currentPlayer);
+        checkForArgentFlightCommander(currentPlayer);
+        checkForAntimassDeflector(currentPlayer);
+        checkForDisable(currentPlayer);
 
-            //Check for pre-combat modifiers
-            //Plasma scoring
-            if (currentPlayer.getOptionData().get(OptionData.PLASMASCORING)) {
-                defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
-            }
+    }
 
-            //Argent flight commander
-            if (currentPlayer.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)) {
-                defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
-            }
-        }
+    private void checkForTitansHero(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.TITANSHERO) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+            defenderNonShips.addUnitTitansHero();
+    }
 
-        if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
-            //Check for pre-combat modifiers
-            //Antimass deflector
-            if (currentPlayer.getOptionData().get(OptionData.ANTIMASSDEFLECTOR)) {
-                defenderNonShips.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
-            }
+    private void checkForPlasmaScoring(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.PLASMASCORING) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+            defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
+    }
 
-            //Disable
-            if (currentPlayer.getOptionData().get(OptionData.DISABLE)) {
-                defenderNonShips.disablePDS();
-            }
-        }
+    private void checkForArgentFlightCommander(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+            defenderNonShips.addOneDiceToBestUnit(CombatType.SPACECANNON);
+    }
+
+    private void checkForAntimassDeflector(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.ANTIMASSDEFLECTOR) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+            defenderNonShips.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
+    }
+
+    private void checkForDisable(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.DISABLE) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+            defenderNonShips.disablePDS();
     }
 
 }

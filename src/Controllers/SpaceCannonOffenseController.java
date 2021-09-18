@@ -7,14 +7,17 @@ import Units.UnitName;
 
 public class SpaceCannonOffenseController extends Controller{
 
+    boolean defenderCancelled = false;
+    boolean attackerCancelled = false;
+
     public SpaceCannonOffenseController(){
         super();
     }
 
     @Override
     public void startProcess() {
-        boolean defenderCancelled = preProcess(attacker, defender);
-        boolean attackerCancelled = preProcess(defender, attacker);
+        preRollChecks(attacker, defender);
+        preRollChecks(defender, attacker);
 
         if (!attackerCancelled) {
             Roller attackerRoller = new Roller(attacker, CombatType.SPACECANNON);
@@ -30,45 +33,63 @@ public class SpaceCannonOffenseController extends Controller{
     /**
      * Method to run through all pre-combat modifiers for the attacker
      */
-    public boolean preProcess(Player currentPlayer, Player otherPlayer){
+    public void preRollChecks(Player currentPlayer, Player otherPlayer) {
+        
+        checkForExperimentalBattlestation(currentPlayer);
+        checkForTitansHero(currentPlayer);
+        checkForPlasmaScoring(currentPlayer);
+        checkForAntimassDeflector(currentPlayer, otherPlayer);
+        checkForStrikeWingAmbush(currentPlayer);
+        checkForArgentFlightCommander(currentPlayer);
+        checkForSolarFlare(currentPlayer);
+        checkForArgentFlightFlagship(currentPlayer);
 
-        if (currentPlayer.getRole() == PlayerRole.DEFENDER){
-            //Experimental battlestation
-            if (currentPlayer.getOptionData().get(OptionData.EXPERIMENTALBATTLESTATION))
-                currentPlayer.addUnitExperimentalBattlestation();
+    }
 
-            //Titans Hero
-            if (currentPlayer.getOptionData().get(OptionData.TITANSHERO))
-                currentPlayer.addUnitTitansHero();
-        }
+    private void checkForExperimentalBattlestation(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.EXPERIMENTALBATTLESTATION) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+            currentPlayer.addUnitExperimentalBattlestation();
+    }
 
-        //Plasma scoring
+    private void checkForTitansHero(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.TITANSHERO) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+            currentPlayer.addUnitTitansHero();
+    }
+
+    private void checkForPlasmaScoring(Player currentPlayer) {
         if (currentPlayer.getOptionData().get(OptionData.PLASMASCORING))
             currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
+    }
 
-        //Antimass deflector
+    private void checkForAntimassDeflector(Player currentPlayer, Player otherPlayer) {
         if (currentPlayer.getOptionData().get(OptionData.ANTIMASSDEFLECTOR))
             otherPlayer.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
+    }
 
-        //Strike wing ambuscade
+    private void checkForStrikeWingAmbush(Player currentPlayer) {
         if (currentPlayer.getOptionData().get(OptionData.STRIKEWINGAMBUSH))
             currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
+    }
 
-        //Argent flight commander
+    private void checkForArgentFlightCommander(Player currentPlayer) {
         if (currentPlayer.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER))
             currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
+    }
 
-        if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
-            //Solar flare
-            if (currentPlayer.getOptionData().get(OptionData.SOLARFLAIR))
-                return true;
+    private void checkForSolarFlare(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.SOLARFLAIR) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+            defenderCancelled = true;
+    }
+
+    private void checkForArgentFlightFlagship(Player currentPlayer) {
+        if (attacker.getFaction() instanceof ArgentFlight && attacker.getUnitList().containsName(UnitName.FLAGSHIP)) {
+            if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
+                defenderCancelled = true;
+            }
+            if (currentPlayer.getRole() == PlayerRole.DEFENDER) {
+                attackerCancelled = true;
+            }
         }
-
-        //Argent flight flagship
-        if (attacker.getFaction() instanceof ArgentFlight && attacker.getUnitList().containsName(UnitName.FLAGSHIP))
-            return true;
-
-        return false;
     }
 
 }
