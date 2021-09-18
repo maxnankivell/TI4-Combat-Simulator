@@ -385,8 +385,8 @@ public class OptionsScreenGUI {
 
         //Button actions
         saveButton.setOnAction(e -> {
-            Main.setAttackerOptionData(saveAttackerCheckBoxs());
-            Main.setDefenderOptionData(saveDefenderCheckBoxs());
+            GUIData.getInstance().setAttackerOptionData(saveAttackerCheckBoxs());
+            GUIData.getInstance().setDefenderOptionData(saveDefenderCheckBoxs());
             window.close();
         });
 
@@ -483,112 +483,66 @@ public class OptionsScreenGUI {
     private void initialiseCheckBoxs(){
 
         //attacker
-        if(Main.getAttackerOptionData().containsKey(OptionData.PLASMASCORING))
-            plasmaScoringAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.PLASMASCORING));
-        if(Main.getAttackerOptionData().containsKey(OptionData.X89BACTERIALWEAPON))
-            x89BacterialWeaponAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.X89BACTERIALWEAPON));
-        if(Main.getAttackerOptionData().containsKey(OptionData.ANTIMASSDEFLECTOR))
-            antimassDeflectorAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.ANTIMASSDEFLECTOR));
+        plasmaScoringAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.PLASMASCORING));
+        x89BacterialWeaponAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.X89BACTERIALWEAPON));
+        antimassDeflectorAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.ANTIMASSDEFLECTOR));
 
-        if(Main.getAttackerOptionData().containsKey(OptionData.STRIKEWINGAMBUSH))
-            strikeWingAmbushAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.STRIKEWINGAMBUSH));
-        if(Main.getAttackerOptionData().containsKey(OptionData.WARFUNDING))
-            warFundingAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.WARFUNDING));
-        if(Main.getAttackerOptionData().containsKey(OptionData.MEMORIA1))
-            memoriaOneAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.MEMORIA1));
-        if(Main.getAttackerOptionData().containsKey(OptionData.MEMORIA2))
-            memoriaTwoAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.MEMORIA2));
-        if(Main.getAttackerOptionData().containsKey(OptionData.TEKKLARLEGION))
-            tekklarLegionAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.TEKKLARLEGION));
+        strikeWingAmbushAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.STRIKEWINGAMBUSH));
+        warFundingAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.WARFUNDING));
+        memoriaOneAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.MEMORIA1));
+        memoriaTwoAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.MEMORIA2));
+        tekklarLegionAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.TEKKLARLEGION));
 
-        if(Main.getAttackerOptionData().containsKey(OptionData.BARONYAGENT))
-            baronyAgentAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.BARONYAGENT));
-        if(Main.getAttackerOptionData().containsKey(OptionData.SOLAGENT))
-            solAgentAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.SOLAGENT));
+        baronyAgentAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.BARONYAGENT));
+        solAgentAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.SOLAGENT));
 
-        if(Main.getAttackerOptionData().containsKey(OptionData.DISABLE))
-            disableLabelAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.DISABLE));
-        if(Main.getAttackerOptionData().containsKey(OptionData.FIGHTERPROTOTYPE))
-            fighterPrototypeAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.FIGHTERPROTOTYPE));
-        if(Main.getAttackerOptionData().containsKey(OptionData.FIRETEAM))
-            fireTeamAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.FIRETEAM));
-        if(Main.getAttackerOptionData().containsKey(OptionData.MORALEBOOST))
-            moraleBoostAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.MORALEBOOST));
-        if(Main.getAttackerOptionData().containsKey(OptionData.BLITZ))
-            blitzAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.BLITZ));
-        if(Main.getAttackerOptionData().containsKey(OptionData.SOLARFLAIR))
-            solarFlairAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.SOLARFLAIR));
+        disableLabelAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.DISABLE));
+        fighterPrototypeAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.FIGHTERPROTOTYPE));
+        fireTeamAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.FIRETEAM));
+        moraleBoostAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.MORALEBOOST));
+        blitzAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.BLITZ));
+        solarFlairAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.SOLARFLAIR));
 
-        if(Main.getAttackerOptionData().containsKey(OptionData.ARGENTFLIGHTCOMMANDER))
-            argentFlightCommanderAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER));
-        if(Main.getAttackerOptionData().containsKey(OptionData.JOLNARCOMMANDER))
-            jolNarCommanderAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.JOLNARCOMMANDER));
-        if(Main.getAttackerOptionData().containsKey(OptionData.L1Z1XCOMMANDER))
-            l1Z1XCommanderAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.L1Z1XCOMMANDER));
-        if(Main.getAttackerOptionData().containsKey(OptionData.WINNUCOMMANDER))
-            winnuCommanderAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.WINNUCOMMANDER));
+        argentFlightCommanderAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER));
+        jolNarCommanderAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.JOLNARCOMMANDER));
+        l1Z1XCommanderAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.L1Z1XCOMMANDER));
+        winnuCommanderAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.WINNUCOMMANDER));
 
-        if(Main.getAttackerOptionData().containsKey(OptionData.PROPHECYOFIXTH))
-            prophecyOfIxthAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.PROPHECYOFIXTH));
+        prophecyOfIxthAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.PROPHECYOFIXTH));
 
-        if(Main.getAttackerOptionData().containsKey(OptionData.TITANSHERO))
-            titansHeroAttackerCheckbox.setSelected(Main.getAttackerOptionData().get(OptionData.TITANSHERO));
+        titansHeroAttackerCheckbox.setSelected(GUIData.getInstance().getAttackerOptionData().get(OptionData.TITANSHERO));
 
         //defender
-        if(Main.getDefenderOptionData().containsKey(OptionData.PLASMASCORING))
-            plasmaScoringDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.PLASMASCORING));
-        if(Main.getDefenderOptionData().containsKey(OptionData.MAGENDEFENSEGRID))
-            magenDefenseGridDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.MAGENDEFENSEGRID));
-        if(Main.getDefenderOptionData().containsKey(OptionData.ANTIMASSDEFLECTOR))
-            antimassDeflectorDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.ANTIMASSDEFLECTOR));
+        plasmaScoringDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.PLASMASCORING));
+        magenDefenseGridDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.MAGENDEFENSEGRID));
+        antimassDeflectorDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.ANTIMASSDEFLECTOR));
 
-        if(Main.getDefenderOptionData().containsKey(OptionData.STRIKEWINGAMBUSH))
-            strikeWingAmbushDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.STRIKEWINGAMBUSH));
-        if(Main.getDefenderOptionData().containsKey(OptionData.WARFUNDING))
-            warFundingDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.WARFUNDING));
-        if(Main.getDefenderOptionData().containsKey(OptionData.MEMORIA1))
-            memoriaOneDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.MEMORIA1));
-        if(Main.getDefenderOptionData().containsKey(OptionData.MEMORIA2))
-            memoriaTwoDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.MEMORIA2));
-        if(Main.getDefenderOptionData().containsKey(OptionData.TEKKLARLEGION))
-            tekklarLegionDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.TEKKLARLEGION));
+        strikeWingAmbushDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.STRIKEWINGAMBUSH));
+        warFundingDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.WARFUNDING));
+        memoriaOneDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.MEMORIA1));
+        memoriaTwoDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.MEMORIA2));
+        tekklarLegionDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.TEKKLARLEGION));
 
-        if(Main.getDefenderOptionData().containsKey(OptionData.BARONYAGENT))
-            baronyAgentDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.BARONYAGENT));
-        if(Main.getDefenderOptionData().containsKey(OptionData.SOLAGENT))
-            solAgentDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.SOLAGENT));
+        baronyAgentDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.BARONYAGENT));
+        solAgentDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.SOLAGENT));
 
-        if(Main.getDefenderOptionData().containsKey(OptionData.BUNKER))
-            bunkerLabelDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.BUNKER));
-        if(Main.getDefenderOptionData().containsKey(OptionData.EXPERIMENTALBATTLESTATION))
-            experimentalBattlestationDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.EXPERIMENTALBATTLESTATION));
-        if(Main.getDefenderOptionData().containsKey(OptionData.FIGHTERPROTOTYPE))
-            fighterPrototypeDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.FIGHTERPROTOTYPE));
-        if(Main.getDefenderOptionData().containsKey(OptionData.FIRETEAM))
-            fireTeamDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.FIRETEAM));
-        if(Main.getDefenderOptionData().containsKey(OptionData.MORALEBOOST))
-            moraleBoostDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.MORALEBOOST));
-        if(Main.getDefenderOptionData().containsKey(OptionData.SOLARFLAIR))
-            solarFlairDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.SOLARFLAIR));
+        bunkerLabelDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.BUNKER));
+        experimentalBattlestationDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.EXPERIMENTALBATTLESTATION));
+        fighterPrototypeDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.FIGHTERPROTOTYPE));
+        fireTeamDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.FIRETEAM));
+        moraleBoostDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.MORALEBOOST));
+        solarFlairDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.SOLARFLAIR));
 
-        if(Main.getDefenderOptionData().containsKey(OptionData.ARGENTFLIGHTCOMMANDER))
-            argentFlightCommanderDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER));
-        if(Main.getDefenderOptionData().containsKey(OptionData.JOLNARCOMMANDER))
-            jolNarCommanderDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.JOLNARCOMMANDER));
-        if(Main.getDefenderOptionData().containsKey(OptionData.L1Z1XCOMMANDER))
-            l1Z1XCommanderDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.L1Z1XCOMMANDER));
-        if(Main.getDefenderOptionData().containsKey(OptionData.WINNUCOMMANDER))
-            winnuCommanderDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.WINNUCOMMANDER));
+        argentFlightCommanderDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER));
+        jolNarCommanderDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.JOLNARCOMMANDER));
+        l1Z1XCommanderDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.L1Z1XCOMMANDER));
+        winnuCommanderDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.WINNUCOMMANDER));
 
-        if(Main.getDefenderOptionData().containsKey(OptionData.CONVENTIONSOFWAR))
-            conventionsOfWarDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.CONVENTIONSOFWAR));
-        if(Main.getDefenderOptionData().containsKey(OptionData.PROPHECYOFIXTH))
-            prophecyOfIxthDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.PROPHECYOFIXTH));
+        conventionsOfWarDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.CONVENTIONSOFWAR));
+        prophecyOfIxthDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.PROPHECYOFIXTH));
 
-        if(Main.getDefenderOptionData().containsKey(OptionData.DEFENDINGINNEBULA))
-            defendingInNebulaDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.DEFENDINGINNEBULA));
-        if(Main.getDefenderOptionData().containsKey(OptionData.TITANSHERO))
-            titansHeroDefenderCheckbox.setSelected(Main.getDefenderOptionData().get(OptionData.TITANSHERO));
+        defendingInNebulaDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.DEFENDINGINNEBULA));
+        titansHeroDefenderCheckbox.setSelected(GUIData.getInstance().getDefenderOptionData().get(OptionData.TITANSHERO));
 
     }
 }

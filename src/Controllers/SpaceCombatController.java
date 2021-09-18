@@ -6,8 +6,6 @@ import Player.Player;
 import Units.Unit;
 import Units.UnitName;
 
-import java.util.ArrayList;
-
 public class SpaceCombatController extends Controller{
 
     public SpaceCombatController(){
@@ -16,79 +14,80 @@ public class SpaceCombatController extends Controller{
 
     @Override
     public void startProcess() {
-        preProcess(attacker, defender);
-        preProcess(defender, attacker);
+        preRollChecks(attacker, defender);
+        preRollChecks(defender, attacker);
 
-        mainProcess(attacker);
-        mainProcess(defender);
+        Roller attackerRoller = new Roller(attacker, CombatType.SPACECOMBAT);
+        attackerRoller.mainProcess();
+        Roller defenderRoller = new Roller(defender, CombatType.SPACECOMBAT);
+        defenderRoller.mainProcess();
     }
 
     /**
      * Method to run through all pre-combat modifiers
      */
-    public void preProcess(Player currentPlayer, Player otherPlayer){
+    public void preRollChecks(Player currentPlayer, Player otherPlayer){
 
-        //Populate the number of dice for the winnu flagship
-        if(currentPlayer.getFaction() instanceof Winnu && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)){
-            Winnu.winnuFlagship(currentPlayer, otherPlayer);
+        checkForWinnuFlagship(currentPlayer, otherPlayer);
+        checkForFighterPrototype(currentPlayer);
+        checkForMoraleBoost(currentPlayer);
+        checkForWinnuCommander(currentPlayer);
+        checkForProphecyOfIxth(currentPlayer);
+        checkForSardakkNorrFlagship(currentPlayer);
+        checkForNaazRokhaFlagship(currentPlayer);
+        checkForBaronyAgent(currentPlayer);
+
+    }
+
+    private void checkForWinnuFlagship(Player currentPlayer, Player otherPlayer) {
+        if(currentPlayer.getFaction() instanceof Winnu && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)) {
+            for (Unit unit : currentPlayer.getUnitArrayList()) {
+                if(unit.getName() == UnitName.FLAGSHIP){
+                    unit.setNumDiceRollsSpaceCombat(otherPlayer.getUnitList().numOfNonFighterShips());
+                }
+            }
         }
+    }
 
-        if(currentPlayer.getOptionData().get(OptionData.FIGHTERPROTOTYPE)){
+    private void checkForFighterPrototype(Player currentPlayer) {
+        if(currentPlayer.getOptionData().get(OptionData.FIGHTERPROTOTYPE))
             currentPlayer.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-2, UnitName.FIGHTER);
-        }
-        if(currentPlayer.getOptionData().get(OptionData.MORALEBOOST)){
+    }
+
+    private void checkForMoraleBoost(Player currentPlayer) {
+        if(currentPlayer.getOptionData().get(OptionData.MORALEBOOST))
             currentPlayer.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
-        }
-        if(currentPlayer.getOptionData().get(OptionData.WINNUCOMMANDER)){
+    }
+
+    private void checkForWinnuCommander(Player currentPlayer) {
+        if(currentPlayer.getOptionData().get(OptionData.WINNUCOMMANDER))
             currentPlayer.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -2);
-        }
-        if(currentPlayer.getOptionData().get(OptionData.PROPHECYOFIXTH)){
+    }
+
+    private void checkForProphecyOfIxth(Player currentPlayer) {
+        if(currentPlayer.getOptionData().get(OptionData.PROPHECYOFIXTH))
             currentPlayer.changeHitValueOfAllUnitsOfSpecificType(CombatType.SPACECOMBAT,-1, UnitName.FIGHTER);
-        }
-        if(currentPlayer.getFaction() instanceof SardakkNorr && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)){
-            SardakkNorr.sardakkNorrFlagship(currentPlayer);
-        }
+    }
 
-        if(currentPlayer.getFaction() instanceof NaazRokha && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)){
+    private void checkForSardakkNorrFlagship(Player currentPlayer) {
+        if(currentPlayer.getFaction() instanceof SardakkNorr && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)) {
+            currentPlayer.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
+            for (Unit unit : currentPlayer.getUnitArrayList()) {
+                if(unit.getName() == UnitName.FLAGSHIP){
+                    unit.setHitValueSpaceCombat(unit.getHitValueSpaceCombat()+1);
+                }
+            }
+        }
+    }
+
+    private void checkForNaazRokhaFlagship(Player currentPlayer) {
+        if(currentPlayer.getFaction() instanceof NaazRokha && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP))
             currentPlayer.addDiceToSpecificUnitType(CombatType.SPACECOMBAT,UnitName.MECH);
-        }
-        if(currentPlayer.getOptionData().get(OptionData.BARONYAGENT)){
+    }
+
+    private void checkForBaronyAgent(Player currentPlayer) {
+        if(currentPlayer.getOptionData().get(OptionData.BARONYAGENT))
             currentPlayer.addOneDiceToBestUnit(CombatType.SPACECOMBAT);
-        }
     }
 
-    /**
-     * Method to run through the main combat process for the attacker
-     */
-    public void mainProcess(Player currentPlayer){
-
-        //Start the rolling for each unit
-        for (Unit unit : currentPlayer.getUnitArrayList()) {
-            ArrayList<Integer> diceRolls = new ArrayList<>();
-
-            //roll amount of dice necessary for one unit
-            for (int i=0; i<unit.getNumDiceRollsSpaceCombat(); i++){
-                diceRolls.add(Roller.diceRoll());
-            }
-
-            //Check re-roll conditions
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if(roll >= unit.getHitValueSpaceCombat()){
-                    currentPlayer.addNumHits(1);
-                }
-
-                //JolNar Flagship
-                if(currentPlayer.getFaction() instanceof JolNar && unit.getName() == UnitName.FLAGSHIP && roll >= 9) {
-                    currentPlayer.addNumHits(2);
-                }
-                //L1Z1X Flagship
-                if(currentPlayer.getFaction() instanceof L1Z1X && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP) && unit.isFlagshipOrDreadnought() && roll >= unit.getHitValueSpaceCombat()) {
-                    currentPlayer.addNumHits(-1);
-                    currentPlayer.addNumNonFighterHits(1);
-                }
-            }
-        }
-    }
 }

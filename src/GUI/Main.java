@@ -3,6 +3,7 @@ package GUI;
 import Controllers.*;
 import Factions.FactionEnum;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -66,16 +67,12 @@ public class Main extends Application {
     ComboBox<Object> attackerPdsCB;
     ComboBox<Object> defenderPdsCB;
 
-    //GUI data
-    private static FactionEnum attackerFaction;
-    private static EnumMap<UpgradeData, Boolean> attackerUpgradeData;
-    private static EnumMap<OptionData, Boolean> attackerOptionData;
-    private static EnumMap<UnitCountData, Integer> attackerUnitCountData;
-
-    private static FactionEnum defenderFaction;
-    private static EnumMap<UpgradeData, Boolean> defenderUpgradeData;
-    private static EnumMap<OptionData, Boolean> defenderOptionData;
-    private static EnumMap<UnitCountData, Integer> defenderUnitCountData;
+    Button spaceCannonOffenseBtn;
+    Button antiFighterBarrageBtn;
+    Button spaceCombatBtn;
+    Button bombardmentBtn;
+    Button spaceCannonDefenseBtn;
+    Button groundCombatBtn;
 
     public static void main(String[] args) {
         launch(args);
@@ -84,8 +81,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        //Initialise EnumMaps
-        initialiseEnumMaps();
+        //Initialise GUIData
+        GUIData.getInstance();;
 
         //Set stage to be called window and give title
         window = primaryStage;
@@ -102,12 +99,12 @@ public class Main extends Application {
         Button helpBtn = new Button("Help");
         Button clearAttackerBtn = new Button("Clear");
         Button clearDefenderBtn = new Button("Clear");
-        Button spaceCannonOffenseBtn = new Button("Space Cannon Offense");
-        Button antiFighterBarrageBtn = new Button("Anti Fighter Barrage");
-        Button spaceCombatBtn = new Button("Space Combat");
-        Button bombardmentBtn = new Button("Bombardment");
-        Button spaceCannonDefenseBtn = new Button("Space Cannon Defense");
-        Button GroundCombatBtn = new Button("Ground Combat");
+        spaceCannonOffenseBtn = new Button("Space Cannon Offense");
+        antiFighterBarrageBtn = new Button("Anti Fighter Barrage");
+        spaceCombatBtn = new Button("Space Combat");
+        bombardmentBtn = new Button("Bombardment");
+        spaceCannonDefenseBtn = new Button("Space Cannon Defense");
+        groundCombatBtn = new Button("Ground Combat");
 
         Label attackerLabel = new Label("Attacker");
         Label defenderLabel = new Label("Defender");
@@ -295,7 +292,7 @@ public class Main extends Application {
         spaceCombatBtn.setPrefWidth(150);
         bombardmentBtn.setPrefWidth(150);
         spaceCannonDefenseBtn.setPrefWidth(150);
-        GroundCombatBtn.setPrefWidth(150);
+        groundCombatBtn.setPrefWidth(150);
 
         clearAttackerBtn.setPrefWidth(125);
         clearDefenderBtn.setPrefWidth(125);
@@ -313,7 +310,7 @@ public class Main extends Application {
                 spaceCombatBtn,
                 bombardmentBtn,
                 spaceCannonDefenseBtn,
-                GroundCombatBtn
+                groundCombatBtn
         );
         bottomBar.setAlignment(Pos.CENTER);
         bottomBar.setSpacing(12);
@@ -455,12 +452,12 @@ public class Main extends Application {
         //Button Actions
         helpBtn.setOnAction(e -> new HelpScreenGUI());
         optionsBtn.setOnAction(e -> new OptionsScreenGUI());
-        spaceCannonOffenseBtn.setOnAction(e -> handleSpaceCannonOffense());
-        antiFighterBarrageBtn.setOnAction(e -> handleAntiFighterBarrage());
-        spaceCombatBtn.setOnAction(e -> handleSpaceCombat());
-        bombardmentBtn.setOnAction(e -> handleBombardment());
-        spaceCannonDefenseBtn.setOnAction(e -> handleSpaceCannonDefense());
-        GroundCombatBtn.setOnAction(e -> handleGroundCombat());
+        spaceCannonOffenseBtn.setOnAction(this::handleCombat);
+        antiFighterBarrageBtn.setOnAction(this::handleCombat);
+        spaceCombatBtn.setOnAction(this::handleCombat);
+        bombardmentBtn.setOnAction(this::handleCombat);
+        spaceCannonDefenseBtn.setOnAction(this::handleCombat);
+        groundCombatBtn.setOnAction(this::handleCombat);
         clearAttackerBtn.setOnAction(e -> handleClearAttacker());
         clearDefenderBtn.setOnAction(e -> handleClearDefender());
 
@@ -472,104 +469,48 @@ public class Main extends Application {
     }
 
     /**
-     * Method to handle Space Cannon Offense after the button is pressed
-     * It will first check to make sure both factions are selected and all GUI values are saved
-     */
-    private void handleSpaceCannonOffense() {
-        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
-            return;
-        }
-
-        checkCheckBox();
-        checkComboBox();
-
-       SpaceCannonOffenseController controller = new  SpaceCannonOffenseController();
-
-       new HitScreenGUI(controller.getAttacker(), controller.getDefender());
-    }
-
-    /**
-     * Method to handle Anti Fighter Barrage after the button is pressed
-     * It will first check to make sure both factions are selected and all GUI values are saved
-     */
-    private void handleAntiFighterBarrage() {
-        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
-            return;
-        }
-
-        checkCheckBox();
-        checkComboBox();
-
-        AFBController controller = new AFBController();
-        new HitScreenGUI(controller.getAttacker(), controller.getDefender());
-
-    }
-
-    /**
-     * Method to handle Space Combat after the button is pressed
-     * It will first check to make sure both factions are selected and all GUI values are saved
-     */
-    private void handleSpaceCombat() {
-        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
-            return;
-        }
-
-        checkCheckBox();
-        checkComboBox();
-
-        SpaceCombatController controller = new SpaceCombatController();
-        new HitScreenGUI(controller.getAttacker(), controller.getDefender());
-
-    }
-
-    /**
-     * Method to handle Bombardment after the button is pressed
-     * It will first check to make sure both factions are selected and all GUI values are saved
-     */
-    private void handleBombardment() {
-        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
-            return;
-        }
-
-        checkCheckBox();
-        checkComboBox();
-
-        BombardmentController controller = new BombardmentController();
-        new HitScreenGUI(controller.getAttacker(), controller.getDefender());
-
-    }
-
-    /**
-     * Method to handle Space Cannon Defense after the button is pressed
-     * It will first check to make sure both factions are selected and all GUI values are saved
-     */
-    private void handleSpaceCannonDefense() {
-        if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
-            return;
-        }
-
-        checkCheckBox();
-        checkComboBox();
-
-        SpaceCannonDefenseController controller = new SpaceCannonDefenseController();
-        new HitScreenGUI(controller.getAttacker(), controller.getDefender());
-
-    }
-
-    /**
      * Method to handle Ground Combat after the button is pressed
      * It will first check to make sure both factions are selected and all GUI values are saved
+     * @param e
      */
-    private void handleGroundCombat() {
+    private void handleCombat(ActionEvent e) {
         if (attackerFactionCB.getSelectionModel().isEmpty() || defenderFactionCB.getSelectionModel().isEmpty()){
             return;
         }
 
-        checkCheckBox();
-        checkComboBox();
+        GUIData.getInstance().setAttackerFaction(updateAttackerFaction());
+        GUIData.getInstance().setDefenderFaction(updateDefenderFaction());
 
-        GroundCombatController controller = new GroundCombatController();
-        new HitScreenGUI(controller.getAttacker(), controller.getDefender());
+        GUIData.getInstance().setAttackerUpgradeData(updateAttackerUpgrades());
+        GUIData.getInstance().setDefenderUpgradeData(updateDefenderUpgrades());
+
+        GUIData.getInstance().setAttackerUnitCountData(updateAttackerUnitCount());
+        GUIData.getInstance().setDefenderUnitCountData(updateDefenderUnitCount());
+
+        if (e.getSource() == antiFighterBarrageBtn) {
+            AFBController controller = new AFBController();
+            new HitScreenGUI(controller.getAttacker(), controller.getDefender());
+        }
+        if (e.getSource() == bombardmentBtn) {
+            BombardmentController controller = new BombardmentController();
+            new HitScreenGUI(controller.getAttacker(), controller.getDefender());
+        }
+        if (e.getSource() == spaceCannonOffenseBtn) {
+            SpaceCannonOffenseController controller = new SpaceCannonOffenseController();
+            new HitScreenGUI(controller.getAttacker(), controller.getDefender());
+        }
+        if (e.getSource() == spaceCannonDefenseBtn) {
+            SpaceCannonDefenseController controller = new SpaceCannonDefenseController();
+            new HitScreenGUI(controller.getAttacker(), controller.getDefender());
+        }
+        if (e.getSource() == spaceCombatBtn) {
+            SpaceCombatController controller = new SpaceCombatController();
+            new HitScreenGUI(controller.getAttacker(), controller.getDefender());
+        }
+        if (e.getSource() == groundCombatBtn) {
+            GroundCombatController controller = new GroundCombatController();
+            new HitScreenGUI(controller.getAttacker(), controller.getDefender());
+        }
 
     }
 
@@ -607,35 +548,26 @@ public class Main extends Application {
         defenderPdsCB.setValue(0);
     }
 
-    private void initialiseEnumMaps() {
-        attackerUpgradeData = new EnumMap<>(UpgradeData.class);
-        attackerOptionData = new EnumMap<>(OptionData.class);
-        attackerUnitCountData = new EnumMap<>(UnitCountData.class);
+    private FactionEnum updateAttackerFaction(){
+        String attackerFactionName = (String) attackerFactionCB.getValue();
+        attackerFactionName = attackerFactionName.replaceAll("[^a-zA-Z0-9]", "");
+        attackerFactionName = attackerFactionName.toUpperCase();
+        return FactionEnum.valueOf(attackerFactionName);
+    }
 
-        defenderUpgradeData = new EnumMap<>(UpgradeData.class);
-        defenderOptionData = new EnumMap<>(OptionData.class);
-        defenderUnitCountData = new EnumMap<>(UnitCountData.class);
-
-        for (UpgradeData upgradeData : UpgradeData.values()) {
-            attackerUpgradeData.put(upgradeData, false);
-            defenderUpgradeData.put(upgradeData, false);
-        }
-
-        for (OptionData optionData : OptionData.values()) {
-            attackerOptionData.put(optionData, false);
-            defenderOptionData.put(optionData, false);
-        }
-
-        for (UnitCountData unitCountData : UnitCountData.values()) {
-            attackerUnitCountData.put(unitCountData, 0);
-            defenderUnitCountData.put(unitCountData, 0);
-        }
+    private FactionEnum updateDefenderFaction(){
+        String defenderFactionName = (String) defenderFactionCB.getValue();
+        defenderFactionName = defenderFactionName.replaceAll("[^a-zA-Z0-9]", "");
+        defenderFactionName = defenderFactionName.toUpperCase();
+        return FactionEnum.valueOf(defenderFactionName);
     }
 
     /**
-     * Method to save the values of all checkboxs in the static options classes
+     *
      */
-    private void checkCheckBox(){
+    private EnumMap<UpgradeData, Boolean> updateAttackerUpgrades(){
+
+        EnumMap<UpgradeData, Boolean> attackerUpgradeData = new EnumMap<>(UpgradeData.class);
 
         attackerUpgradeData.put(UpgradeData.ISFLAGSHIPUPGRADED, attackerFlagshipCheckBox.isSelected());
         attackerUpgradeData.put(UpgradeData.ISDREADNOUGHTUPGRADED, attackerDreadnoughtCheckBox.isSelected());
@@ -646,6 +578,16 @@ public class Main extends Application {
         attackerUpgradeData.put(UpgradeData.ISINFANTRYUPGRADED, attackerInfantryCheckBox.isSelected());
         attackerUpgradeData.put(UpgradeData.ISPDSUPGRADED, attackerPdsCheckBox.isSelected());
 
+        return attackerUpgradeData;
+    }
+
+    /**
+     *
+     */
+    private EnumMap<UpgradeData, Boolean> updateDefenderUpgrades(){
+
+        EnumMap<UpgradeData, Boolean> defenderUpgradeData = new EnumMap<>(UpgradeData.class);
+
         defenderUpgradeData.put(UpgradeData.ISFLAGSHIPUPGRADED, defenderFlagshipCheckBox.isSelected());
         defenderUpgradeData.put(UpgradeData.ISDREADNOUGHTUPGRADED, defenderDreadnoughtCheckBox.isSelected());
         defenderUpgradeData.put(UpgradeData.ISCARRIERUPGRADED, defenderCarrierCheckBox.isSelected());
@@ -655,22 +597,15 @@ public class Main extends Application {
         defenderUpgradeData.put(UpgradeData.ISINFANTRYUPGRADED, defenderInfantryCheckBox.isSelected());
         defenderUpgradeData.put(UpgradeData.ISPDSUPGRADED, defenderPdsCheckBox.isSelected());
 
+        return defenderUpgradeData;
     }
 
     /**
      * Method to save the values of all comboboxs in the static options classes
      */
-    private void checkComboBox(){
+    private EnumMap<UnitCountData, Integer> updateAttackerUnitCount(){
 
-        String attackerFactionName = (String) attackerFactionCB.getValue();
-        attackerFactionName = attackerFactionName.replaceAll("[^a-zA-Z0-9]", "");
-        attackerFactionName = attackerFactionName.toUpperCase();
-        attackerFaction = FactionEnum.valueOf(attackerFactionName);
-
-        String defenderFactionName = (String) defenderFactionCB.getValue();
-        defenderFactionName = defenderFactionName.replaceAll("[^a-zA-Z0-9]", "");
-        defenderFactionName = defenderFactionName.toUpperCase();
-        defenderFaction = FactionEnum.valueOf(defenderFactionName);
+        EnumMap<UnitCountData, Integer> attackerUnitCountData = new EnumMap<>(UnitCountData.class);
 
         attackerUnitCountData.put(UnitCountData.FLAGSHIPCOUNT, (Integer) attackerFlagshipCB.getValue());
         attackerUnitCountData.put(UnitCountData.WARSUNCOUNT, (Integer) attackerWarSunCB.getValue());
@@ -683,6 +618,13 @@ public class Main extends Application {
         attackerUnitCountData.put(UnitCountData.INFANTRYCOUNT, (Integer) attackerInfantryCB.getValue());
         attackerUnitCountData.put(UnitCountData.PDSCOUNT, (Integer) attackerPdsCB.getValue());
 
+        return attackerUnitCountData;
+    }
+
+    private EnumMap<UnitCountData, Integer> updateDefenderUnitCount(){
+
+        EnumMap<UnitCountData, Integer> defenderUnitCountData = new EnumMap<>(UnitCountData.class);
+
         defenderUnitCountData.put(UnitCountData.FLAGSHIPCOUNT, (Integer) defenderFlagshipCB.getValue());
         defenderUnitCountData.put(UnitCountData.WARSUNCOUNT, (Integer) defenderWarSunCB.getValue());
         defenderUnitCountData.put(UnitCountData.DREADNOUGHTCOUNT, (Integer) defenderDreadnoughtCB.getValue());
@@ -694,69 +636,7 @@ public class Main extends Application {
         defenderUnitCountData.put(UnitCountData.INFANTRYCOUNT, (Integer) defenderInfantryCB.getValue());
         defenderUnitCountData.put(UnitCountData.PDSCOUNT, (Integer) defenderPdsCB.getValue());
 
-    }
-
-    public static FactionEnum getAttackerFaction() {
-        return attackerFaction;
-    }
-
-    public static void setAttackerFaction(FactionEnum attackerFaction) {
-        Main.attackerFaction = attackerFaction;
-    }
-
-    public static EnumMap<UpgradeData, Boolean> getAttackerUpgradeData() {
-        return attackerUpgradeData;
-    }
-
-    public static void setAttackerUpgradeData(EnumMap<UpgradeData, Boolean> attackerUpgradeData) {
-        Main.attackerUpgradeData = attackerUpgradeData;
-    }
-
-    public static EnumMap<OptionData, Boolean> getAttackerOptionData() {
-        return attackerOptionData;
-    }
-
-    public static void setAttackerOptionData(EnumMap<OptionData, Boolean> attackerOptionData) {
-        Main.attackerOptionData = attackerOptionData;
-    }
-
-    public static EnumMap<UnitCountData, Integer> getAttackerUnitCountData() {
-        return attackerUnitCountData;
-    }
-
-    public static void setAttackerUnitCountData(EnumMap<UnitCountData, Integer> attackerUnitCountData) {
-        Main.attackerUnitCountData = attackerUnitCountData;
-    }
-
-    public static FactionEnum getDefenderFaction() {
-        return defenderFaction;
-    }
-
-    public static void setDefenderFaction(FactionEnum defenderFaction) {
-        Main.defenderFaction = defenderFaction;
-    }
-
-    public static EnumMap<UpgradeData, Boolean> getDefenderUpgradeData() {
-        return defenderUpgradeData;
-    }
-
-    public static void setDefenderUpgradeData(EnumMap<UpgradeData, Boolean> defenderUpgradeData) {
-        Main.defenderUpgradeData = defenderUpgradeData;
-    }
-
-    public static EnumMap<OptionData, Boolean> getDefenderOptionData() {
-        return defenderOptionData;
-    }
-
-    public static void setDefenderOptionData(EnumMap<OptionData, Boolean> defenderOptionData) {
-        Main.defenderOptionData = defenderOptionData;
-    }
-
-    public static EnumMap<UnitCountData, Integer> getDefenderUnitCountData() {
         return defenderUnitCountData;
     }
 
-    public static void setDefenderUnitCountData(EnumMap<UnitCountData, Integer> defenderUnitCountData) {
-        Main.defenderUnitCountData = defenderUnitCountData;
-    }
 }

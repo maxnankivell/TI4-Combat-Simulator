@@ -3,12 +3,12 @@ package Controllers;
 import Factions.ArgentFlight;
 import GUI.OptionData;
 import Player.*;
-import Units.Unit;
 import Units.UnitName;
 
-import java.util.ArrayList;
-
 public class SpaceCannonOffenseController extends Controller{
+
+    boolean defenderCancelled = false;
+    boolean attackerCancelled = false;
 
     public SpaceCannonOffenseController(){
         super();
@@ -16,81 +16,78 @@ public class SpaceCannonOffenseController extends Controller{
 
     @Override
     public void startProcess() {
-        boolean defenderCancelled = preProcess(attacker, defender);
-        boolean attackerCancelled = preProcess(defender, attacker);
+        preRollChecks(attacker, defender);
+        preRollChecks(defender, attacker);
 
-        if (!attackerCancelled) mainProcess(attacker);
-        if (!defenderCancelled) mainProcess(defender);
+        if (!attackerCancelled) {
+            Roller attackerRoller = new Roller(attacker, CombatType.SPACECANNON);
+            attackerRoller.mainProcess();
+        }
+        if (!defenderCancelled) {
+            Roller defenderRoller = new Roller(defender, CombatType.SPACECANNON);
+            defenderRoller.mainProcess();
+        }
+
     }
 
     /**
      * Method to run through all pre-combat modifiers for the attacker
      */
-    public boolean preProcess(Player currentPlayer, Player otherPlayer){
+    public void preRollChecks(Player currentPlayer, Player otherPlayer) {
+        
+        checkForExperimentalBattlestation(currentPlayer);
+        checkForTitansHero(currentPlayer);
+        checkForPlasmaScoring(currentPlayer);
+        checkForAntimassDeflector(currentPlayer, otherPlayer);
+        checkForStrikeWingAmbush(currentPlayer);
+        checkForArgentFlightCommander(currentPlayer);
+        checkForSolarFlare(currentPlayer);
+        checkForArgentFlightFlagship(currentPlayer);
 
-        if (currentPlayer.getRole() == PlayerRole.DEFENDER){
-            //Experimental battlestation
-            if (currentPlayer.getOptionData().get(OptionData.EXPERIMENTALBATTLESTATION))
-                currentPlayer.addUnitExperimentalBattlestation();
-
-            //Titans Hero
-            if (currentPlayer.getOptionData().get(OptionData.TITANSHERO))
-                currentPlayer.addUnitTitansHero();
-        }
-
-        //Plasma scoring
-        if (currentPlayer.getOptionData().get(OptionData.PLASMASCORING))
-            currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
-
-        //Antimass deflector
-        if (currentPlayer.getOptionData().get(OptionData.ANTIMASSDEFLECTOR))
-            otherPlayer.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
-
-        //Strike wing ambuscade
-        if (currentPlayer.getOptionData().get(OptionData.STRIKEWINGAMBUSH))
-            currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
-
-        //Argent flight commander
-        if (currentPlayer.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER))
-            currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
-
-        if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
-            //Solar flare
-            if (currentPlayer.getOptionData().get(OptionData.SOLARFLAIR))
-                return true;
-        }
-
-        //Argent flight flagship
-        if (attacker.getFaction() instanceof ArgentFlight && attacker.getUnitList().containsName(UnitName.FLAGSHIP))
-            return true;
-
-        return false;
     }
 
-    /**
-     * Method to run through the main combat process
-     */
-    public void mainProcess(Player currentPlayer){
-        //start rolling
-        for (Unit unit : currentPlayer.getUnitArrayList()) {
-            ArrayList<Integer> diceRolls = new ArrayList<>();
+    private void checkForExperimentalBattlestation(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.EXPERIMENTALBATTLESTATION) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+            currentPlayer.addUnitExperimentalBattlestation();
+    }
 
-            //roll amount of dice necessary for one unit
-            for (int i = 0; i < unit.getNumDiceRollsSpaceCannon(); i++) {
-                diceRolls.add(Roller.diceRoll());
+    private void checkForTitansHero(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.TITANSHERO) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+            currentPlayer.addUnitTitansHero();
+    }
+
+    private void checkForPlasmaScoring(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.PLASMASCORING))
+            currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
+    }
+
+    private void checkForAntimassDeflector(Player currentPlayer, Player otherPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.ANTIMASSDEFLECTOR))
+            otherPlayer.changeHitValueOfAllUnits(CombatType.SPACECANNON, 1);
+    }
+
+    private void checkForStrikeWingAmbush(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.STRIKEWINGAMBUSH))
+            currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
+    }
+
+    private void checkForArgentFlightCommander(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER))
+            currentPlayer.addOneDiceToBestUnit(CombatType.SPACECANNON);
+    }
+
+    private void checkForSolarFlare(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.SOLARFLAIR) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+            defenderCancelled = true;
+    }
+
+    private void checkForArgentFlightFlagship(Player currentPlayer) {
+        if (attacker.getFaction() instanceof ArgentFlight && attacker.getUnitList().containsName(UnitName.FLAGSHIP)) {
+            if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
+                defenderCancelled = true;
             }
-
-            //Check re-roll conditions
-            //Jol Nar commander
-            if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
-                Roller.reRollMissedDice(CombatType.SPACECANNON, diceRolls, unit);
-            }
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if (roll >= unit.getHitValueSpaceCannon()) {
-                    currentPlayer.addNumHits(1);
-                }
+            if (currentPlayer.getRole() == PlayerRole.DEFENDER) {
+                attackerCancelled = true;
             }
         }
     }

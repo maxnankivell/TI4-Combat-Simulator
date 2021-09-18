@@ -2,11 +2,8 @@ package Controllers;
 
 import Factions.ArgentFlight;
 import GUI.OptionData;
-import Units.Unit;
-import Units.UnitName;
 import Player.*;
-
-import java.util.ArrayList;
+import Units.UnitName;
 
 public class AFBController extends Controller{
 
@@ -19,69 +16,50 @@ public class AFBController extends Controller{
      */
     @Override
     public void startProcess() {
-        preProcess(attacker);
-        preProcess(defender);
+        preRollChecks(attacker);
+        preRollChecks(defender);
 
-        mainProcess(attacker);
-        mainProcess(defender);
+        Roller attackerRoller = new Roller(attacker, CombatType.AFB);
+        attackerRoller.mainProcess();
+        Roller defenderRoller = new Roller(defender, CombatType.AFB);
+        defenderRoller.mainProcess();
 
-        postProcess(attacker, defender);
-        postProcess(defender, attacker);
+        postRollChecks(attacker, defender);
+        postRollChecks(defender, attacker);
     }
 
     /**
      * Method to run through all pre-combat modifiers
      */
-    public void preProcess(Player currentPlayer){
-        //Argent Flight Promissory note
-        if (currentPlayer.getOptionData().get(OptionData.STRIKEWINGAMBUSH)) {
-            currentPlayer.addOneDiceToBestUnit(CombatType.AFB);
-        }
-        //Argent Flight commander
-        if (currentPlayer.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER)) {
-            currentPlayer.addOneDiceToBestUnit(CombatType.AFB);
-        }
-    }
+    public void preRollChecks(Player currentPlayer){
 
-    /**
-     * Method to run through the main combat process
-     */
-    private void mainProcess(Player currentPlayer) {
-        //Start the rolling for each unit
-        for (Unit unit : currentPlayer.getUnitArrayList()) {
-            ArrayList<Integer> diceRolls = new ArrayList<>();
-
-            //roll amount of dice necessary for one unit
-            for (int i=0; i<unit.getNumDiceRollsAFB(); i++){
-                diceRolls.add(Roller.diceRoll());
-            }
-
-            //Check re-roll conditions
-            //Jol Nar commander
-            if (currentPlayer.getOptionData().get(OptionData.JOLNARCOMMANDER)) {
-                Roller.reRollMissedDice(CombatType.AFB, diceRolls, unit);
-            }
-
-            //Check number of hits from this unit
-            for (Integer roll : diceRolls) {
-                if(roll >= unit.getHitValueAFB()){
-                    currentPlayer.addNumHits(1);
-                }
-                //Argent Flight special destroyers
-                if(currentPlayer.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYER && unit.isUpgraded() && roll >= 9) {
-                    currentPlayer.addNumInfantryHits(1);
-                }
-            }
-        }
+        checkForStrikeWingAmbush(currentPlayer);
+        checkForArgentFlightCommander(currentPlayer);
     }
 
     /**
      * Method to run through all post-combat modifiers
      */
-    private void postProcess(Player currentPlayer, Player otherPlayer) {
-        //Argent Flight faction ability
+    private void postRollChecks(Player currentPlayer, Player otherPlayer) {
+
+        checkForRaidFormation(currentPlayer, otherPlayer);
+    }
+
+    private void checkForStrikeWingAmbush(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.STRIKEWINGAMBUSH))
+            currentPlayer.addOneDiceToBestUnit(CombatType.AFB);
+    }
+
+    private void checkForArgentFlightCommander(Player currentPlayer) {
+        if (currentPlayer.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER))
+            currentPlayer.addOneDiceToBestUnit(CombatType.AFB);
+    }
+
+    private void checkForRaidFormation(Player currentPlayer, Player otherPlayer) {
         if(currentPlayer.getFaction() instanceof ArgentFlight) {
-            ArgentFlight.raidFormation(currentPlayer, otherPlayer);
+            if(currentPlayer.getNumHits() > (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER))) {
+                currentPlayer.addNumSustainDamageHits((currentPlayer.getNumHits() - (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER))));
+            }
         }
     }
 }

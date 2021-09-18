@@ -73,31 +73,4 @@ public class SardakkNorr extends Faction{
                 .build();
     }
 
-    /**
-     * Method for the Sardakk Norr flagship
-     * @param player the player using the method
-     */
-    public static void sardakkNorrFlagship(Player player){
-        player.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
-        for (Unit unit : player.getUnitArrayList()) {
-            if(unit.getName() == UnitName.FLAGSHIP){
-                unit.setHitValueSpaceCombat(unit.getHitValueSpaceCombat()+1);
-            }
-        }
-    }
-
-    /**
-     * subtracts one from all opposing player ground units hit values
-     * if the current player is Sardakk Norr then add one to
-     * all current player ground units hit values
-     * @param currentPlayer the current player
-     * @param otherPlayer the other player
-     */
-    public static void tekklarLegion(Player currentPlayer, Player otherPlayer){
-        currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
-        if (otherPlayer.getFaction() instanceof SardakkNorr){
-            otherPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
-        }
-    }
-
 }
