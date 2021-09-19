@@ -1,6 +1,6 @@
 package Controllers;
 
-import Factions.ArgentFlight;
+import Factions.FactionEnum;
 import GUI.OptionData;
 import Player.*;
 import Units.UnitName;
@@ -82,7 +82,7 @@ public class SpaceCannonOffenseController extends Controller{
     }
 
     private void checkForArgentFlightFlagship(Player currentPlayer) {
-        if (attacker.getFaction() instanceof ArgentFlight && attacker.getUnitList().containsName(UnitName.FLAGSHIP)) {
+        if (attacker.getFactionEnum() == FactionEnum.ARGENTFLIGHT && attacker.getUnitList().containsName(UnitName.FLAGSHIP)) {
             if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
                 defenderCancelled = true;
             }

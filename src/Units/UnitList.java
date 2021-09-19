@@ -9,30 +9,6 @@ public class UnitList {
         unitArrayList = new ArrayList<>();
     }
 
-    public ArrayList<Unit> getUnitArrayList() {
-        return unitArrayList;
-    }
-
-    public void add(Unit unit){
-        unitArrayList.add(unit);
-    }
-
-    public Unit get(int index){
-        return unitArrayList.get(index);
-    }
-
-    public void remove(int index){
-        unitArrayList.remove(index);
-    }
-
-    public void removeShips(){
-        unitArrayList.removeIf(Unit::isShip);
-    }
-
-    public int size(){
-        return unitArrayList.size();
-    }
-
     /**
      * checks if any unit has a planetary shield
      * @return if any unit has a planetary shield
@@ -89,6 +65,30 @@ public class UnitList {
             }
         }
         return number;
+    }
+
+    public ArrayList<Unit> getUnitArrayList() {
+        return unitArrayList;
+    }
+
+    public void add(Unit unit){
+        unitArrayList.add(unit);
+    }
+
+    public Unit get(int index){
+        return unitArrayList.get(index);
+    }
+
+    public void remove(int index){
+        unitArrayList.remove(index);
+    }
+
+    public void removeShips(){
+        unitArrayList.removeIf(Unit::isShip);
+    }
+
+    public int size(){
+        return unitArrayList.size();
     }
 
 }

@@ -1,8 +1,6 @@
 package Controllers;
 
-import Factions.ArgentFlight;
-import Factions.JolNar;
-import Factions.L1Z1X;
+import Factions.FactionEnum;
 import GUI.OptionData;
 import Player.Player;
 import Units.Unit;
@@ -88,18 +86,18 @@ public class Roller {
     }
 
     private void checkForArgentFlightDestroyers(CombatType combatType, Unit unit, Integer roll) {
-        if(currentPlayer.getFaction() instanceof ArgentFlight && unit.getName() == UnitName.DESTROYER && unit.isUpgraded() && roll >= 9 && combatType == CombatType.AFB)
+        if(currentPlayer.getFactionEnum() == FactionEnum.ARGENTFLIGHT && unit.getName() == UnitName.DESTROYER && unit.isUpgraded() && roll >= 9 && combatType == CombatType.AFB)
             currentPlayer.addNumInfantryHits(1);
     }
 
     private void checkForJolNarFlagship(CombatType combatType, Unit unit, Integer roll) {
-        if(currentPlayer.getFaction() instanceof JolNar && unit.getName() == UnitName.FLAGSHIP && roll >= 9 && combatType == CombatType.SPACECOMBAT) {
+        if(currentPlayer.getFactionEnum() == FactionEnum.JOLNAR && unit.getName() == UnitName.FLAGSHIP && roll >= 9 && combatType == CombatType.SPACECOMBAT) {
             currentPlayer.addNumHits(2);
         }
     }
 
     private void checkForL1Z1XFlagship(CombatType combatType, Unit unit, Integer roll) {
-        if(currentPlayer.getFaction() instanceof L1Z1X && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP) && unit.isFlagshipOrDreadnought() && roll >= unit.getHitValueSpaceCombat() && combatType == CombatType.SPACECOMBAT) {
+        if(currentPlayer.getFactionEnum() == FactionEnum.L1Z1X && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP) && unit.isFlagshipOrDreadnought() && roll >= unit.getHitValueSpaceCombat() && combatType == CombatType.SPACECOMBAT) {
             currentPlayer.addNumHits(-1);
             currentPlayer.addNumNonFighterHits(1);
         }

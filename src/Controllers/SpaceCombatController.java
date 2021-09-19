@@ -40,7 +40,7 @@ public class SpaceCombatController extends Controller{
     }
 
     private void checkForWinnuFlagship(Player currentPlayer, Player otherPlayer) {
-        if(currentPlayer.getFaction() instanceof Winnu && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)) {
+        if(currentPlayer.getFactionEnum() == FactionEnum.WINNU && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)) {
             for (Unit unit : currentPlayer.getUnitArrayList()) {
                 if(unit.getName() == UnitName.FLAGSHIP){
                     unit.setNumDiceRollsSpaceCombat(otherPlayer.getUnitList().numOfNonFighterShips());
@@ -70,7 +70,7 @@ public class SpaceCombatController extends Controller{
     }
 
     private void checkForSardakkNorrFlagship(Player currentPlayer) {
-        if(currentPlayer.getFaction() instanceof SardakkNorr && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)) {
+        if(currentPlayer.getFactionEnum() == FactionEnum.SARDAKKNORR && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP)) {
             currentPlayer.changeHitValueOfAllUnits(CombatType.SPACECOMBAT, -1);
             for (Unit unit : currentPlayer.getUnitArrayList()) {
                 if(unit.getName() == UnitName.FLAGSHIP){
@@ -81,7 +81,7 @@ public class SpaceCombatController extends Controller{
     }
 
     private void checkForNaazRokhaFlagship(Player currentPlayer) {
-        if(currentPlayer.getFaction() instanceof NaazRokha && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP))
+        if(currentPlayer.getFactionEnum() == FactionEnum.NAAZROKHA && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP))
             currentPlayer.addDiceToSpecificUnitType(CombatType.SPACECOMBAT,UnitName.MECH);
     }
 

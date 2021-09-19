@@ -1,8 +1,6 @@
 package Controllers;
 
-import Factions.JolNar;
-import Factions.NaazRokha;
-import Factions.SardakkNorr;
+import Factions.FactionEnum;
 import GUI.OptionData;
 import Player.*;
 import Units.UnitName;
@@ -53,7 +51,7 @@ public class GroundCombatController extends Controller{
     private void checkForTekklarLegion(Player currentPlayer, Player otherPlayer) {
         if (currentPlayer.getOptionData().get(OptionData.TEKKLARLEGION)) {
             currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
-            if (otherPlayer.getFaction() instanceof SardakkNorr){
+            if (otherPlayer.getFactionEnum() == FactionEnum.SARDAKKNORR){
                 otherPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, 1);
             }
         }
@@ -75,12 +73,12 @@ public class GroundCombatController extends Controller{
     }
 
     private void checkForJolNarMech(Player currentPlayer) {
-        if (currentPlayer.getFaction() instanceof JolNar && currentPlayer.getUnitList().containsName(UnitName.MECH))
+        if (currentPlayer.getFactionEnum() == FactionEnum.JOLNAR && currentPlayer.getUnitList().containsName(UnitName.MECH))
             currentPlayer.changeHitValueOfAllUnitsOfSpecificType(CombatType.GROUNDCOMBAT, -1, UnitName.INFANTRY);
     }
 
     private void checkForNaazRokhaFlagship(Player currentPlayer) {
-        if (currentPlayer.getFaction() instanceof NaazRokha && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP))
+        if (currentPlayer.getFactionEnum() == FactionEnum.NAAZROKHA && currentPlayer.getUnitList().containsName(UnitName.FLAGSHIP))
             currentPlayer.addDiceToSpecificUnitType(CombatType.GROUNDCOMBAT, UnitName.MECH);
     }
 
