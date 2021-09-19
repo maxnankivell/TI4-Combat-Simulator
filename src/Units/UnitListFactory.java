@@ -1,8 +1,8 @@
 package Units;
 
 import Factions.*;
-import GUI.UnitCountData;
-import GUI.UpgradeData;
+import GUIData.UnitCountData;
+import GUIData.UpgradeData;
 
 import java.util.EnumMap;
 

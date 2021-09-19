@@ -1,4 +1,4 @@
-package GUI;
+package GUIData;
 
 import Factions.FactionEnum;
 

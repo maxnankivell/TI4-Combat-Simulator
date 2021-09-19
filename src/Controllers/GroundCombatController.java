@@ -1,7 +1,7 @@
 package Controllers;
 
 import Factions.FactionEnum;
-import GUI.OptionData;
+import GUIData.OptionData;
 import Player.*;
 import Units.UnitName;
 
@@ -39,12 +39,12 @@ public class GroundCombatController extends Controller{
     }
 
     private void checkForDefendingInNebula(Player currentPlayer) {
-        if (currentPlayer.getOptionData().get(OptionData.DEFENDINGINNEBULA) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+        if (currentPlayer.getOptionData().get(OptionData.DEFENDINGINNEBULA) && currentPlayer instanceof DefendingPlayer)
             currentPlayer.changeHitValueOfAllUnits(CombatType.GROUNDCOMBAT, -1);
     }
 
     private void checkForMagenDefenseGrid(Player currentPlayer) {
-        if (currentPlayer.getOptionData().get(OptionData.MAGENDEFENSEGRID) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+        if (currentPlayer.getOptionData().get(OptionData.MAGENDEFENSEGRID) && currentPlayer instanceof DefendingPlayer)
             currentPlayer.addNumHits(1);
     }
 

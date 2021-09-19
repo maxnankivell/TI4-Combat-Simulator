@@ -1,4 +1,4 @@
-package GUI;
+package GUIData;
 
 public enum OptionData {
 

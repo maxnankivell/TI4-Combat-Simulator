@@ -1,51 +1,31 @@
 package Player;
 
 import Controllers.CombatType;
-import GUI.OptionData;
-import GUI.UnitCountData;
-import GUI.UpgradeData;
 import Factions.FactionEnum;
+import GUIData.OptionData;
 import Units.Unit;
 import Units.UnitList;
-import Units.UnitListFactory;
 import Units.UnitName;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
 
-public class Player {
+public abstract class Player {
 
-    private UnitList unitList;
-    private PlayerRole role;
+    protected UnitList unitList;
 
-    private int numHits;
-    private int numInfantryHits;
-    private int numSustainDamageHits;
-    private int numNonFighterHits;
+    protected int numHits;
+    protected int numInfantryHits;
+    protected int numSustainDamageHits;
+    protected int numNonFighterHits;
 
-    private FactionEnum factionEnum;
-    private EnumMap<OptionData, Boolean> optionData;
+    protected FactionEnum factionEnum;
+    protected EnumMap<OptionData, Boolean> optionData;
 
     //Main constructor
-    public Player(PlayerRole role, FactionEnum factionEnum, EnumMap<UpgradeData, Boolean> upgradeData, EnumMap<OptionData, Boolean> optionData, EnumMap<UnitCountData, Integer> unitCountData) {
-        this.role = role;
+    protected Player(FactionEnum factionEnum, EnumMap<OptionData, Boolean> optionData) {
         this.factionEnum = factionEnum;
         this.optionData = optionData;
-
-        UnitListFactory unitListFactory = new UnitListFactory();
-        unitList = unitListFactory.makeUnitList(factionEnum,  upgradeData, unitCountData);
-    }
-
-    //Make a copy
-    public Player(Player master) {
-        this.unitList = master.getUnitList();
-        this.role = master.getRole();
-        this.numHits = master.getNumHits();
-        this.numInfantryHits = master.getNumInfantryHits();
-        this.numSustainDamageHits = master.getNumSustainDamageHits();
-        this.numNonFighterHits = master.getNumNonFighterHits();
-        this.factionEnum = master.getFactionEnum();
-        this.optionData = master.getOptionData();
     }
 
     /**
@@ -135,10 +115,6 @@ public class Player {
         }
     }
 
-    public PlayerRole getRole() {
-        return role;
-    }
-
     public int getNumHits() {
         return numHits;
     }
@@ -155,20 +131,20 @@ public class Player {
         return numNonFighterHits;
     }
 
-    public FactionEnum getFactionEnum() {
-        return factionEnum;
-    }
-
-    public EnumMap<OptionData, Boolean> getOptionData() {
-        return optionData;
-    }
-
     public UnitList getUnitList(){
         return unitList;
     }
 
     public ArrayList<Unit> getUnitArrayList(){
         return unitList.getUnitArrayList();
+    }
+
+    public FactionEnum getFactionEnum() {
+        return factionEnum;
+    }
+
+    public EnumMap<OptionData, Boolean> getOptionData() {
+        return optionData;
     }
 
     public void addNumHits(int numHits){

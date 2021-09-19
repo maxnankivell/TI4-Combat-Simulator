@@ -1,6 +1,5 @@
 package Controllers;
 
-import GUI.GUIData;
 import Player.*;
 
 public abstract class Controller {
@@ -8,16 +7,8 @@ public abstract class Controller {
     protected Player defender;
 
     public Controller(){
-        attacker = new Player(PlayerRole.ATTACKER,
-                GUIData.getInstance().getAttackerFaction(),
-                GUIData.getInstance().getAttackerUpgradeData(),
-                GUIData.getInstance().getAttackerOptionData(),
-                GUIData.getInstance().getAttackerUnitCountData());
-        defender = new Player(PlayerRole.DEFENDER,
-                GUIData.getInstance().getDefenderFaction(),
-                GUIData.getInstance().getDefenderUpgradeData(),
-                GUIData.getInstance().getDefenderOptionData(),
-                GUIData.getInstance().getDefenderUnitCountData());
+        attacker = new AttackingPlayer();
+        defender = new DefendingPlayer();
 
         startProcess();
     }
