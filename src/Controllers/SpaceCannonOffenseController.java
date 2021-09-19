@@ -1,7 +1,7 @@
 package Controllers;
 
-import Factions.ArgentFlight;
-import GUI.OptionData;
+import Factions.FactionEnum;
+import GUIData.OptionData;
 import Player.*;
 import Units.UnitName;
 
@@ -47,12 +47,12 @@ public class SpaceCannonOffenseController extends Controller{
     }
 
     private void checkForExperimentalBattlestation(Player currentPlayer) {
-        if (currentPlayer.getOptionData().get(OptionData.EXPERIMENTALBATTLESTATION) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+        if (currentPlayer.getOptionData().get(OptionData.EXPERIMENTALBATTLESTATION) && currentPlayer instanceof DefendingPlayer)
             currentPlayer.addUnitExperimentalBattlestation();
     }
 
     private void checkForTitansHero(Player currentPlayer) {
-        if (currentPlayer.getOptionData().get(OptionData.TITANSHERO) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+        if (currentPlayer.getOptionData().get(OptionData.TITANSHERO) && currentPlayer instanceof DefendingPlayer)
             currentPlayer.addUnitTitansHero();
     }
 
@@ -77,16 +77,16 @@ public class SpaceCannonOffenseController extends Controller{
     }
 
     private void checkForSolarFlare(Player currentPlayer) {
-        if (currentPlayer.getOptionData().get(OptionData.SOLARFLAIR) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+        if (currentPlayer.getOptionData().get(OptionData.SOLARFLAIR) && currentPlayer instanceof AttackingPlayer)
             defenderCancelled = true;
     }
 
     private void checkForArgentFlightFlagship(Player currentPlayer) {
-        if (attacker.getFaction() instanceof ArgentFlight && attacker.getUnitList().containsName(UnitName.FLAGSHIP)) {
-            if (currentPlayer.getRole() == PlayerRole.ATTACKER) {
+        if (attacker.getFactionEnum() == FactionEnum.ARGENTFLIGHT && attacker.getUnitList().containsName(UnitName.FLAGSHIP)) {
+            if (currentPlayer instanceof AttackingPlayer) {
                 defenderCancelled = true;
             }
-            if (currentPlayer.getRole() == PlayerRole.DEFENDER) {
+            if (currentPlayer instanceof DefendingPlayer) {
                 attackerCancelled = true;
             }
         }

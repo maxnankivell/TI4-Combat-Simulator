@@ -1,7 +1,6 @@
 package Controllers;
 
-import Factions.ArgentFlight;
-import GUI.OptionData;
+import GUIData.OptionData;
 import Player.*;
 import Units.Unit;
 import Units.UnitName;
@@ -42,7 +41,7 @@ public class BombardmentController extends Controller{
     }
 
     private void checkForBlitz(Player currentPlayer) {
-        if (attacker.getOptionData().get(OptionData.BLITZ) && currentPlayer.getRole() == PlayerRole.ATTACKER) {
+        if (attacker.getOptionData().get(OptionData.BLITZ) && currentPlayer instanceof AttackingPlayer) {
             for (Unit unit : currentPlayer.getUnitArrayList()){
                 if (unit.isNonFighterShip() && unit.getNumDiceRollsBombardment()==0){
                     unit.setBombardmentValue(6,1);
@@ -52,42 +51,42 @@ public class BombardmentController extends Controller{
     }
 
     private void checkForPlasmaScoring(Player currentPlayer) {
-        if (attacker.getOptionData().get(OptionData.PLASMASCORING) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+        if (attacker.getOptionData().get(OptionData.PLASMASCORING) && currentPlayer instanceof AttackingPlayer)
             attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
     }
 
     private void checkForStrikeWingAmbush(Player currentPlayer) {
-        if (attacker.getOptionData().get(OptionData.STRIKEWINGAMBUSH) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+        if (attacker.getOptionData().get(OptionData.STRIKEWINGAMBUSH) && currentPlayer instanceof AttackingPlayer)
             attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
     }
 
     private void checkForDisable(Player currentPlayer) {
-        if (attacker.getOptionData().get(OptionData.DISABLE) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+        if (attacker.getOptionData().get(OptionData.DISABLE) && currentPlayer instanceof AttackingPlayer)
             defender.disablePDS();
     }
 
     private void checkForArgentFlightCommander(Player currentPlayer) {
-        if (attacker.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+        if (attacker.getOptionData().get(OptionData.ARGENTFLIGHTCOMMANDER) && currentPlayer instanceof AttackingPlayer)
             attacker.addOneDiceToBestUnit(CombatType.BOMBARDMENT);
     }
 
     private void checkForL1Z1XCommander(Player currentPlayer) {
-        if (attacker.getOptionData().get(OptionData.L1Z1XCOMMANDER) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+        if (attacker.getOptionData().get(OptionData.L1Z1XCOMMANDER) && currentPlayer instanceof AttackingPlayer)
             planetaryShieldCancelled = true;
     }
 
     private void checkForWarSuns(Player currentPlayer) {
-        if (attacker.getUnitList().containsName(UnitName.WARSUN) && currentPlayer.getRole() == PlayerRole.ATTACKER)
+        if (attacker.getUnitList().containsName(UnitName.WARSUN) && currentPlayer instanceof AttackingPlayer)
             planetaryShieldCancelled = true;
     }
 
     private void checkForBunker(Player currentPlayer, Player otherPlayer) {
-        if (currentPlayer.getOptionData().get(OptionData.BUNKER) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+        if (currentPlayer.getOptionData().get(OptionData.BUNKER) && currentPlayer instanceof DefendingPlayer)
             otherPlayer.changeHitValueOfAllUnits(CombatType.BOMBARDMENT, 4);
     }
 
     private void checkForConventionsOfWar(Player currentPlayer) {
-        if (currentPlayer.getOptionData().get(OptionData.CONVENTIONSOFWAR) && currentPlayer.getRole() == PlayerRole.DEFENDER)
+        if (currentPlayer.getOptionData().get(OptionData.CONVENTIONSOFWAR) && currentPlayer instanceof DefendingPlayer)
             bombardmentCancelled = true;
     }
 }

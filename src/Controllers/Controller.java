@@ -1,17 +1,14 @@
 package Controllers;
 
 import Player.*;
-import Units.Unit;
-
-import java.util.ArrayList;
 
 public abstract class Controller {
     protected Player attacker;
     protected Player defender;
 
     public Controller(){
-        attacker = new Player(PlayerRole.ATTACKER);
-        defender = new Player(PlayerRole.DEFENDER);
+        attacker = new AttackingPlayer();
+        defender = new DefendingPlayer();
 
         startProcess();
     }

@@ -1,7 +1,7 @@
 package Controllers;
 
-import Factions.ArgentFlight;
-import GUI.OptionData;
+import Factions.FactionEnum;
+import GUIData.OptionData;
 import Player.*;
 import Units.UnitName;
 
@@ -56,7 +56,7 @@ public class AFBController extends Controller{
     }
 
     private void checkForRaidFormation(Player currentPlayer, Player otherPlayer) {
-        if(currentPlayer.getFaction() instanceof ArgentFlight) {
+        if(currentPlayer.getFactionEnum() == FactionEnum.ARGENTFLIGHT) {
             if(currentPlayer.getNumHits() > (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER))) {
                 currentPlayer.addNumSustainDamageHits((currentPlayer.getNumHits() - (otherPlayer.getUnitList().numberOfType(UnitName.FIGHTER))));
             }
