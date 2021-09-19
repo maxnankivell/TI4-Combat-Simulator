@@ -2,7 +2,7 @@ package GUI;
 
 import Controllers.*;
 import Factions.FactionEnum;
-import GUIData.GUIData;
+import GUIData.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;

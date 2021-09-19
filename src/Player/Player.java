@@ -13,12 +13,7 @@ import java.util.EnumMap;
 public abstract class Player {
 
     protected UnitList unitList;
-
-    protected int numHits;
-    protected int numInfantryHits;
-    protected int numSustainDamageHits;
-    protected int numNonFighterHits;
-
+    protected Hits hits;
     protected FactionEnum factionEnum;
     protected EnumMap<OptionData, Boolean> optionData;
 
@@ -26,6 +21,7 @@ public abstract class Player {
     protected Player(FactionEnum factionEnum, EnumMap<OptionData, Boolean> optionData) {
         this.factionEnum = factionEnum;
         this.optionData = optionData;
+        this.hits = new Hits();
     }
 
     /**
@@ -116,19 +112,35 @@ public abstract class Player {
     }
 
     public int getNumHits() {
-        return numHits;
+        return hits.getNumHits();
     }
 
     public int getNumInfantryHits() {
-        return numInfantryHits;
+        return hits.getNumInfantryHits();
     }
 
     public int getNumSustainDamageHits() {
-        return numSustainDamageHits;
+        return hits.getNumSustainDamageHits();
     }
 
     public int getNumNonFighterHits() {
-        return numNonFighterHits;
+        return hits.getNumNonFighterHits();
+    }
+
+    public void addNumHits(int numHits){
+        hits.addNumHits(numHits);
+    }
+
+    public void addNumInfantryHits(int numInfantryHits){
+        hits.addNumInfantryHits(numInfantryHits);
+    }
+
+    public void addNumSustainDamageHits(int numSustainDamageHits){
+        hits.addNumSustainDamageHits(numSustainDamageHits);
+    }
+
+    public void addNumNonFighterHits(int numNonFighterHits){
+        hits.addNumNonFighterHits(numNonFighterHits);
     }
 
     public UnitList getUnitList(){
@@ -147,20 +159,5 @@ public abstract class Player {
         return optionData;
     }
 
-    public void addNumHits(int numHits){
-        this.numHits+=numHits;
-    }
-
-    public void addNumInfantryHits(int numInfantryHits){
-        this.numInfantryHits+=numInfantryHits;
-    }
-
-    public void addNumSustainDamageHits(int numSustainDamageHits){
-        this.numSustainDamageHits+=numSustainDamageHits;
-    }
-
-    public void addNumNonFighterHits(int numNonFighterHits){
-        this.numNonFighterHits+=numNonFighterHits;
-    }
 
 }

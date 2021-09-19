@@ -1,6 +1,6 @@
 package GUI;
 
-import GUIData.GUIData;
+import GUIData.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
