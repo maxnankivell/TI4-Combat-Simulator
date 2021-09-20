@@ -14,12 +14,6 @@ public class Naalu extends Faction{
         fighter.setSpaceCombatValue(8,1);
     }
 
-    public void upgradeFlagship(){
-        flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCombatValue(9, 2)
-                .build();
-    }
-
     public void upgradeFighter(){
         fighter = new Unit.Builder(UnitName.FIGHTER)
                 .addIsUpgraded()

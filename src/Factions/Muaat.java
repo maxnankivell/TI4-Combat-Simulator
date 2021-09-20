@@ -12,9 +12,4 @@ public class Muaat extends Faction{
 
     }
 
-    public void upgradeFlagship(){
-        flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCombatValue(5, 2)
-                .build();
-    }
 }

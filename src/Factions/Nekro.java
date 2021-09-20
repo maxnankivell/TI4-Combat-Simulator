@@ -12,9 +12,4 @@ public class Nekro extends Faction{
 
     }
 
-    public void upgradeFlagship(){
-        flagship = new Unit.Builder(UnitName.FLAGSHIP)
-                .addSpaceCombatValue(9, 2)
-                .build();
-    }
 }

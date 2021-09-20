@@ -59,6 +59,7 @@ public abstract class Faction {
 
     public void upgradeDreadnought(){
         dreadnought = new Unit.Builder(UnitName.DREADNOUGHT)
+                .addIsUpgraded()
                 .addSpaceCombatValue(5, 1)
                 .addBombardmentValue(5, 1)
                 .build();
@@ -66,6 +67,7 @@ public abstract class Faction {
 
     public void upgradeCarrier(){
         carrier = new Unit.Builder(UnitName.CARRIER)
+                .addIsUpgraded()
                 .addSpaceCombatValue(9, 1)
                 .build();
     }
