@@ -1,8 +1,8 @@
 package Controllers;
 
-import Factions.*;
 import GUIData.OptionData;
 import Player.Player;
+import Factions.FactionEnum;
 import Units.Unit;
 import Units.UnitName;
 
